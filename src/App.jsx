@@ -9,6 +9,10 @@ import ContactPage from './pages/ContactPage';
 import AdminDashboard from './pages/AdminDashboard';
 import AiAgentWidget from './components/AiAgentWidget';
 
+import ProtectedRoute from './components/ProtectedRoute';
+import LoginPortal from './pages/LoginPortal';
+import EmployeeDashboard from './pages/EmployeeDashboard';
+
 function App() {
   return (
     <Router basename={import.meta.env.BASE_URL}>
@@ -20,7 +24,25 @@ function App() {
         <Route path="/services/web-development" element={<WebDevService />} />
         <Route path="/services/ai-automation" element={<AiAutomationService />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        
+        {/* Authentication & Role-Based Portals */}
+        <Route path="/login" element={<LoginPortal />} />
+        <Route 
+          path="/admin" 
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AdminDashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/employee" 
+          element={
+            <ProtectedRoute requiredRole="employee">
+              <EmployeeDashboard />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
 
       {/* Global AI Agent Widget */}
