@@ -60,11 +60,13 @@ const LoginPortal = () => {
     } catch (err) {
       console.error(err);
       if (err.code === 'auth/email-already-in-use') {
-        setError('This email is already registered. Please log in.');
+        setError('This email is already registered. Please click "Log In" instead.');
       } else if (err.code === 'auth/weak-password') {
         setError('Password should be at least 6 characters.');
+      } else if (err.code === 'auth/invalid-credential') {
+         setError('Invalid password. Please try again.');
       } else {
-        setError('Invalid credentials or account does not exist.');
+        setError(`Database Error: ${err.message}`);
       }
       setLoading(false);
     }
