@@ -93,7 +93,7 @@ const ClientLogin = () => {
           {isLogin ? <User size={32} color="#a388ff" /> : <UserPlus size={32} color="#a388ff" />}
         </div>
         
-        <h2 style={{ marginBottom: '0.5rem' }}>Client Portal</h2>
+        <h2 style={{ marginBottom: '0.5rem' }}>{isLogin ? 'Welcome Back' : 'Create Account'}</h2>
         <p style={{ color: '#aaa', marginBottom: '2rem' }}>
           {isLogin ? 'Sign in to access your projects' : 'Create an account to get started'}
         </p>
