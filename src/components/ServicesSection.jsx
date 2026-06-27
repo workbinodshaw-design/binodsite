@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Code, Bot } from 'lucide-react';
+import { Code, Bot, MessageCircle } from 'lucide-react';
 
 const ServicesSection = () => {
   return (
@@ -32,6 +32,22 @@ const ServicesSection = () => {
           <p>Stop doing manual work. We build custom AI agents and workflow pipelines that integrate seamlessly into your tools.</p>
           <div className="funnel-arrow">Explore Solutions →</div>
         </Link>
+      </div>
+
+      {/* WhatsApp Trust Tile */}
+      <div className="whatsapp-trust-wrapper">
+        <a href="https://wa.me/919394683474" target="_blank" rel="noreferrer" className="whatsapp-trust-tile glass">
+          <div className="whatsapp-icon-bg">
+            <MessageCircle size={32} color="#fff" />
+          </div>
+          <div className="trust-text">
+            <h4>Talk to a human immediately</h4>
+            <p>Skip the forms. Chat directly with our lead developer on WhatsApp to discuss your vision right now.</p>
+          </div>
+          <div className="trust-arrow">
+            Chat Now →
+          </div>
+        </a>
       </div>
     </div>
   );

@@ -481,6 +481,108 @@ body {
   transform: translateX(10px);
 }
 
+/* WhatsApp Trust Tile */
+.whatsapp-trust-wrapper {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.whatsapp-trust-tile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem 3rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  color: var(--text-primary);
+  width: 100%;
+  max-width: 900px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.whatsapp-trust-tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #25D366;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+}
+
+.whatsapp-trust-tile:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(37, 211, 102, 0.4);
+  box-shadow: 0 15px 40px rgba(37, 211, 102, 0.15);
+}
+
+.whatsapp-icon-bg {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+}
+
+.trust-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.trust-text h4 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.trust-text p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.trust-arrow {
+  font-weight: 600;
+  color: #25D366;
+  white-space: nowrap;
+  opacity: 0.8;
+  transition: all 0.3s;
+}
+
+.whatsapp-trust-tile:hover .trust-arrow {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+  .whatsapp-trust-tile {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+  }
+  .trust-text {
+    text-align: center;
+  }
+}
+
 /* Process Timeline */
 .process-steps {
   display: flex;
