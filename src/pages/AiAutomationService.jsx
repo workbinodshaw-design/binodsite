@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MessageSquare, Workflow, Database, LineChart, ArrowRight, MessageCircle } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
 import LeadFormModal from '../components/LeadFormModal';
+import InteractiveDemo from '../components/InteractiveDemo';
 
 const AiAutomationService = () => {
   const [selectedService, setSelectedService] = useState(null);
@@ -52,8 +53,18 @@ const AiAutomationService = () => {
           <div className="badge-dot"></div>
           AI & AUTOMATION
         </div>
-        <h1 className="headline">What process can we automate?</h1>
-        <p className="description" style={{ margin: '0 auto', maxWidth: '600px' }}>
+        <h1 className="headline" style={{ fontSize: '3.5rem' }}>We Build Systems That Scale.</h1>
+        <p className="description" style={{ margin: '0 auto', maxWidth: '700px', fontSize: '1.2rem' }}>
+          Stop losing leads and wasting time on manual entry. Experience our custom automation workflows directly below.
+        </p>
+      </div>
+
+      {/* INTERACTIVE DEMO INJECTED HERE */}
+      <InteractiveDemo />
+
+      <div className="text-center" style={{ marginTop: '2rem', marginBottom: '4rem' }}>
+        <h2 style={{ fontSize: '2.5rem' }}>What process can we automate?</h2>
+        <p className="text-secondary" style={{ maxWidth: '600px', margin: '1rem auto' }}>
           Select the type of automation you need, and we'll gather some quick details to get started.
         </p>
       </div>
