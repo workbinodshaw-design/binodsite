@@ -100,13 +100,34 @@ const AdminDashboard = () => {
       <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
         <button 
           onClick={() => setActiveTab('leads')}
-          style={{ background: activeTab === 'leads' ? '#fff' : 'rgba(255,255,255,0.1)', color: activeTab === 'leads' ? '#000' : '#fff', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '30px', cursor: 'pointer', fontWeight: 'bold' }}
+          style={{ 
+            background: activeTab === 'leads' ? '#a388ff' : 'rgba(0,0,0,0.05)', 
+            color: activeTab === 'leads' ? '#fff' : '#333', 
+            border: 'none', 
+            padding: '0.8rem 1.5rem', 
+            borderRadius: '30px', 
+            cursor: 'pointer', 
+            fontWeight: 'bold',
+            transition: 'all 0.3s ease'
+          }}
         >
           All Leads Database
         </button>
         <button 
           onClick={() => setActiveTab('team')}
-          style={{ background: activeTab === 'team' ? '#fff' : 'rgba(255,255,255,0.1)', color: activeTab === 'team' ? '#000' : '#fff', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '30px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', gap: '8px', alignItems: 'center' }}
+          style={{ 
+            background: activeTab === 'team' ? '#a388ff' : 'rgba(0,0,0,0.05)', 
+            color: activeTab === 'team' ? '#fff' : '#333', 
+            border: 'none', 
+            padding: '0.8rem 1.5rem', 
+            borderRadius: '30px', 
+            cursor: 'pointer', 
+            fontWeight: 'bold', 
+            display: 'flex', 
+            gap: '8px', 
+            alignItems: 'center',
+            transition: 'all 0.3s ease'
+          }}
         >
           <Users size={18} /> User Management
         </button>
