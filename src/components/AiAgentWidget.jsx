@@ -1,5 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bot, X, Send, MessageCircle } from 'lucide-react';
+import Groq from 'groq-sdk';
+
+// Initialize Groq client (Note: dangerouslyAllowBrowser is set to true for frontend demo purposes. 
+// In a real production app, this should be routed through a backend to protect the API key).
+const groq = new Groq({
+  apiKey: import.meta.env.VITE_GROQ_API_KEY,
+  dangerouslyAllowBrowser: true 
+});
+
+const SYSTEM_PROMPT = `You are CastFlow AI, a highly professional sales assistant for a premium AI Automation and Web Development Agency.
+Your primary goal is to answer client questions concisely and guide them to book a consultation or click the WhatsApp link. 
+Be helpful, energetic, and professional. 
+If they ask about pricing, mention custom web dev starts at $2,000 and AI automation starts at $3,000, but emphasize we build custom solutions.
+Keep your answers short (1-3 sentences maximum). Don't use markdown formatting, just plain text.`;
 
 const AiAgentWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,28 +36,50 @@ const AiAgentWidget = () => {
     return () => window.removeEventListener('open-ai-agent', handleOpen);
   }, []);
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
     if (!inputText.trim()) return;
 
     const userMessage = inputText;
-    setMessages((prev) => [...prev, { sender: 'user', text: userMessage }]);
+    // Add user message to UI
+    const newMessages = [...messages, { sender: 'user', text: userMessage }];
+    setMessages(newMessages);
     setInputText('');
     setIsTyping(true);
 
-    setTimeout(() => {
-      setIsTyping(false);
-      let aiResponse = "I can definitely help with that. Our team specializes in custom AI agents and full-stack web development. Would you like to schedule a call?";
-      
-      const lowerInput = userMessage.toLowerCase();
-      if (lowerInput.includes('price') || lowerInput.includes('cost')) {
-        aiResponse = "Our projects are custom-tailored to your exact needs, typically starting around $2,000 for web dev and $3,000 for AI automation systems. Should I connect you with a founder for a quote?";
-      } else if (lowerInput.includes('whatsapp') || lowerInput.includes('human')) {
-        aiResponse = "Sure! You can chat directly with our founders on WhatsApp right here: https://wa.me/919394683474";
+    try {
+      if (!import.meta.env.VITE_GROQ_API_KEY) {
+        throw new Error("Missing Groq API Key");
       }
 
+      // Format history for Groq
+      const apiMessages = [
+        { role: 'system', content: SYSTEM_PROMPT },
+        ...newMessages.map(m => ({
+          role: m.sender === 'ai' ? 'assistant' : 'user',
+          content: m.text
+        }))
+      ];
+
+      const completion = await groq.chat.completions.create({
+        messages: apiMessages,
+        model: 'llama3-8b-8192',
+        temperature: 0.7,
+        max_tokens: 150,
+      });
+
+      const aiResponse = completion.choices[0]?.message?.content || "I'm sorry, I encountered an error. Please contact us on WhatsApp.";
+      setIsTyping(false);
       setMessages((prev) => [...prev, { sender: 'ai', text: aiResponse }]);
-    }, 1500);
+
+    } catch (error) {
+      console.error("Groq API Error:", error);
+      setIsTyping(false);
+      
+      // Fallback response if API key is missing or fails
+      let fallbackResponse = "I can definitely help with that. Since my AI brain is currently offline (API key missing), please chat directly with our founders on WhatsApp right here: https://wa.me/919394683474";
+      setMessages((prev) => [...prev, { sender: 'ai', text: fallbackResponse }]);
+    }
   };
 
   return (

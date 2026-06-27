@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { X, Send } from 'lucide-react';
+import { saveLeadToDatabase } from '../firebase';
 
 const LeadFormModal = ({ serviceName, onClose }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In a real app, you would send the form data to an API or Formspree here.
-    // We simulate a successful submission for now.
+    
+    // Extract form data
+    const formData = new FormData(e.target);
+    const leadData = Object.fromEntries(formData.entries());
+
+    // Save to Firebase
+    await saveLeadToDatabase(leadData, 'LeadFormModal');
+    
     setIsSubmitted(true);
     setTimeout(() => {
       onClose();
