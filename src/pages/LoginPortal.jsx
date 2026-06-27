@@ -19,7 +19,9 @@ const LoginPortal = () => {
       if (user) {
         try {
           const userDoc = await getDoc(doc(db, 'users', user.uid));
-          if (userDoc.exists()) {
+          if (user.email && user.email.toLowerCase() === 'work.binodshaw@gmail.com') {
+            navigate('/admin');
+          } else if (userDoc.exists()) {
             const role = userDoc.data().role;
             if (role === 'admin') navigate('/admin');
             else if (role === 'employee') navigate('/employee');

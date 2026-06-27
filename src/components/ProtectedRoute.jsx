@@ -17,7 +17,19 @@ const ProtectedRoute = ({ children, requiredRole }) => {
         // Fetch role from Firestore 'users' collection
         try {
           const userDoc = await getDoc(doc(db, 'users', user.uid));
-          if (userDoc.exists()) {
+        
+          // Founder Fail-Safe: Always grant admin to the founder's exact email
+          if (user.email && user.email.toLowerCase() === 'work.binodshaw@gmail.com') {
+            setUserRole('admin');
+            // Automatically create/fix their admin document in the database just in case
+            if (!userDoc.exists() || userDoc.data().role !== 'admin') {
+              await setDoc(doc(db, 'users', user.uid), {
+                email: user.email,
+                role: 'admin',
+                createdAt: userDoc.exists() ? userDoc.data().createdAt : new Date()
+              }, { merge: true });
+            }
+          } else if (userDoc.exists()) {
             setUserRole(userDoc.data().role);
           } else {
             // Default role if not assigned
