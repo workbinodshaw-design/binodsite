@@ -16,7 +16,7 @@ const Navbar = () => {
         <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
         <Link to="/services" className={`nav-link ${location.pathname === '/services' ? 'active' : ''}`}>Services</Link>
         <Link to="/portfolio" className={`nav-link ${location.pathname === '/portfolio' ? 'active' : ''}`}>Portfolio</Link>
-        <Link to="/login" className={`nav-link ${location.pathname === '/login' ? 'active' : ''}`}>Team Login</Link>
+        <Link to="/client-login" className={`nav-link ${location.pathname === '/client-login' ? 'active' : ''}`}>Client Portal</Link>
         <button 
           onClick={() => window.dispatchEvent(new Event('open-ai-agent'))}
           className="nav-link btn btn-primary small" 

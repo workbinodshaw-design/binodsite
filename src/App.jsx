@@ -13,6 +13,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import LoginPortal from './pages/LoginPortal';
 import EmployeeDashboard from './pages/EmployeeDashboard';
 import ClientDashboard from './pages/ClientDashboard';
+import ClientLogin from './pages/ClientLogin';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         
         {/* Authentication & Role-Based Portals */}
         <Route path="/login" element={<LoginPortal />} />
+        <Route path="/client-login" element={<ClientLogin />} />
         <Route 
           path="/admin" 
           element={
