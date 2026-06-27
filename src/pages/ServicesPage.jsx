@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Code, Bot, CheckCircle, ArrowRight } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
 
@@ -56,6 +57,10 @@ const ServicesPage = () => {
               </div>
             </div>
           </div>
+
+          <Link to="/services/web-development" className="btn btn-primary" style={{ marginTop: '2.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
+            Explore Web Development Options <ArrowRight size={18} />
+          </Link>
         </div>
         
         {/* Placeholder for an image or graphic */}
@@ -109,6 +114,10 @@ const ServicesPage = () => {
               </div>
             </div>
           </div>
+
+          <Link to="/services/ai-automation" className="btn btn-primary" style={{ marginTop: '2.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', background: '#5D3FD3' }}>
+            Explore AI Automation Options <ArrowRight size={18} />
+          </Link>
         </div>
         
         <div className="service-detail-visual glass flex-center">
