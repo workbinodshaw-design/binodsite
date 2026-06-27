@@ -8,12 +8,12 @@ const ContactSection = () => {
       <p>Let's discuss how AI and modern web technology can help you scale.</p>
       
       <div className="contact-buttons">
-        <button className="btn btn-primary">
+        <a href="https://wa.me/919394683474" target="_blank" rel="noreferrer" className="btn btn-primary" style={{ textDecoration: 'none' }}>
           <Calendar size={18} /> Book a Discovery Call
-        </button>
-        <button className="btn btn-secondary">
+        </a>
+        <a href="mailto:work.binodshaw@gmail.com" className="btn btn-secondary" style={{ textDecoration: 'none' }}>
           <Mail size={18} /> Email Us
-        </button>
+        </a>
       </div>
       
       <div className="footer-credits">
