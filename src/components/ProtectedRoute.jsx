@@ -50,11 +50,8 @@ const ProtectedRoute = ({ children, requiredRole }) => {
 
   // If a specific role is required and user doesn't have it (Admin overrides everything)
   if (requiredRole && userRole !== requiredRole && userRole !== 'admin') {
-    // Redirect employees trying to access admin panel to their own dashboard
-    if (userRole === 'employee') {
-      return <Navigate to="/employee" replace />;
-    }
-    // Fallback
+    if (userRole === 'employee') return <Navigate to="/employee" replace />;
+    if (userRole === 'client') return <Navigate to="/client" replace />;
     return <Navigate to="/" replace />;
   }
 

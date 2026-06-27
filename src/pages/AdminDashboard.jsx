@@ -6,13 +6,15 @@ import { RefreshCw, LogOut, Shield, Users } from 'lucide-react';
 
 const AdminDashboard = () => {
   const [leads, setLeads] = useState([]);
+  const [systemUsers, setSystemUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeTab, setActiveTab] = useState('leads'); // 'leads' or 'team'
+  const [activeTab, setActiveTab] = useState('leads');
 
   useEffect(() => {
-    fetchLeads();
-  }, []);
+    if (activeTab === 'leads') fetchLeads();
+    if (activeTab === 'team') fetchUsers();
+  }, [activeTab]);
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -40,6 +42,41 @@ const AdminDashboard = () => {
     }
   };
 
+  const fetchUsers = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, orderBy("createdAt", "desc"));
+      const querySnapshot = await getDocs(q);
+      
+      const fetchedUsers = [];
+      querySnapshot.forEach((doc) => {
+        fetchedUsers.push({ id: doc.id, ...doc.data() });
+      });
+      
+      setSystemUsers(fetchedUsers);
+    } catch (err) {
+      console.error("Error fetching users:", err);
+      setError("Failed to load users. Check Firestore permissions.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRoleChange = async (userId, newRole) => {
+    try {
+      const userRef = doc(db, 'users', userId);
+      await updateDoc(userRef, { role: newRole });
+      
+      // Update local state to reflect change immediately
+      setSystemUsers(systemUsers.map(u => u.id === userId ? { ...u, role: newRole } : u));
+    } catch (error) {
+      console.error("Error updating role:", error);
+      alert("Failed to update user role.");
+    }
+  };
+
   return (
     <div className="page-container" style={{ paddingTop: '8rem', paddingBottom: '4rem' }}>
       <div className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
@@ -50,7 +87,7 @@ const AdminDashboard = () => {
           <p className="text-secondary">Full control over agency operations, leads, and team access.</p>
         </div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <button onClick={fetchLeads} className="btn btn-secondary" style={{ padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <button onClick={() => activeTab === 'leads' ? fetchLeads() : fetchUsers()} className="btn btn-secondary" style={{ padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <RefreshCw size={18} className={loading ? 'spin' : ''} /> Refresh
           </button>
           <button onClick={handleLogout} className="btn" style={{ background: 'rgba(255,107,107,0.2)', color: '#FF6B6B', padding: '0.8rem 1.5rem', borderRadius: '30px', display: 'flex', alignItems: 'center', gap: '8px', border: 'none', cursor: 'pointer' }}>
@@ -71,26 +108,70 @@ const AdminDashboard = () => {
           onClick={() => setActiveTab('team')}
           style={{ background: activeTab === 'team' ? '#fff' : 'rgba(255,255,255,0.1)', color: activeTab === 'team' ? '#000' : '#fff', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '30px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', gap: '8px', alignItems: 'center' }}
         >
-          <Users size={18} /> Team Access (RBAC)
+          <Users size={18} /> User Management
         </button>
       </div>
 
       {activeTab === 'team' && (
-        <div className="glass" style={{ padding: '2rem', borderRadius: '24px' }}>
-          <h2 className="h3">Team Role Management</h2>
-          <p className="text-secondary" style={{ marginBottom: '2rem' }}>To add an employee and grant them limited dashboard access:</p>
-          <ol style={{ lineHeight: '1.8', color: '#ccc', marginBottom: '2rem' }}>
-            <li>Go to your <strong>Firebase Console</strong> &gt; Authentication.</li>
-            <li>Click <strong>Add User</strong> and create an email/password for your employee.</li>
-            <li>Copy the new user's <strong>UID</strong>.</li>
-            <li>Go to <strong>Firestore Database</strong>.</li>
-            <li>Create a new collection called <strong>users</strong> (if it doesn't exist).</li>
-            <li>Create a new document. Set the Document ID to the employee's exact UID.</li>
-            <li>Add a string field: <code>role</code> = <code>employee</code>.</li>
-          </ol>
-          <div style={{ padding: '1rem', background: 'rgba(46, 204, 113, 0.1)', border: '1px solid #2ecc71', borderRadius: '8px', color: '#2ecc71' }}>
-            When that user logs in at <strong>/login</strong>, the system will automatically route them to the restricted Employee Dashboard instead of this Master Admin panel.
+        <div className="glass" style={{ padding: '2rem', borderRadius: '24px', overflowX: 'auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+            <div>
+              <h2 className="h3" style={{ margin: 0 }}>Registered Users</h2>
+              <p className="text-secondary" style={{ margin: 0 }}>Manage access roles for your clients and employees.</p>
+            </div>
           </div>
+
+          {error ? (
+            <div style={{ color: '#FF6B6B', textAlign: 'center', padding: '2rem' }}>{error}</div>
+          ) : loading && systemUsers.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>Loading users...</div>
+          ) : systemUsers.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>No registered users found.</div>
+          ) : (
+            <table className="admin-table" style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                  <th style={{ padding: '1rem 0' }}>Join Date</th>
+                  <th>Email</th>
+                  <th>User ID</th>
+                  <th>Access Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                {systemUsers.map((user) => (
+                  <tr key={user.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <td style={{ padding: '1rem 0', whiteSpace: 'nowrap', color: '#aaa' }}>
+                      {user.createdAt?.toDate ? user.createdAt.toDate().toLocaleDateString() : 'Just now'}
+                    </td>
+                    <td>
+                      <strong>{user.email}</strong>
+                    </td>
+                    <td>
+                      <span style={{ fontSize: '0.8rem', color: '#666', fontFamily: 'monospace' }}>{user.id}</span>
+                    </td>
+                    <td>
+                      <select 
+                        value={user.role || 'client'} 
+                        onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                        style={{ 
+                          padding: '0.4rem 0.8rem', 
+                          borderRadius: '8px', 
+                          background: 'rgba(0,0,0,0.5)', 
+                          color: '#fff', 
+                          border: '1px solid rgba(255,255,255,0.2)',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <option value="client">Client (Restricted)</option>
+                        <option value="employee">Employee (Staff Panel)</option>
+                        <option value="admin">Admin (Master Panel)</option>
+                      </select>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       )}
 

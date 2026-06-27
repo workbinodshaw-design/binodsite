@@ -12,6 +12,7 @@ import AiAgentWidget from './components/AiAgentWidget';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoginPortal from './pages/LoginPortal';
 import EmployeeDashboard from './pages/EmployeeDashboard';
+import ClientDashboard from './pages/ClientDashboard';
 
 function App() {
   return (
@@ -40,6 +41,14 @@ function App() {
           element={
             <ProtectedRoute requiredRole="employee">
               <EmployeeDashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/client" 
+          element={
+            <ProtectedRoute requiredRole="client">
+              <ClientDashboard />
             </ProtectedRoute>
           } 
         />
