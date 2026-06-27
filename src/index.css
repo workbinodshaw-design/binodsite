@@ -1201,3 +1201,151 @@ body {
   font-weight: 700;
   opacity: 0.5;
 }
+
+/* -------------------------------------
+ *  PREMIUM CSS ANIMATED VISUALS
+ * ------------------------------------- */
+
+.premium-animated-visual {
+  width: 100%;
+  height: 350px;
+  border-radius: 24px;
+  background: radial-gradient(circle at center, rgba(30,30,40,1) 0%, rgba(10,10,15,1) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.5), 0 20px 40px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+/* AI Visual: Rotating Neural Rings */
+.ai-visual {
+  background: radial-gradient(circle at center, rgba(93, 63, 211, 0.2) 0%, rgba(10,10,15,1) 70%);
+}
+
+.ai-core {
+  width: 40px;
+  height: 40px;
+  background: #a388ff;
+  border-radius: 50%;
+  box-shadow: 0 0 30px #a388ff, 0 0 60px #5D3FD3;
+  animation: pulseCore 2s infinite alternate;
+  z-index: 10;
+}
+
+@keyframes pulseCore {
+  0% { transform: scale(0.9); box-shadow: 0 0 20px #a388ff; }
+  100% { transform: scale(1.1); box-shadow: 0 0 50px #a388ff, 0 0 80px #5D3FD3; }
+}
+
+.ai-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(163, 136, 255, 0.3);
+  border-top: 1px solid #a388ff;
+  box-shadow: 0 0 15px rgba(93, 63, 211, 0.2);
+}
+
+.ai-ring.ring-1 {
+  width: 120px;
+  height: 120px;
+  animation: spinRing 8s linear infinite;
+}
+
+.ai-ring.ring-2 {
+  width: 200px;
+  height: 200px;
+  border: 1px dashed rgba(163, 136, 255, 0.4);
+  animation: spinRing 12s linear infinite reverse;
+}
+
+.ai-ring.ring-3 {
+  width: 280px;
+  height: 280px;
+  border-top: 2px solid #5D3FD3;
+  animation: spinRing 18s linear infinite;
+}
+
+@keyframes spinRing {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.ai-node {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fff;
+}
+
+.ai-node.node-1 { top: 25%; left: 30%; animation: floatNode 4s ease-in-out infinite; }
+.ai-node.node-2 { bottom: 30%; right: 25%; animation: floatNode 5s ease-in-out infinite 1s; }
+.ai-node.node-3 { top: 40%; right: 20%; animation: floatNode 6s ease-in-out infinite 2s; background: #a388ff; box-shadow: 0 0 15px #a388ff;}
+
+@keyframes floatNode {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-15px) scale(1.2); }
+}
+
+/* Web Visual: Floating Isometric Layers */
+.web-visual {
+  background: radial-gradient(circle at center, rgba(255, 107, 107, 0.15) 0%, rgba(10,10,15,1) 70%);
+}
+
+.floating-layer {
+  position: absolute;
+  width: 220px;
+  height: 160px;
+  border-radius: 12px;
+  transform-style: preserve-3d;
+  background: rgba(20, 20, 25, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 20px 20px 40px rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+}
+
+.layer-back {
+  transform: rotateX(60deg) rotateZ(-45deg) translateZ(-50px);
+  background: rgba(255, 107, 107, 0.1);
+  border-color: rgba(255, 107, 107, 0.3);
+  animation: floatBack 6s ease-in-out infinite;
+}
+
+.layer-mid {
+  transform: rotateX(60deg) rotateZ(-45deg) translateZ(0px);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: floatMid 6s ease-in-out infinite 0.2s;
+}
+
+.layer-front {
+  transform: rotateX(60deg) rotateZ(-45deg) translateZ(50px);
+  background: rgba(10, 10, 15, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: rgba(37, 211, 102, 0.3);
+  animation: floatFront 6s ease-in-out infinite 0.4s;
+}
+
+@keyframes floatBack {
+  0%, 100% { transform: rotateX(60deg) rotateZ(-45deg) translateZ(-50px); }
+  50% { transform: rotateX(60deg) rotateZ(-45deg) translateZ(-65px); }
+}
+
+@keyframes floatMid {
+  0%, 100% { transform: rotateX(60deg) rotateZ(-45deg) translateZ(0px); }
+  50% { transform: rotateX(60deg) rotateZ(-45deg) translateZ(10px); }
+}
+
+@keyframes floatFront {
+  0%, 100% { transform: rotateX(60deg) rotateZ(-45deg) translateZ(50px); }
+  50% { transform: rotateX(60deg) rotateZ(-45deg) translateZ(75px); }
+}

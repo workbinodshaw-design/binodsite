@@ -74,8 +74,14 @@ const ServicesPage = () => {
           
           {/* Visual Side */}
           <div className="service-visual-column" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            <div className="image-container" style={{ width: '100%', borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
-              <img src="/ai_automation_concept.png" alt="AI Automation Concept" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <div className="premium-animated-visual ai-visual">
+               <div className="ai-core"></div>
+               <div className="ai-ring ring-1"></div>
+               <div className="ai-ring ring-2"></div>
+               <div className="ai-ring ring-3"></div>
+               <div className="ai-node node-1"></div>
+               <div className="ai-node node-2"></div>
+               <div className="ai-node node-3"></div>
             </div>
 
             {/* Custom Visual: Manual vs AI */}
@@ -122,8 +128,18 @@ const ServicesPage = () => {
           
           {/* Visual Side (Left for Web Dev to alternate layout) */}
           <div className="service-visual-column" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            <div className="image-container" style={{ width: '100%', borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
-              <img src="/web_development_mockup.png" alt="Premium Web Development" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <div className="premium-animated-visual web-visual">
+               <div className="floating-layer layer-back"></div>
+               <div className="floating-layer layer-mid">
+                  <div className="skeleton-line" style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.1)', marginBottom: '10px', borderRadius: '4px' }}></div>
+                  <div className="skeleton-line" style={{ width: '75%', height: '8px', background: 'rgba(255,255,255,0.1)', marginBottom: '10px', borderRadius: '4px' }}></div>
+                  <div className="skeleton-line" style={{ width: '50%', height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px' }}></div>
+               </div>
+               <div className="floating-layer layer-front">
+                  <div className="code-snippet" style={{ fontFamily: 'monospace', color: '#25D366', fontSize: '1.2rem' }}>
+                    <span style={{ color: '#ff4757' }}>const</span> build = <span style={{ color: '#feca57' }}>'perfect'</span>;
+                  </div>
+               </div>
             </div>
 
             {/* Custom Visual: Visitors to Revenue */}
