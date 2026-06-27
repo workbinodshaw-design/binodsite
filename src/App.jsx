@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import UIOverlay from './components/UIOverlay';
 import SceneContainer from './components/SceneContainer';
 import ActiveCardOverlay from './components/ActiveCardOverlay';
+import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -29,9 +30,12 @@ function App() {
     <>
       <div id="app-container" style={{ filter: activeCard ? 'blur(8px)' : 'none', transition: 'filter 0.3s ease' }}>
         <UIOverlay />
-        <div className="canvas-container">
-          <SceneContainer scrollProgress={scrollProgress} setActiveCard={setActiveCard} />
-        </div>
+        {/* 3D Scene Layer wrapped in Error Boundary so the site doesn't blank out if WebGL/Model fails */}
+        <ErrorBoundary>
+          <div className="canvas-container">
+            <SceneContainer scrollProgress={scrollProgress} setActiveCard={setActiveCard} />
+          </div>
+        </ErrorBoundary>
       </div>
       <ActiveCardOverlay activeCard={activeCard} onClose={() => setActiveCard(null)} />
       
