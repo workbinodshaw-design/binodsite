@@ -5,11 +5,27 @@ import { Code, Bot, MessageCircle } from 'lucide-react';
 const ServicesSection = () => {
   return (
     <div className="services-container">
-      <div className="section-header text-center" style={{ marginBottom: '2rem' }}>
+      <div className="section-header text-center" style={{ marginBottom: '1rem' }}>
         <h2 className="section-title">How can we scale your business?</h2>
         <p className="section-subtitle">
           Choose a path below to see exactly how we leverage cutting-edge technology to drive revenue and eliminate manual work.
         </p>
+      </div>
+
+      {/* WhatsApp Trust Tile (Moved Above) */}
+      <div className="whatsapp-trust-wrapper">
+        <a href="https://wa.me/919394683474" target="_blank" rel="noreferrer" className="whatsapp-trust-tile glass">
+          <div className="whatsapp-icon-bg">
+            <MessageCircle size={24} color="#fff" />
+          </div>
+          <div className="trust-text">
+            <h4>Talk directly to our founders</h4>
+            <p>Trusted by forward-thinking businesses. Skip the automated forms and chat with an expert on WhatsApp.</p>
+          </div>
+          <div className="trust-arrow">
+            Chat Now →
+          </div>
+        </a>
       </div>
 
       <div className="funnel-tiles-grid">
@@ -34,21 +50,7 @@ const ServicesSection = () => {
         </Link>
       </div>
 
-      {/* WhatsApp Trust Tile */}
-      <div className="whatsapp-trust-wrapper">
-        <a href="https://wa.me/919394683474" target="_blank" rel="noreferrer" className="whatsapp-trust-tile glass">
-          <div className="whatsapp-icon-bg">
-            <MessageCircle size={32} color="#fff" />
-          </div>
-          <div className="trust-text">
-            <h4>Talk to a human immediately</h4>
-            <p>Skip the forms. Chat directly with our lead developer on WhatsApp to discuss your vision right now.</p>
-          </div>
-          <div className="trust-arrow">
-            Chat Now →
-          </div>
-        </a>
-      </div>
+
     </div>
   );
 };

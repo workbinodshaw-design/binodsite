@@ -483,7 +483,8 @@ body {
 
 /* WhatsApp Trust Tile */
 .whatsapp-trust-wrapper {
-  margin-top: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -493,15 +494,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  padding: 2rem 3rem;
-  border-radius: 24px;
+  gap: 1.5rem;
+  padding: 1.2rem 2rem;
+  border-radius: 16px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   text-decoration: none;
   color: var(--text-primary);
   width: 100%;
-  max-width: 900px;
+  max-width: 600px;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -515,51 +516,52 @@ body {
   width: 4px;
   height: 100%;
   background: #25D366;
-  border-top-left-radius: 24px;
-  border-bottom-left-radius: 24px;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
 }
 
 .whatsapp-trust-tile:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(37, 211, 102, 0.4);
-  box-shadow: 0 15px 40px rgba(37, 211, 102, 0.15);
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.15);
 }
 
 .whatsapp-icon-bg {
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: #25D366;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
 }
 
 .trust-text {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
   text-align: left;
 }
 
 .trust-text h4 {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: 700;
   margin: 0;
 }
 
 .trust-text p {
   color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 0.85rem;
+  line-height: 1.4;
   margin: 0;
 }
 
 .trust-arrow {
+  font-size: 0.9rem;
   font-weight: 600;
   color: #25D366;
   white-space: nowrap;
