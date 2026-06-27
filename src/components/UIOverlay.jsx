@@ -4,11 +4,6 @@ import { Sparkles, ArrowRight, PlayCircle } from 'lucide-react';
 const UIOverlay = () => {
   return (
     <div className="ui-overlay">
-      <div className="logo-container">
-        {/* The user will place their logo.png in the public folder */}
-        <img src={import.meta.env.BASE_URL + 'logo.png'} alt="CastFlow Logo" className="logo-img" onError={(e) => { e.target.style.display = 'none' }} />
-        <span className="logo-text">CASTFLOW</span>
-      </div>
       <div className="ui-content">
         <div className="badge">
           <div className="badge-dot"></div>

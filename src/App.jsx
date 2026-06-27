@@ -1,49 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import UIOverlay from './components/UIOverlay';
-import SceneContainer from './components/SceneContainer';
-import ActiveCardOverlay from './components/ActiveCardOverlay';
-import ErrorBoundary from './components/ErrorBoundary';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import HomePage from './pages/HomePage';
+import ServicesPage from './pages/ServicesPage';
 
 function App() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [activeCard, setActiveCard] = useState(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Calculate scroll progress from 0 to 1 based on body height
-      const totalScroll = document.body.scrollHeight - window.innerHeight;
-      const currentScroll = window.scrollY;
-      const progress = currentScroll / totalScroll;
-      
-      // Clamp between 0 and 1
-      setScrollProgress(Math.min(Math.max(progress, 0), 1));
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    // Initial call
-    handleScroll();
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <>
-      <div id="app-container" style={{ filter: activeCard ? 'blur(8px)' : 'none', transition: 'filter 0.3s ease' }}>
-        <UIOverlay />
-        {/* 3D Scene Layer wrapped in Error Boundary so the site doesn't blank out if WebGL/Model fails */}
-        <ErrorBoundary>
-          <div className="canvas-container">
-            <SceneContainer scrollProgress={scrollProgress} setActiveCard={setActiveCard} />
-          </div>
-        </ErrorBoundary>
-      </div>
-      <ActiveCardOverlay activeCard={activeCard} onClose={() => setActiveCard(null)} />
+    <Router basename={import.meta.env.BASE_URL}>
+      {/* Navbar sits outside Routes so it is persistent across all pages */}
+      <Navbar />
       
-      {/* Scroll Snapping Sections */}
-      <div className="scroll-sections">
-        {/* Empty tall container for smooth native scrolling */}
-      </div>
-    </>
+      {/* Routes define which page component renders based on the URL */}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/services" element={<ServicesPage />} />
+        {/* We can add /portfolio and /contact here later */}
+      </Routes>
+    </Router>
   );
 }
 
