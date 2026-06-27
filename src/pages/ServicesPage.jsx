@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Code, Bot, CheckCircle, ArrowRight, Zap, Clock, TrendingUp, Users } from 'lucide-react';
+import { Code, Bot, CheckCircle, ArrowRight, Zap, Clock, TrendingUp, Users, Globe } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
 
 const ServicesPage = () => {
