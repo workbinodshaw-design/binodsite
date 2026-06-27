@@ -1608,6 +1608,72 @@ body {
   50% { transform: translateY(-3px); }
 }
 
+/* Floating Demo Tile over Spiderman */
+.floating-demo-tile {
+  position: absolute;
+  top: 45%;
+  right: 5%;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 25px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #fff;
+  background: rgba(20, 20, 25, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(163, 136, 255, 0.3);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 20px rgba(93, 63, 211, 0.2);
+  transition: all 0.3s ease;
+  animation: float 4s ease-in-out infinite, borderPulse 3s infinite;
+}
+
+@media (max-width: 1024px) {
+  .floating-demo-tile {
+    top: auto;
+    bottom: 20%;
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+.floating-demo-tile:hover {
+  transform: translateY(-5px) scale(1.05);
+  background: rgba(30, 30, 40, 0.9);
+  border-color: #a388ff;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 30px rgba(163, 136, 255, 0.4);
+}
+
+.floating-demo-tile .tile-icon {
+  background: rgba(93, 63, 211, 0.2);
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.floating-demo-tile .tile-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.floating-demo-tile .tile-content strong {
+  font-size: 1.1rem;
+}
+
+.floating-demo-tile .tile-content span {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.tile-zap {
+  animation: pulseCore 2s infinite alternate;
+}
+
+@keyframes borderPulse {
+  0%, 100% { border-color: rgba(255,255,255,0.1); }
+  50% { border-color: rgba(163, 136, 255, 0.6); }
+}
+
 /* Web Visual: Floating Isometric Layers */
 .web-visual {
   background: radial-gradient(circle at center, rgba(255, 107, 107, 0.15) 0%, rgba(10,10,15,1) 70%);
