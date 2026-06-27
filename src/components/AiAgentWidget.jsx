@@ -16,6 +16,12 @@ const AiAgentWidget = () => {
     }
   }, [messages, isTyping, isOpen]);
 
+  useEffect(() => {
+    const handleOpen = () => setIsOpen(true);
+    window.addEventListener('open-ai-agent', handleOpen);
+    return () => window.removeEventListener('open-ai-agent', handleOpen);
+  }, []);
+
   const handleSend = (e) => {
     e.preventDefault();
     if (!inputText.trim()) return;

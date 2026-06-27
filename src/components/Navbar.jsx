@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Bot } from 'lucide-react';
 
 const Navbar = () => {
   const location = useLocation();
@@ -15,7 +16,13 @@ const Navbar = () => {
         <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
         <Link to="/services" className={`nav-link ${location.pathname === '/services' ? 'active' : ''}`}>Services</Link>
         <Link to="/portfolio" className={`nav-link ${location.pathname === '/portfolio' ? 'active' : ''}`}>Portfolio</Link>
-        <Link to="/contact" className={`nav-link btn btn-primary small`}>Let's Talk</Link>
+        <button 
+          onClick={() => window.dispatchEvent(new Event('open-ai-agent'))}
+          className="nav-link btn btn-primary small" 
+          style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+        >
+          <Bot size={16} /> Ask AI Agent
+        </button>
       </div>
     </nav>
   );
