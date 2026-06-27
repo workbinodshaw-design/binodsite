@@ -60,7 +60,7 @@ const SceneContainer = ({ scrollProgress, setActiveCard }) => {
       <pointLight position={[-3, 1, 3]} intensity={2} color="#98FF98" distance={10} /> {/* Mint side glow */}
       <pointLight position={[4, -1, -2]} intensity={2} color="#FF7F50" distance={10} /> {/* Coral back glow */}
 
-      <Environment preset="city" />
+      <Environment files="/potsdamer_platz_1k.hdr" />
 
       {/* Main Content */}
       <HolographicScene scrollProgress={scrollProgress} setActiveCard={setActiveCard} />
