@@ -22,11 +22,15 @@ const UIOverlay = () => {
           </p>
           
           <div className="button-group">
-            <button className="btn btn-primary">
-              Start a Project <ArrowRight size={18} />
-            </button>
-            <button className="btn btn-secondary">
-              View Our Work <PlayCircle size={18} />
+            <Link to="/contact" className="btn btn-primary">
+              Book Discovery Call <ArrowRight size={18} />
+            </Link>
+            <button 
+              className="btn btn-secondary" 
+              onClick={() => window.dispatchEvent(new Event('open-ai-agent'))}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+              Ask AI Agent <Bot size={18} />
             </button>
           </div>
         </div>
