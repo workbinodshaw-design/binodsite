@@ -7,7 +7,8 @@ const BabySpiderman = () => {
   const groupRef = useRef();
 
   // useGLTF handles suspense automatically. It will pause rendering until the model loads.
-  const { scene } = useGLTF('./spiderman.glb');
+  const modelPath = import.meta.env.BASE_URL + 'spiderman.glb';
+  const { scene } = useGLTF(modelPath);
 
   useFrame((state, delta) => {
     if (groupRef.current) {
@@ -28,6 +29,6 @@ const BabySpiderman = () => {
 };
 
 // Preload the model to prevent popping
-useGLTF.preload('./spiderman.glb');
+useGLTF.preload(import.meta.env.BASE_URL + 'spiderman.glb');
 
 export default BabySpiderman;
