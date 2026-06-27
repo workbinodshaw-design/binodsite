@@ -20,12 +20,11 @@ const InteractiveDemo = () => {
     }
   }, [messages, isTyping, view]);
 
-  const handleCommentSubmit = (e) => {
-    e.preventDefault();
-    if (!commentText.trim()) return;
+  const executeComment = (text) => {
+    if (!text.trim()) return;
 
     // 1. Add comment
-    const newComment = commentText;
+    const newComment = text;
     setComments([...comments, { username: 'you', text: newComment }]);
     setCommentText('');
 
@@ -53,6 +52,11 @@ const InteractiveDemo = () => {
     }, 2000);
   };
 
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    executeComment(commentText);
+  };
+
   return (
     <div className="interactive-demo-container" style={{ margin: '4rem 0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div className="demo-header-text text-center" style={{ marginBottom: '3rem' }}>
@@ -61,7 +65,7 @@ const InteractiveDemo = () => {
         </div>
         <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Experience It Yourself</h2>
         <p className="text-secondary" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.1rem', lineHeight: '1.6' }}>
-          Type a comment on the mock Instagram post below and watch how our AI agents instantly trigger and engage your prospects in the DMs.
+          Click one of the quick replies below and watch how our AI agents instantly trigger and engage your prospects in the DMs. No typing required.
         </p>
       </div>
 
@@ -101,6 +105,25 @@ const InteractiveDemo = () => {
                   <strong>{c.username}</strong> {c.text}
                 </div>
               ))}
+            </div>
+            
+            <div className="quick-reply-instructions" style={{ textAlign: 'center', fontSize: '0.8rem', color: '#a388ff', marginBottom: '8px', animation: 'bounce 2s infinite' }}>
+              👇 Click a button to test the AI 👇
+            </div>
+
+            <div className="quick-reply-pills" style={{ display: 'flex', gap: '8px', padding: '0 15px 10px 15px', overflowX: 'auto', msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+              <button 
+                onClick={() => executeComment("Send me the blueprint!")}
+                style={{ background: 'rgba(93, 63, 211, 0.2)', border: '1px solid #5D3FD3', color: '#fff', padding: '6px 12px', borderRadius: '16px', fontSize: '0.85rem', cursor: 'pointer', whiteSpace: 'nowrap' }}
+              >
+                "Send me the blueprint!"
+              </button>
+              <button 
+                onClick={() => executeComment("How does this work?")}
+                style={{ background: 'rgba(255, 107, 107, 0.2)', border: '1px solid #ff6b6b', color: '#fff', padding: '6px 12px', borderRadius: '16px', fontSize: '0.85rem', cursor: 'pointer', whiteSpace: 'nowrap' }}
+              >
+                "How does this work?"
+              </button>
             </div>
 
             <form className="ig-comment-input-area" onSubmit={handleCommentSubmit}>

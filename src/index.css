@@ -1603,6 +1603,11 @@ body {
   to { transform: scale(1); opacity: 1; }
 }
 
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
 /* Web Visual: Floating Isometric Layers */
 .web-visual {
   background: radial-gradient(circle at center, rgba(255, 107, 107, 0.15) 0%, rgba(10,10,15,1) 70%);
