@@ -78,6 +78,29 @@ body {
   pointer-events: none; /* Let clicks pass through if needed, except for buttons */
 }
 
+.logo-container {
+  position: absolute;
+  top: 3rem;
+  left: 6rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  pointer-events: auto;
+}
+
+.logo-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-primary);
+}
+
 .ui-content {
   pointer-events: auto;
   max-width: 600px;
