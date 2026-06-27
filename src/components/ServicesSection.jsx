@@ -12,21 +12,7 @@ const ServicesSection = () => {
         </p>
       </div>
 
-      {/* WhatsApp Trust Tile (Moved Above) */}
-      <div className="whatsapp-trust-wrapper">
-        <a href="https://wa.me/919394683474" target="_blank" rel="noreferrer" className="whatsapp-trust-tile glass">
-          <div className="whatsapp-icon-bg">
-            <MessageCircle size={24} color="#fff" />
-          </div>
-          <div className="trust-text">
-            <h4>Talk directly to our founders</h4>
-            <p>Trusted by forward-thinking businesses. Skip the automated forms and chat with an expert on WhatsApp.</p>
-          </div>
-          <div className="trust-arrow">
-            Chat Now →
-          </div>
-        </a>
-      </div>
+
 
       <div className="funnel-tiles-grid">
         {/* Web Dev Tile */}

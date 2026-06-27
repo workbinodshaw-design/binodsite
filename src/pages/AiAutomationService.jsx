@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MessageSquare, Workflow, Database, LineChart, ArrowRight } from 'lucide-react';
+import { MessageSquare, Workflow, Database, LineChart, ArrowRight, MessageCircle } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
 import LeadFormModal from '../components/LeadFormModal';
 
@@ -77,7 +77,23 @@ const AiAutomationService = () => {
         ))}
       </div>
 
-      <div className="content-section" style={{ minHeight: 'auto', paddingBottom: '4rem', marginTop: '6rem' }}>
+      {/* WhatsApp Trust Tile */}
+      <div className="whatsapp-trust-wrapper" style={{ marginTop: '4rem' }}>
+        <a href="https://wa.me/919394683474" target="_blank" rel="noreferrer" className="whatsapp-trust-tile glass">
+          <div className="whatsapp-icon-bg">
+            <MessageCircle size={24} color="#fff" />
+          </div>
+          <div className="trust-text">
+            <h4>Talk directly to our founders</h4>
+            <p>Trusted by forward-thinking businesses. Skip the automated forms and chat with an expert on WhatsApp.</p>
+          </div>
+          <div className="trust-arrow">
+            Chat Now →
+          </div>
+        </a>
+      </div>
+
+      <div className="content-section" style={{ minHeight: 'auto', paddingBottom: '4rem', marginTop: '2rem' }}>
         <ContactSection />
       </div>
 
