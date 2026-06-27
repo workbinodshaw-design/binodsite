@@ -1094,6 +1094,18 @@ body {
  *  SERVICES PAGE EDUCATIONAL VISUALS
  * ------------------------------------- */
 
+@media (max-width: 768px) {
+  .service-grid-2-col {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .service-header-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+}
+
 /* AI Automation Visuals */
 .comparison-card {
   width: 100%;
