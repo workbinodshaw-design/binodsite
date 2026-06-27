@@ -16,14 +16,21 @@ const Navbar = () => {
         <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
         <Link to="/services" className={`nav-link ${location.pathname === '/services' ? 'active' : ''}`}>Services</Link>
         <Link to="/portfolio" className={`nav-link ${location.pathname === '/portfolio' ? 'active' : ''}`}>Portfolio</Link>
-        <Link to="/client-login" className={`nav-link ${location.pathname === '/client-login' ? 'active' : ''}`}>Client Portal</Link>
-        <button 
-          onClick={() => window.dispatchEvent(new Event('open-ai-agent'))}
+        <Link 
+          to="/client-login" 
           className="nav-link btn btn-primary small" 
-          style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+          style={{ 
+            color: '#000', 
+            background: '#fff', 
+            padding: '0.6rem 1.5rem', 
+            borderRadius: '30px', 
+            fontWeight: '600', 
+            marginLeft: '1rem',
+            textDecoration: 'none'
+          }}
         >
-          <Bot size={16} /> Ask AI Agent
-        </button>
+          Login
+        </Link>
       </div>
     </nav>
   );

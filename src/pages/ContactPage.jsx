@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MessageCircle, Mail, Send } from 'lucide-react';
 import { saveLeadToDatabase } from '../firebase';
+import ProtectedWhatsAppLink from '../components/ProtectedWhatsAppLink';
 
 const ContactPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -51,12 +52,12 @@ const ContactPage = () => {
             <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Direct Contact</h3>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Skip the form and chat with us immediately.</p>
             
-            <a href="https://wa.me/919394683474" target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none', color: '#fff', marginBottom: '1.5rem' }}>
+            <ProtectedWhatsAppLink phoneNumber="919394683474" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none', color: '#fff', marginBottom: '1.5rem' }}>
               <div style={{ background: 'rgba(37, 211, 102, 0.2)', width: '48px', height: '48px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <MessageCircle size={24} color="#25D366" />
               </div>
               <span style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>WhatsApp Us</span>
-            </a>
+            </ProtectedWhatsAppLink>
 
             <a href="mailto:work.binodshaw@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none', color: '#fff' }}>
               <div style={{ background: 'rgba(163, 136, 255, 0.2)', width: '48px', height: '48px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

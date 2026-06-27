@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MessageCircle, Mail, Phone, MessageSquare } from 'lucide-react';
+import ProtectedWhatsAppLink from './ProtectedWhatsAppLink';
 
 const ContactWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,10 +9,10 @@ const ContactWidget = () => {
     <div className="contact-widget-container">
       {/* Options that pop up when clicked */}
       <div className={`widget-options ${isOpen ? 'open' : ''}`}>
-        <a href="https://wa.me/919394683474" target="_blank" rel="noreferrer" className="widget-btn whatsapp" title="WhatsApp Us">
+        <ProtectedWhatsAppLink phoneNumber="919394683474" className="widget-btn whatsapp" title="WhatsApp Us">
           <MessageCircle size={20} />
           <span className="widget-tooltip">WhatsApp</span>
-        </a>
+        </ProtectedWhatsAppLink>
         <a href="mailto:work.binodshaw@gmail.com" className="widget-btn email" title="Email Us">
           <Mail size={20} />
           <span className="widget-tooltip">Email</span>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Monitor, Smartphone, ShoppingCart, Globe, ArrowRight, MessageCircle, Zap, TrendingUp, ShieldCheck } from 'lucide-react';
+import { Monitor, Smartphone, ShoppingCart, Globe, ArrowRight, MessageCircle, Zap, TrendingUp, ShieldCheck, MessageSquare } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
 import LeadFormModal from '../components/LeadFormModal';
+import ProtectedWhatsAppLink from '../components/ProtectedWhatsAppLink';
 
 const WebDevService = () => {
   const [selectedService, setSelectedService] = useState(null);
@@ -107,18 +108,15 @@ const WebDevService = () => {
 
       {/* WhatsApp Trust Tile */}
       <div className="whatsapp-trust-wrapper" style={{ marginTop: '4rem' }}>
-        <a href="https://wa.me/919394683474" target="_blank" rel="noreferrer" className="whatsapp-trust-tile glass">
+        <ProtectedWhatsAppLink phoneNumber="919394683474" className="whatsapp-trust-tile glass">
           <div className="whatsapp-icon-bg">
-            <MessageCircle size={24} color="#fff" />
+            <MessageSquare size={32} color="#fff" />
           </div>
-          <div className="trust-text">
-            <h4>Talk directly to our founders</h4>
+          <div className="whatsapp-trust-text">
+            <h4>Need immediate advice?</h4>
             <p>Trusted by forward-thinking businesses. Skip the automated forms and chat with an expert on WhatsApp.</p>
           </div>
-          <div className="trust-arrow">
-            Chat Now →
-          </div>
-        </a>
+        </ProtectedWhatsAppLink>
       </div>
 
       <div className="content-section" style={{ minHeight: 'auto', paddingBottom: '4rem', marginTop: '2rem' }}>

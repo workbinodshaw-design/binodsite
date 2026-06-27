@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bot, X, Send, MessageCircle } from 'lucide-react';
+import ProtectedWhatsAppLink from './ProtectedWhatsAppLink';
 
 const AiAgentWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +57,7 @@ const AiAgentWidget = () => {
       console.error("Backend API Error:", error);
       setIsTyping(false);
       
-      let fallbackResponse = "I can definitely help with that. Since I encountered a slight connection issue, please chat directly with our founders on WhatsApp right here: https://wa.me/919394683474";
+      let fallbackResponse = "I can definitely help with that. Since I encountered a slight connection issue, please chat directly with our founders on WhatsApp using the button below.";
       setMessages((prev) => [...prev, { sender: 'ai', text: fallbackResponse }]);
     }
   };
@@ -106,9 +107,9 @@ const AiAgentWidget = () => {
             </button>
           </form>
           <div className="ai-chat-footer">
-            <a href="https://wa.me/919394683474" target="_blank" rel="noreferrer">
-              <MessageCircle size={12} /> Talk to a human
-            </a>
+            <ProtectedWhatsAppLink phoneNumber="919394683474" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#25D366', textDecoration: 'none', fontWeight: 'bold' }}>
+              <MessageCircle size={18} /> WhatsApp Support
+            </ProtectedWhatsAppLink>
           </div>
         </div>
       )}
