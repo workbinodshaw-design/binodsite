@@ -6,6 +6,7 @@ import ServicesPage from './pages/ServicesPage';
 import WebDevService from './pages/WebDevService';
 import AiAutomationService from './pages/AiAutomationService';
 import ContactPage from './pages/ContactPage';
+import AdminDashboard from './pages/AdminDashboard';
 import AiAgentWidget from './components/AiAgentWidget';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/services/web-development" element={<WebDevService />} />
         <Route path="/services/ai-automation" element={<AiAutomationService />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
 
       {/* Global AI Agent Widget */}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const ContactSection = () => {
   return (
@@ -11,9 +12,9 @@ const ContactSection = () => {
         <a href="mailto:work.binodshaw@gmail.com" className="btn btn-primary" style={{ textDecoration: 'none', padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
           Start a Project
         </a>
-        <a href="https://calendly.com/" target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ textDecoration: 'none', padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
+        <Link to="/contact" className="btn btn-secondary" style={{ textDecoration: 'none', padding: '1rem 2.5rem', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Calendar size={18} /> Book Discovery Call
-        </a>
+        </Link>
       </div>
       
       <div className="footer-credits">

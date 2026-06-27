@@ -1956,3 +1956,11 @@ body {
   gap: 4px;
 }
 .ai-chat-footer a:hover { color: #fff; }
+
+/* Admin Table Styles */
+.admin-table { width: 100%; border-collapse: collapse; text-align: left; }
+.admin-table th { padding: 1rem; border-bottom: 2px solid rgba(255,255,255,0.1); color: var(--text-secondary); font-weight: 500; }
+.admin-table td { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.admin-table tr:hover { background: rgba(255,255,255,0.02); }
+.spin { animation: spin 1s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
