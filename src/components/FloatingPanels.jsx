@@ -63,17 +63,18 @@ const FloatingPanels = ({ setActiveCard }) => {
       {/* Panel 6: Experience Automation (New Sandbox Link) */}
       <FloatingPanel 
         radius={7} height={1.5} startAngle={Math.PI / 6} webOrigin={[1, 0, 0]}
-        className="floating-demo-tile-3d pulse-border"
         onClick={() => navigate('/services/ai-automation')}
       >
-        <div className="tile-icon">
-          <Bot size={24} color="#a388ff" />
+        <div className="card-header">
+          <div className="card-icon" style={{ background: '#E6E6FA' }}><Bot size={18} color="#8A2BE2" /></div>
+          Live Sandbox
         </div>
-        <div className="tile-content">
-          <strong>Experience Automation</strong>
-          <span>Try the live sandbox</span>
+        <div style={{ padding: '1rem 0', fontWeight: 800, fontSize: '1.8rem', color: '#1a1a1a', lineHeight: '1.2' }}>
+          Experience Automation
         </div>
-        <Zap size={20} className="text-coral tile-zap" />
+        <div style={{ fontSize: '1rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Zap size={16} color="#FF7F50" className="pulse" /> Click to test the AI
+        </div>
       </FloatingPanel>
       {/* Panel 1: AI Automation (Front, High) - Tom's Hand (High Forward) */}
       <FloatingPanel 
