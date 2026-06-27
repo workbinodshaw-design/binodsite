@@ -3,7 +3,9 @@ import { useFrame } from '@react-three/fiber';
 import { Html, Billboard, Line } from '@react-three/drei';
 import { Activity, Code, Database, Zap, Layout, Server, Bot } from 'lucide-react';
 
-const FloatingPanel = ({ radius, height, startAngle, webOrigin = [0, 1.2, 0], onClick, children }) => {
+import { useNavigate } from 'react-router-dom';
+
+const FloatingPanel = ({ radius, height, startAngle, webOrigin = [0, 1.2, 0], onClick, children, className = "floating-card" }) => {
   const [hovered, setHovered] = useState(false);
   
   // Compute fixed position once
@@ -30,7 +32,7 @@ const FloatingPanel = ({ radius, height, startAngle, webOrigin = [0, 1.2, 0], on
             }}
           >
             <div 
-              className="floating-card" 
+              className={className} 
               onClick={(e) => { e.stopPropagation(); onClick(); }}
               onPointerOver={() => setHovered(true)}
               onPointerOut={() => setHovered(false)}
@@ -54,8 +56,25 @@ const FloatingPanel = ({ radius, height, startAngle, webOrigin = [0, 1.2, 0], on
 };
 
 const FloatingPanels = ({ setActiveCard }) => {
+  const navigate = useNavigate();
+
   return (
     <group>
+      {/* Panel 6: Experience Automation (New Sandbox Link) */}
+      <FloatingPanel 
+        radius={7} height={1.5} startAngle={Math.PI / 6} webOrigin={[1, 0, 0]}
+        className="floating-demo-tile-3d pulse-border"
+        onClick={() => navigate('/services/ai-automation')}
+      >
+        <div className="tile-icon">
+          <Bot size={24} color="#a388ff" />
+        </div>
+        <div className="tile-content">
+          <strong>Experience Automation</strong>
+          <span>Try the live sandbox</span>
+        </div>
+        <Zap size={20} className="text-coral tile-zap" />
+      </FloatingPanel>
       {/* Panel 1: AI Automation (Front, High) - Tom's Hand (High Forward) */}
       <FloatingPanel 
         radius={7} height={3} startAngle={0} webOrigin={[0.2, 0.5, 1]}
