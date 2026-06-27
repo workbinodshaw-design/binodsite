@@ -30,6 +30,7 @@ const UIOverlay = () => {
             </button>
           </div>
         </div>
+      </div>
     </>
   );
 };
