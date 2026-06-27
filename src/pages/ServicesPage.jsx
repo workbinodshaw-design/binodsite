@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Code, Bot, CheckCircle, ArrowRight, Zap, Clock, TrendingUp, Users, Globe, Play, Server, Workflow } from 'lucide-react';
+import { Code, Bot, CheckCircle, ArrowRight, Zap, Clock, TrendingUp, Users, Globe, Mail, Database, Server, Workflow } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
 
 const ServicesPage = () => {
@@ -74,14 +74,25 @@ const ServicesPage = () => {
           
           {/* Visual Side */}
           <div className="service-visual-column" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            <div className="premium-animated-visual ai-visual">
-               <div className="ai-core"></div>
-               <div className="ai-ring ring-1"></div>
-               <div className="ai-ring ring-2"></div>
-               <div className="ai-ring ring-3"></div>
-               <div className="ai-node node-1"></div>
-               <div className="ai-node node-2"></div>
-               <div className="ai-node node-3"></div>
+            <div className="premium-animated-visual ai-pipeline-visual">
+               <div className="pipeline-track">
+                  <div className="data-packet"></div>
+               </div>
+               
+               <div className="pipeline-node node-input">
+                  <div className="node-icon"><Mail size={24} /></div>
+                  <span className="node-label">Email Received</span>
+               </div>
+               
+               <div className="pipeline-node node-ai">
+                  <div className="node-icon pulse"><Bot size={32} color="#fff" /></div>
+                  <span className="node-label">AI Agent Processing</span>
+               </div>
+               
+               <div className="pipeline-node node-output">
+                  <div className="node-icon"><Database size={24} /></div>
+                  <span className="node-label">CRM Updated</span>
+               </div>
             </div>
 
             {/* Custom Visual: Manual vs AI */}

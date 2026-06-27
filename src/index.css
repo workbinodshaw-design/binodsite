@@ -1221,75 +1221,97 @@ body {
   perspective: 1000px;
 }
 
-/* AI Visual: Rotating Neural Rings */
-.ai-visual {
-  background: radial-gradient(circle at center, rgba(93, 63, 211, 0.2) 0%, rgba(10,10,15,1) 70%);
+/* AI Pipeline Visual */
+.ai-pipeline-visual {
+  background: radial-gradient(circle at center, rgba(93, 63, 211, 0.15) 0%, rgba(10,10,15,1) 80%);
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 2rem;
 }
 
-.ai-core {
-  width: 40px;
-  height: 40px;
-  background: #a388ff;
-  border-radius: 50%;
-  box-shadow: 0 0 30px #a388ff, 0 0 60px #5D3FD3;
-  animation: pulseCore 2s infinite alternate;
-  z-index: 10;
-}
-
-@keyframes pulseCore {
-  0% { transform: scale(0.9); box-shadow: 0 0 20px #a388ff; }
-  100% { transform: scale(1.1); box-shadow: 0 0 50px #a388ff, 0 0 80px #5D3FD3; }
-}
-
-.ai-ring {
+.pipeline-track {
   position: absolute;
+  top: 40%;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.data-packet {
+  width: 12px;
+  height: 12px;
+  background: #25D366;
   border-radius: 50%;
-  border: 1px solid rgba(163, 136, 255, 0.3);
-  border-top: 1px solid #a388ff;
-  box-shadow: 0 0 15px rgba(93, 63, 211, 0.2);
-}
-
-.ai-ring.ring-1 {
-  width: 120px;
-  height: 120px;
-  animation: spinRing 8s linear infinite;
-}
-
-.ai-ring.ring-2 {
-  width: 200px;
-  height: 200px;
-  border: 1px dashed rgba(163, 136, 255, 0.4);
-  animation: spinRing 12s linear infinite reverse;
-}
-
-.ai-ring.ring-3 {
-  width: 280px;
-  height: 280px;
-  border-top: 2px solid #5D3FD3;
-  animation: spinRing 18s linear infinite;
-}
-
-@keyframes spinRing {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.ai-node {
   position: absolute;
-  width: 10px;
-  height: 10px;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #fff;
+  top: -5px;
+  box-shadow: 0 0 15px #25D366, 0 0 30px #25D366;
+  animation: movePacket 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.ai-node.node-1 { top: 25%; left: 30%; animation: floatNode 4s ease-in-out infinite; }
-.ai-node.node-2 { bottom: 30%; right: 25%; animation: floatNode 5s ease-in-out infinite 1s; }
-.ai-node.node-3 { top: 40%; right: 20%; animation: floatNode 6s ease-in-out infinite 2s; background: #a388ff; box-shadow: 0 0 15px #a388ff;}
+@keyframes movePacket {
+  0% { left: 0; opacity: 0; }
+  10% { opacity: 1; }
+  45% { left: 50%; opacity: 1; transform: scale(1.5) translateX(-50%); background: #a388ff; box-shadow: 0 0 20px #a388ff; }
+  55% { left: 50%; opacity: 1; transform: scale(1.5) translateX(-50%); background: #a388ff; box-shadow: 0 0 20px #a388ff;}
+  90% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
 
-@keyframes floatNode {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-15px) scale(1.2); }
+.pipeline-node {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: -15%;
+}
+
+.node-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(20, 20, 25, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  transition: all 0.3s;
+}
+
+.node-ai .node-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(93, 63, 211, 0.2);
+  border-color: #5D3FD3;
+  color: #fff;
+  box-shadow: 0 0 30px rgba(93, 63, 211, 0.4);
+}
+
+.node-icon.pulse {
+  animation: nodePulse 4s infinite;
+}
+
+@keyframes nodePulse {
+  0%, 40% { box-shadow: 0 0 20px rgba(93, 63, 211, 0.2); transform: scale(1); border-color: rgba(93,63,211,0.5); }
+  50% { box-shadow: 0 0 50px rgba(163, 136, 255, 0.8); transform: scale(1.1); border-color: #a388ff; }
+  60%, 100% { box-shadow: 0 0 20px rgba(93, 63, 211, 0.2); transform: scale(1); border-color: rgba(93,63,211,0.5); }
+}
+
+.node-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  max-width: 100px;
+  background: rgba(0,0,0,0.5);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
 }
 
 /* Web Visual: Floating Isometric Layers */
