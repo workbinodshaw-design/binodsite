@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Code, Bot, CheckCircle, ArrowRight } from 'lucide-react';
+import { Code, Bot, CheckCircle, ArrowRight, Zap, Clock, TrendingUp, Users } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
 
 const ServicesPage = () => {
@@ -19,98 +19,41 @@ const ServicesPage = () => {
         </div>
         <h1 className="headline">Scale With Confidence</h1>
         <p className="description" style={{ margin: '0 auto', maxWidth: '600px' }}>
-          We provide end-to-end digital solutions combining state-of-the-art web architectures with powerful AI automation pipelines.
+          We provide end-to-end digital solutions combining powerful AI automation pipelines with state-of-the-art web architectures.
         </p>
       </div>
 
-      {/* Web Development Section */}
+      {/* AI Automation Section (NOW FIRST) */}
       <div className="service-detail-section">
-        <div className="service-detail-content">
-          <div className="service-icon coral" style={{ marginBottom: '1.5rem' }}>
-            <Code size={32} />
-          </div>
-          <h2>Web Development</h2>
-          <p className="text-secondary">
-            Your website is your best salesperson. We build ultra-fast, high-converting platforms that don't just look stunning—they drive revenue.
-          </p>
-          
-          <div className="service-features-list">
-            <div className="feature-item">
-              <CheckCircle size={20} className="text-coral" />
-              <div>
-                <strong>SaaS Applications</strong>
-                <p>Scalable, secure, and intuitive web apps built on React and Node.js.</p>
-              </div>
-            </div>
-            <div className="feature-item">
-              <CheckCircle size={20} className="text-coral" />
-              <div>
-                <strong>3D WebGL Experiences</strong>
-                <p>Immersive, interactive 3D websites that wow your customers and destroy the competition.</p>
-              </div>
-            </div>
-            <div className="feature-item">
-              <CheckCircle size={20} className="text-coral" />
-              <div>
-                <strong>E-Commerce & High-Converting Landing Pages</strong>
-                <p>Optimized for speed and conversion rates.</p>
-              </div>
-            </div>
-          </div>
-
-          <Link to="/services/web-development" className="btn btn-primary" style={{ marginTop: '2.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
-            Explore Web Development Options <ArrowRight size={18} />
-          </Link>
-        </div>
-        
-        {/* Placeholder for an image or graphic */}
-        <div className="service-detail-visual glass">
-          <div className="mockup-window">
-             <div className="mockup-header">
-                <span className="dot bg-red"></span>
-                <span className="dot bg-yellow"></span>
-                <span className="dot bg-green"></span>
-             </div>
-             <div className="mockup-body">
-                <div className="skeleton-line w-3/4"></div>
-                <div className="skeleton-line w-1/2"></div>
-                <div className="skeleton-box"></div>
-             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* AI Automation Section */}
-      <div className="service-detail-section reverse">
         <div className="service-detail-content">
           <div className="service-icon lavender" style={{ marginBottom: '1.5rem' }}>
             <Bot size={32} />
           </div>
           <h2>AI & Automation</h2>
-          <p className="text-secondary">
-            Stop doing manual work. We build custom AI agents and workflow pipelines that integrate directly into your existing tools, saving you hundreds of hours.
+          <p className="text-secondary" style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>
+            Imagine having an employee who works 24/7, never sleeps, and never makes a mistake. Instead of manually copying data from emails to spreadsheets, our AI does it instantly while you focus on growing the business.
           </p>
           
-          <div className="service-features-list">
+          <div className="service-features-list" style={{ marginTop: '2rem' }}>
             <div className="feature-item">
               <CheckCircle size={20} className="text-lavender" />
               <div>
                 <strong>Customer Support AI Agents</strong>
-                <p>24/7 intelligent chatbots trained on your company data that actually solve problems.</p>
+                <p>24/7 chatbots that actually know your business and solve customer problems instantly.</p>
               </div>
             </div>
             <div className="feature-item">
               <CheckCircle size={20} className="text-lavender" />
               <div>
-                <strong>CRM & Workflow Automation</strong>
-                <p>Seamlessly connect tools (HubSpot, Slack, Stripe) via Make/Zapier to eliminate manual data entry.</p>
+                <strong>Workflow Automation</strong>
+                <p>Connect your tools (like Gmail, HubSpot, and Slack) so they talk to each other automatically.</p>
               </div>
             </div>
             <div className="feature-item">
               <CheckCircle size={20} className="text-lavender" />
               <div>
                 <strong>Automated Lead Generation</strong>
-                <p>Scrape, qualify, and outreach to leads on autopilot.</p>
+                <p>Find clients, qualify them, and send customized outreach emails on complete autopilot.</p>
               </div>
             </div>
           </div>
@@ -120,13 +63,85 @@ const ServicesPage = () => {
           </Link>
         </div>
         
-        <div className="service-detail-visual glass flex-center">
-           <div className="automation-flow">
-              <div className="node">Email Received</div>
-              <div className="arrow">↓</div>
-              <div className="node highlight">AI Analyzes Intent</div>
-              <div className="arrow">↓</div>
-              <div className="node">CRM Updated & Reply Sent</div>
+        {/* Custom Visual: Manual vs AI */}
+        <div className="service-detail-visual glass flex-center" style={{ flexDirection: 'column', gap: '2rem', padding: '3rem' }}>
+           <div className="comparison-card manual">
+              <div className="comp-header">
+                 <Clock size={20} /> <span>Manual Way (Slow & Expensive)</span>
+              </div>
+              <div className="comp-body">
+                 You read an email ➔ Copy data to CRM ➔ Draft a reply ➔ <strong>Takes 15 mins</strong>
+              </div>
+           </div>
+           
+           <div className="comparison-divider">VS</div>
+
+           <div className="comparison-card ai">
+              <div className="comp-header">
+                 <Zap size={20} /> <span>AI Automation (Instant)</span>
+              </div>
+              <div className="comp-body">
+                 AI reads email ➔ CRM auto-updates ➔ Reply sent ➔ <strong>Takes 2 seconds</strong>
+              </div>
+           </div>
+        </div>
+      </div>
+
+      {/* Web Development Section (NOW SECOND) */}
+      <div className="service-detail-section reverse">
+        <div className="service-detail-content">
+          <div className="service-icon coral" style={{ marginBottom: '1.5rem' }}>
+            <Code size={32} />
+          </div>
+          <h2>Web Development</h2>
+          <p className="text-secondary" style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>
+            Your website shouldn't just be a digital brochure; it should be your absolute best salesperson. We build platforms that load instantly and are designed specifically to turn casual visitors into paying clients.
+          </p>
+          
+          <div className="service-features-list" style={{ marginTop: '2rem' }}>
+            <div className="feature-item">
+              <CheckCircle size={20} className="text-coral" />
+              <div>
+                <strong>High-Converting Landing Pages</strong>
+                <p>Beautiful, fast, and optimized strictly to generate leads and sales.</p>
+              </div>
+            </div>
+            <div className="feature-item">
+              <CheckCircle size={20} className="text-coral" />
+              <div>
+                <strong>E-Commerce & SaaS Platforms</strong>
+                <p>Robust online stores and custom software built to handle thousands of users effortlessly.</p>
+              </div>
+            </div>
+            <div className="feature-item">
+              <CheckCircle size={20} className="text-coral" />
+              <div>
+                <strong>3D WebGL Experiences</strong>
+                <p>Stand out from competitors with jaw-dropping 3D interactive experiences directly in the browser.</p>
+              </div>
+            </div>
+          </div>
+
+          <Link to="/services/web-development" className="btn btn-primary" style={{ marginTop: '2.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
+            Explore Web Development Options <ArrowRight size={18} />
+          </Link>
+        </div>
+        
+        {/* Custom Visual: Visitors to Revenue */}
+        <div className="service-detail-visual glass flex-center" style={{ flexDirection: 'column', gap: '1.5rem', padding: '3rem' }}>
+           <div className="funnel-visual-step">
+              <Users size={24} className="text-coral" />
+              <span>Traffic & Visitors</span>
+           </div>
+           <div className="funnel-visual-arrow">↓</div>
+           <div className="funnel-visual-step highlight">
+              <Globe size={24} />
+              <span>High-Converting Website</span>
+           </div>
+           <div className="funnel-visual-arrow">↓</div>
+           <div className="funnel-visual-step success">
+              <TrendingUp size={24} />
+              <span>Revenue & Leads</span>
            </div>
         </div>
       </div>

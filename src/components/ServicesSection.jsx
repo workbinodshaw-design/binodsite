@@ -15,16 +15,6 @@ const ServicesSection = () => {
 
 
       <div className="funnel-tiles-grid">
-        {/* Web Dev Tile */}
-        <Link to="/services/web-development" className="funnel-tile glass">
-          <div className="funnel-icon coral">
-            <Code size={48} />
-          </div>
-          <h3>Web Development</h3>
-          <p>We build ultra-fast, high-converting platforms, immersive 3D experiences, and scalable SaaS architectures.</p>
-          <div className="funnel-arrow">Explore Solutions →</div>
-        </Link>
-
         {/* AI Automation Tile */}
         <Link to="/services/ai-automation" className="funnel-tile glass">
           <div className="funnel-icon lavender">
@@ -32,6 +22,16 @@ const ServicesSection = () => {
           </div>
           <h3>AI & Automation</h3>
           <p>Stop doing manual work. We build custom AI agents and workflow pipelines that integrate seamlessly into your tools.</p>
+          <div className="funnel-arrow">Explore Solutions →</div>
+        </Link>
+
+        {/* Web Dev Tile */}
+        <Link to="/services/web-development" className="funnel-tile glass">
+          <div className="funnel-icon coral">
+            <Code size={48} />
+          </div>
+          <h3>Web Development</h3>
+          <p>We build ultra-fast, high-converting platforms, immersive 3D experiences, and scalable SaaS architectures.</p>
           <div className="funnel-arrow">Explore Solutions →</div>
         </Link>
       </div>

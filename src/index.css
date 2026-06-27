@@ -1089,3 +1089,103 @@ body {
 .widget-toggle.active {
   background: #333;
 }
+
+/* -------------------------------------
+ *  SERVICES PAGE EDUCATIONAL VISUALS
+ * ------------------------------------- */
+
+/* AI Automation Visuals */
+.comparison-card {
+  width: 100%;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.comparison-card.manual {
+  border-left: 4px solid #ff4757;
+}
+
+.comparison-card.ai {
+  border-left: 4px solid #5D3FD3;
+  background: rgba(93, 63, 211, 0.08);
+  border-color: rgba(93, 63, 211, 0.3);
+}
+
+.comp-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.comparison-card.manual .comp-header {
+  color: #ff4757;
+}
+
+.comparison-card.ai .comp-header {
+  color: #a388ff;
+}
+
+.comp-body {
+  padding: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.comp-body strong {
+  color: var(--text-primary);
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.comparison-divider {
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+/* Web Dev Funnel Visuals */
+.funnel-visual-step {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.funnel-visual-step.highlight {
+  background: rgba(255, 107, 107, 0.1);
+  border-color: rgba(255, 107, 107, 0.3);
+  color: var(--coral);
+}
+
+.funnel-visual-step.success {
+  background: rgba(37, 211, 102, 0.1);
+  border-color: rgba(37, 211, 102, 0.3);
+  color: #25D366;
+}
+
+.funnel-visual-arrow {
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  opacity: 0.5;
+}
