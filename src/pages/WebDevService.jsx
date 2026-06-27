@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Monitor, Smartphone, ShoppingCart, Globe, ArrowRight, MessageCircle } from 'lucide-react';
+import { Monitor, Smartphone, ShoppingCart, Globe, ArrowRight, MessageCircle, Zap, TrendingUp, ShieldCheck } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
 import LeadFormModal from '../components/LeadFormModal';
 
@@ -56,6 +56,34 @@ const WebDevService = () => {
         <p className="description" style={{ margin: '0 auto', maxWidth: '600px' }}>
           Select the type of web project you need, and we'll gather some quick details to get started.
         </p>
+      </div>
+
+      {/* Performance Visualizer */}
+      <div className="performance-showcase glass" style={{ maxWidth: '1000px', margin: '4rem auto', padding: '3rem', borderRadius: '30px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Why top brands choose us</h2>
+          <p style={{ color: 'var(--text-secondary)' }}>We don't just build websites; we engineer high-performance conversion machines.</p>
+        </div>
+
+        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <div className="stat-card" style={{ flex: '1', minWidth: '250px', background: 'rgba(0,0,0,0.2)', padding: '2rem', borderRadius: '20px', textAlign: 'center', border: '1px solid rgba(255,107,107,0.2)' }}>
+            <Zap size={40} color="#FF6B6B" style={{ margin: '0 auto 1rem' }} />
+            <div style={{ fontSize: '3rem', fontWeight: '800', color: '#FF6B6B' }}>0.8s</div>
+            <p style={{ color: 'var(--text-secondary)' }}>Average Load Time</p>
+          </div>
+          
+          <div className="stat-card" style={{ flex: '1', minWidth: '250px', background: 'rgba(0,0,0,0.2)', padding: '2rem', borderRadius: '20px', textAlign: 'center', border: '1px solid rgba(163,136,255,0.2)' }}>
+            <TrendingUp size={40} color="#a388ff" style={{ margin: '0 auto 1rem' }} />
+            <div style={{ fontSize: '3rem', fontWeight: '800', color: '#a388ff' }}>+127%</div>
+            <p style={{ color: 'var(--text-secondary)' }}>Conversion Increase</p>
+          </div>
+
+          <div className="stat-card" style={{ flex: '1', minWidth: '250px', background: 'rgba(0,0,0,0.2)', padding: '2rem', borderRadius: '20px', textAlign: 'center', border: '1px solid rgba(37,211,102,0.2)' }}>
+            <ShieldCheck size={40} color="#25D366" style={{ margin: '0 auto 1rem' }} />
+            <div style={{ fontSize: '3rem', fontWeight: '800', color: '#25D366' }}>99.9%</div>
+            <p style={{ color: 'var(--text-secondary)' }}>Server Uptime</p>
+          </div>
+        </div>
       </div>
 
       <div className="service-options-grid">
