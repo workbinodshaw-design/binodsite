@@ -1,30 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bot, X, Send, MessageCircle } from 'lucide-react';
-import Groq from 'groq-sdk';
-
-// Initialize Groq client (Note: dangerouslyAllowBrowser is set to true for frontend demo purposes. 
-// In a real production app, this should be routed through a backend to protect the API key).
-const groq = new Groq({
-  apiKey: import.meta.env.VITE_GROQ_API_KEY,
-  dangerouslyAllowBrowser: true 
-});
-
-const SYSTEM_PROMPT = `You are CastFlow AI, the lead sales assistant for CastFlow, an AI Automation and Web Development Agency.
-Your ONLY job is to answer questions using EXACTLY the information provided below. Do not make up features, services, or pages that are not listed here. Keep answers to 1-3 short sentences.
-
-# Website Navigation & Features
-- Homepage: Features a 3D Spiderman interactive experience, a Trusted By marquee, and links to our services.
-- AI Automation Page (/services/ai-automation): Features an "Interactive Demo" where users can test a fake CRM workflow. Services offered: 1. Customer Support Chatbots, 2. CRM & Workflow Automation, 3. Automated Lead Generation, 4. AI Data Analysis.
-- Web Development Page (/services/web-development): Features a "Performance Visualizer" showing 0.8s load time and 99.9% uptime. Services offered: 1. SaaS Platform Development, 2. E-Commerce Solutions, 3. High-Converting Landing Pages, 4. 3D & Immersive WebGL.
-- Contact Page (/contact): A premium lead form for booking.
-
-# Strict Rules
-- NEVER lie or invent features. If a user asks to experience AI on the site, tell them to go to the "AI & Automation" service page to try the Interactive CRM Demo.
-- Do NOT mention "workflow automation demos" unless explaining the specific demo on the AI Automation page.
-- Do NOT use markdown. Write in plain text.
-- If asked about pricing: Web Dev starts at $2,000. AI starts at $3,000.
-- IMPORTANT: Do NOT provide the WhatsApp link unless the user explicitly asks for human contact or WhatsApp.
-- If they ask something completely unrelated to our services, politely refuse to answer and guide them back to web dev or AI.`;
 
 const AiAgentWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,42 +27,35 @@ const AiAgentWidget = () => {
     if (!inputText.trim()) return;
 
     const userMessage = inputText;
-    // Add user message to UI
     const newMessages = [...messages, { sender: 'user', text: userMessage }];
     setMessages(newMessages);
     setInputText('');
     setIsTyping(true);
 
     try {
-      if (!import.meta.env.VITE_GROQ_API_KEY) {
-        throw new Error("Missing Groq API Key");
-      }
-
-      // Format history for Groq
-      const apiMessages = [
-        { role: 'system', content: SYSTEM_PROMPT },
-        ...newMessages.map(m => ({
-          role: m.sender === 'ai' ? 'assistant' : 'user',
-          content: m.text
-        }))
-      ];
-
-      const completion = await groq.chat.completions.create({
-        messages: apiMessages,
-        model: 'llama-3.1-8b-instant',
-        temperature: 0.7,
-        max_tokens: 150,
+      // Securely calling our Vercel Serverless Function instead of Groq directly
+      // The API key and System Prompt are completely hidden from the browser
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ messages: newMessages })
       });
 
-      const aiResponse = completion.choices[0]?.message?.content || "I'm sorry, I encountered an error. Please contact us on WhatsApp.";
+      if (!response.ok) {
+        throw new Error('Failed to fetch from backend API');
+      }
+
+      const data = await response.json();
+      
       setIsTyping(false);
-      setMessages((prev) => [...prev, { sender: 'ai', text: aiResponse }]);
+      setMessages((prev) => [...prev, { sender: 'ai', text: data.response }]);
 
     } catch (error) {
-      console.error("Groq API Error:", error);
+      console.error("Backend API Error:", error);
       setIsTyping(false);
       
-      // Fallback response if API key is missing or fails
       let fallbackResponse = "I can definitely help with that. Since I encountered a slight connection issue, please chat directly with our founders on WhatsApp right here: https://wa.me/919394683474";
       setMessages((prev) => [...prev, { sender: 'ai', text: fallbackResponse }]);
     }

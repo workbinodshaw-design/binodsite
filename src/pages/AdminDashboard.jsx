@@ -1,23 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
-import { db } from '../firebase';
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
+import { db, auth } from '../firebase';
 import { Lock, Search, RefreshCw, LogOut } from 'lucide-react';
 
 const AdminDashboard = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [authChecking, setAuthChecking] = useState(true);
 
-  const checkAuth = (e) => {
-    e.preventDefault();
-    if (password === 'castflowadmin') {
-      setIsAuthenticated(true);
-      fetchLeads();
-    } else {
-      alert("Incorrect password");
+  useEffect(() => {
+    if (!auth) {
+      setAuthChecking(false);
+      return;
     }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true);
+        fetchLeads();
+      } else {
+        setIsAuthenticated(false);
+      }
+      setAuthChecking(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // fetchLeads is called in onAuthStateChanged
+    } catch (err) {
+      console.error(err);
+      setError("Invalid credentials or Firebase Auth is not enabled in the console.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    await signOut(auth);
   };
 
   const fetchLeads = async () => {
@@ -25,7 +54,7 @@ const AdminDashboard = () => {
     setError(null);
     try {
       if (!db) {
-        throw new Error("Database connection not established. Check your Firebase configuration.");
+        throw new Error("Database connection not established.");
       }
       const leadsRef = collection(db, "leads");
       const q = query(leadsRef, orderBy("createdAt", "desc"));
@@ -39,11 +68,15 @@ const AdminDashboard = () => {
       setLeads(fetchedLeads);
     } catch (err) {
       console.error("Error fetching leads:", err);
-      setError("Failed to load leads. Ensure your database security rules allow reading.");
+      setError("Failed to load leads. Ensure your Firebase Security Rules allow authenticated reads.");
     } finally {
       setLoading(false);
     }
   };
+
+  if (authChecking) {
+    return <div className="page-container text-center" style={{ paddingTop: '8rem' }}>Verifying Security Protocol...</div>;
+  }
 
   if (!isAuthenticated) {
     return (
@@ -52,16 +85,28 @@ const AdminDashboard = () => {
           <div style={{ background: 'rgba(163, 136, 255, 0.2)', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem auto' }}>
             <Lock size={32} color="#a388ff" />
           </div>
-          <h2 style={{ marginBottom: '2rem' }}>Admin Access</h2>
-          <form onSubmit={checkAuth}>
+          <h2 style={{ marginBottom: '2rem' }}>Secure Admin Portal</h2>
+          {error && <div style={{ color: '#FF6B6B', marginBottom: '1rem', fontSize: '0.9rem' }}>{error}</div>}
+          <form onSubmit={handleLogin}>
+            <input 
+              type="email" 
+              placeholder="Admin Email" 
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.5)', color: '#fff', marginBottom: '1rem' }}
+            />
             <input 
               type="password" 
-              placeholder="Enter Admin Password" 
+              placeholder="Admin Password" 
+              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.5)', color: '#fff', marginBottom: '1rem' }}
             />
-            <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Login</button>
+            <button type="submit" disabled={loading} className="btn btn-primary" style={{ width: '100%' }}>
+              {loading ? 'Authenticating...' : 'Secure Login'}
+            </button>
           </form>
         </div>
       </div>
@@ -79,7 +124,7 @@ const AdminDashboard = () => {
           <button onClick={fetchLeads} className="btn btn-secondary" style={{ padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <RefreshCw size={18} className={loading ? 'spin' : ''} /> Refresh
           </button>
-          <button onClick={() => setIsAuthenticated(false)} className="btn" style={{ background: 'rgba(255,107,107,0.2)', color: '#FF6B6B', padding: '0.8rem 1.5rem', borderRadius: '30px', display: 'flex', alignItems: 'center', gap: '8px', border: 'none', cursor: 'pointer' }}>
+          <button onClick={handleLogout} className="btn" style={{ background: 'rgba(255,107,107,0.2)', color: '#FF6B6B', padding: '0.8rem 1.5rem', borderRadius: '30px', display: 'flex', alignItems: 'center', gap: '8px', border: 'none', cursor: 'pointer' }}>
             <LogOut size={18} /> Logout
           </button>
         </div>
