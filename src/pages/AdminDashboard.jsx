@@ -366,12 +366,17 @@ const AdminDashboard = () => {
                       <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.4', color: '#ccc' }}>{lead.details}</p>
                       <div style={{ marginTop: '0.8rem' }}>
                         <input 
-                          type="url" 
+                          type="text" 
                           placeholder="Attach Live URL (e.g. https://site.com)" 
                           defaultValue={lead.projectLink || ''}
                           onBlur={(e) => {
-                            if (e.target.value && e.target.value !== lead.projectLink) {
-                              handleUpdateLeadLink(lead.id, e.target.value);
+                            let link = e.target.value.trim();
+                            if (link && !link.startsWith('http://') && !link.startsWith('https://')) {
+                              link = 'https://' + link;
+                              e.target.value = link;
+                            }
+                            if (link !== (lead.projectLink || '')) {
+                              handleUpdateLeadLink(lead.id, link);
                             }
                           }}
                           style={{ width: '100%', padding: '0.5rem', background: '#000', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '4px', fontSize: '0.8rem' }}
