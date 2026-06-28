@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ArrowRight, Code, Cpu, MessageSquare, Mail, Camera, ExternalLink, Zap, Terminal, Server } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const PortfolioPage = () => {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const [progress, setProgress] = useState(0);
+  const containerRef = useRef(null);
 
   const skills = [
     { name: 'Frontend Development', icon: <Code size={24} />, desc: 'React, Next.js, UI/UX Design' },
@@ -23,61 +17,73 @@ const PortfolioPage = () => {
       id: 1,
       title: 'WhatsApp Automation',
       description: 'A powerful automated system that handles customer inquiries and acts as a 24/7 intelligent agent directly on WhatsApp.',
-      icon: <MessageSquare size={32} color="#25D366" />,
+      icon: <MessageSquare size={40} color="#25D366" />,
       tags: ['Node.js', 'WhatsApp API', 'AI'],
-      color: 'rgba(37, 211, 102, 0.1)',
-      top: '20%', left: '50%', width: '400px',
-      transform: 'translate(-50%, -50%) rotateX(10deg) rotateY(-5deg) rotateZ(-2deg)',
-      zIndex: 5, scale: 1
+      color: 'rgba(37, 211, 102, 0.1)'
     },
     {
       id: 2,
       title: 'Auto Email Sender',
       description: 'A scalable bulk-emailing tool designed to programmatically send personalized emails to thousands of leads.',
-      icon: <Mail size={32} color="#EA4335" />,
+      icon: <Mail size={40} color="#EA4335" />,
       tags: ['Python', 'SMTP', 'React'],
-      color: 'rgba(234, 67, 53, 0.1)',
-      top: '5%', left: '15%', width: '350px',
-      transform: 'rotateX(20deg) rotateY(15deg) rotateZ(-8deg)',
-      zIndex: 3, scale: 0.85
+      color: 'rgba(234, 67, 53, 0.1)'
     },
     {
       id: 3,
       title: 'AI Email Reader',
       description: 'An intelligent inbox assistant that reads incoming emails, categorizes them using NLP, and extracts critical information.',
-      icon: <Zap size={32} color="#FBBC05" />,
+      icon: <Zap size={40} color="#FBBC05" />,
       tags: ['Python', 'IMAP', 'NLP'],
-      color: 'rgba(251, 188, 5, 0.1)',
-      top: '10%', left: '75%', width: '350px',
-      transform: 'rotateX(15deg) rotateY(-15deg) rotateZ(5deg)',
-      zIndex: 2, scale: 0.8
+      color: 'rgba(251, 188, 5, 0.1)'
     },
     {
       id: 4,
       title: 'Insta Auto Reply',
       description: 'A social media automation script that monitors posts and automatically replies to specific keyword comments.',
-      icon: <Camera size={32} color="#E1306C" />,
+      icon: <Camera size={40} color="#E1306C" />,
       tags: ['JavaScript', 'Graph API', 'Webhooks'],
-      color: 'rgba(225, 48, 108, 0.1)',
-      top: '60%', left: '20%', width: '380px',
-      transform: 'rotateX(5deg) rotateY(20deg) rotateZ(-12deg)',
-      zIndex: 4, scale: 0.9
+      color: 'rgba(225, 48, 108, 0.1)'
     },
     {
       id: 5,
       title: 'Auto DM Assistant',
       description: 'A robust direct messaging bot that initiates conversations, handles FAQs via AI, and funnels warm leads to a CRM.',
-      icon: <Terminal size={32} color="#8A2BE2" />,
+      icon: <Terminal size={40} color="#8A2BE2" />,
       tags: ['Node.js', 'Social APIs', 'CRM'],
-      color: 'rgba(138, 43, 226, 0.1)',
-      top: '55%', left: '70%', width: '320px',
-      transform: 'rotateX(15deg) rotateY(-25deg) rotateZ(8deg)',
-      zIndex: 6, scale: 0.85
+      color: 'rgba(138, 43, 226, 0.1)'
     }
   ];
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    
+    const handleScroll = () => {
+      if (containerRef.current) {
+        const { top, height } = containerRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Total scrollable area is height - windowHeight
+        const scrollPx = -top; 
+        const maxScroll = height - windowHeight;
+        
+        if (scrollPx < 0) {
+           setProgress(0);
+        } else if (scrollPx > maxScroll) {
+           setProgress(projects.length - 1);
+        } else {
+           setProgress((scrollPx / maxScroll) * (projects.length - 1));
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [projects.length]);
+
+
   return (
-    <div className="portfolio-page" style={{ paddingTop: '80px', minHeight: '100vh', background: 'var(--bg-color)', color: 'var(--text-primary)', overflow: 'hidden' }}>
+    <div className="portfolio-page" style={{ paddingTop: '80px', minHeight: '100vh', background: 'var(--bg-color)', color: 'var(--text-primary)' }}>
       
       {/* 1. HERO SECTION */}
       <section style={{ padding: '8rem 2rem', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
@@ -142,73 +148,75 @@ const PortfolioPage = () => {
         </div>
       </section>
 
-      {/* 3. TORNADO PROJECTS SECTION */}
-      <section style={{ padding: '8rem 2rem 2rem 2rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '3.5rem', marginBottom: '1rem', fontWeight: 800 }}>Featured Projects</h2>
-          <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
-            Scroll down to explore the digital solutions and automation bots I've built.
-          </p>
-        </div>
+      {/* 3. SCROLLING STACK PROJECTS SECTION */}
+      <section ref={containerRef} style={{ position: 'relative', height: `${projects.length * 100}vh`, padding: 0, marginTop: '4rem' }}>
         
-        <div style={{ position: 'relative', height: '1100px', perspective: '1200px', maxWidth: '1400px', margin: '0 auto' }}>
+        {/* Sticky Container */}
+        <div style={{ position: 'sticky', top: 0, height: '100vh', width: '100%', overflow: 'hidden', perspective: '1500px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           
-          <div style={{ 
-            position: 'absolute', top: '15%', left: '50%', width: '800px', height: '800px', 
-            background: 'radial-gradient(circle, rgba(138,43,226,0.15) 0%, rgba(20,20,25,0) 60%)',
-            transform: `translate(-50%, ${scrollY * 0.1}px)`,
-            zIndex: 0,
-            borderRadius: '50%'
-          }}></div>
-
-          <div style={{ 
-            position: 'absolute', top: '5%', left: '0', right: '0', bottom: '0', 
-            transformStyle: 'preserve-3d',
-            transform: `translateY(${-scrollY * 0.05}px) rotateY(${scrollY * 0.02}deg)`,
-            transition: 'transform 0.1s ease-out'
-          }}>
-            {projects.map((project, i) => (
-              <div key={project.id} className="glass project-card" style={{
-                position: 'absolute',
-                top: project.top,
-                left: project.left,
-                width: project.width,
-                borderRadius: '24px',
-                padding: '2.5rem',
-                border: '1px solid rgba(255,255,255,0.1)',
-                zIndex: project.zIndex,
-                transform: `${project.transform} scale(${project.scale}) translateY(${scrollY * (i % 2 === 0 ? -0.05 : -0.1)}px)`,
-                transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease',
-                cursor: 'pointer',
-                display: 'flex',
-                flexDirection: 'column'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = `${project.transform} scale(${project.scale * 1.05}) translateY(${scrollY * (i % 2 === 0 ? -0.05 : -0.1)}px) translateZ(80px)`;
-                e.currentTarget.style.boxShadow = '0 30px 60px rgba(138,43,226,0.2)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = `${project.transform} scale(${project.scale}) translateY(${scrollY * (i % 2 === 0 ? -0.05 : -0.1)}px)`;
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-              >
-                <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: project.color, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
-                  {project.icon}
-                </div>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>{project.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', flexGrow: 1, marginBottom: '2rem' }}>
-                  {project.description}
-                </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.5rem' }}>
-                  {project.tags.map((tag, idx) => (
-                    <span key={idx} style={{ padding: '0.25rem 0.75rem', background: 'rgba(138,43,226,0.1)', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 'bold', letterSpacing: '1px', color: '#8A2BE2' }}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+          <div style={{ position: 'absolute', top: '15%', textAlign: 'center', zIndex: 10, width: '100%' }}>
+            <h2 style={{ fontSize: '3.5rem', marginBottom: '0.5rem', fontWeight: 800 }}>Featured Projects</h2>
+            <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)' }}>Scroll down to explore</p>
           </div>
+
+          <div style={{ position: 'relative', width: '100%', maxWidth: '800px', height: '400px', transformStyle: 'preserve-3d' }}>
+            {projects.map((project, i) => {
+              const delta = progress - i; 
+              
+              // Delta: 0 = active in center
+              // Delta > 0 = passed (goes UP and BACK)
+              // Delta < 0 = coming (comes from DOWN and FRONT)
+              
+              // Clamp delta to prevent cards from flying too far away when totally offscreen
+              const clampedDelta = Math.max(-2, Math.min(2, delta));
+              
+              const translateY = clampedDelta * -50; // vh
+              const translateZ = -clampedDelta * 400; // px (positive goes back, negative comes forward) -> Wait, if coming (<0), we want it in front (+400). So -clampedDelta * 400.
+              const rotateX = clampedDelta * 15; // deg
+              
+              const opacity = Math.max(0, 1 - Math.abs(clampedDelta));
+              const isPointerActive = Math.abs(delta) < 0.2;
+
+              return (
+                <div key={project.id} className="glass" style={{
+                  position: 'absolute',
+                  top: '0',
+                  left: '0',
+                  right: '0',
+                  bottom: '0',
+                  margin: 'auto',
+                  padding: '3rem',
+                  borderRadius: '32px',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  transform: `translate3d(0, ${translateY}vh, ${translateZ}px) rotateX(${rotateX}deg)`,
+                  opacity: opacity,
+                  transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
+                  pointerEvents: isPointerActive ? 'auto' : 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  background: 'rgba(20, 20, 25, 0.7)',
+                  backdropFilter: 'blur(16px)',
+                  boxShadow: '0 30px 60px rgba(0,0,0,0.4), 0 0 40px rgba(138,43,226,0.1)'
+                }}>
+                  <div style={{ width: '80px', height: '80px', borderRadius: '20px', background: project.color, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
+                    {project.icon}
+                  </div>
+                  <h3 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#fff', fontWeight: 800 }}>{project.title}</h3>
+                  <p style={{ color: '#aaa', lineHeight: '1.8', fontSize: '1.2rem', flexGrow: 1, marginBottom: '2.5rem' }}>
+                    {project.description}
+                  </p>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem', marginBottom: '1.5rem' }}>
+                    {project.tags.map((tag, idx) => (
+                      <span key={idx} style={{ padding: '0.4rem 1.2rem', background: 'rgba(138,43,226,0.15)', borderRadius: '30px', fontSize: '0.85rem', fontWeight: 'bold', letterSpacing: '1px', color: '#b673f8' }}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
         </div>
       </section>
 
