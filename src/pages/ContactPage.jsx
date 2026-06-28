@@ -154,8 +154,6 @@ const ContactPage = () => {
                     <option value="">Select a service</option>
                     <option value="Web Design & Development">Web Design & Development</option>
                     <option value="AI Automation">AI Automation</option>
-                    <option value="UI/UX Design">UI/UX Design</option>
-                    <option value="SEO & Marketing">SEO & Marketing</option>
                     <option value="Other">Other</option>
                   </select>
                 </div>
@@ -163,10 +161,10 @@ const ContactPage = () => {
                   <label>Estimated Budget</label>
                   <select name="budget" required style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }}>
                     <option value="">Select a range</option>
-                    <option value="< $1,000">Less than $1,000</option>
-                    <option value="$1,000 - $5,000">$1,000 - $5,000</option>
-                    <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-                    <option value="$10,000+">$10,000+</option>
+                    <option value="< ₹10,000 / $120">Less than ₹10,000 / $120</option>
+                    <option value="₹10,000 - ₹40,000 / $120 - $500">₹10,000 - ₹40,000 / $120 - $500</option>
+                    <option value="₹40,000 - ₹80,000 / $500 - $1,000">₹40,000 - ₹80,000 / $500 - $1,000</option>
+                    <option value="₹80,000+ / $1,000+">₹80,000+ / $1,000+</option>
                     <option value="Custom">Custom / Let's Discuss</option>
                   </select>
                 </div>
