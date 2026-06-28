@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth, db } from '../firebase';
-import { LogOut, User, FolderClock, Clock, CheckCircle2, AlertCircle } from 'lucide-react';
+import { LogOut, User, FolderClock, Clock, CheckCircle2, AlertCircle, Activity } from 'lucide-react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 
 const ClientDashboard = () => {
@@ -98,6 +98,74 @@ const ClientDashboard = () => {
                 {getStatusBadge(project.status || 'new')}
               </div>
               
+              {/* Animated Progress Tracker */}
+              {project.progress !== undefined && (
+                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '2rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', marginTop: '0.5rem' }}>
+                  <h4 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px', color: '#38bdf8' }}>
+                    <Activity size={20} /> Live Project Status
+                  </h4>
+                  
+                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.5rem', position: 'relative' }}>
+                    {/* Background track line */}
+                    <div style={{ position: 'absolute', top: '24px', left: '10%', right: '10%', height: '4px', background: 'rgba(255,255,255,0.1)', zIndex: 0, borderRadius: '4px' }}></div>
+                    
+                    {/* Active track line */}
+                    <div style={{ position: 'absolute', top: '24px', left: '10%', width: `${project.progress * 0.8}%`, height: '4px', background: '#38bdf8', zIndex: 0, borderRadius: '4px', transition: 'width 1s cubic-bezier(0.4, 0, 0.2, 1)', boxShadow: '0 0 10px rgba(56, 189, 248, 0.5)' }}></div>
+
+                    {[
+                      { value: 0, label: 'Reqs' },
+                      { value: 25, label: 'Design' },
+                      { value: 50, label: 'Core Build' },
+                      { value: 75, label: 'QA / Testing' },
+                      { value: 100, label: 'Delivery' }
+                    ].map((phase) => {
+                      const isCompleted = project.progress >= phase.value;
+                      const isCurrent = project.progress === phase.value;
+                      
+                      return (
+                        <div 
+                          key={phase.value} 
+                          style={{ 
+                            display: 'flex', 
+                            flexDirection: 'column', 
+                            alignItems: 'center', 
+                            gap: '0.8rem', 
+                            zIndex: 1, 
+                            flex: 1
+                          }}
+                        >
+                          <div style={{ 
+                            width: '48px', 
+                            height: '48px', 
+                            borderRadius: '50%', 
+                            background: isCompleted ? '#38bdf8' : '#222', 
+                            border: isCurrent ? '4px solid #fff' : (isCompleted ? '4px solid #38bdf8' : '4px solid #444'),
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            justifyContent: 'center',
+                            color: isCompleted ? '#000' : '#888',
+                            fontWeight: 'bold',
+                            transition: 'all 0.5s ease',
+                            boxShadow: isCurrent ? '0 0 20px rgba(255, 255, 255, 0.4)' : (isCompleted ? '0 0 15px rgba(56, 189, 248, 0.4)' : 'none'),
+                            transform: isCurrent ? 'scale(1.1)' : 'scale(1)'
+                          }}>
+                            {isCompleted ? <CheckCircle2 size={24} /> : phase.value + '%'}
+                          </div>
+                          <span style={{ 
+                            fontSize: '0.85rem', 
+                            fontWeight: isCurrent ? 'bold' : 'normal',
+                            color: isCurrent ? '#fff' : (isCompleted ? '#38bdf8' : '#888'),
+                            textAlign: 'center'
+                          }}>
+                            {phase.label}
+                          </span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
               <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1.5rem', borderRadius: '12px' }}>
                 <h4 style={{ fontSize: '1rem', marginBottom: '0.5rem', color: '#a388ff' }}>Project Details</h4>
                 <p style={{ color: 'var(--text-secondary)', whiteSpace: 'pre-wrap' }}>

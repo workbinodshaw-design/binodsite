@@ -375,6 +375,21 @@ const AdminDashboard = () => {
                           <option key={emp.id} value={emp.email}>{emp.email}</option>
                         ))}
                       </select>
+                      {lead.assignedTo && (
+                        <div style={{ marginTop: '0.5rem', fontSize: '0.85rem' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                            <div style={{ flex: 1, height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', overflow: 'hidden' }}>
+                              <div style={{ width: `${lead.progress || 0}%`, height: '100%', background: '#38bdf8' }}></div>
+                            </div>
+                            <span style={{ color: '#38bdf8', fontWeight: 'bold' }}>{lead.progress || 0}%</span>
+                          </div>
+                          {lead.progressUpdatedAt && (
+                            <div style={{ color: '#aaa', fontSize: '0.75rem' }}>
+                              Updated {lead.progressUpdatedAt?.toDate ? lead.progressUpdatedAt.toDate().toLocaleDateString() : 'recently'}
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </td>
                     <td>
                       <select 
