@@ -456,14 +456,44 @@ const AdminDashboard = () => {
                           <span style={{ color: '#888' }}>Name</span>
                           <span style={{ fontWeight: 'bold' }}>{lead.name}</span>
                         </div>
+                        {lead.company && (
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span style={{ color: '#888' }}>Company</span>
+                            <span>{lead.company}</span>
+                          </div>
+                        )}
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <span style={{ color: '#888' }}>Email</span>
                           <span style={{ color: '#fff' }}>{lead.email}</span>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: '#888' }}>Phone</span>
-                          <span>{lead.phone || 'N/A'}</span>
+                          <span style={{ color: '#888' }}>WhatsApp</span>
+                          <span style={{ color: '#25D366' }}>{lead.whatsapp || lead.phone || 'N/A'}</span>
                         </div>
+                        {lead.phone && lead.whatsapp && (
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span style={{ color: '#888' }}>Alt Phone</span>
+                            <span>{lead.phone}</span>
+                          </div>
+                        )}
+                        {lead.address && (
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span style={{ color: '#888' }}>Location</span>
+                            <span>{lead.address}</span>
+                          </div>
+                        )}
+                        {lead.deadline && (
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span style={{ color: '#888' }}>Deadline</span>
+                            <span style={{ color: '#ef4444' }}>{lead.deadline}</span>
+                          </div>
+                        )}
+                        {lead.source && (
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span style={{ color: '#888' }}>Source</span>
+                            <span style={{ fontStyle: 'italic' }}>{lead.source}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
 

@@ -103,38 +103,106 @@ const ContactPage = () => {
             </div>
           ) : !isSubmitted ? (
             <form onSubmit={handleSubmit} className="lead-form">
-              <h3 style={{ fontSize: '1.8rem', marginBottom: '0.5rem' }}>Project Details</h3>
-              <p style={{ color: '#a388ff', marginBottom: '2rem', fontSize: '0.9rem' }}>Logged in as: {user.email}</p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1rem' }}>
+                <div>
+                  <h3 style={{ fontSize: '1.8rem', margin: 0 }}>Comprehensive Project Request</h3>
+                  <p style={{ color: '#a388ff', fontSize: '0.9rem', marginTop: '0.5rem' }}>Logged in as: {user.email}</p>
+                </div>
+              </div>
               
-              <div className="form-group">
-                <label>Name</label>
-                <input type="text" name="name" required placeholder="John Doe" />
+              <h4 style={{ color: '#38bdf8', marginBottom: '1.5rem', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ background: 'rgba(56, 189, 248, 0.2)', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>1</span>
+                Personal & Business Info
+              </h4>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <label>Full Name</label>
+                  <input type="text" name="name" required placeholder="John Doe" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }} />
+                </div>
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <label>Company / Business Name</label>
+                  <input type="text" name="company" placeholder="e.g. Acme Corp (Optional)" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }} />
+                </div>
               </div>
 
-              <div className="form-group">
-                <label>WhatsApp / Phone (Important)</label>
-                <input type="tel" name="phone" required placeholder="+1 234 567 8900" />
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1.5rem' }}>
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <label>WhatsApp Number</label>
+                  <input type="tel" name="whatsapp" required placeholder="+1 234 567 8900" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }} />
+                </div>
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <label>Alternative Phone</label>
+                  <input type="tel" name="phone" placeholder="Optional" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }} />
+                </div>
               </div>
 
-              <div className="form-group">
-                <label>Estimated Budget</label>
-                <select name="budget" required>
-                  <option value="">Select a range</option>
-                  <option value="< ₹10,000 / $120">Less than ₹10,000 / $120</option>
-                  <option value="₹10,000 - ₹30,000 / $120 - $350">₹10,000 - ₹30,000 / $120 - $350</option>
-                  <option value="₹30,000 - ₹60,000 / $350 - $700">₹30,000 - ₹60,000 / $350 - $700</option>
-                  <option value="₹60,000+ / $700+">₹60,000+ / $700+</option>
-                  <option value="Custom">Custom / Let's Discuss</option>
-                </select>
+              <div className="form-group" style={{ marginTop: '1.5rem' }}>
+                <label>Location / Address (City, Country)</label>
+                <input type="text" name="address" required placeholder="New York, USA" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }} />
               </div>
 
-              <div className="form-group">
-                <label>How can we help?</label>
+              <h4 style={{ color: '#a388ff', marginBottom: '1.5rem', marginTop: '3rem', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ background: 'rgba(163, 136, 255, 0.2)', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>2</span>
+                Project Specifications
+              </h4>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <label>Service Requested</label>
+                  <select name="service_requested" required style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    <option value="">Select a service</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="AI Automation">AI Automation</option>
+                    <option value="UI/UX Design">UI/UX Design</option>
+                    <option value="SEO & Marketing">SEO & Marketing</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <label>Estimated Budget</label>
+                  <select name="budget" required style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    <option value="">Select a range</option>
+                    <option value="< $1,000">Less than $1,000</option>
+                    <option value="$1,000 - $5,000">$1,000 - $5,000</option>
+                    <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                    <option value="$10,000+">$10,000+</option>
+                    <option value="Custom">Custom / Let's Discuss</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1.5rem' }}>
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <label>Ideal Deadline</label>
+                  <select name="deadline" required style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    <option value="">Select a timeline</option>
+                    <option value="ASAP (Urgent)">ASAP (Urgent)</option>
+                    <option value="Within 1 Month">Within 1 Month</option>
+                    <option value="1-3 Months">1-3 Months</option>
+                    <option value="Flexible">Flexible</option>
+                  </select>
+                </div>
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <label>How did you hear about us?</label>
+                  <select name="source" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    <option value="">Select an option (Optional)</option>
+                    <option value="Google Search">Google Search</option>
+                    <option value="Social Media">Social Media</option>
+                    <option value="Referral">Referral / Word of Mouth</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-group" style={{ marginTop: '1.5rem' }}>
+                <label>Project Details / Requirements</label>
                 <textarea 
                   name="details" 
                   required 
-                  placeholder="Tell us a little bit about what you're trying to build or automate..."
-                  rows="5"
+                  placeholder="Tell us everything we need to know about your project, goals, and specific features..."
+                  rows="6"
+                  style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }}
                 ></textarea>
               </div>
 

@@ -256,14 +256,38 @@ const EmployeeDashboard = () => {
                     <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Client Name</span>
                     <p style={{ margin: '0.2rem 0 0 0', fontWeight: 'bold', fontSize: '1.1rem' }}>{task.name}</p>
                   </div>
+                  {task.company && (
+                    <div>
+                      <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Company</span>
+                      <p style={{ margin: '0.2rem 0 0 0', color: '#ccc' }}>{task.company}</p>
+                    </div>
+                  )}
                   <div>
                     <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Client Email</span>
                     <p style={{ margin: '0.2rem 0 0 0', color: '#a388ff' }}>{task.email}</p>
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Phone / WhatsApp</span>
-                    <p style={{ margin: '0.2rem 0 0 0' }}>{task.phone || 'Not provided'}</p>
+                    <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>WhatsApp</span>
+                    <p style={{ margin: '0.2rem 0 0 0', color: '#25D366', fontWeight: 'bold' }}>{task.whatsapp || task.phone || 'Not provided'}</p>
                   </div>
+                  {task.phone && task.whatsapp && (
+                    <div>
+                      <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Alt Phone</span>
+                      <p style={{ margin: '0.2rem 0 0 0', color: '#ccc' }}>{task.phone}</p>
+                    </div>
+                  )}
+                  {task.address && (
+                    <div>
+                      <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Location</span>
+                      <p style={{ margin: '0.2rem 0 0 0', color: '#ccc' }}>{task.address}</p>
+                    </div>
+                  )}
+                  {task.deadline && (
+                    <div>
+                      <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Deadline</span>
+                      <p style={{ margin: '0.2rem 0 0 0', color: '#ef4444', fontWeight: 'bold' }}>{task.deadline}</p>
+                    </div>
+                  )}
                 </div>
 
                 {/* Project Requirements */}

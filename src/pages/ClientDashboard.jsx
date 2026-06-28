@@ -182,18 +182,32 @@ const ClientDashboard = () => {
                 )}
               </div>
               
-              {project.budget && (
-                <div style={{ display: 'flex', gap: '2rem', marginTop: '0.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '2rem', marginTop: '1.5rem', background: 'rgba(0,0,0,0.2)', padding: '1.5rem', borderRadius: '12px' }}>
+                {project.service_requested && (
                   <div>
-                    <span style={{ color: '#aaa', fontSize: '0.85rem' }}>Budget</span>
-                    <p style={{ fontWeight: '600' }}>{project.budget}</p>
+                    <span style={{ color: '#aaa', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Service</span>
+                    <p style={{ fontWeight: 'bold', color: '#fff', marginTop: '0.3rem' }}>{project.service_requested}</p>
                   </div>
+                )}
+                {project.budget && (
                   <div>
-                    <span style={{ color: '#aaa', fontSize: '0.85rem' }}>Source</span>
-                    <p style={{ fontWeight: '600', textTransform: 'capitalize' }}>{project.source}</p>
+                    <span style={{ color: '#aaa', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Budget</span>
+                    <p style={{ fontWeight: 'bold', color: '#2ecc71', marginTop: '0.3rem' }}>{project.budget}</p>
                   </div>
-                </div>
-              )}
+                )}
+                {project.deadline && (
+                  <div>
+                    <span style={{ color: '#aaa', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Deadline</span>
+                    <p style={{ fontWeight: 'bold', color: '#ef4444', marginTop: '0.3rem' }}>{project.deadline}</p>
+                  </div>
+                )}
+                {project.company && (
+                  <div>
+                    <span style={{ color: '#aaa', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Company</span>
+                    <p style={{ fontWeight: 'bold', color: '#fff', marginTop: '0.3rem' }}>{project.company}</p>
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
