@@ -76,6 +76,9 @@ const PricingPage = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#444' }}>
                 <CheckCircle2 size={20} color="#3b82f6" /> Cost scales with requirements
               </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#444' }}>
+                <CheckCircle2 size={20} color="#3b82f6" /> Free post-launch support
+              </div>
             </div>
             
             <Link to="/contact" className="btn" style={{ width: '100%', padding: '1.2rem', background: '#f8f9fa', color: '#111', border: '1px solid #ddd', borderRadius: '16px', fontWeight: 700, textAlign: 'center', display: 'block' }}>
@@ -113,6 +116,9 @@ const PricingPage = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#eee', fontWeight: 500 }}>
                 <CheckCircle2 size={22} color="#b673f8" /> Mobile-first & SEO Optimized
               </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#eee', fontWeight: 500 }}>
+                <CheckCircle2 size={22} color="#b673f8" /> Free post-launch support
+              </div>
             </div>
             
             <Link to="/contact" className="btn btn-primary" style={{ width: '100%', padding: '1.2rem', borderRadius: '16px', fontWeight: 700, textAlign: 'center', display: 'block', fontSize: '1.1rem' }}>
@@ -144,6 +150,9 @@ const PricingPage = () => {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#444' }}>
                 <CheckCircle2 size={20} color="#ec4899" /> Dedicated 24/7 Support
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#444' }}>
+                <CheckCircle2 size={20} color="#ec4899" /> Free post-launch support
               </div>
             </div>
             
