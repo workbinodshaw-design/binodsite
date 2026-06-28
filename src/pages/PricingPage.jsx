@@ -84,7 +84,7 @@ const PricingPage = () => {
           {/* Tier 2: Websites (Highlighted) */}
           <div style={{ background: '#111', padding: '4rem 3rem', borderRadius: '32px', boxShadow: '0 30px 60px rgba(138,43,226,0.2)', position: 'relative', border: '1px solid rgba(138,43,226,0.3)', transform: 'scale(1.05)', zIndex: 2 }}>
             <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', background: 'var(--primary-color)', color: '#fff', padding: '8px 24px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 800, letterSpacing: '1px' }}>
-              WEB DEVELOPMENT
+              Web Design & Development
             </div>
             <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: 'rgba(138,43,226,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
               <Target size={30} color="#b673f8" />

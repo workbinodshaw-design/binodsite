@@ -106,11 +106,11 @@ const FloatingPanels = ({ setActiveCard }) => {
         </ul>
       </FloatingPanel>
 
-      {/* Panel 2: Web Development (Right, Low) - Toby's Right Hand (Touching ground) */}
+      {/* Panel 2: Web Design & Development (Right, Low) - Toby's Right Hand (Touching ground) */}
       <FloatingPanel 
         radius={8} height={-1} startAngle={Math.PI / 2.5} webOrigin={[0.5, -2.5, 1]}
         onClick={() => setActiveCard({
-          title: "Web Development",
+          title: "Web Design & Development",
           icon: <div className="card-icon coral"><Layout size={24} color="#FF4500" /></div>,
           content: (
             <ul className="card-list" style={{ fontSize: '1.2rem', lineHeight: '2' }}>
@@ -124,7 +124,7 @@ const FloatingPanels = ({ setActiveCard }) => {
       >
         <div className="card-header">
           <div className="card-icon coral"><Layout size={18} color="#FF4500" /></div>
-          Web Development
+          Web Design & Development
         </div>
         <ul className="card-list">
           <li>Web Applications</li>

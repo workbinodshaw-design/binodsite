@@ -152,7 +152,7 @@ const ContactPage = () => {
                   <label>Service Requested</label>
                   <select name="service_requested" required style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }}>
                     <option value="">Select a service</option>
-                    <option value="Web Development">Web Development</option>
+                    <option value="Web Design & Development">Web Design & Development</option>
                     <option value="AI Automation">AI Automation</option>
                     <option value="UI/UX Design">UI/UX Design</option>
                     <option value="SEO & Marketing">SEO & Marketing</option>

@@ -123,14 +123,14 @@ const ServicesPage = () => {
 
       <div style={{ width: '100%', height: '1px', background: 'rgba(255,255,255,0.1)', marginBottom: '8rem' }}></div>
 
-      {/* Web Development Section (Expanded) */}
+      {/* Web Design & Development Section (Expanded) */}
       <div className="service-detail-section" style={{ display: 'flex', flexDirection: 'column', gap: '3rem', marginBottom: '8rem' }}>
         <div className="service-header-row" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '2rem' }}>
           <div className="service-icon coral" style={{ margin: 0 }}>
             <Code size={48} />
           </div>
           <div>
-            <h2 style={{ margin: 0, fontSize: '2.5rem' }}>High-End Web Development</h2>
+            <h2 style={{ margin: 0, fontSize: '2.5rem' }}>High-End Web Design & Development</h2>
             <p className="text-secondary" style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>We don't build brochures. We build digital salespeople.</p>
           </div>
         </div>
@@ -204,7 +204,7 @@ const ServicesPage = () => {
             </div>
 
             <Link to="/services/web-development" className="btn btn-primary" style={{ marginTop: '1.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
-              Explore Web Development Options <ArrowRight size={20} />
+              Explore Web Design & Development Options <ArrowRight size={20} />
             </Link>
           </div>
 

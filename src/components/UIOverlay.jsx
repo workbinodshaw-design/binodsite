@@ -9,7 +9,7 @@ const UIOverlay = () => {
         <div className="ui-content">
           <div className="badge">
             <div className="badge-dot"></div>
-            AI AUTOMATION • WEB DEVELOPMENT
+            AI AUTOMATION • Web Design & Development
           </div>
           
           <h1 className="headline">

@@ -30,7 +30,7 @@ const ServicesSection = () => {
           <div className="funnel-icon coral">
             <Code size={48} />
           </div>
-          <h3>Web Development</h3>
+          <h3>Web Design & Development</h3>
           <p>We build ultra-fast, high-converting platforms, immersive 3D experiences, and scalable SaaS architectures.</p>
           <div className="funnel-arrow">Explore Solutions →</div>
         </Link>

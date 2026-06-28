@@ -51,7 +51,7 @@ const WebDevService = () => {
       <div className="page-header text-center">
         <div className="badge">
           <div className="badge-dot"></div>
-          WEB DEVELOPMENT
+          Web Design & Development
         </div>
         <h1 className="headline">What are you looking to build?</h1>
         <p className="description" style={{ margin: '0 auto', maxWidth: '600px' }}>
@@ -92,7 +92,7 @@ const WebDevService = () => {
           <div 
             key={option.id} 
             className="service-option-card glass"
-            onClick={() => openLeadForm(`Web Development: ${option.title}`)}
+            onClick={() => openLeadForm(`Web Design & Development: ${option.title}`)}
           >
             <div className="service-icon coral mb-4">
               {option.icon}

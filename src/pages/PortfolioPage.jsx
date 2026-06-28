@@ -129,7 +129,7 @@ const PortfolioPage = () => {
               I am currently a student at the <strong style={{ color: 'var(--text-primary)' }}>Central Institute of Technology Kokrajhar (CITK)</strong>, studying <strong style={{ color: 'var(--text-primary)' }}>Computer Science and Engineering (CSE)</strong>. 
             </p>
             <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '1.5rem' }}>
-              While academia gives me a strong theoretical foundation, my true passion lies in building practical, high-impact digital solutions. I specialize in <strong style={{ color: 'var(--text-primary)' }}>Web Development</strong> and <strong style={{ color: 'var(--text-primary)' }}>AI Automation</strong>.
+              While academia gives me a strong theoretical foundation, my true passion lies in building practical, high-impact digital solutions. I specialize in <strong style={{ color: 'var(--text-primary)' }}>Web Design & Development</strong> and <strong style={{ color: 'var(--text-primary)' }}>AI Automation</strong>.
             </p>
             <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '2.5rem' }}>
               I love finding bottlenecks in workflows and writing scripts, bots, and applications to completely automate them. From social media engagement bots to intelligent email parsers, if a process is repetitive, I can automate it.
