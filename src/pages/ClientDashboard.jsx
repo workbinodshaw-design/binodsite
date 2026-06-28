@@ -55,10 +55,10 @@ const ClientDashboard = () => {
       case 'new':
         return <span className="status-badge new"><AlertCircle size={14} /> Pending Review</span>;
       case 'contacted':
-      case 'in-progress':
-        return <span className="status-badge progress"><Clock size={14} /> In Progress</span>;
+      case 'building':
+        return <span className="status-badge progress" style={{ background: 'rgba(56, 189, 248, 0.2)', color: '#38bdf8', display: 'inline-flex', alignItems: 'center', gap: '4px', padding: '0.4rem 1rem', borderRadius: '30px' }}><Clock size={14} /> Building...</span>;
       case 'completed':
-        return <span className="status-badge completed"><CheckCircle2 size={14} /> Completed</span>;
+        return <span className="status-badge completed" style={{ background: 'rgba(46, 204, 113, 0.2)', color: '#2ecc71', display: 'inline-flex', alignItems: 'center', gap: '4px', padding: '0.4rem 1rem', borderRadius: '30px' }}><CheckCircle2 size={14} /> Completed</span>;
       default:
         return <span className="status-badge progress"><Clock size={14} /> Pending</span>;
     }
@@ -103,6 +103,15 @@ const ClientDashboard = () => {
                 <p style={{ color: 'var(--text-secondary)', whiteSpace: 'pre-wrap' }}>
                   {project.details || 'No details provided.'}
                 </p>
+                
+                {project.projectLink && (
+                  <div style={{ marginTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1.5rem' }}>
+                    <p style={{ marginBottom: '1rem', color: '#fff', fontWeight: 'bold' }}>Delivery Ready:</p>
+                    <a href={project.projectLink} target="_blank" rel="noreferrer" className="btn" style={{ display: 'inline-block', padding: '1rem 3rem', textDecoration: 'none', background: '#38bdf8', color: '#000', fontWeight: 'bold', borderRadius: '50px' }}>
+                      View Final Project
+                    </a>
+                  </div>
+                )}
               </div>
               
               {project.budget && (

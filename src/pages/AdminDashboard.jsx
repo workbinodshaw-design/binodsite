@@ -124,6 +124,28 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleUpdateLeadStatus = async (leadId, newStatus) => {
+    try {
+      const leadRef = doc(db, 'leads', leadId);
+      await updateDoc(leadRef, { status: newStatus });
+      setLeads(leads.map(l => l.id === leadId ? { ...l, status: newStatus } : l));
+    } catch (error) {
+      console.error("Error updating status:", error);
+      alert("Failed to update status.");
+    }
+  };
+
+  const handleUpdateLeadLink = async (leadId, newLink) => {
+    try {
+      const leadRef = doc(db, 'leads', leadId);
+      await updateDoc(leadRef, { projectLink: newLink });
+      setLeads(leads.map(l => l.id === leadId ? { ...l, projectLink: newLink } : l));
+    } catch (error) {
+      console.error("Error updating link:", error);
+      alert("Failed to attach link.");
+    }
+  };
+
   return (
     <div className="page-container" style={{ paddingTop: '8rem', paddingBottom: '4rem' }}>
       <div className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
@@ -321,16 +343,40 @@ const AdminDashboard = () => {
                       {lead.phone && <span style={{ color: '#aaa', fontSize: '0.85rem' }}>{lead.phone}</span>}
                     </td>
                     <td>
-                      <span className="badge" style={{ 
-                        background: lead.status === 'contacted' ? 'rgba(46, 204, 113, 0.2)' : 'rgba(163, 136, 255, 0.2)',
-                        color: lead.status === 'contacted' ? '#2ecc71' : '#a388ff'
-                      }}>
-                        {lead.status || 'new'}
-                      </span>
+                      <select 
+                        value={lead.status || 'new'} 
+                        onChange={(e) => handleUpdateLeadStatus(lead.id, e.target.value)}
+                        style={{ 
+                          padding: '0.4rem', 
+                          borderRadius: '8px', 
+                          background: 'rgba(0,0,0,0.5)', 
+                          color: lead.status === 'completed' ? '#2ecc71' : (lead.status === 'building' ? '#38bdf8' : '#a388ff'), 
+                          border: '1px solid rgba(255,255,255,0.2)',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <option value="new">Pending Review</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="building">Building / Working</option>
+                        <option value="completed">Completed</option>
+                      </select>
                     </td>
                     <td style={{ color: '#25D366', fontWeight: 'bold' }}>{lead.budget || 'N/A'}</td>
                     <td style={{ maxWidth: '250px' }}>
                       <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.4', color: '#ccc' }}>{lead.details}</p>
+                      <div style={{ marginTop: '0.8rem' }}>
+                        <input 
+                          type="url" 
+                          placeholder="Attach Live URL (e.g. https://site.com)" 
+                          defaultValue={lead.projectLink || ''}
+                          onBlur={(e) => {
+                            if (e.target.value && e.target.value !== lead.projectLink) {
+                              handleUpdateLeadLink(lead.id, e.target.value);
+                            }
+                          }}
+                          style={{ width: '100%', padding: '0.5rem', background: '#000', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '4px', fontSize: '0.8rem' }}
+                        />
+                      </div>
                     </td>
                   </tr>
                 ))}
