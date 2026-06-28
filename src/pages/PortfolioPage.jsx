@@ -159,22 +159,24 @@ const PortfolioPage = () => {
             <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)' }}>Scroll down to explore</p>
           </div>
 
-          <div style={{ position: 'relative', width: '100%', maxWidth: '800px', height: '400px', transformStyle: 'preserve-3d' }}>
+          <div style={{ position: 'relative', width: '100%', maxWidth: '800px', height: '400px', transformStyle: 'preserve-3d', transform: 'translateZ(-400px) rotateX(5deg)' }}>
             {projects.map((project, i) => {
               const delta = progress - i; 
               
-              // Delta: 0 = active in center
-              // Delta > 0 = passed (goes UP and BACK)
-              // Delta < 0 = coming (comes from DOWN and FRONT)
-              
               // Clamp delta to prevent cards from flying too far away when totally offscreen
+              // We'll let them go up to delta = +/- 2 so they complete a half circle behind
               const clampedDelta = Math.max(-2, Math.min(2, delta));
               
-              const translateY = clampedDelta * -50; // vh
-              const translateZ = -clampedDelta * 400; // px (positive goes back, negative comes forward) -> Wait, if coming (<0), we want it in front (+400). So -clampedDelta * 400.
-              const rotateX = clampedDelta * 15; // deg
+              // Circular Helix Math:
+              // Angle determines where it is on the circle. 
+              // When delta is 0, it's at 0deg (front).
+              // When delta > 0 (passed), it rotates left (negative degrees) and goes UP.
+              // When delta < 0 (coming), it comes from the right (positive degrees) and UP from BELOW.
+              const angle = clampedDelta * -75; // degrees around the Y axis
+              const translateY = clampedDelta * -30; // vh (vertical movement)
+              const radius = 600; // px (distance from center of rotation)
               
-              const opacity = Math.max(0, 1 - Math.abs(clampedDelta));
+              const opacity = Math.max(0, 1 - Math.abs(clampedDelta) * 0.4);
               const isPointerActive = Math.abs(delta) < 0.2;
 
               return (
@@ -188,7 +190,7 @@ const PortfolioPage = () => {
                   padding: '3rem',
                   borderRadius: '32px',
                   border: '1px solid rgba(255,255,255,0.1)',
-                  transform: `translate3d(0, ${translateY}vh, ${translateZ}px) rotateX(${rotateX}deg)`,
+                  transform: `translateY(${translateY}vh) rotateY(${angle}deg) translateZ(${radius}px)`,
                   opacity: opacity,
                   transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
                   pointerEvents: isPointerActive ? 'auto' : 'none',
