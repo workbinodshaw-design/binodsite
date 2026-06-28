@@ -13,25 +13,34 @@ const UIOverlay = () => {
           </div>
           
           <h1 className="headline">
-            Build <span>Smarter.</span><br />
-            Automate <span>Faster.</span>
+            Turn Your Bottlenecks Into <br />
+            <span>Automated Revenue.</span>
           </h1>
           
-          <p className="description">
-            We combine AI automation and modern web development to build scalable digital solutions that drive real business growth.
+          <p className="description" style={{ fontSize: '1.2rem', marginBottom: '2.5rem' }}>
+            We build custom AI agents, automated workflows, and high-performance web apps that save you 40+ hours a week and scale your business effortlessly.
           </p>
           
           <div className="button-group">
-            <Link to="/contact" className="btn btn-primary">
-              Book Discovery Call <ArrowRight size={18} />
+            <Link to="/contact" className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '1rem 2rem', fontSize: '1.1rem' }}>
+              Get Free Consultation <ArrowRight size={18} />
             </Link>
-            <button 
-              className="btn btn-secondary" 
-              onClick={() => window.dispatchEvent(new Event('open-ai-agent'))}
-              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-            >
-              Ask AI Agent <Bot size={18} />
-            </button>
+            <Link to="/portfolio" className="btn btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '1rem 2rem', fontSize: '1.1rem' }}>
+              View Portfolio
+            </Link>
+          </div>
+
+          <div style={{ marginTop: '2.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div style={{ display: 'flex' }}>
+              {[1, 2, 3, 4, 5].map((star) => (
+                <svg key={star} width="20" height="20" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                </svg>
+              ))}
+            </div>
+            <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+              <strong>4.9/5</strong> rating from innovative founders
+            </p>
           </div>
         </div>
       </div>
