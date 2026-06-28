@@ -164,13 +164,21 @@ const PortfolioPage = () => {
             {/* Real 3D Tornado Graphic Background */}
             <div style={{
               position: 'absolute', top: '50%', left: '50%', 
-              transform: `translate(-50%, -50%) rotateZ(${progress * 60}deg)`,
+              transform: `translate(-50%, -50%) scale(${1 + Math.sin(progress * Math.PI) * 0.05})`,
               width: '1200px', height: '1200px',
               transition: 'transform 0.1s ease-out',
               zIndex: -1,
-              opacity: 0.7
+              opacity: 0.6,
+              pointerEvents: 'none'
             }}>
-              <img src="/tornado_bg.png" alt="Tornado Vortex" style={{ width: '100%', height: '100%', objectFit: 'contain', mixBlendMode: 'multiply' }} />
+              <img src="/tornado_bg.png" alt="Tornado Vortex" style={{ 
+                width: '100%', 
+                height: '100%', 
+                objectFit: 'contain', 
+                mixBlendMode: 'multiply',
+                WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 65%)',
+                maskImage: 'radial-gradient(circle at center, black 30%, transparent 65%)'
+              }} />
             </div>
 
             {/* Floating Cards */}
