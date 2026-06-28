@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
 :root {
   --bg-color: #FAFAFA;
@@ -27,12 +27,17 @@ html {
 }
 
 body {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-primary);
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.04em;
 }
 
 /* Sticky Scroll Architecture */
@@ -153,7 +158,7 @@ body {
 .logo-text {
   font-size: 1.5rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: -0.04em;
   color: var(--text-primary);
 }
 
@@ -186,11 +191,11 @@ body {
 }
 
 .headline {
-  font-size: 5rem;
+  font-size: 4rem;
   line-height: 1.1;
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 2rem;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
 }
 
 .headline span {
@@ -408,10 +413,9 @@ body {
 }
 
 .section-title {
-  font-size: 3.5rem;
-  font-weight: 700;
+  font-size: 2.8rem;
+  font-weight: 800;
   margin-bottom: 1rem;
-  letter-spacing: -0.02em;
 }
 .section-subtitle {
   font-size: 1.2rem;
