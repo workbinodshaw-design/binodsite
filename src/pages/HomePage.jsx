@@ -6,6 +6,7 @@ import ContactSection from '../components/ContactSection';
 import SceneContainer from '../components/SceneContainer';
 import ActiveCardOverlay from '../components/ActiveCardOverlay';
 import ErrorBoundary from '../components/ErrorBoundary';
+import FloatingBubbles from '../components/FloatingBubbles';
 import { Layers, Box, Cpu, HardDrive } from 'lucide-react';
 
 function HomePage() {
@@ -43,6 +44,7 @@ function HomePage() {
       <div className="hero-pin-wrapper" ref={heroWrapperRef}>
         <div className="hero-sticky-container" style={{ filter: activeCard ? 'blur(8px)' : 'none', transition: 'filter 0.3s ease' }}>
           
+          <FloatingBubbles />
           <UIOverlay />
 
           <ErrorBoundary>

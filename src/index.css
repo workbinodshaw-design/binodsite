@@ -2288,3 +2288,45 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     align-items: center;
   }
 }
+
+/* =========================================
+   FLOATING BUBBLES ANIMATION
+   ========================================= */
+
+.bubbles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.floating-bubble {
+  position: absolute;
+  bottom: -100px;
+  border-radius: 50%;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-50vh) translateX(50px) scale(1.1);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) translateX(-50px) scale(1);
+    opacity: 0;
+  }
+}
