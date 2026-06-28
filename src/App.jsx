@@ -10,6 +10,7 @@ import PortfolioPage from './pages/PortfolioPage';
 import PricingPage from './pages/PricingPage';
 import AdminDashboard from './pages/AdminDashboard';
 import AiAgentWidget from './components/AiAgentWidget';
+import Footer from './components/Footer';
 
 import ProtectedRoute from './components/ProtectedRoute';
 import LoginPortal from './pages/LoginPortal';
@@ -60,6 +61,7 @@ function App() {
         />
       </Routes>
 
+      <Footer />
       {/* Global AI Agent Widget */}
       <AiAgentWidget />
     </Router>
