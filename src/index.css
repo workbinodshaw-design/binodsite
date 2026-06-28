@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@700;800&display=swap');
 
 :root {
   --bg-color: #FAFAFA;
@@ -191,17 +191,19 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 }
 
 .headline {
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 4rem;
   line-height: 1.1;
   font-weight: 800;
   margin-bottom: 2rem;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.05em;
 }
 
 .headline span {
-  background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+  background: linear-gradient(135deg, #8A2BE2 0%, #FF7F50 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 .description {
