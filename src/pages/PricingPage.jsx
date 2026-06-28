@@ -81,7 +81,7 @@ const PricingPage = () => {
               </div>
             </div>
             
-            <Link to="/contact" className="btn" style={{ width: '100%', padding: '1.2rem', background: '#f8f9fa', color: '#111', border: '1px solid #ddd', borderRadius: '16px', fontWeight: 700, textAlign: 'center', display: 'block' }}>
+            <Link to="/contact" state={{ service: "AI Automation" }} className="btn" style={{ width: '100%', padding: '1.2rem', background: '#f8f9fa', color: '#111', border: '1px solid #ddd', borderRadius: '16px', fontWeight: 700, textAlign: 'center', display: 'block' }}>
               Automate My Work
             </Link>
           </div>
@@ -121,7 +121,7 @@ const PricingPage = () => {
               </div>
             </div>
             
-            <Link to="/contact" className="btn btn-primary" style={{ width: '100%', padding: '1.2rem', borderRadius: '16px', fontWeight: 700, textAlign: 'center', display: 'block', fontSize: '1.1rem' }}>
+            <Link to="/contact" state={{ service: "Web Design & Development" }} className="btn btn-primary" style={{ width: '100%', padding: '1.2rem', borderRadius: '16px', fontWeight: 700, textAlign: 'center', display: 'block', fontSize: '1.1rem' }}>
               Build My Website
             </Link>
           </div>
@@ -156,7 +156,7 @@ const PricingPage = () => {
               </div>
             </div>
             
-            <Link to="/contact" className="btn" style={{ width: '100%', padding: '1.2rem', background: '#f8f9fa', color: '#111', border: '1px solid #ddd', borderRadius: '16px', fontWeight: 700, textAlign: 'center', display: 'block' }}>
+            <Link to="/contact" state={{ service: "Other" }} className="btn" style={{ width: '100%', padding: '1.2rem', background: '#f8f9fa', color: '#111', border: '1px solid #ddd', borderRadius: '16px', fontWeight: 700, textAlign: 'center', display: 'block' }}>
               Request a Custom Quote
             </Link>
           </div>
@@ -174,7 +174,7 @@ const PricingPage = () => {
           <p style={{ fontSize: '1.2rem', opacity: 0.9, lineHeight: 1.6, marginBottom: '2rem' }}>
             We only charge for the exact value and architecture you require. If your needs are small, your price stays small. If you need a massive enterprise system, we build it at a fair, requirement-based cost.
           </p>
-          <Link to="/contact" className="btn" style={{ background: '#fff', color: 'var(--primary-color)', padding: '1rem 2.5rem', borderRadius: '30px', fontWeight: 800, fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+          <Link to="/contact" state={{ service: "Other" }} className="btn" style={{ background: '#fff', color: 'var(--primary-color)', padding: '1rem 2.5rem', borderRadius: '30px', fontWeight: 800, fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
             Get an Honest Quote <ArrowRight size={20} />
           </Link>
         </div>

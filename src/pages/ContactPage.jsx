@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { MessageCircle, Mail, Send, Lock } from 'lucide-react';
 import { saveLeadToDatabase, auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ProtectedWhatsAppLink from '../components/ProtectedWhatsAppLink';
 
 const ContactPage = () => {
+  const location = useLocation();
+  const defaultService = location.state?.service || '';
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [user, setUser] = useState(null);
@@ -150,7 +153,7 @@ const ContactPage = () => {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label>Service Requested</label>
-                  <select name="service_requested" required style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  <select name="service_requested" required defaultValue={defaultService} style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }}>
                     <option value="">Select a service</option>
                     <option value="Web Design & Development">Web Design & Development</option>
                     <option value="AI Automation">AI Automation</option>
