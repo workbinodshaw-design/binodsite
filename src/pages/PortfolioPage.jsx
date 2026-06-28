@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowRight, Code, Cpu, MessageSquare, Mail, Instagram, ExternalLink, Zap, Terminal, Database, Server } from 'lucide-react';
+import { ArrowRight, Code, Cpu, MessageSquare, Mail, Camera, ExternalLink, Zap, Terminal, Database, Server } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const PortfolioPage = () => {
@@ -36,7 +36,7 @@ const PortfolioPage = () => {
       id: 4,
       title: 'Instagram Auto Comment Reply',
       description: 'A social media automation script that monitors Instagram posts and automatically replies to specific keyword comments, significantly boosting engagement and instantly sending DMs to commenters.',
-      icon: <Instagram size={32} color="#E1306C" />,
+      icon: <Camera size={32} color="#E1306C" />,
       tags: ['JavaScript', 'Graph API', 'Webhooks'],
       color: 'rgba(225, 48, 108, 0.1)'
     },
