@@ -149,7 +149,7 @@ const PortfolioPage = () => {
       </section>
 
       {/* 3. SCROLLING STACK PROJECTS SECTION */}
-      <section ref={containerRef} style={{ position: 'relative', height: `${projects.length * 100}vh`, padding: 0, marginTop: '4rem' }}>
+      <section ref={containerRef} style={{ position: 'relative', height: `${projects.length * 150}vh`, padding: 0, marginTop: '4rem' }}>
         
         {/* Sticky Container */}
         <div style={{ position: 'sticky', top: 0, height: '100vh', width: '100%', overflow: 'hidden', perspective: '1500px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -160,24 +160,53 @@ const PortfolioPage = () => {
           </div>
 
           <div style={{ position: 'relative', width: '100%', maxWidth: '800px', height: '400px', transformStyle: 'preserve-3d', transform: 'translateZ(-400px) rotateX(5deg)' }}>
+            
+            {/* CSS 3D Tornado Graphic */}
+            <div style={{
+              position: 'absolute', top: '50%', left: '50%', 
+              transformStyle: 'preserve-3d',
+              transform: `translate(-50%, -50%) rotateX(80deg) rotateZ(${progress * 180}deg)`,
+              width: 0, height: 0,
+              transition: 'transform 0.1s ease-out'
+            }}>
+              {Array.from({ length: 25 }).map((_, i) => {
+                const size = 150 + i * 35; // Top rings are larger
+                const zOffset = 400 - i * 35; // Stack them vertically in the 3D space
+                return (
+                  <div key={i} style={{
+                    position: 'absolute',
+                    top: '50%', left: '50%',
+                    width: `${size}px`, height: `${size}px`,
+                    border: `1px solid rgba(138, 43, 226, ${0.1 + (i / 50)})`,
+                    borderRadius: '50%',
+                    transform: `translate(-50%, -50%) translateZ(${zOffset}px)`,
+                    boxShadow: '0 0 15px rgba(138,43,226,0.1), inset 0 0 15px rgba(138,43,226,0.1)',
+                  }}>
+                    {/* Glowing particle on the ring */}
+                    <div style={{ 
+                      position: 'absolute', top: '-2px', left: '50%', width: '4px', height: '4px', 
+                      background: '#fff', borderRadius: '50%', boxShadow: '0 0 10px 2px #8A2BE2',
+                      transform: `rotate(${i * 45}deg) translateX(${size/2}px)`
+                    }}></div>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Floating Cards */}
             {projects.map((project, i) => {
               const delta = progress - i; 
               
-              // Clamp delta to prevent cards from flying too far away when totally offscreen
-              // We'll let them go up to delta = +/- 2 so they complete a half circle behind
-              const clampedDelta = Math.max(-2, Math.min(2, delta));
+              // We'll let them go up to delta = +/- 2.5 so they complete a wide arc
+              const clampedDelta = Math.max(-2.5, Math.min(2.5, delta));
               
-              // Circular Helix Math:
-              // Angle determines where it is on the circle. 
-              // When delta is 0, it's at 0deg (front).
-              // When delta > 0 (passed), it rotates left (negative degrees) and goes UP.
-              // When delta < 0 (coming), it comes from the right (positive degrees) and UP from BELOW.
-              const angle = clampedDelta * -75; // degrees around the Y axis
-              const translateY = clampedDelta * -30; // vh (vertical movement)
-              const radius = 600; // px (distance from center of rotation)
+              // Spaced out math
+              const angle = clampedDelta * -90; // Spread out to 90 degrees per scroll unit
+              const translateY = clampedDelta * -45; // Increased vertical distance so they are further apart
+              const radius = 650; // Increased radius to orbit outside the tornado
               
-              const opacity = Math.max(0, 1 - Math.abs(clampedDelta) * 0.4);
-              const isPointerActive = Math.abs(delta) < 0.2;
+              const opacity = Math.max(0, 1 - Math.abs(clampedDelta) * 0.35); // Fades slower so you see more cards
+              const isPointerActive = Math.abs(delta) < 0.3;
 
               return (
                 <div key={project.id} className="glass" style={{
@@ -196,9 +225,9 @@ const PortfolioPage = () => {
                   pointerEvents: isPointerActive ? 'auto' : 'none',
                   display: 'flex',
                   flexDirection: 'column',
-                  background: 'rgba(20, 20, 25, 0.7)',
+                  background: 'rgba(20, 20, 25, 0.75)',
                   backdropFilter: 'blur(16px)',
-                  boxShadow: '0 30px 60px rgba(0,0,0,0.4), 0 0 40px rgba(138,43,226,0.1)'
+                  boxShadow: '0 30px 60px rgba(0,0,0,0.5), 0 0 40px rgba(138,43,226,0.15)'
                 }}>
                   <div style={{ width: '80px', height: '80px', borderRadius: '20px', background: project.color, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
                     {project.icon}
