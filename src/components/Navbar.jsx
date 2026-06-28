@@ -1,19 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { User } from 'lucide-react';
+import { User, Shield, Briefcase } from 'lucide-react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase';
 
 const Navbar = () => {
   const location = useLocation();
   const [user, setUser] = useState(null);
+  const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        if (currentUser.email && currentUser.email.toLowerCase() === 'work.binodshaw@gmail.com') {
+          setUserRole('admin');
+        } else {
+          try {
+            const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+            if (userDoc.exists()) {
+              setUserRole(userDoc.data().role || 'client');
+            } else {
+              setUserRole('client');
+            }
+          } catch (e) {
+            setUserRole('client');
+          }
+        }
+      } else {
+        setUserRole(null);
+      }
     });
     return () => unsubscribe();
   }, []);
+
+  const getDashboardRoute = () => {
+    if (userRole === 'admin') return '/admin';
+    if (userRole === 'employee') return '/employee';
+    return '/client';
+  };
+
+  const getRoleBadgeColor = () => {
+    if (userRole === 'admin') return { bg: 'rgba(163, 136, 255, 0.2)', text: '#a388ff', icon: <Shield size={14} /> };
+    if (userRole === 'employee') return { bg: 'rgba(56, 189, 248, 0.2)', text: '#38bdf8', icon: <Briefcase size={14} /> };
+    return { bg: 'rgba(255, 255, 255, 0.1)', text: '#fff', icon: <User size={14} /> };
+  };
 
   return (
     <nav className="navbar">
@@ -30,22 +62,42 @@ const Navbar = () => {
         
         {user ? (
           <Link 
-            to="/client-login" 
+            to={getDashboardRoute()} 
             className="nav-link btn btn-primary small" 
             style={{ 
               color: '#fff', 
-              background: '#000', 
-              padding: '0.6rem', 
+              background: 'rgba(0,0,0,0.5)', 
+              padding: '0.4rem 1rem', 
+              borderRadius: '30px', 
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              marginLeft: '1rem',
+              textDecoration: 'none',
+              border: '1px solid rgba(255,255,255,0.1)'
+            }}
+            title="Go to Dashboard"
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: '1.2' }}>
+              <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>{user.displayName || user.email?.split('@')[0]}</span>
+              {userRole && (
+                <span style={{ fontSize: '0.7rem', color: getRoleBadgeColor().text, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                  {userRole}
+                </span>
+              )}
+            </div>
+            <div style={{ 
+              width: '32px', 
+              height: '32px', 
               borderRadius: '50%', 
+              background: userRole ? getRoleBadgeColor().bg : '#222',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              marginLeft: '1rem',
-              textDecoration: 'none'
-            }}
-            title="My Account"
-          >
-            <User size={20} />
+              color: userRole ? getRoleBadgeColor().text : '#fff'
+            }}>
+              {userRole ? getRoleBadgeColor().icon : <User size={16} />}
+            </div>
           </Link>
         ) : (
           <Link 
