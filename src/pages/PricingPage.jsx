@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
-import { ArrowRight, CheckCircle2, Zap, Shield, Rocket, Target, BarChart, ChevronDown, HeartHandshake } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ArrowRight, CheckCircle2, Zap, Shield, Rocket, Target, BarChart, ChevronDown, ChevronUp, HeartHandshake } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const PricingPage = () => {
+  const [openFaq, setOpenFaq] = useState(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -82,11 +84,12 @@ const PricingPage = () => {
           </div>
 
           {/* Tier 2: Websites (Highlighted) */}
-          <div style={{ background: '#111', padding: '4rem 3rem', borderRadius: '32px', boxShadow: '0 30px 60px rgba(138,43,226,0.2)', position: 'relative', border: '1px solid rgba(138,43,226,0.3)', transform: 'scale(1.05)', zIndex: 2 }}>
+          <div className="pricing-tier-highlight" style={{ background: '#111', padding: '4rem 3rem', borderRadius: '32px', boxShadow: '0 0 40px rgba(138,43,226,0.4)', position: 'relative', border: '2px solid rgba(138,43,226,0.6)', transform: 'scale(1.05)', zIndex: 2, overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: 0, left: '-100%', width: '50%', height: '100%', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)', transform: 'skewX(-20deg)', animation: 'shimmer 3s infinite' }}></div>
             <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', background: 'var(--primary-color)', color: '#fff', padding: '8px 24px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 800, letterSpacing: '1px' }}>
               Web Design & Development
             </div>
-            <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: 'rgba(138,43,226,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
+            <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: 'rgba(138,43,226,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem', position: 'relative', zIndex: 1 }}>
               <Target size={30} color="#b673f8" />
             </div>
             <h3 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '0.5rem', color: '#fff' }}>Websites & Portals</h3>
@@ -178,21 +181,33 @@ const PricingPage = () => {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {faqs.map((faq, idx) => (
-              <details key={idx} style={{ 
-                background: '#f8f9fa', 
-                padding: '1.5rem', 
-                borderRadius: '16px',
-                border: '1px solid #eee',
-                cursor: 'pointer'
-              }}>
-                <summary style={{ fontSize: '1.2rem', fontWeight: 700, color: '#111', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div 
+                key={idx} 
+                onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                style={{ 
+                  background: '#f8f9fa', 
+                  padding: '1.5rem', 
+                  borderRadius: '16px',
+                  border: '1px solid #eee',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#111', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {faq.q}
-                  <ChevronDown size={20} color="#888" />
-                </summary>
-                <p style={{ marginTop: '1.5rem', color: '#555', lineHeight: 1.7, fontSize: '1.1rem', borderTop: '1px solid #ddd', paddingTop: '1.5rem' }}>
-                  {faq.a}
-                </p>
-              </details>
+                  {openFaq === idx ? <ChevronUp size={20} color="#888" /> : <ChevronDown size={20} color="#888" />}
+                </div>
+                <div style={{ 
+                  maxHeight: openFaq === idx ? '200px' : '0', 
+                  overflow: 'hidden', 
+                  transition: 'max-height 0.4s ease',
+                  opacity: openFaq === idx ? 1 : 0
+                }}>
+                  <p style={{ marginTop: '1.5rem', color: '#555', lineHeight: 1.7, fontSize: '1.1rem', borderTop: '1px solid #ddd', paddingTop: '1.5rem' }}>
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>

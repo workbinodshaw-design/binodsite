@@ -139,17 +139,33 @@ const ServicesPage = () => {
           
           {/* Visual Side (Left for Web Dev to alternate layout) */}
           <div className="service-visual-column" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            <div className="premium-animated-visual web-visual">
-               <div className="floating-layer layer-back"></div>
-               <div className="floating-layer layer-mid">
-                  <div className="skeleton-line" style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.1)', marginBottom: '10px', borderRadius: '4px' }}></div>
-                  <div className="skeleton-line" style={{ width: '75%', height: '8px', background: 'rgba(255,255,255,0.1)', marginBottom: '10px', borderRadius: '4px' }}></div>
-                  <div className="skeleton-line" style={{ width: '50%', height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px' }}></div>
+            <div className="premium-animated-visual web-visual" style={{ position: 'relative', height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+               <div className="browser-mockup" style={{ width: '80%', height: '80%', background: '#0f0f0f', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', position: 'relative' }}>
+                 {/* Browser Header */}
+                 <div style={{ height: '30px', background: '#1a1a1a', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', padding: '0 12px', gap: '6px' }}>
+                   <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ff5f56' }}></div>
+                   <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ffbd2e' }}></div>
+                   <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#27c93f' }}></div>
+                 </div>
+                 {/* Browser Body - Animated elements */}
+                 <div className="browser-body" style={{ flex: 1, padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', position: 'relative' }}>
+                    <div className="skeleton-pulse" style={{ height: '30px', width: '40%', background: 'rgba(255,255,255,0.1)', borderRadius: '4px' }}></div>
+                    <div className="skeleton-pulse" style={{ height: '15px', width: '100%', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', animationDelay: '0.2s' }}></div>
+                    <div className="skeleton-pulse" style={{ height: '15px', width: '80%', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', animationDelay: '0.4s' }}></div>
+                    
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
+                      <div className="skeleton-pulse" style={{ height: '60px', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', animationDelay: '0.6s' }}></div>
+                      <div className="skeleton-pulse" style={{ height: '60px', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', animationDelay: '0.8s' }}></div>
+                    </div>
+                 </div>
                </div>
-               <div className="floating-layer layer-front">
-                  <div className="code-snippet" style={{ fontFamily: 'monospace', color: '#25D366', fontSize: '1.2rem' }}>
-                    <span style={{ color: '#ff4757' }}>const</span> build = <span style={{ color: '#feca57' }}>'perfect'</span>;
-                  </div>
+               
+               {/* Floating elements popping out of browser */}
+               <div className="floating-badge text-coral pulse" style={{ position: 'absolute', right: '5%', top: '15%', background: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem', borderRadius: '20px', border: '1px solid rgba(255,107,107,0.3)', backdropFilter: 'blur(10px)', fontSize: '0.9rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 2 }}>
+                  <TrendingUp size={16} /> +320% Conversion
+               </div>
+               <div className="floating-badge text-lavender pulse" style={{ position: 'absolute', left: '0%', bottom: '20%', background: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem', borderRadius: '20px', border: '1px solid rgba(138,43,226,0.3)', backdropFilter: 'blur(10px)', fontSize: '0.9rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 2, animationDelay: '1s' }}>
+                  <Clock size={16} /> 0.8s Load Time
                </div>
             </div>
 
