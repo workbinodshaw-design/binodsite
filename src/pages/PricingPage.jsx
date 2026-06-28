@@ -18,7 +18,7 @@ const PricingPage = () => {
     },
     {
       q: "How does automation pricing work?",
-      a: "You can start buying your time back for as low as ₹5,000. As your operations scale and you require more intelligent AI agents, the investment scales proportionally with the exact value the system generates for you."
+      a: "You can start buying your time back for as low as ₹5,000 / $60. As your operations scale and you require more intelligent AI agents, the investment scales proportionally with the exact value the system generates for you."
     },
     {
       q: "Do you offer payment plans for larger projects?",
@@ -58,7 +58,7 @@ const PricingPage = () => {
             <p style={{ color: '#666', marginBottom: '2rem', minHeight: '50px' }}>Perfect for automating repetitive tasks and saving hours of manual work.</p>
             <div style={{ marginBottom: '2.5rem' }}>
               <span style={{ color: '#888', fontSize: '1rem', fontWeight: 600 }}>Starting from</span>
-              <div style={{ fontSize: '3rem', fontWeight: 900, color: '#111', lineHeight: 1 }}>₹5,000</div>
+              <div style={{ fontSize: '3rem', fontWeight: 900, color: '#111', lineHeight: 1 }}>₹5,000 / $60</div>
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '3rem' }}>
@@ -93,8 +93,8 @@ const PricingPage = () => {
             <p style={{ color: '#aaa', marginBottom: '2rem', minHeight: '50px' }}>Affordable, beautiful websites. The price is tailored entirely to your requirements.</p>
             <div style={{ marginBottom: '2.5rem' }}>
               <span style={{ color: '#888', fontSize: '1rem', fontWeight: 600 }}>Depending on Requirements</span>
-              <div style={{ fontSize: '3rem', fontWeight: 900, color: '#fff', lineHeight: 1.1 }}>₹8k - ₹15k</div>
-              <div style={{ fontSize: '1rem', color: '#888', marginTop: '0.5rem' }}>(Scales to ₹30k+ for advanced apps)</div>
+              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#fff', lineHeight: 1.1 }}>₹8k - ₹15k <span style={{ fontSize: '1.5rem', color: '#b673f8' }}>/ $100 - $180</span></div>
+              <div style={{ fontSize: '1rem', color: '#888', marginTop: '0.5rem' }}>(Scales to ₹30k+ / $350+ for advanced apps)</div>
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginBottom: '3rem' }}>
@@ -126,7 +126,7 @@ const PricingPage = () => {
             <p style={{ color: '#666', marginBottom: '2rem', minHeight: '50px' }}>Custom-architected software, CRMs, and complex AI solutions.</p>
             <div style={{ marginBottom: '2.5rem' }}>
               <span style={{ color: '#888', fontSize: '1rem', fontWeight: 600 }}>Custom Scope</span>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#111', lineHeight: 1.2 }}>₹50k - ₹90k+</div>
+              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#111', lineHeight: 1.2 }}>₹50k - ₹90k+ <span style={{ fontSize: '1.5rem', color: '#ec4899' }}>/ $600 - $1100+</span></div>
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '3rem' }}>

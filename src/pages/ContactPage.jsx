@@ -94,10 +94,11 @@ const ContactPage = () => {
                 <label>Estimated Budget</label>
                 <select name="budget" required>
                   <option value="">Select a range</option>
-                  <option value="< $1,000">Less than $1,000</option>
-                  <option value="$1,000 - $5,000">$1,000 - $5,000</option>
-                  <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-                  <option value="$10,000+">$10,000+</option>
+                  <option value="< ₹10,000 / $120">Less than ₹10,000 / $120</option>
+                  <option value="₹10,000 - ₹30,000 / $120 - $350">₹10,000 - ₹30,000 / $120 - $350</option>
+                  <option value="₹30,000 - ₹60,000 / $350 - $700">₹30,000 - ₹60,000 / $350 - $700</option>
+                  <option value="₹60,000+ / $700+">₹60,000+ / $700+</option>
+                  <option value="Custom">Custom / Let's Discuss</option>
                 </select>
               </div>
 
