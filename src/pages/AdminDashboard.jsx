@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, orderBy, query, doc, updateDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { db, auth } from '../firebase';
-import { RefreshCw, LogOut, Shield, Users, Lock, Trash2, Plus, Briefcase, Activity, CheckCircle2 } from 'lucide-react';
+import { RefreshCw, LogOut, Shield, Users, Lock, Trash2, Plus, Briefcase, Activity, CheckCircle2, Inbox, Zap, Archive } from 'lucide-react';
 
 const AdminDashboard = () => {
   const [leads, setLeads] = useState([]);
@@ -11,6 +11,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('leads');
+  const [pipelineStage, setPipelineStage] = useState('inbox');
   const [newTeamEmail, setNewTeamEmail] = useState('');
 
   useEffect(() => {
@@ -328,18 +329,93 @@ const AdminDashboard = () => {
 
       {activeTab === 'leads' && (
         <div>
+          {/* Pipeline Sub-Navigation */}
+          <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1rem' }}>
+            <button 
+              onClick={() => setPipelineStage('inbox')}
+              style={{ 
+                background: 'transparent',
+                color: pipelineStage === 'inbox' ? '#38bdf8' : '#888',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                borderBottom: pipelineStage === 'inbox' ? '2px solid #38bdf8' : '2px solid transparent',
+                transition: 'all 0.3s ease',
+                fontSize: '1.1rem'
+              }}
+            >
+              <Inbox size={20} /> Inbox (New)
+            </button>
+            <button 
+              onClick={() => setPipelineStage('active')}
+              style={{ 
+                background: 'transparent',
+                color: pipelineStage === 'active' ? '#a388ff' : '#888',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                borderBottom: pipelineStage === 'active' ? '2px solid #a388ff' : '2px solid transparent',
+                transition: 'all 0.3s ease',
+                fontSize: '1.1rem'
+              }}
+            >
+              <Zap size={20} /> Active Projects
+            </button>
+            <button 
+              onClick={() => setPipelineStage('completed')}
+              style={{ 
+                background: 'transparent',
+                color: pipelineStage === 'completed' ? '#2ecc71' : '#888',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                borderBottom: pipelineStage === 'completed' ? '2px solid #2ecc71' : '2px solid transparent',
+                transition: 'all 0.3s ease',
+                fontSize: '1.1rem'
+              }}
+            >
+              <Archive size={20} /> Completed & Delivered
+            </button>
+          </div>
+
           {error && <div style={{ color: '#FF6B6B', padding: '1rem', background: 'rgba(255,107,107,0.1)', borderRadius: '8px', marginBottom: '2rem' }}>{error}</div>}
 
           {loading && leads.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>Loading your leads...</div>
-          ) : leads.length === 0 ? (
+          ) : leads.filter(lead => {
+              if (pipelineStage === 'inbox') return (lead.status || 'new') === 'new';
+              if (pipelineStage === 'active') return lead.status === 'contacted' || lead.status === 'building';
+              if (pipelineStage === 'completed') return lead.status === 'completed';
+              return true;
+            }).length === 0 ? (
             <div className="glass text-center" style={{ padding: '4rem 2rem', borderRadius: '24px', maxWidth: '600px', margin: '0 auto' }}>
-              <h2 className="h3" style={{ marginBottom: '1rem' }}>No Leads Found</h2>
-              <p className="text-secondary">When clients submit requests, they will appear here as manageable project cards.</p>
+              <h2 className="h3" style={{ marginBottom: '1rem' }}>No Projects Here</h2>
+              <p className="text-secondary">
+                {pipelineStage === 'inbox' && "You don't have any pending new leads to review."}
+                {pipelineStage === 'active' && "No projects are currently being built."}
+                {pipelineStage === 'completed' && "You haven't completed any projects yet."}
+              </p>
             </div>
           ) : (
             <div style={{ display: 'grid', gap: '2rem' }}>
-              {leads.map((lead) => (
+              {leads.filter(lead => {
+                if (pipelineStage === 'inbox') return (lead.status || 'new') === 'new';
+                if (pipelineStage === 'active') return lead.status === 'contacted' || lead.status === 'building';
+                if (pipelineStage === 'completed') return lead.status === 'completed';
+                return true;
+              }).map((lead) => (
                 <div key={lead.id} className="glass" style={{ padding: '2.5rem', borderRadius: '24px', display: 'flex', flexDirection: 'column', gap: '2rem', border: '1px solid rgba(255,255,255,0.05)' }}>
                   
                   {/* Card Header */}
@@ -351,6 +427,22 @@ const AdminDashboard = () => {
                       </div>
                       <p className="text-secondary">Received on: {lead.createdAt?.toDate ? lead.createdAt.toDate().toLocaleDateString() : 'Unknown Date'}</p>
                     </div>
+                    {pipelineStage === 'inbox' && (
+                      <div style={{ display: 'flex', gap: '1rem' }}>
+                        <button 
+                          onClick={() => handleUpdateLeadStatus(lead.id, 'rejected')}
+                          style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '0.8rem 1.5rem', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold' }}
+                        >
+                          <Trash2 size={18} /> Reject
+                        </button>
+                        <button 
+                          onClick={() => handleUpdateLeadStatus(lead.id, 'contacted')}
+                          style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '0.8rem 1.5rem', background: '#38bdf8', color: '#000', border: 'none', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold' }}
+                        >
+                          <CheckCircle2 size={18} /> Accept Project
+                        </button>
+                      </div>
+                    )}
                   </div>
 
                   {/* Top Level Grid: Client Info + Control Panel */}
