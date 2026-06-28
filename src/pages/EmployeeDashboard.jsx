@@ -1,35 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs, orderBy, query, doc, updateDoc } from 'firebase/firestore';
-import { signOut } from 'firebase/auth';
+import { collection, getDocs, query, where, doc, updateDoc } from 'firebase/firestore';
+import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { db, auth } from '../firebase';
-import { RefreshCw, LogOut, CheckCircle } from 'lucide-react';
+import { RefreshCw, LogOut, CheckCircle2, Clock, AlertCircle, Briefcase } from 'lucide-react';
 
 const EmployeeDashboard = () => {
-  const [leads, setLeads] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
 
   useEffect(() => {
-    fetchLeads();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user && user.email) {
+        setUserEmail(user.email);
+        fetchTasks(user.email);
+      } else {
+        setLoading(false);
+      }
+    });
+    return () => unsubscribe();
   }, []);
 
-  const fetchLeads = async () => {
+  const fetchTasks = async (email) => {
+    if (!email) return;
     setLoading(true);
     setError(null);
     try {
-      const leadsRef = collection(db, "leads");
-      const q = query(leadsRef, orderBy("createdAt", "desc"));
+      const q = query(
+        collection(db, "leads"),
+        where("assignedTo", "==", email)
+      );
       const querySnapshot = await getDocs(q);
       
-      const fetchedLeads = [];
+      const fetchedTasks = [];
       querySnapshot.forEach((document) => {
-        fetchedLeads.push({ id: document.id, ...document.data() });
+        fetchedTasks.push({ id: document.id, ...document.data() });
       });
       
-      setLeads(fetchedLeads);
+      // Sort client-side
+      fetchedTasks.sort((a, b) => {
+        const timeA = a.createdAt?.toMillis ? a.createdAt.toMillis() : 0;
+        const timeB = b.createdAt?.toMillis ? b.createdAt.toMillis() : 0;
+        return timeB - timeA;
+      });
+
+      setTasks(fetchedTasks);
     } catch (err) {
-      console.error("Error fetching leads:", err);
-      setError("Failed to load leads.");
+      console.error("Error fetching tasks:", err);
+      setError("Failed to load your tasks.");
     } finally {
       setLoading(false);
     }
@@ -39,26 +58,39 @@ const EmployeeDashboard = () => {
     await signOut(auth);
   };
 
-  const markAsContacted = async (leadId) => {
+  const handleUpdateStatus = async (taskId, newStatus) => {
     try {
-      const leadRef = doc(db, 'leads', leadId);
-      await updateDoc(leadRef, {
-        status: 'contacted',
-        updatedAt: new Date()
-      });
-      fetchLeads();
+      const taskRef = doc(db, 'leads', taskId);
+      await updateDoc(taskRef, { status: newStatus });
+      setTasks(tasks.map(t => t.id === taskId ? { ...t, status: newStatus } : t));
     } catch (error) {
-      console.error("Error updating lead:", error);
-      alert("Failed to update lead status.");
+      console.error("Error updating status:", error);
+      alert("Failed to update status.");
+    }
+  };
+
+  const handleUpdateLink = async (taskId, newLink) => {
+    try {
+      const taskRef = doc(db, 'leads', taskId);
+      await updateDoc(taskRef, { projectLink: newLink });
+      setTasks(tasks.map(t => t.id === taskId ? { ...t, projectLink: newLink } : t));
+    } catch (error) {
+      console.error("Error updating link:", error);
+      alert("Failed to attach link.");
     }
   };
 
   return (
-    <div className="page-container" style={{ padding: '6rem 2rem 2rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h1 className="h2" style={{ margin: 0 }}>Employee Dashboard</h1>
+    <div className="page-container" style={{ paddingTop: '8rem', paddingBottom: '4rem' }}>
+      <div className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
+        <div>
+          <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <Briefcase color="#a388ff" /> Task Workspace
+          </h1>
+          <p className="text-secondary">Welcome back, {userEmail || 'Team Member'}. Here are your assigned projects.</p>
+        </div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <button onClick={fetchLeads} className="btn btn-secondary" style={{ padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <button onClick={() => fetchTasks(userEmail)} className="btn btn-secondary" style={{ padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <RefreshCw size={18} className={loading ? 'spin' : ''} /> Refresh
           </button>
           <button onClick={handleLogout} className="btn" style={{ background: 'rgba(255,107,107,0.2)', color: '#FF6B6B', padding: '0.8rem 1.5rem', borderRadius: '30px', display: 'flex', alignItems: 'center', gap: '8px', border: 'none', cursor: 'pointer' }}>
@@ -69,63 +101,118 @@ const EmployeeDashboard = () => {
 
       {error && <div style={{ color: '#FF6B6B', padding: '1rem', background: 'rgba(255,107,107,0.1)', borderRadius: '8px', marginBottom: '2rem' }}>{error}</div>}
 
-      <div className="glass" style={{ padding: '2rem', borderRadius: '24px' }}>
-        <h2 className="h4" style={{ marginBottom: '1.5rem' }}>Active Leads</h2>
-        
-        {loading ? (
-          <p>Loading leads...</p>
-        ) : leads.length === 0 ? (
-          <p style={{ color: '#aaa' }}>No leads found.</p>
-        ) : (
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse' }}>
-              <thead>
-                <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                  <th style={{ padding: '1rem 0' }}>Date</th>
-                  <th>Name</th>
-                  <th>Email / Phone</th>
-                  <th>Source</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {leads.map((lead) => (
-                  <tr key={lead.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <td style={{ padding: '1rem 0', color: '#aaa' }}>
-                      {lead.createdAt?.toDate ? lead.createdAt.toDate().toLocaleDateString() : 'Just now'}
-                    </td>
-                    <td style={{ fontWeight: '500' }}>{lead.name}</td>
-                    <td>
-                      <div>{lead.email}</div>
-                      <div style={{ fontSize: '0.85rem', color: '#aaa' }}>{lead.phone}</div>
-                    </td>
-                    <td><span className="badge">{lead.source}</span></td>
-                    <td>
-                      <span className="badge" style={{ 
-                        background: lead.status === 'contacted' ? 'rgba(46, 204, 113, 0.2)' : 'rgba(163, 136, 255, 0.2)',
-                        color: lead.status === 'contacted' ? '#2ecc71' : '#a388ff'
-                      }}>
-                        {lead.status || 'new'}
-                      </span>
-                    </td>
-                    <td>
-                      {lead.status !== 'contacted' && (
-                        <button 
-                          onClick={() => markAsContacted(lead.id)}
-                          style={{ background: 'transparent', border: '1px solid #2ecc71', color: '#2ecc71', padding: '0.4rem 0.8rem', borderRadius: '4px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
-                        >
-                          <CheckCircle size={14} /> Contacted
-                        </button>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      {loading ? (
+        <div style={{ textAlign: 'center', padding: '4rem', color: '#aaa' }}>
+          <p>Loading your assigned tasks...</p>
+        </div>
+      ) : tasks.length === 0 ? (
+        <div className="glass text-center" style={{ padding: '4rem 2rem', borderRadius: '24px', maxWidth: '600px', margin: '0 auto' }}>
+          <div style={{ background: 'rgba(163, 136, 255, 0.1)', width: '80px', height: '80px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem auto' }}>
+            <CheckCircle2 size={40} color="#a388ff" />
           </div>
-        )}
-      </div>
+          <h2 className="h3" style={{ marginBottom: '1rem' }}>Inbox Zero!</h2>
+          <p className="text-secondary" style={{ lineHeight: '1.6' }}>
+            You currently have no active tasks assigned to you. Enjoy the downtime or check with the admin for new assignments.
+          </p>
+        </div>
+      ) : (
+        <div style={{ display: 'grid', gap: '2rem' }}>
+          {tasks.map((task) => (
+            <div key={task.id} className="glass" style={{ padding: '2.5rem', borderRadius: '24px', display: 'flex', flexDirection: 'column', gap: '1.5rem', border: task.status === 'completed' ? '1px solid rgba(46, 204, 113, 0.2)' : '1px solid rgba(255,255,255,0.1)' }}>
+              
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
+                    <h3 style={{ margin: 0, fontSize: '1.8rem' }}>{task.service_requested || task.source || 'General Project'}</h3>
+                    <span className="badge" style={{ background: 'rgba(163, 136, 255, 0.2)', color: '#a388ff' }}>{task.budget || 'Custom Budget'}</span>
+                  </div>
+                  <p className="text-secondary">Assigned on: {task.createdAt?.toDate ? task.createdAt.toDate().toLocaleDateString() : 'Unknown'}</p>
+                </div>
+                
+                {/* Status Control */}
+                <div style={{ background: 'rgba(0,0,0,0.5)', padding: '1rem', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '1rem', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <span style={{ fontSize: '0.9rem', color: '#aaa', fontWeight: 'bold' }}>Phase:</span>
+                  <select 
+                    value={task.status || 'new'} 
+                    onChange={(e) => handleUpdateStatus(task.id, e.target.value)}
+                    style={{ 
+                      padding: '0.6rem 1rem', 
+                      borderRadius: '8px', 
+                      background: 'rgba(255,255,255,0.1)', 
+                      color: task.status === 'completed' ? '#2ecc71' : (task.status === 'building' ? '#38bdf8' : '#fff'), 
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <option value="new">Pending Review</option>
+                    <option value="contacted">Client Contacted</option>
+                    <option value="building">Building / Working</option>
+                    <option value="completed">Completed</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Client Info Grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', background: 'rgba(0,0,0,0.3)', padding: '1.5rem', borderRadius: '16px' }}>
+                <div>
+                  <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Client Name</span>
+                  <p style={{ margin: '0.2rem 0 0 0', fontWeight: 'bold', fontSize: '1.1rem' }}>{task.name}</p>
+                </div>
+                <div>
+                  <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Client Email</span>
+                  <p style={{ margin: '0.2rem 0 0 0', color: '#a388ff' }}>{task.email}</p>
+                </div>
+                <div>
+                  <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Phone / WhatsApp</span>
+                  <p style={{ margin: '0.2rem 0 0 0' }}>{task.phone || 'Not provided'}</p>
+                </div>
+              </div>
+
+              {/* Project Requirements */}
+              <div>
+                <h4 style={{ marginBottom: '0.8rem', color: '#ccc' }}>Project Requirements</h4>
+                <p style={{ background: 'rgba(255,255,255,0.02)', padding: '1.5rem', borderRadius: '12px', lineHeight: '1.6', color: '#eee', whiteSpace: 'pre-wrap' }}>
+                  {task.details}
+                </p>
+              </div>
+
+              {/* Delivery Section */}
+              <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem', marginTop: '0.5rem' }}>
+                <h4 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <CheckCircle2 color={task.projectLink ? '#2ecc71' : '#888'} size={20} /> 
+                  Deliverable Link
+                </h4>
+                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                  <input 
+                    type="text" 
+                    placeholder="Attach Final Live URL (e.g. https://site.com) to deliver to client" 
+                    defaultValue={task.projectLink || ''}
+                    onBlur={(e) => {
+                      let link = e.target.value.trim();
+                      if (link && !link.startsWith('http://') && !link.startsWith('https://')) {
+                        link = 'https://' + link;
+                        e.target.value = link;
+                      }
+                      if (link !== (task.projectLink || '')) {
+                        handleUpdateLink(task.id, link);
+                      }
+                    }}
+                    style={{ flex: 1, padding: '1rem 1.5rem', background: 'rgba(0,0,0,0.5)', color: '#fff', border: task.projectLink ? '1px solid rgba(46, 204, 113, 0.5)' : '1px solid rgba(255,255,255,0.2)', borderRadius: '12px', fontSize: '1rem', outline: 'none', transition: 'border 0.3s ease' }}
+                  />
+                  {task.projectLink && (
+                    <span style={{ color: '#2ecc71', fontWeight: 'bold', fontSize: '0.9rem' }}>Attached ✓</span>
+                  )}
+                </div>
+                <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '0.8rem' }}>
+                  Adding a link here will automatically make it available in the Client's Dashboard.
+                </p>
+              </div>
+
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

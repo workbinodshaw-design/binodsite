@@ -14,7 +14,10 @@ const AdminDashboard = () => {
   const [newTeamEmail, setNewTeamEmail] = useState('');
 
   useEffect(() => {
-    if (activeTab === 'leads') fetchLeads();
+    if (activeTab === 'leads') {
+      fetchLeads();
+      fetchWhitelisted();
+    }
     if (activeTab === 'team') {
       fetchUsers();
       fetchWhitelisted();
@@ -143,6 +146,17 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error("Error updating link:", error);
       alert("Failed to attach link.");
+    }
+  };
+
+  const handleAssignLead = async (leadId, employeeEmail) => {
+    try {
+      const leadRef = doc(db, 'leads', leadId);
+      await updateDoc(leadRef, { assignedTo: employeeEmail });
+      setLeads(leads.map(l => l.id === leadId ? { ...l, assignedTo: employeeEmail } : l));
+    } catch (error) {
+      console.error("Error assigning lead:", error);
+      alert("Failed to assign lead.");
     }
   };
 
@@ -321,6 +335,7 @@ const AdminDashboard = () => {
                   <th style={{ padding: '1rem 0' }}>Date</th>
                   <th>Source</th>
                   <th>Client Info</th>
+                  <th>Assigned To</th>
                   <th>Status</th>
                   <th>Budget</th>
                   <th>Project Request</th>
@@ -341,6 +356,25 @@ const AdminDashboard = () => {
                       <strong>{lead.name}</strong><br/>
                       <span style={{ color: '#a388ff', fontSize: '0.9rem' }}>{lead.email}</span><br/>
                       {lead.phone && <span style={{ color: '#aaa', fontSize: '0.85rem' }}>{lead.phone}</span>}
+                    </td>
+                    <td>
+                      <select 
+                        value={lead.assignedTo || ''} 
+                        onChange={(e) => handleAssignLead(lead.id, e.target.value)}
+                        style={{ 
+                          padding: '0.4rem', 
+                          borderRadius: '8px', 
+                          background: 'rgba(0,0,0,0.5)', 
+                          color: lead.assignedTo ? '#38bdf8' : '#888', 
+                          border: '1px solid rgba(255,255,255,0.2)',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <option value="">Unassigned</option>
+                        {whitelistedEmails.map(emp => (
+                          <option key={emp.id} value={emp.email}>{emp.email}</option>
+                        ))}
+                      </select>
                     </td>
                     <td>
                       <select 
