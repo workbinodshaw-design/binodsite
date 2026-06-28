@@ -13,7 +13,7 @@ const BabySpiderman = () => {
   useFrame((state, delta) => {
     if (groupRef.current) {
       // Gentle breathing animation anchored to the platform
-      groupRef.current.position.y = -2.65 + Math.sin(state.clock.elapsedTime * 2) * 0.05;
+      groupRef.current.position.y = -4.0 + Math.sin(state.clock.elapsedTime * 2) * 0.05;
       
       // Look around slowly (optional, you can remove this if the model looks weird rotating)
       groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.3;
@@ -21,7 +21,7 @@ const BabySpiderman = () => {
   });
 
   return (
-    <group ref={groupRef} position={[0, -2.65, 0]} scale={[1.5, 1.5, 1.5]} rotation={[0, -Math.PI / 2, 0]}>
+    <group ref={groupRef} position={[0, -4.0, 0]} scale={[1.5, 1.5, 1.5]} rotation={[0, -Math.PI / 2, 0]}>
       {/* Renders the GLTF model facing the camera */}
       <primitive object={scene} />
     </group>
