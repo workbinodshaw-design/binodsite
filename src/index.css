@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&family=Bangers&display=swap');
 
 :root {
   --bg-color: #FAFAFA;
@@ -200,15 +200,20 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 }
 
 .headline span {
-  font-family: 'Satisfy', cursive;
-  font-size: 5.5rem;
+  font-family: 'Bangers', cursive;
+  font-size: 6rem;
   font-weight: 400;
-  background: linear-gradient(135deg, #4F46E5 0%, #9333EA 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #FFDE00; /* Spiderman Logo Yellow */
+  -webkit-text-stroke: 2px #E23636; /* Spiderman Red Border */
+  text-shadow: 4px 4px 0px #E23636; /* Spiderman Red Drop Shadow */
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
   display: inline-block;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+  letter-spacing: 0.05em;
+  transform: rotate(-3deg);
 }
 
 .description {
