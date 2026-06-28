@@ -84,8 +84,8 @@ const PortfolioPage = () => {
             <div style={{ position: 'relative' }}>
               <div style={{ position: 'absolute', inset: '-15px', background: 'linear-gradient(45deg, #8A2BE2, #FF7F50)', borderRadius: '24px', opacity: 0.5, filter: 'blur(20px)' }}></div>
               <img 
-                src="https://images.unsplash.com/photo-1537511446984-935f663eb1f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="Profile Placeholder" 
+                src="/binod-profile.png" 
+                alt="Binod Shaw" 
                 style={{ width: '100%', maxWidth: '450px', height: '500px', objectFit: 'cover', borderRadius: '24px', position: 'relative', zIndex: 1, border: '1px solid rgba(255,255,255,0.1)' }}
               />
               {/* Floating detail card */}
