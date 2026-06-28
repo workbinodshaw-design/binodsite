@@ -87,7 +87,11 @@ const Navbar = () => {
             }}
             title="Go to Dashboard"
           >
-            <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>Dashboard</span>
+            <span style={{ fontSize: '0.9rem', fontWeight: 'bold', textTransform: userRole === 'admin' || userRole === 'employee' ? 'uppercase' : 'none', letterSpacing: userRole === 'admin' || userRole === 'employee' ? '1px' : 'normal' }}>
+              {userRole === 'admin' ? 'Admin' : 
+               userRole === 'employee' ? 'Team' : 
+               (user.displayName || user.email?.split('@')[0])}
+            </span>
             <div style={{ 
               display: 'flex',
               alignItems: 'center',
