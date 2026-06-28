@@ -10,9 +10,9 @@ const FloatingBubbles = () => {
     
     // Choose between Spiderman Red, Electric Blue, and Lavender tones
     const colors = [
-      'rgba(226, 54, 54, 0.15)', // Spiderman Red
-      'rgba(0, 89, 200, 0.15)',  // Spiderman Blue
-      'rgba(138, 43, 226, 0.1)'  // Lavender
+      'rgba(79, 70, 229, 0.15)',  // Indigo
+      'rgba(147, 51, 234, 0.15)', // Violet
+      'rgba(138, 43, 226, 0.1)'   // Lavender
     ];
     const bg = colors[Math.floor(Math.random() * colors.length)];
 
