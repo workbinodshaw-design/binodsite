@@ -13,7 +13,8 @@ import AiAgentWidget from './components/AiAgentWidget';
 import Footer from './components/Footer';
 
 import ProtectedRoute from './components/ProtectedRoute';
-import LoginPortal from './pages/LoginPortal';
+import AdminLogin from './pages/AdminLogin';
+import TeamLogin from './pages/TeamLogin';
 import EmployeeDashboard from './pages/EmployeeDashboard';
 import ClientDashboard from './pages/ClientDashboard';
 import ClientLogin from './pages/ClientLogin';
@@ -33,7 +34,8 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         
         {/* Authentication & Role-Based Portals */}
-        <Route path="/login" element={<LoginPortal />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/team-login" element={<TeamLogin />} />
         <Route path="/client-login" element={<ClientLogin />} />
         <Route 
           path="/admin" 

@@ -57,7 +57,9 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    if (requiredRole === 'admin') return <Navigate to="/admin-login" replace />;
+    if (requiredRole === 'employee') return <Navigate to="/team-login" replace />;
+    return <Navigate to="/client-login" replace />;
   }
 
   // If a specific role is required and user doesn't have it (Admin overrides everything)

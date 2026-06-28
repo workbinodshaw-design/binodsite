@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs, orderBy, query, doc, updateDoc } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query, doc, updateDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { db, auth } from '../firebase';
-import { RefreshCw, LogOut, Shield, Users } from 'lucide-react';
+import { RefreshCw, LogOut, Shield, Users, Lock, Trash2, Plus } from 'lucide-react';
 
 const AdminDashboard = () => {
   const [leads, setLeads] = useState([]);
   const [systemUsers, setSystemUsers] = useState([]);
+  const [whitelistedEmails, setWhitelistedEmails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('leads');
+  const [newTeamEmail, setNewTeamEmail] = useState('');
 
   useEffect(() => {
     if (activeTab === 'leads') fetchLeads();
-    if (activeTab === 'team') fetchUsers();
+    if (activeTab === 'team') {
+      fetchUsers();
+      fetchWhitelisted();
+    }
   }, [activeTab]);
 
   const handleLogout = async () => {
@@ -58,9 +63,52 @@ const AdminDashboard = () => {
       setSystemUsers(fetchedUsers);
     } catch (err) {
       console.error("Error fetching users:", err);
-      setError("Failed to load users. Check Firestore permissions.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchWhitelisted = async () => {
+    try {
+      const whitelistRef = collection(db, "whitelisted_employees");
+      const querySnapshot = await getDocs(whitelistRef);
+      const emails = [];
+      querySnapshot.forEach((doc) => {
+        emails.push({ id: doc.id, ...doc.data() });
+      });
+      setWhitelistedEmails(emails);
+    } catch (err) {
+      console.error("Error fetching whitelist:", err);
+    }
+  };
+
+  const handleWhitelistEmail = async (e) => {
+    e.preventDefault();
+    if (!newTeamEmail) return;
+    
+    const formattedEmail = newTeamEmail.toLowerCase().trim();
+    try {
+      await setDoc(doc(db, 'whitelisted_employees', formattedEmail), {
+        email: formattedEmail,
+        role: 'employee',
+        addedAt: new Date(),
+        addedBy: 'Admin'
+      });
+      setNewTeamEmail('');
+      fetchWhitelisted();
+    } catch (error) {
+      console.error("Error adding to whitelist:", error);
+      alert("Failed to authorize email.");
+    }
+  };
+
+  const handleRemoveWhitelist = async (emailId) => {
+    try {
+      await deleteDoc(doc(db, 'whitelisted_employees', emailId));
+      fetchWhitelisted();
+    } catch (error) {
+      console.error("Error removing from whitelist:", error);
+      alert("Failed to revoke access.");
     }
   };
 
@@ -69,7 +117,6 @@ const AdminDashboard = () => {
       const userRef = doc(db, 'users', userId);
       await updateDoc(userRef, { role: newRole });
       
-      // Update local state to reflect change immediately
       setSystemUsers(systemUsers.map(u => u.id === userId ? { ...u, role: newRole } : u));
     } catch (error) {
       console.error("Error updating role:", error);
@@ -129,70 +176,111 @@ const AdminDashboard = () => {
             transition: 'all 0.3s ease'
           }}
         >
-          <Users size={18} /> User Management
+          <Lock size={18} /> Access & Team Management
         </button>
       </div>
 
       {activeTab === 'team' && (
-        <div className="glass" style={{ padding: '2rem', borderRadius: '24px', overflowX: 'auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-            <div>
-              <h2 className="h3" style={{ margin: 0 }}>Registered Users</h2>
-              <p className="text-secondary" style={{ margin: 0 }}>Manage access roles for your clients and employees.</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+          
+          {/* WHITELIST MANAGEMENT */}
+          <div className="glass" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
+            <h2 className="h3" style={{ margin: '0 0 0.5rem 0', color: '#38bdf8' }}>Team Whitelist (Strict Access Control)</h2>
+            <p className="text-secondary" style={{ margin: '0 0 2rem 0' }}>Only emails listed here can access the Team Portal.</p>
+            
+            <form onSubmit={handleWhitelistEmail} style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+              <input 
+                type="email" 
+                required 
+                placeholder="employee@castflow.in"
+                value={newTeamEmail}
+                onChange={(e) => setNewTeamEmail(e.target.value)}
+                style={{ flex: 1, padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.5)', color: '#fff', outline: 'none' }}
+              />
+              <button type="submit" style={{ padding: '0 2rem', background: '#38bdf8', color: '#000', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Plus size={18} /> Authorize Email
+              </button>
+            </form>
+
+            <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '12px', padding: '1rem' }}>
+              {whitelistedEmails.length === 0 ? (
+                <p style={{ color: '#888', textAlign: 'center', margin: 0, padding: '1rem' }}>No team members authorized yet.</p>
+              ) : (
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                  {whitelistedEmails.map(item => (
+                    <li key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                      <span style={{ fontWeight: 'bold' }}>{item.email}</span>
+                      <button onClick={() => handleRemoveWhitelist(item.id)} style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', border: 'none', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Trash2 size={16} /> Revoke Access
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
 
-          {error ? (
-            <div style={{ color: '#FF6B6B', textAlign: 'center', padding: '2rem' }}>{error}</div>
-          ) : loading && systemUsers.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>Loading users...</div>
-          ) : systemUsers.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>No registered users found.</div>
-          ) : (
-            <table className="admin-table" style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse' }}>
-              <thead>
-                <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                  <th style={{ padding: '1rem 0' }}>Join Date</th>
-                  <th>Email</th>
-                  <th>User ID</th>
-                  <th>Access Role</th>
-                </tr>
-              </thead>
-              <tbody>
-                {systemUsers.map((user) => (
-                  <tr key={user.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <td style={{ padding: '1rem 0', whiteSpace: 'nowrap', color: '#aaa' }}>
-                      {user.createdAt?.toDate ? user.createdAt.toDate().toLocaleDateString() : 'Just now'}
-                    </td>
-                    <td>
-                      <strong>{user.email}</strong>
-                    </td>
-                    <td>
-                      <span style={{ fontSize: '0.8rem', color: '#666', fontFamily: 'monospace' }}>{user.id}</span>
-                    </td>
-                    <td>
-                      <select 
-                        value={user.role || 'client'} 
-                        onChange={(e) => handleRoleChange(user.id, e.target.value)}
-                        style={{ 
-                          padding: '0.4rem 0.8rem', 
-                          borderRadius: '8px', 
-                          background: 'rgba(0,0,0,0.5)', 
-                          color: '#fff', 
-                          border: '1px solid rgba(255,255,255,0.2)',
-                          cursor: 'pointer'
-                        }}
-                      >
-                        <option value="client">Client (Restricted)</option>
-                        <option value="employee">Employee (Staff Panel)</option>
-                        <option value="admin">Admin (Master Panel)</option>
-                      </select>
-                    </td>
+          {/* GENERAL USERS MANAGEMENT */}
+          <div className="glass" style={{ padding: '2rem', borderRadius: '24px', overflowX: 'auto' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+              <div>
+                <h2 className="h3" style={{ margin: 0 }}>Registered Users Database</h2>
+                <p className="text-secondary" style={{ margin: 0 }}>View all registered accounts and force role updates if necessary.</p>
+              </div>
+            </div>
+
+            {error ? (
+              <div style={{ color: '#FF6B6B', textAlign: 'center', padding: '2rem' }}>{error}</div>
+            ) : loading && systemUsers.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>Loading users...</div>
+            ) : systemUsers.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>No registered users found.</div>
+            ) : (
+              <table className="admin-table" style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse' }}>
+                <thead>
+                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                    <th style={{ padding: '1rem 0' }}>Join Date</th>
+                    <th>Email</th>
+                    <th>User ID</th>
+                    <th>Force Access Role</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+                </thead>
+                <tbody>
+                  {systemUsers.map((user) => (
+                    <tr key={user.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                      <td style={{ padding: '1rem 0', whiteSpace: 'nowrap', color: '#aaa' }}>
+                        {user.createdAt?.toDate ? user.createdAt.toDate().toLocaleDateString() : 'Just now'}
+                      </td>
+                      <td>
+                        <strong>{user.email}</strong>
+                      </td>
+                      <td>
+                        <span style={{ fontSize: '0.8rem', color: '#666', fontFamily: 'monospace' }}>{user.id}</span>
+                      </td>
+                      <td>
+                        <select 
+                          value={user.role || 'client'} 
+                          onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                          style={{ 
+                            padding: '0.4rem 0.8rem', 
+                            borderRadius: '8px', 
+                            background: 'rgba(0,0,0,0.5)', 
+                            color: '#fff', 
+                            border: '1px solid rgba(255,255,255,0.2)',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          <option value="client">Client (Restricted)</option>
+                          <option value="employee">Employee (Staff Panel)</option>
+                          <option value="admin">Admin (Master Panel)</option>
+                        </select>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
         </div>
       )}
 
