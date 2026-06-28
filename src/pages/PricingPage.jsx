@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowRight, CheckCircle2, Zap, Shield, Rocket, Target, BarChart, ChevronDown } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Zap, Shield, Rocket, Target, BarChart, ChevronDown, HeartHandshake } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const PricingPage = () => {
@@ -9,20 +9,20 @@ const PricingPage = () => {
 
   const faqs = [
     {
-      q: "Why isn't there a fixed price for everything?",
-      a: "Because your business isn't a template. Every pricing quote is meticulously calculated based on the specific demands, complexity, and scale of your operations. You only pay for the exact value and architecture you require."
+      q: "Are there any hidden charges?",
+      a: "Never. Hum kabhi extra paisa nahi lete. We look at your exact requirements, calculate the cost based on the work needed, and that is your final price. 100% transparent."
     },
     {
-      q: "How fast will I see a Return on Investment (ROI)?",
-      a: "Many of our automation clients see an ROI within the first 30 days. By eliminating manual data entry, automating lead generation, and speeding up customer response times, the systems literally pay for themselves."
+      q: "Why is website pricing a range?",
+      a: "A simple 3-page portfolio is vastly different from a full e-commerce store with payments and dashboards. We keep things affordable (₹8k - ₹15k) for basic needs, and scale up (₹30k+) only if you need complex features."
     },
     {
-      q: "Do you offer payment plans?",
-      a: "Yes, for larger projects (Growth and Scale tiers), we typically split payments into milestones—ensuring you see tangible progress and results at every stage of development."
+      q: "How does automation pricing work?",
+      a: "You can start automating small tasks for as low as ₹5,000. As you need more complex bots or AI agents, the price scales precisely with the complexity of the workflow."
     },
     {
-      q: "What if I just need a very small script?",
-      a: "Our Starter tier is perfect for that. We can build single-purpose automations or landing pages starting from just ₹5,000 to get you up and running quickly."
+      q: "Do you offer payment plans for larger projects?",
+      a: "Yes, for any project over ₹40,000, we typically split payments into milestones—ensuring you see tangible progress and results at every stage."
     }
   ];
 
@@ -33,14 +33,14 @@ const PricingPage = () => {
       <section style={{ padding: '6rem 2rem', textAlign: 'center', position: 'relative' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <div style={{ display: 'inline-flex', padding: '6px 16px', background: 'rgba(138,43,226,0.1)', color: 'var(--primary-color)', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 'bold', letterSpacing: '1px', marginBottom: '2rem' }}>
-            VALUE-DRIVEN PRICING
+            100% TRANSPARENT PRICING
           </div>
           <h1 style={{ fontSize: '4.5rem', fontWeight: 900, lineHeight: 1.1, marginBottom: '1.5rem', letterSpacing: '-1.5px', color: '#111' }}>
-            An Investment in an <br />
-            <span style={{ color: 'var(--primary-color)' }}>Unfair Advantage.</span>
+            Pay Exactly For <br />
+            <span style={{ color: 'var(--primary-color)' }}>What You Need.</span>
           </h1>
-          <p style={{ fontSize: '1.3rem', color: '#555', lineHeight: 1.6, marginBottom: '2rem', maxWidth: '750px', margin: '0 auto 3rem auto' }}>
-            My pricing is never random. It is strictly decided based on the <strong>unique demands, complexity, and scale</strong> of your business. You aren't just buying code—you are buying time, efficiency, and relentless growth.
+          <p style={{ fontSize: '1.3rem', color: '#555', lineHeight: 1.6, marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 3rem auto' }}>
+            <strong>Hum kabhi extra paisa nahi lete.</strong> Whatever your exact need is, we calculate the cost based purely on that requirement and take exactly that amount. No hidden fees. No overcharging.
           </p>
         </div>
       </section>
@@ -49,13 +49,13 @@ const PricingPage = () => {
       <section style={{ padding: '2rem 2rem 6rem 2rem' }}>
         <div style={{ maxWidth: '1300px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem', alignItems: 'center' }}>
           
-          {/* Tier 1: Starter */}
+          {/* Tier 1: Small Automations */}
           <div style={{ background: '#fff', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 40px rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.05)', position: 'relative' }}>
             <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: '#f0f5ff', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
-              <Target size={30} color="#3b82f6" />
+              <Zap size={30} color="#3b82f6" />
             </div>
-            <h3 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '0.5rem' }}>Starter / Foundation</h3>
-            <p style={{ color: '#666', marginBottom: '2rem', minHeight: '50px' }}>Perfect for solopreneurs needing a digital presence or a single automated task.</p>
+            <h3 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '0.5rem' }}>Automations & Bots</h3>
+            <p style={{ color: '#666', marginBottom: '2rem', minHeight: '50px' }}>Perfect for automating repetitive tasks and saving hours of manual work.</p>
             <div style={{ marginBottom: '2.5rem' }}>
               <span style={{ color: '#888', fontSize: '1rem', fontWeight: 600 }}>Starting from</span>
               <div style={{ fontSize: '3rem', fontWeight: 900, color: '#111', lineHeight: 1 }}>₹5,000</div>
@@ -66,66 +66,67 @@ const PricingPage = () => {
                 <CheckCircle2 size={20} color="#3b82f6" /> Single-workflow automations
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#444' }}>
-                <CheckCircle2 size={20} color="#3b82f6" /> Landing pages & Portfolios
+                <CheckCircle2 size={20} color="#3b82f6" /> Basic WhatsApp/Email Bots
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#444' }}>
-                <CheckCircle2 size={20} color="#3b82f6" /> Basic API integrations
+                <CheckCircle2 size={20} color="#3b82f6" /> Data scraping & entry
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#444' }}>
-                <CheckCircle2 size={20} color="#3b82f6" /> 1-Week Delivery
+                <CheckCircle2 size={20} color="#3b82f6" /> Cost scales with requirements
               </div>
             </div>
             
             <Link to="/contact" className="btn" style={{ width: '100%', padding: '1.2rem', background: '#f8f9fa', color: '#111', border: '1px solid #ddd', borderRadius: '16px', fontWeight: 700, textAlign: 'center', display: 'block' }}>
-              Start Small
+              Automate My Work
             </Link>
           </div>
 
-          {/* Tier 2: Growth (Highlighted) */}
+          {/* Tier 2: Websites (Highlighted) */}
           <div style={{ background: '#111', padding: '4rem 3rem', borderRadius: '32px', boxShadow: '0 30px 60px rgba(138,43,226,0.2)', position: 'relative', border: '1px solid rgba(138,43,226,0.3)', transform: 'scale(1.05)', zIndex: 2 }}>
             <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', background: 'var(--primary-color)', color: '#fff', padding: '8px 24px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 800, letterSpacing: '1px' }}>
-              MOST REQUESTED
+              WEB DEVELOPMENT
             </div>
             <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: 'rgba(138,43,226,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
-              <Rocket size={30} color="#b673f8" />
+              <Target size={30} color="#b673f8" />
             </div>
-            <h3 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '0.5rem', color: '#fff' }}>Growth Systems</h3>
-            <p style={{ color: '#aaa', marginBottom: '2rem', minHeight: '50px' }}>For ambitious businesses ready to automate entire departments and scale fast.</p>
+            <h3 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '0.5rem', color: '#fff' }}>Websites & Portals</h3>
+            <p style={{ color: '#aaa', marginBottom: '2rem', minHeight: '50px' }}>Affordable, beautiful websites. The price is tailored entirely to your requirements.</p>
             <div style={{ marginBottom: '2.5rem' }}>
-              <span style={{ color: '#888', fontSize: '1rem', fontWeight: 600 }}>Starting from</span>
-              <div style={{ fontSize: '3.5rem', fontWeight: 900, color: '#fff', lineHeight: 1 }}>₹50,000</div>
+              <span style={{ color: '#888', fontSize: '1rem', fontWeight: 600 }}>Depending on Requirements</span>
+              <div style={{ fontSize: '3rem', fontWeight: 900, color: '#fff', lineHeight: 1.1 }}>₹8k - ₹15k</div>
+              <div style={{ fontSize: '1rem', color: '#888', marginTop: '0.5rem' }}>(Scales to ₹30k+ for advanced apps)</div>
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginBottom: '3rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#eee', fontWeight: 500 }}>
-                <CheckCircle2 size={22} color="#b673f8" /> Intelligent WhatsApp & Email Bots
+                <CheckCircle2 size={22} color="#b673f8" /> Landing Pages & Portfolios
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#eee', fontWeight: 500 }}>
-                <CheckCircle2 size={22} color="#b673f8" /> Full-Stack Business Websites
+                <CheckCircle2 size={22} color="#b673f8" /> Business Websites
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#eee', fontWeight: 500 }}>
-                <CheckCircle2 size={22} color="#b673f8" /> Lead Funnel Automation
+                <CheckCircle2 size={22} color="#b673f8" /> E-commerce Stores
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#eee', fontWeight: 500 }}>
-                <CheckCircle2 size={22} color="#b673f8" /> Multi-App Workflows (CRM sync)
+                <CheckCircle2 size={22} color="#b673f8" /> Mobile-first & SEO Optimized
               </div>
             </div>
             
             <Link to="/contact" className="btn btn-primary" style={{ width: '100%', padding: '1.2rem', borderRadius: '16px', fontWeight: 700, textAlign: 'center', display: 'block', fontSize: '1.1rem' }}>
-              Scale Your Business
+              Build My Website
             </Link>
           </div>
 
-          {/* Tier 3: Enterprise */}
+          {/* Tier 3: Custom Scale */}
           <div style={{ background: '#fff', padding: '3rem', borderRadius: '32px', boxShadow: '0 20px 40px rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.05)', position: 'relative' }}>
             <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: '#fff0f5', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
               <Shield size={30} color="#ec4899" />
             </div>
-            <h3 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '0.5rem' }}>Total Dominance</h3>
-            <p style={{ color: '#666', marginBottom: '2rem', minHeight: '50px' }}>Custom-architected software and AI solutions for maximum operational efficiency.</p>
+            <h3 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '0.5rem' }}>Large Scale Systems</h3>
+            <p style={{ color: '#666', marginBottom: '2rem', minHeight: '50px' }}>Custom-architected software, CRMs, and complex AI solutions.</p>
             <div style={{ marginBottom: '2.5rem' }}>
               <span style={{ color: '#888', fontSize: '1rem', fontWeight: 600 }}>Custom Scope</span>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#111', lineHeight: 1.2 }}>₹80k - ₹90k+</div>
+              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#111', lineHeight: 1.2 }}>₹50k - ₹90k+</div>
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '3rem' }}>
@@ -154,15 +155,15 @@ const PricingPage = () => {
       {/* 3. VALUE PROPOSITION BANNER */}
       <section style={{ padding: '4rem 2rem', background: 'var(--primary-color)', color: '#fff', textAlign: 'center' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <Zap size={48} style={{ margin: '0 auto 1.5rem auto', opacity: 0.9 }} />
+          <HeartHandshake size={48} style={{ margin: '0 auto 1.5rem auto', opacity: 0.9 }} />
           <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem', lineHeight: 1.2 }}>
-            You aren't paying for code. <br/>You are buying your time back.
+            Honest Pricing. Zero Surprises.
           </h2>
           <p style={{ fontSize: '1.2rem', opacity: 0.9, lineHeight: 1.6, marginBottom: '2rem' }}>
-            If a custom ₹80,000 automation saves your team 20 hours a week, it pays for itself in a month. After that, it generates pure profit. That is the standard I build for.
+            We only charge for the exact value and architecture you require. If your needs are small, your price stays small. If you need a massive enterprise system, we build it at a fair, requirement-based cost.
           </p>
           <Link to="/contact" className="btn" style={{ background: '#fff', color: 'var(--primary-color)', padding: '1rem 2.5rem', borderRadius: '30px', fontWeight: 800, fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
-            Calculate Your ROI <ArrowRight size={20} />
+            Get an Honest Quote <ArrowRight size={20} />
           </Link>
         </div>
       </section>
@@ -172,7 +173,7 @@ const PricingPage = () => {
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 style={{ fontSize: '3rem', fontWeight: 800, marginBottom: '1rem' }}>Pricing FAQ</h2>
-            <p style={{ color: '#666', fontSize: '1.2rem' }}>Everything you need to know about the investment.</p>
+            <p style={{ color: '#666', fontSize: '1.2rem' }}>Everything you need to know about our honest pricing model.</p>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
