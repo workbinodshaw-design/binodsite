@@ -53,7 +53,6 @@ const PortfolioPage = () => {
   const skills = [
     { name: 'Frontend Development', icon: <Code size={24} />, desc: 'React, Next.js, UI/UX Design' },
     { name: 'Backend & APIs', icon: <Server size={24} />, desc: 'Node.js, Express, Python' },
-    { name: 'Database Management', icon: <Database size={24} />, desc: 'MongoDB, PostgreSQL, Firebase' },
     { name: 'AI & Automation', icon: <Cpu size={24} />, desc: 'OpenAI API, Workflow Scripts, Chatbots' },
   ];
 
@@ -66,7 +65,7 @@ const PortfolioPage = () => {
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px', margin: '0 auto' }}>
           <div className="badge" style={{ margin: '0 auto 2rem auto', display: 'inline-flex' }}>
             <div className="badge-dot"></div>
-            COMPUTER SCIENCE ENGINEER • AUTOMATION EXPERT
+            CSE STUDENT • AUTOMATION EXPERT
           </div>
           <h1 style={{ fontSize: '4rem', fontWeight: '800', lineHeight: '1.1', marginBottom: '1.5rem', letterSpacing: '-1px' }}>
             Hi, I'm <span className="gradient-text">Binod Shaw</span>
@@ -104,10 +103,10 @@ const PortfolioPage = () => {
           <div style={{ flex: '1 1 500px' }}>
             <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>About Me</h2>
             <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '1.5rem' }}>
-              I am currently a student at the <strong style={{ color: '#fff' }}>Central Institute of Technology Kokrajhar (CITK)</strong>, pursuing my degree in <strong style={{ color: '#fff' }}>Computer Science and Engineering</strong>. 
+              I am currently a student at the <strong style={{ color: 'var(--text-primary)' }}>Central Institute of Technology Kokrajhar (CITK)</strong>, studying <strong style={{ color: 'var(--text-primary)' }}>Computer Science and Engineering (CSE)</strong>. 
             </p>
             <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '1.5rem' }}>
-              While academia gives me a strong theoretical foundation, my true passion lies in building practical, high-impact digital solutions. I specialize in <strong style={{ color: '#fff' }}>Full-Stack Web Development</strong> and <strong style={{ color: '#fff' }}>AI Automation</strong>.
+              While academia gives me a strong theoretical foundation, my true passion lies in building practical, high-impact digital solutions. I specialize in <strong style={{ color: 'var(--text-primary)' }}>Web Development</strong> and <strong style={{ color: 'var(--text-primary)' }}>AI Automation</strong>.
             </p>
             <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '2.5rem' }}>
               I love finding bottlenecks in workflows and writing scripts, bots, and applications to completely automate them. From social media engagement bots to intelligent email parsers, if a process is repetitive, I can automate it.
@@ -117,7 +116,7 @@ const PortfolioPage = () => {
               {skills.map((skill, idx) => (
                 <div key={idx} className="glass" style={{ padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
                   <div style={{ color: '#8A2BE2', marginBottom: '1rem' }}>{skill.icon}</div>
-                  <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem' }}>{skill.name}</h4>
+                  <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem', color: 'var(--text-primary)' }}>{skill.name}</h4>
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{skill.desc}</p>
                 </div>
               ))}
