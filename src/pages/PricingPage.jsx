@@ -10,19 +10,19 @@ const PricingPage = () => {
   const faqs = [
     {
       q: "Are there any hidden charges?",
-      a: "Never. Hum kabhi extra paisa nahi lete. We look at your exact requirements, calculate the cost based on the work needed, and that is your final price. 100% transparent."
+      a: "Never. We despise the 'hidden fee' agency model. We analyze your exact business needs, calculate the precise scope of work, and that becomes your final price. It is mathematically impossible for you to be overcharged."
     },
     {
       q: "Why is website pricing a range?",
-      a: "A simple 3-page portfolio is vastly different from a full e-commerce store with payments and dashboards. We keep things affordable (₹8k - ₹15k) for basic needs, and scale up (₹30k+) only if you need complex features."
+      a: "A sleek 3-page portfolio requires vastly different architecture than a massive e-commerce portal. We keep things aggressively affordable (₹8k - ₹15k) for high-converting landing pages, and scale up (₹30k+) only when your business demands heavy backend complexity."
     },
     {
       q: "How does automation pricing work?",
-      a: "You can start automating small tasks for as low as ₹5,000. As you need more complex bots or AI agents, the price scales precisely with the complexity of the workflow."
+      a: "You can start buying your time back for as low as ₹5,000. As your operations scale and you require more intelligent AI agents, the investment scales proportionally with the exact value the system generates for you."
     },
     {
       q: "Do you offer payment plans for larger projects?",
-      a: "Yes, for any project over ₹40,000, we typically split payments into milestones—ensuring you see tangible progress and results at every stage."
+      a: "Absolutely. For enterprise projects (₹40,000+), we divide the investment into strict milestones. You only pay as you see tangible, working software deployed for your business."
     }
   ];
 
@@ -33,14 +33,14 @@ const PricingPage = () => {
       <section style={{ padding: '6rem 2rem', textAlign: 'center', position: 'relative' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <div style={{ display: 'inline-flex', padding: '6px 16px', background: 'rgba(138,43,226,0.1)', color: 'var(--primary-color)', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 'bold', letterSpacing: '1px', marginBottom: '2rem' }}>
-            100% TRANSPARENT PRICING
+            RUTHLESSLY TRANSPARENT PRICING
           </div>
           <h1 style={{ fontSize: '4.5rem', fontWeight: 900, lineHeight: 1.1, marginBottom: '1.5rem', letterSpacing: '-1.5px', color: '#111' }}>
-            Pay Exactly For <br />
-            <span style={{ color: 'var(--primary-color)' }}>What You Need.</span>
+            We Refuse to <br />
+            <span style={{ color: 'var(--primary-color)' }}>Overcharge You.</span>
           </h1>
           <p style={{ fontSize: '1.3rem', color: '#555', lineHeight: 1.6, marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 3rem auto' }}>
-            <strong>Hum kabhi extra paisa nahi lete.</strong> Whatever your exact need is, we calculate the cost based purely on that requirement and take exactly that amount. No hidden fees. No overcharging.
+            Most agencies force you into bloated packages with features you will never use. We despise that model. We analyze your exact requirements, calculate the precise cost of development, and charge you exactly that amount. <strong>Not a single rupee more.</strong>
           </p>
         </div>
       </section>
