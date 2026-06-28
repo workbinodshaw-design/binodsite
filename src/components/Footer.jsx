@@ -1,7 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase';
 
 const Footer = () => {
+  const [user, setUser] = useState(null);
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        try {
+          const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+          if (currentUser.email && currentUser.email.toLowerCase() === 'work.binodshaw@gmail.com') {
+             setUserRole('admin');
+          } else if (userDoc.exists()) {
+             setUserRole(userDoc.data().role);
+          } else {
+             setUserRole('client');
+          }
+        } catch(e) {
+          console.error("Error fetching role for footer:", e);
+        }
+      } else {
+        setUserRole(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await signOut(auth);
+  };
+
   return (
     <footer style={{ background: '#050505', color: '#fff', paddingTop: '6rem', paddingBottom: '2rem', borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: 'auto' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
@@ -62,11 +95,24 @@ const Footer = () => {
 
           {/* Portals Col */}
           <div>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', color: '#fff' }}>Portals</h4>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', color: '#fff' }}>
+              {user ? 'My Dashboard' : 'Portals'}
+            </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <Link to="/client-login" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Client Login</Link>
-              <Link to="/employee" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Team</Link>
-              <Link to="/admin" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Admin</Link>
+              {!user ? (
+                <>
+                  <Link to="/client-login" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Client Login</Link>
+                  <Link to="/team-login" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Team</Link>
+                  <Link to="/admin-login" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Admin</Link>
+                </>
+              ) : (
+                <>
+                  {userRole === 'admin' && <Link to="/admin" style={{ color: '#a388ff', fontWeight: 'bold', textDecoration: 'none' }}>Master Panel</Link>}
+                  {userRole === 'employee' && <Link to="/employee" style={{ color: '#38bdf8', fontWeight: 'bold', textDecoration: 'none' }}>Team Portal</Link>}
+                  {userRole === 'client' && <Link to="/client" style={{ color: '#fff', fontWeight: 'bold', textDecoration: 'none' }}>Client Dashboard</Link>}
+                  <button onClick={handleLogout} style={{ background: 'none', border: 'none', padding: 0, textAlign: 'left', color: '#ff6b6b', cursor: 'pointer', marginTop: '0.5rem', fontSize: '0.95rem' }}>Log Out</button>
+                </>
+              )}
             </div>
           </div>
 
