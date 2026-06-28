@@ -161,51 +161,31 @@ const PortfolioPage = () => {
 
           <div style={{ position: 'relative', width: '100%', maxWidth: '800px', height: '400px', transformStyle: 'preserve-3d', transform: 'translateZ(-400px) rotateX(5deg)' }}>
             
-            {/* CSS 3D Tornado Graphic */}
+            {/* Real 3D Tornado Graphic Background */}
             <div style={{
               position: 'absolute', top: '50%', left: '50%', 
-              transformStyle: 'preserve-3d',
-              transform: `translate(-50%, -50%) rotateX(80deg) rotateZ(${progress * 180}deg)`,
-              width: 0, height: 0,
-              transition: 'transform 0.1s ease-out'
+              transform: `translate(-50%, -50%) rotateZ(${progress * 60}deg)`,
+              width: '1200px', height: '1200px',
+              transition: 'transform 0.1s ease-out',
+              zIndex: -1,
+              opacity: 0.7
             }}>
-              {Array.from({ length: 25 }).map((_, i) => {
-                const size = 150 + i * 35; // Top rings are larger
-                const zOffset = 400 - i * 35; // Stack them vertically in the 3D space
-                return (
-                  <div key={i} style={{
-                    position: 'absolute',
-                    top: '50%', left: '50%',
-                    width: `${size}px`, height: `${size}px`,
-                    border: `1px solid rgba(138, 43, 226, ${0.1 + (i / 50)})`,
-                    borderRadius: '50%',
-                    transform: `translate(-50%, -50%) translateZ(${zOffset}px)`,
-                    boxShadow: '0 0 15px rgba(138,43,226,0.1), inset 0 0 15px rgba(138,43,226,0.1)',
-                  }}>
-                    {/* Glowing particle on the ring */}
-                    <div style={{ 
-                      position: 'absolute', top: '-2px', left: '50%', width: '4px', height: '4px', 
-                      background: '#fff', borderRadius: '50%', boxShadow: '0 0 10px 2px #8A2BE2',
-                      transform: `rotate(${i * 45}deg) translateX(${size/2}px)`
-                    }}></div>
-                  </div>
-                )
-              })}
+              <img src="/tornado_bg.png" alt="Tornado Vortex" style={{ width: '100%', height: '100%', objectFit: 'contain', mixBlendMode: 'multiply' }} />
             </div>
 
             {/* Floating Cards */}
             {projects.map((project, i) => {
               const delta = progress - i; 
               
-              // We'll let them go up to delta = +/- 2.5 so they complete a wide arc
-              const clampedDelta = Math.max(-2.5, Math.min(2.5, delta));
+              // Prevent backwards text: Max delta 1.5 (which is 1.5 * 90 = 135deg)
+              const clampedDelta = Math.max(-1.5, Math.min(1.5, delta));
               
-              // Spaced out math
-              const angle = clampedDelta * -90; // Spread out to 90 degrees per scroll unit
-              const translateY = clampedDelta * -45; // Increased vertical distance so they are further apart
-              const radius = 650; // Increased radius to orbit outside the tornado
+              const angle = clampedDelta * -90; 
+              const translateY = clampedDelta * -45; 
+              const radius = 600; 
               
-              const opacity = Math.max(0, 1 - Math.abs(clampedDelta) * 0.35); // Fades slower so you see more cards
+              // Fade out entirely before turning around
+              const opacity = Math.max(0, 1 - Math.abs(clampedDelta) * 0.65); 
               const isPointerActive = Math.abs(delta) < 0.3;
 
               return (
@@ -218,27 +198,28 @@ const PortfolioPage = () => {
                   margin: 'auto',
                   padding: '3rem',
                   borderRadius: '32px',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  border: '1px solid rgba(255,255,255,1)',
                   transform: `translateY(${translateY}vh) rotateY(${angle}deg) translateZ(${radius}px)`,
                   opacity: opacity,
                   transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
                   pointerEvents: isPointerActive ? 'auto' : 'none',
                   display: 'flex',
                   flexDirection: 'column',
-                  background: 'rgba(20, 20, 25, 0.75)',
-                  backdropFilter: 'blur(16px)',
-                  boxShadow: '0 30px 60px rgba(0,0,0,0.5), 0 0 40px rgba(138,43,226,0.15)'
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  backdropFilter: 'blur(20px)',
+                  boxShadow: '0 30px 60px rgba(0,0,0,0.08), 0 0 40px rgba(138,43,226,0.05)',
+                  backfaceVisibility: 'hidden'
                 }}>
                   <div style={{ width: '80px', height: '80px', borderRadius: '20px', background: project.color, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
                     {project.icon}
                   </div>
-                  <h3 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#fff', fontWeight: 800 }}>{project.title}</h3>
-                  <p style={{ color: '#aaa', lineHeight: '1.8', fontSize: '1.2rem', flexGrow: 1, marginBottom: '2.5rem' }}>
+                  <h3 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#111', fontWeight: 800 }}>{project.title}</h3>
+                  <p style={{ color: '#555', lineHeight: '1.8', fontSize: '1.2rem', flexGrow: 1, marginBottom: '2.5rem' }}>
                     {project.description}
                   </p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem', marginBottom: '1.5rem' }}>
                     {project.tags.map((tag, idx) => (
-                      <span key={idx} style={{ padding: '0.4rem 1.2rem', background: 'rgba(138,43,226,0.15)', borderRadius: '30px', fontSize: '0.85rem', fontWeight: 'bold', letterSpacing: '1px', color: '#b673f8' }}>
+                      <span key={idx} style={{ padding: '0.4rem 1.2rem', background: 'rgba(138,43,226,0.1)', borderRadius: '30px', fontSize: '0.85rem', fontWeight: 'bold', letterSpacing: '1px', color: '#8A2BE2' }}>
                         {tag}
                       </span>
                     ))}
