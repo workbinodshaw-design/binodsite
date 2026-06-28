@@ -78,53 +78,42 @@ const Footer = () => {
           <div>
             <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', color: '#fff' }}>Services</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <Link to="/services/web-development" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Web Design & Development</Link>
-              <Link to="/services/ai-automation" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>AI Automation</Link>
-              <Link to="/portfolio" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Our Portfolio</Link>
+              <Link to="/services/ai-automation" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Automation</Link>
+              <Link to="/services/web-development" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Web Development</Link>
+              <Link to="/services/ai-solutions" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>AI Solutions</Link>
             </div>
           </div>
 
-          {/* Company Col */}
+          {/* Support Col */}
           <div>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', color: '#fff' }}>Company</h4>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', color: '#fff' }}>Support</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <Link to="/pricing" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Pricing</Link>
+              <Link to="/privacy" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Privacy Policy</Link>
+              <Link to="/terms" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Terms of Service</Link>
               <Link to="/contact" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Contact Us</Link>
             </div>
           </div>
 
-          {/* Portals Col */}
+          {/* Socials Col */}
           <div>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', color: '#fff' }}>
-              {user ? 'My Dashboard' : 'Portals'}
-            </h4>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', color: '#fff' }}>Socials</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {!user ? (
-                <>
-                  <Link to="/client-login" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Client Login</Link>
-                  <Link to="/team-login" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Team</Link>
-                  <Link to="/admin-login" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Admin</Link>
-                </>
-              ) : (
-                <>
-                  {userRole === 'admin' && <Link to="/admin" style={{ color: '#a388ff', fontWeight: 'bold', textDecoration: 'none' }}>Master Panel</Link>}
-                  {userRole === 'employee' && <Link to="/employee" style={{ color: '#38bdf8', fontWeight: 'bold', textDecoration: 'none' }}>Team Portal</Link>}
-                  {userRole === 'client' && <Link to="/client" style={{ color: '#fff', fontWeight: 'bold', textDecoration: 'none' }}>Client Dashboard</Link>}
-                  <button onClick={handleLogout} style={{ background: 'none', border: 'none', padding: 0, textAlign: 'left', color: '#ff6b6b', cursor: 'pointer', marginTop: '0.5rem', fontSize: '0.95rem' }}>Log Out</button>
-                </>
-              )}
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Instagram</a>
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>LinkedIn</a>
+              <a href="https://github.com" target="_blank" rel="noreferrer" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>GitHub</a>
             </div>
           </div>
-
         </div>
 
         {/* Bottom Bar */}
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.05)', color: '#555', fontSize: '0.9rem' }}>
           <p>© {new Date().getFullYear()} Castflow. All rights reserved.</p>
-          <div style={{ display: 'flex', gap: '1.5rem' }}>
-            <span style={{ cursor: 'pointer', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#555'}>Twitter</span>
-            <span style={{ cursor: 'pointer', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#555'}>LinkedIn</span>
-            <span style={{ cursor: 'pointer', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#555'}>GitHub</span>
+          <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+             {user && (
+                <button onClick={handleLogout} style={{ background: 'none', border: 'none', padding: 0, color: '#ff6b6b', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 'bold' }}>
+                  Log Out
+                </button>
+             )}
           </div>
         </div>
 

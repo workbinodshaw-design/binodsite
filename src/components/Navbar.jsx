@@ -71,26 +71,24 @@ const Navbar = () => {
               borderRadius: '30px', 
               display: 'flex',
               alignItems: 'center',
-              gap: '10px',
+              gap: '8px',
               marginLeft: '1rem',
               textDecoration: 'none',
-              border: '1px solid rgba(255,255,255,0.1)'
+              border: '1px solid rgba(255,255,255,0.1)',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.background = 'rgba(0,0,0,0.5)';
+              e.currentTarget.style.transform = 'translateY(0)';
             }}
             title="Go to Dashboard"
           >
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: '1.2' }}>
-              <span style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>{user.displayName || user.email?.split('@')[0]}</span>
-              {userRole && (
-                <span style={{ fontSize: '0.7rem', color: getRoleBadgeColor().text, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                  {userRole}
-                </span>
-              )}
-            </div>
+            <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>Dashboard</span>
             <div style={{ 
-              width: '32px', 
-              height: '32px', 
-              borderRadius: '50%', 
-              background: userRole ? getRoleBadgeColor().bg : '#222',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

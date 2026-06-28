@@ -27,8 +27,10 @@ const ContactWidget = () => {
       <button 
         className={`widget-toggle ${isOpen ? 'active' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
+        style={{ borderRadius: '30px', padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}
       >
-        <MessageSquare size={28} />
+        <MessageSquare size={24} />
+        {isOpen ? <span>Close</span> : <span>Chat with us</span>}
       </button>
     </div>
   );
