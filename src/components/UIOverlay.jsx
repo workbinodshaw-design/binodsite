@@ -33,13 +33,13 @@ const UIOverlay = () => {
           <div style={{ marginTop: '2.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <div style={{ display: 'flex' }}>
               {[1, 2, 3, 4, 5].map((star) => (
-                <svg key={star} width="20" height="20" viewBox="0 0 24 24" fill="#F59E0B" xmlns="http://www.w3.org/2000/svg">
+                <svg key={star} width="20" height="20" viewBox="0 0 24 24" fill={star <= 4 ? "#F59E0B" : "#4B5563"} xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                 </svg>
               ))}
             </div>
             <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-              <strong>4.9/5</strong> rating from innovative founders
+              <strong>3.8/5</strong> rating from innovative founders
             </p>
           </div>
         </div>

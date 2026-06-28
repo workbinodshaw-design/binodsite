@@ -57,16 +57,7 @@ function HomePage() {
       {/* 2. NORMAL SCROLLING CONTENT */}
       <div className="normal-content">
         
-        {/* Social Proof Marquee */}
-        <div style={{ padding: '3rem 0', background: 'rgba(20,20,25,0.8)', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden', marginBottom: '4rem' }}>
-          <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.9rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '2rem' }}>Trusted by innovative companies</p>
-          <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '3rem', maxWidth: '1200px', margin: '0 auto', opacity: 0.6 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.2rem', fontWeight: 'bold', color: '#fff' }}><Layers /> SynergyTech</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.2rem', fontWeight: 'bold', color: '#fff' }}><Box /> BlockScale</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.2rem', fontWeight: 'bold', color: '#fff' }}><Cpu /> NexusAI</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.2rem', fontWeight: 'bold', color: '#fff' }}><HardDrive /> DataFlow</div>
-          </div>
-        </div>
+
 
         <div className="content-section" style={{ justifyContent: 'center' }}>
           <ServicesSection />
