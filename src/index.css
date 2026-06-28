@@ -1969,3 +1969,9 @@ body {
 .status-badge.new { background: rgba(163, 136, 255, 0.2); color: #a388ff; }
 .status-badge.progress { background: rgba(255, 165, 0, 0.2); color: #ffa500; }
 .status-badge.completed { background: rgba(37, 211, 102, 0.2); color: #25d366; }
+
+@keyframes scrollDown {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
