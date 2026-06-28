@@ -6,6 +6,7 @@ import ServicesPage from './pages/ServicesPage';
 import WebDevService from './pages/WebDevService';
 import AiAutomationService from './pages/AiAutomationService';
 import ContactPage from './pages/ContactPage';
+import PortfolioPage from './pages/PortfolioPage';
 import AdminDashboard from './pages/AdminDashboard';
 import AiAgentWidget from './components/AiAgentWidget';
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/web-development" element={<WebDevService />} />
         <Route path="/services/ai-automation" element={<AiAutomationService />} />
+        <Route path="/portfolio" element={<PortfolioPage />} />
         <Route path="/contact" element={<ContactPage />} />
         
         {/* Authentication & Role-Based Portals */}

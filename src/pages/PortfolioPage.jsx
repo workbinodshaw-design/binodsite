@@ -1,0 +1,182 @@
+import React, { useEffect } from 'react';
+import { ArrowRight, Code, Cpu, MessageSquare, Mail, Instagram, ExternalLink, Zap, Terminal, Database, Server } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const PortfolioPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const projects = [
+    {
+      id: 1,
+      title: 'WhatsApp Automation Engine',
+      description: 'A powerful automated system that handles customer inquiries, sends bulk notifications, and acts as a 24/7 intelligent agent directly on WhatsApp, saving countless hours of manual replies.',
+      icon: <MessageSquare size={32} color="#25D366" />,
+      tags: ['Node.js', 'WhatsApp API', 'AI'],
+      color: 'rgba(37, 211, 102, 0.1)'
+    },
+    {
+      id: 2,
+      title: 'Auto Email Sender',
+      description: 'A scalable bulk-emailing tool designed to programmatically send personalized emails to thousands of leads. Includes dynamic template rendering and automated follow-up sequences.',
+      icon: <Mail size={32} color="#EA4335" />,
+      tags: ['Python', 'SMTP', 'React'],
+      color: 'rgba(234, 67, 53, 0.1)'
+    },
+    {
+      id: 3,
+      title: 'AI Email Reader & Notifier',
+      description: 'An intelligent inbox assistant that reads incoming emails, categorizes them using NLP, extracts critical information (like project leads), and sends real-time notifications to a dashboard or phone.',
+      icon: <Zap size={32} color="#FBBC05" />,
+      tags: ['Python', 'IMAP', 'NLP'],
+      color: 'rgba(251, 188, 5, 0.1)'
+    },
+    {
+      id: 4,
+      title: 'Instagram Auto Comment Reply',
+      description: 'A social media automation script that monitors Instagram posts and automatically replies to specific keyword comments, significantly boosting engagement and instantly sending DMs to commenters.',
+      icon: <Instagram size={32} color="#E1306C" />,
+      tags: ['JavaScript', 'Graph API', 'Webhooks'],
+      color: 'rgba(225, 48, 108, 0.1)'
+    },
+    {
+      id: 5,
+      title: 'Auto DM Assistant',
+      description: 'A robust direct messaging bot that initiates conversations with targeted audiences, handles FAQs via AI, and funnels warm leads directly to a CRM system seamlessly.',
+      icon: <Terminal size={32} color="#8A2BE2" />,
+      tags: ['Node.js', 'Social APIs', 'CRM'],
+      color: 'rgba(138, 43, 226, 0.1)'
+    }
+  ];
+
+  const skills = [
+    { name: 'Frontend Development', icon: <Code size={24} />, desc: 'React, Next.js, UI/UX Design' },
+    { name: 'Backend & APIs', icon: <Server size={24} />, desc: 'Node.js, Express, Python' },
+    { name: 'Database Management', icon: <Database size={24} />, desc: 'MongoDB, PostgreSQL, Firebase' },
+    { name: 'AI & Automation', icon: <Cpu size={24} />, desc: 'OpenAI API, Workflow Scripts, Chatbots' },
+  ];
+
+  return (
+    <div className="portfolio-page" style={{ paddingTop: '80px', minHeight: '100vh', background: 'var(--bg-color)', color: 'var(--text-primary)' }}>
+      
+      {/* 1. HERO SECTION */}
+      <section style={{ padding: '8rem 2rem', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(138,43,226,0.15) 0%, rgba(20,20,25,0) 70%)', zIndex: 0 }}></div>
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px', margin: '0 auto' }}>
+          <div className="badge" style={{ margin: '0 auto 2rem auto', display: 'inline-flex' }}>
+            <div className="badge-dot"></div>
+            COMPUTER SCIENCE ENGINEER • AUTOMATION EXPERT
+          </div>
+          <h1 style={{ fontSize: '4rem', fontWeight: '800', lineHeight: '1.1', marginBottom: '1.5rem', letterSpacing: '-1px' }}>
+            Hi, I'm <span className="gradient-text">Binod Shaw</span>
+          </h1>
+          <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem auto' }}>
+            I build intelligent web applications and automated systems that eliminate manual work.
+          </p>
+        </div>
+      </section>
+
+      {/* 2. ABOUT ME SECTION */}
+      <section style={{ padding: '4rem 2rem', background: 'rgba(255,255,255,0.02)', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center' }}>
+          {/* Profile Picture Placeholder */}
+          <div style={{ flex: '1 1 400px', display: 'flex', justifyContent: 'center' }}>
+            <div style={{ position: 'relative' }}>
+              <div style={{ position: 'absolute', inset: '-15px', background: 'linear-gradient(45deg, #8A2BE2, #FF7F50)', borderRadius: '24px', opacity: 0.5, filter: 'blur(20px)' }}></div>
+              <img 
+                src="https://images.unsplash.com/photo-1537511446984-935f663eb1f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Profile Placeholder" 
+                style={{ width: '100%', maxWidth: '450px', height: '500px', objectFit: 'cover', borderRadius: '24px', position: 'relative', zIndex: 1, border: '1px solid rgba(255,255,255,0.1)' }}
+              />
+              {/* Floating detail card */}
+              <div className="glass" style={{ position: 'absolute', bottom: '-20px', right: '-20px', zIndex: 2, padding: '1.5rem', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '1rem', border: '1px solid rgba(138,43,226,0.3)' }}>
+                <Cpu color="#8A2BE2" size={32} />
+                <div>
+                  <h4 style={{ margin: 0, fontSize: '1.1rem' }}>AI Automation</h4>
+                  <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Specialist</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* About Text */}
+          <div style={{ flex: '1 1 500px' }}>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>About Me</h2>
+            <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+              I am currently a student at the <strong style={{ color: '#fff' }}>Central Institute of Technology Kokrajhar (CITK)</strong>, pursuing my degree in <strong style={{ color: '#fff' }}>Computer Science and Engineering</strong>. 
+            </p>
+            <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+              While academia gives me a strong theoretical foundation, my true passion lies in building practical, high-impact digital solutions. I specialize in <strong style={{ color: '#fff' }}>Full-Stack Web Development</strong> and <strong style={{ color: '#fff' }}>AI Automation</strong>.
+            </p>
+            <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '2.5rem' }}>
+              I love finding bottlenecks in workflows and writing scripts, bots, and applications to completely automate them. From social media engagement bots to intelligent email parsers, if a process is repetitive, I can automate it.
+            </p>
+            
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+              {skills.map((skill, idx) => (
+                <div key={idx} className="glass" style={{ padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div style={{ color: '#8A2BE2', marginBottom: '1rem' }}>{skill.icon}</div>
+                  <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem' }}>{skill.name}</h4>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{skill.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. PROJECTS SECTION */}
+      <section style={{ padding: '6rem 2rem' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Featured Projects</h2>
+            <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
+              A collection of automation tools and applications I've built to streamline digital interactions and workflows.
+            </p>
+          </div>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '2rem' }}>
+            {projects.map((project) => (
+              <div key={project.id} className="glass project-card" style={{ padding: '2.5rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', transition: 'transform 0.3s ease, border-color 0.3s ease', cursor: 'pointer' }}>
+                <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: project.color, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
+                  {project.icon}
+                </div>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{project.title}</h3>
+                <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', flexGrow: 1, marginBottom: '2rem' }}>
+                  {project.description}
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.5rem' }}>
+                  {project.tags.map((tag, idx) => (
+                    <span key={idx} style={{ padding: '0.25rem 0.75rem', background: 'rgba(255,255,255,0.05)', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 'bold', letterSpacing: '1px', color: 'var(--text-secondary)' }}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#fff', fontWeight: 'bold', fontSize: '0.9rem', marginTop: 'auto' }}>
+                  View Project <ExternalLink size={16} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. CTA SECTION */}
+      <section style={{ padding: '8rem 2rem', textAlign: 'center', background: 'rgba(138,43,226,0.05)', borderTop: '1px solid rgba(138,43,226,0.2)' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>Ready to Automate Your Business?</h2>
+          <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '3rem' }}>
+            Whether you need a custom web application or an intelligent automation script to save you hours of manual work, I can build it.
+          </p>
+          <Link to="/contact" className="btn btn-primary" style={{ padding: '1rem 3rem', fontSize: '1.2rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+            Let's Talk <ArrowRight size={20} />
+          </Link>
+        </div>
+      </section>
+      
+    </div>
+  );
+};
+
+export default PortfolioPage;
