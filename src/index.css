@@ -2453,9 +2453,7 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
   /* 5. Flexbox overrides for specific sections (About Me, Pricing etc)
      Avoid global override that breaks layout! Target specific pages. */
   .pricing-page section > div[style*="display: flex"],
-  .portfolio-page section > div[style*="display: flex"] {
-    flex-direction: column !important;
-  }
+  
   
   /* Pricing Page specifics */
   .pricing-card {
@@ -2536,13 +2534,9 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
   }
   
   /* Floating Stack Cards (Featured Projects) */
-  .portfolio-page div[style*="transform: translateZ"] {
-    transform: translateZ(-800px) rotateX(5deg) scale(0.6) !important;
-  }
   
-  .portfolio-page .glass {
-    width: 95vw !important;
-  }
+  
+  
   
   /* Floating Chat Widget */
   .ai-agent-widget, .chat-widget-button {
