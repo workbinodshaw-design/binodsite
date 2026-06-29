@@ -39,7 +39,7 @@ const HolographicScene = ({ scrollProgress, setActiveCard }) => {
   });
 
   return (
-    <group ref={groupRef} position={isMobile ? [0, -1.2, 0] : [6, 0, 0]} scale={isMobile ? 1.3 : 1}>
+    <group ref={groupRef} position={isMobile ? [0, 1.5, 0] : [6, 0, 0]} scale={isMobile ? 1.15 : 1}>
       <React.Suspense fallback={null}>
         <BabySpiderman />
       </React.Suspense>
