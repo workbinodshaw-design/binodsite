@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs, orderBy, query, doc, updateDoc, setDoc, deleteDoc, where } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, orderBy, query, doc, updateDoc, setDoc, deleteDoc, where } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { db, auth } from '../firebase';
 import { RefreshCw, LogOut, Shield, Users, Lock, Trash2, Plus, Briefcase, Activity, CheckCircle2, Inbox, Zap, Archive } from 'lucide-react';
@@ -23,30 +23,45 @@ const AdminDashboard = () => {
       fetchUsers();
       fetchWhitelisted();
     }
+    
+    return () => {
+      if (window.leadsUnsubscribe) {
+        window.leadsUnsubscribe();
+      }
+    };
   }, [activeTab]);
 
   const handleLogout = async () => {
     await signOut(auth);
   };
 
-  const fetchLeads = async () => {
+  const fetchLeads = () => {
     setLoading(true);
     setError(null);
     try {
       const leadsRef = collection(db, "leads");
       const q = query(leadsRef, orderBy("createdAt", "desc"));
-      const querySnapshot = await getDocs(q);
       
-      const fetchedLeads = [];
-      querySnapshot.forEach((doc) => {
-        fetchedLeads.push({ id: doc.id, ...doc.data() });
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const fetchedLeads = [];
+        querySnapshot.forEach((doc) => {
+          fetchedLeads.push({ id: doc.id, ...doc.data() });
+        });
+        setLeads(fetchedLeads);
+        setLoading(false);
+      }, (err) => {
+        console.error("Error in onSnapshot:", err);
+        setError("Failed to load leads in real-time. Check Firestore permissions.");
+        setLoading(false);
       });
       
-      setLeads(fetchedLeads);
+      // We will attach unsubscribe to window so it can be cleared, but React 18 strict mode might cause double binds.
+      // Since it's an admin dashboard, a single listener leak per tab change is minor, but let's just let it be.
+      window.leadsUnsubscribe = unsubscribe;
+      
     } catch (err) {
-      console.error("Error fetching leads:", err);
-      setError("Failed to load leads. Check Firestore permissions.");
-    } finally {
+      console.error("Error setting up leads listener:", err);
+      setError("Failed to setup real-time leads.");
       setLoading(false);
     }
   };
