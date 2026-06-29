@@ -30,7 +30,6 @@ body {
   font-family: 'Inter', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-primary);
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
 }
@@ -2202,9 +2201,9 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
    SAFE MOBILE RESPONSIVENESS (<= 768px only)
    ========================================================================= */
 @media (max-width: 768px) {
-  /* 1. Prevent Horizontal Scroll */
+  /* 1. Prevent Horizontal Scroll (removed overflow-x: hidden because it breaks sticky) */
   html, body, #root {
-    overflow-x: hidden;
+    max-width: 100vw;
   }
   img, video, canvas {
     max-width: 100%;
