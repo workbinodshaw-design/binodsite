@@ -15,7 +15,11 @@ const LeadFormModal = ({ serviceName, onClose }) => {
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
 
-  const countries = Country.getAllCountries();
+  const allCountries = Country.getAllCountries();
+  const priorityCodes = ['IN', 'US', 'GB', 'CA', 'AU'];
+  const priorityCountries = priorityCodes.map(code => allCountries.find(c => c.isoCode === code)).filter(Boolean);
+  const otherCountries = allCountries.filter(c => !priorityCodes.includes(c.isoCode));
+  
   const states = selectedCountry ? State.getStatesOfCountry(selectedCountry) : [];
   const cities = selectedState ? City.getCitiesOfState(selectedCountry, selectedState) : [];
 
@@ -137,7 +141,9 @@ const LeadFormModal = ({ serviceName, onClose }) => {
                     }}
                   >
                     <option value="">Select Country</option>
-                    {countries.map(c => <option key={c.isoCode} value={c.isoCode}>{c.name}</option>)}
+                    {priorityCountries.map(c => <option key={`p-${c.isoCode}`} value={c.isoCode}>{c.name}</option>)}
+                    <option disabled>──────────</option>
+                    {otherCountries.map(c => <option key={c.isoCode} value={c.isoCode}>{c.name}</option>)}
                   </select>
                 </div>
                 <div className="form-group" style={{ marginBottom: 0 }}>
