@@ -516,6 +516,12 @@ const AdminDashboard = () => {
                             <span>{lead.address}</span>
                           </div>
                         )}
+                        {lead.service_requested && (
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span style={{ color: '#888' }}>Service</span>
+                            <span style={{ fontWeight: 'bold' }}>{lead.service_requested}</span>
+                          </div>
+                        )}
                         {lead.deadline && (
                           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <span style={{ color: '#888' }}>Deadline</span>

@@ -282,6 +282,12 @@ const EmployeeDashboard = () => {
                       <p style={{ margin: '0.2rem 0 0 0', color: '#666' }}>{task.address}</p>
                     </div>
                   )}
+                  {task.service_requested && (
+                    <div>
+                      <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Service</span>
+                      <p style={{ margin: '0.2rem 0 0 0', color: '#1a1a1a', fontWeight: 'bold' }}>{task.service_requested}</p>
+                    </div>
+                  )}
                   {task.deadline && (
                     <div>
                       <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Deadline</span>
