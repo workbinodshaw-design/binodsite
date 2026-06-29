@@ -126,7 +126,24 @@ const AdminDashboard = () => {
   const handleRemoveWhitelist = async (emailId) => {
     try {
       await deleteDoc(doc(db, 'whitelisted_employees', emailId));
+      
+      try {
+        // Auto-downgrade the user's role back to client when revoked
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("email", "==", emailId));
+        const querySnapshot = await getDocs(q);
+        
+        querySnapshot.forEach(async (userDoc) => {
+          if (userDoc.data().role !== 'admin') {
+            await updateDoc(doc(db, "users", userDoc.id), { role: 'client' });
+          }
+        });
+      } catch (downgradeError) {
+        console.warn("Could not auto-downgrade existing user.", downgradeError);
+      }
+
       fetchWhitelisted();
+      fetchUsers(); // Refresh users table to show updated role
     } catch (error) {
       console.error("Error removing from whitelist:", error);
       alert("Failed to revoke access.");
