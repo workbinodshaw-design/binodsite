@@ -2524,8 +2524,9 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 
 
 
+
 /* ==========================================================================
-   MOBILE HERO SECTION FIX (200vh Interactive Scroll & Clip Fix)
+   MOBILE HERO SECTION FIX (Flexbox Stacking without Overlap)
    ========================================================================== */
 @media (max-width: 768px) {
   /* Give enough height for one full swipe to rotate the model */
@@ -2534,28 +2535,39 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     min-height: 200vh !important;
   }
 
-  /* Restore sticky behavior but keep it stacked with extra height to avoid clipping */
+  /* Sticky container takes exactly 100vh so it perfectly fits the screen without clipping the bottom */
   .hero-sticky-container {
     position: sticky !important;
     top: 0 !important;
-    height: 115vh !important;
+    height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    overflow: hidden !important;
+  }
+
+  /* UI Overlay takes the top half flexibly */
+  .ui-overlay {
+    width: 100% !important;
+    height: auto !important;
+    flex: 1 !important; /* Take remaining space */
+    position: relative !important;
+    padding: 6rem 1rem 0rem 1rem !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
   }
+  
+  /* Reduce bottom margins on text elements to save space on small screens */
+  .ui-overlay .headline { margin-bottom: 1rem !important; }
+  .ui-overlay .description { margin-bottom: 1rem !important; }
+  .ui-overlay .badge { margin-bottom: 1.5rem !important; }
 
-  /* Make UI Overlay take natural height at top */
-  .ui-overlay {
-    width: 100% !important;
-    height: 55vh !important;
-    position: relative !important;
-    padding: 7rem 1.5rem 0rem 1.5rem !important;
-  }
-
-  /* Make Canvas Container take the remaining space and sit below UI Overlay */
+  /* Canvas Container takes the bottom 50vh exactly */
   .canvas-container {
     width: 100% !important;
-    height: 60vh !important;
+    height: 50vh !important;
+    flex-shrink: 0 !important;
     position: relative !important;
     top: 0 !important;
     left: 0 !important;
