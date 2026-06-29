@@ -2465,14 +2465,16 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
   
   /* 6. Navigation & Safe Area */
   .navbar {
-    padding: 1rem 1rem !important;
+    padding: 1rem 1.5rem !important;
     background: rgba(250, 250, 250, 0.95) !important;
     backdrop-filter: blur(12px) !important;
-    flex-wrap: wrap; 
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    flex-direction: row !important;
   }
   
   .logo-text {
-    font-size: 1.1rem !important;
+    font-size: 1.2rem !important;
   }
   
   .logo-img {
@@ -2480,23 +2482,51 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     height: 32px !important;
   }
   
-  .nav-links {
-    gap: 0.75rem !important;
-    overflow-x: auto;
-    padding-bottom: 5px;
-    width: 100%;
+  .mobile-menu-btn {
+    display: flex !important;
+    align-items: center;
     justify-content: center;
-    margin-top: 0.5rem;
+    z-index: 1001;
+  }
+  
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(250, 250, 250, 0.98);
+    backdrop-filter: blur(15px);
+    flex-direction: column !important;
+    align-items: center;
+    padding: 2rem 1rem;
+    gap: 1.5rem !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    overflow-x: hidden !important;
+  }
+  
+  .nav-links.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
   }
   
   .nav-link {
-    font-size: 0.85rem !important;
+    font-size: 1.1rem !important;
     white-space: nowrap;
   }
   
   .nav-links .btn {
-    padding: 0.3rem 0.8rem !important;
-    width: auto !important;
+    padding: 0.8rem 2rem !important;
+    width: 100% !important;
+    justify-content: center !important;
+    margin-top: 1rem !important;
+    margin-left: 0 !important;
   }
 
   /* Portfolio Image overlapping fix */
