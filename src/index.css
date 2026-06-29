@@ -2534,41 +2534,45 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     min-height: 200vh !important;
   }
 
-  /* Sticky container takes exactly 100vh so it perfectly fits the screen without clipping the bottom */
+  /* Sticky container takes exactly 100vh so it perfectly fits the screen without clipping the bottom  /* Restore sticky behavior but keep it stacked with extra height to avoid clipping */
   .hero-sticky-container {
     position: sticky !important;
     top: 0 !important;
     height: 100vh !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    overflow: hidden !important;
+    width: 100% !important;
+    overflow: hidden !important; /* Keep this to prevent scrollbars */
   }
 
-  /* UI Overlay takes the top half flexibly */
+  /* UI Overlay sits on top, natural flow, pointer events none so it doesn't block 3D */
   .ui-overlay {
     width: 100% !important;
     height: auto !important;
-    flex: 1 !important; /* Take remaining space */
     position: relative !important;
-    padding: 6rem 1rem 0rem 1rem !important;
+    padding: 3rem 1rem 0rem 1rem !important; /* Reduced padding from 6rem to save space */
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important; /* Changed from flex-start to fill the white space evenly */
+    justify-content: flex-start !important;
+    z-index: 10 !important;
+    pointer-events: none !important;
+  }
+  
+  /* Make buttons clickable again since ui-overlay is pointer-events: none */
+  .ui-overlay * {
+    pointer-events: auto;
   }
   
   /* Reduce bottom margins on text elements to save space on small screens */
-  .ui-overlay .headline { margin-bottom: 1rem !important; }
+  .ui-overlay .headline { margin-bottom: 1rem !important; font-size: 2.8rem !important; }
   .ui-overlay .description { margin-bottom: 1rem !important; }
   .ui-overlay .badge { margin-bottom: 1.5rem !important; }
 
-  /* Canvas Container takes the bottom 50vh exactly */
+  /* Canvas Container absolutely positioned at the bottom */
   .canvas-container {
     width: 100% !important;
-    height: 50vh !important;
-    flex-shrink: 0 !important;
-    position: relative !important;
-    top: 0 !important;
+    height: 60vh !important; /* Make it slightly taller for better view */
+    position: absolute !important;
+    bottom: 0 !important;
     left: 0 !important;
+    z-index: 1 !important;
   }
 }
