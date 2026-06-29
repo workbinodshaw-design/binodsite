@@ -99,23 +99,27 @@ const AdminDashboard = () => {
         addedBy: 'Admin'
       });
       
-      // Check if user already exists as a client and upgrade them automatically
-      const usersRef = collection(db, "users");
-      const q = query(usersRef, where("email", "==", formattedEmail));
-      const querySnapshot = await getDocs(q);
-      
-      querySnapshot.forEach(async (userDoc) => {
-        if (userDoc.data().role !== 'admin') {
-          await updateDoc(doc(db, "users", userDoc.id), { role: 'employee' });
-        }
-      });
+      try {
+        // Check if user already exists as a client and upgrade them automatically
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("email", "==", formattedEmail));
+        const querySnapshot = await getDocs(q);
+        
+        querySnapshot.forEach(async (userDoc) => {
+          if (userDoc.data().role !== 'admin') {
+            await updateDoc(doc(db, "users", userDoc.id), { role: 'employee' });
+          }
+        });
+      } catch (upgradeError) {
+        console.warn("Could not auto-upgrade existing user (likely due to Firestore permissions).", upgradeError);
+      }
 
       setNewTeamEmail('');
       fetchWhitelisted();
       fetchUsers(); // Refresh users table to show updated role
     } catch (error) {
       console.error("Error adding to whitelist:", error);
-      alert("Failed to authorize email.");
+      alert("Failed to authorize email. Error: " + error.message);
     }
   };
 
