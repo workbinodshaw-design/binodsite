@@ -2357,7 +2357,7 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
   }
   
   /* We can hide overflow on specific sections that don't have sticky children */
-  .services-container, .process-container, .contact-container, .portfolio-page {
+  .services-container, .process-container, .contact-container {
     overflow-x: hidden !important;
     width: 100% !important;
   }
