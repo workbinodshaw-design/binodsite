@@ -35,6 +35,8 @@ const ContactPage = () => {
       
       // Forcefully attach the logged-in user's email to tie it to their dashboard
       leadData.email = user.email;
+      leadData.clientUid = user.uid;
+      leadData.clientAuthEmail = user.email;
       
       await saveLeadToDatabase(leadData, 'ContactPage');
       
