@@ -4,7 +4,15 @@ import { Link } from 'react-router-dom';
 
 const PortfolioPage = () => {
   const [progress, setProgress] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const containerRef = useRef(null);
+  const isMobile = windowWidth < 768;
 
   const skills = [
     { name: 'Frontend Development', icon: <Code size={24} />, desc: 'React, Next.js, UI/UX Design' },
@@ -104,8 +112,8 @@ const PortfolioPage = () => {
 
       {/* 2. ABOUT ME SECTION */}
       <section style={{ padding: '4rem 2rem', background: 'rgba(255,255,255,0.02)', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center' }}>
-          <div style={{ flex: '1 1 400px', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '2rem' : '4rem', alignItems: 'center' }}>
+          <div style={{ flex: '1 1 auto', width: '100%', maxWidth: '400px', display: 'flex', justifyContent: 'center' }}>
             <div style={{ position: 'relative' }}>
               <div style={{ position: 'absolute', inset: '-15px', background: 'linear-gradient(45deg, #8A2BE2, #FF7F50)', borderRadius: '24px', opacity: 0.5, filter: 'blur(20px)' }}></div>
               <img 
@@ -123,8 +131,8 @@ const PortfolioPage = () => {
             </div>
           </div>
           
-          <div style={{ flex: '1 1 500px' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>About Me</h2>
+          <div style={{ flex: '1 1 auto', width: '100%' }}>
+            <h2 style={{ fontSize: isMobile ? '1.5rem' : '2.5rem', marginBottom: '1.5rem' }}>About Me</h2>
             <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '1.5rem' }}>
               I am currently a student at the <strong style={{ color: 'var(--text-primary)' }}>Central Institute of Technology Kokrajhar (CITK)</strong>, studying <strong style={{ color: 'var(--text-primary)' }}>Computer Science and Engineering (CSE)</strong>. 
             </p>
@@ -190,7 +198,8 @@ const PortfolioPage = () => {
               
               const angle = clampedDelta * -90; 
               const translateY = clampedDelta * -45; 
-              const radius = 600; 
+              const isMobile = windowWidth < 768;
+              const radius = isMobile ? 300 : 600; 
               
               // Fade out entirely before turning around
               const opacity = Math.max(0, 1 - Math.abs(clampedDelta) * 0.65); 
@@ -204,10 +213,10 @@ const PortfolioPage = () => {
                   right: '0',
                   bottom: '0',
                   margin: 'auto',
-                  padding: '3rem',
+                  padding: isMobile ? '1.5rem' : '3rem',
                   borderRadius: '32px',
                   border: '1px solid rgba(255,255,255,1)',
-                  transform: `translateY(${translateY}vh) rotateY(${angle}deg) translateZ(${radius}px)`,
+                  transform: `translateY(${translateY}vh) rotateY(${angle}deg) translateZ(${radius}px) ${isMobile ? 'scale(0.8)' : 'scale(1)'}`,
                   opacity: opacity,
                   transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
                   pointerEvents: isPointerActive ? 'auto' : 'none',
@@ -218,11 +227,11 @@ const PortfolioPage = () => {
                   boxShadow: '0 30px 60px rgba(0,0,0,0.08), 0 0 40px rgba(138,43,226,0.05)',
                   backfaceVisibility: 'hidden'
                 }}>
-                  <div style={{ width: '80px', height: '80px', borderRadius: '20px', background: project.color, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
+                  <div style={{ width: isMobile ? '50px' : '80px', height: isMobile ? '50px' : '80px', borderRadius: isMobile ? '12px' : '20px', background: project.color, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
                     {project.icon}
                   </div>
-                  <h3 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#111', fontWeight: 800 }}>{project.title}</h3>
-                  <p style={{ color: '#555', lineHeight: '1.8', fontSize: '1.2rem', flexGrow: 1, marginBottom: '2.5rem' }}>
+                  <h3 style={{ fontSize: isMobile ? '1.5rem' : '2.5rem', marginBottom: '1rem', color: '#111', fontWeight: 800 }}>{project.title}</h3>
+                  <p style={{ color: '#555', lineHeight: '1.8', fontSize: isMobile ? '0.9rem' : '1.2rem', flexGrow: 1, marginBottom: isMobile ? '1.5rem' : '2.5rem' }}>
                     {project.description}
                   </p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem', marginBottom: '1.5rem' }}>
