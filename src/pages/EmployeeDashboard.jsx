@@ -163,7 +163,7 @@ const EmployeeDashboard = () => {
                   </div>
                   
                   {/* Status Override (Optional fallback) */}
-                  <div style={{ background: 'rgba(0,0,0,0.5)', padding: '1rem', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '1rem', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div style={{ background: '#fdfdfd', padding: '1rem', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '1rem', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <span style={{ fontSize: '0.9rem', color: '#aaa', fontWeight: 'bold' }}>Status Override:</span>
                     <select 
                       value={task.status || 'new'} 
@@ -172,7 +172,7 @@ const EmployeeDashboard = () => {
                         padding: '0.6rem 1rem', 
                         borderRadius: '8px', 
                         background: 'rgba(255,255,255,0.1)', 
-                        color: task.status === 'completed' ? '#2ecc71' : (task.status === 'building' ? '#38bdf8' : '#fff'), 
+                        color: task.status === 'completed' ? '#2ecc71' : (task.status === 'building' ? '#38bdf8' : '#1a1a1a'), 
                         border: 'none',
                         cursor: 'pointer',
                         fontWeight: 'bold'
@@ -187,7 +187,7 @@ const EmployeeDashboard = () => {
                 </div>
 
                 {/* Progress Tracker (Pizza Tracker UI) */}
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '2rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ background: '#fdfdfd', padding: '2rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
                   <h4 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px', color: '#38bdf8' }}>
                     <Activity size={20} /> Development Phase Tracker
                   </h4>
@@ -221,12 +221,12 @@ const EmployeeDashboard = () => {
                             width: '48px', 
                             height: '48px', 
                             borderRadius: '50%', 
-                            background: isCompleted ? '#38bdf8' : '#222', 
-                            border: isCurrent ? '4px solid #fff' : (isCompleted ? '4px solid #38bdf8' : '4px solid #444'),
+                            background: isCompleted ? '#38bdf8' : '#f0f0f0', 
+                            border: isCurrent ? '4px solid #1a1a1a' : (isCompleted ? '4px solid #38bdf8' : '4px solid #e0e0e0'),
                             display: 'flex', 
                             alignItems: 'center', 
                             justifyContent: 'center',
-                            color: isCompleted ? '#000' : '#888',
+                            color: isCompleted ? '#fff' : '#888',
                             fontWeight: 'bold',
                             transition: 'all 0.3s ease',
                             boxShadow: isCompleted ? '0 0 15px rgba(56, 189, 248, 0.4)' : 'none'
@@ -236,7 +236,7 @@ const EmployeeDashboard = () => {
                           <span style={{ 
                             fontSize: '0.85rem', 
                             fontWeight: isCurrent ? 'bold' : 'normal',
-                            color: isCompleted ? '#fff' : '#888',
+                            color: isCompleted ? '#1a1a1a' : '#888',
                             textAlign: 'center'
                           }}>
                             {phase.label}
@@ -251,7 +251,7 @@ const EmployeeDashboard = () => {
                 </div>
 
                 {/* Client Info Grid */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', background: 'rgba(0,0,0,0.3)', padding: '1.5rem', borderRadius: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', background: '#fdfdfd', padding: '1.5rem', borderRadius: '16px' }}>
                   <div>
                     <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Client Name</span>
                     <p style={{ margin: '0.2rem 0 0 0', fontWeight: 'bold', fontSize: '1.1rem' }}>{task.name}</p>
@@ -319,7 +319,7 @@ const EmployeeDashboard = () => {
                           handleUpdateLink(task.id, link);
                         }
                       }}
-                      style={{ flex: 1, padding: '1rem 1.5rem', background: 'rgba(0,0,0,0.5)', color: '#fff', border: task.projectLink ? '1px solid rgba(46, 204, 113, 0.5)' : '1px solid rgba(255,255,255,0.2)', borderRadius: '12px', fontSize: '1rem', outline: 'none', transition: 'border 0.3s ease' }}
+                      style={{ flex: 1, padding: '1rem 1.5rem', background: '#fdfdfd', color: '#1a1a1a', border: task.projectLink ? '1px solid rgba(46, 204, 113, 0.5)' : '1px solid rgba(255,255,255,0.2)', borderRadius: '12px', fontSize: '1rem', outline: 'none', transition: 'border 0.3s ease' }}
                     />
                     {task.projectLink && (
                       <span style={{ color: '#2ecc71', fontWeight: 'bold', fontSize: '0.9rem' }}>Attached ✓</span>

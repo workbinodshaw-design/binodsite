@@ -220,7 +220,7 @@ const AdminDashboard = () => {
           onClick={() => setActiveTab('leads')}
           style={{ 
             background: activeTab === 'leads' ? '#a388ff' : 'transparent', 
-            color: activeTab === 'leads' ? '#fff' : '#888', 
+            color: activeTab === 'leads' ? '#1a1a1a' : '#888', 
             border: 'none', 
             padding: '1rem 2rem', 
             borderRadius: '12px', 
@@ -239,7 +239,7 @@ const AdminDashboard = () => {
           onClick={() => setActiveTab('team')}
           style={{ 
             background: activeTab === 'team' ? '#a388ff' : 'transparent', 
-            color: activeTab === 'team' ? '#fff' : '#888', 
+            color: activeTab === 'team' ? '#1a1a1a' : '#888', 
             border: 'none', 
             padding: '1rem 2rem', 
             borderRadius: '12px', 
@@ -271,20 +271,20 @@ const AdminDashboard = () => {
                 placeholder="employee@castflow.in"
                 value={newTeamEmail}
                 onChange={(e) => setNewTeamEmail(e.target.value)}
-                style={{ flex: 1, padding: '1rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.5)', color: '#fff', outline: 'none' }}
+                style={{ flex: 1, padding: '1rem', borderRadius: '12px', border: '1px solid rgba(0,0,0,0.1)', background: '#fdfdfd', color: '#1a1a1a', outline: 'none' }}
               />
               <button type="submit" style={{ padding: '0 2rem', background: '#38bdf8', color: '#000', border: 'none', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Plus size={18} /> Authorize Email
               </button>
             </form>
 
-            <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '16px', padding: '1rem' }}>
+            <div style={{ background: '#fdfdfd', borderRadius: '16px', padding: '1rem' }}>
               {whitelistedEmails.length === 0 ? (
                 <p style={{ color: '#888', textAlign: 'center', margin: 0, padding: '1rem' }}>No team members authorized yet.</p>
               ) : (
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                   {whitelistedEmails.map(item => (
-                    <li key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <li key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
                       <span style={{ fontWeight: 'bold' }}>{item.email}</span>
                       <button onClick={() => handleRemoveWhitelist(item.id)} style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <Trash2 size={16} /> Revoke Access
@@ -314,7 +314,7 @@ const AdminDashboard = () => {
             ) : (
               <table className="admin-table" style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                  <tr style={{ borderBottom: '1px solid rgba(0,0,0,0.1)' }}>
                     <th style={{ padding: '1rem 0' }}>Join Date</th>
                     <th>Email</th>
                     <th>User ID</th>
@@ -323,7 +323,7 @@ const AdminDashboard = () => {
                 </thead>
                 <tbody>
                   {systemUsers.map((user) => (
-                    <tr key={user.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <tr key={user.id} style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
                       <td style={{ padding: '1rem 0', whiteSpace: 'nowrap', color: '#aaa' }}>
                         {user.createdAt?.toDate ? user.createdAt.toDate().toLocaleDateString() : 'Just now'}
                       </td>
@@ -340,9 +340,9 @@ const AdminDashboard = () => {
                           style={{ 
                             padding: '0.6rem 1rem', 
                             borderRadius: '8px', 
-                            background: 'rgba(0,0,0,0.5)', 
-                            color: '#fff', 
-                            border: '1px solid rgba(255,255,255,0.2)',
+                            background: '#fdfdfd', 
+                            color: '#1a1a1a', 
+                            border: '1px solid rgba(0,0,0,0.1)',
                             cursor: 'pointer',
                             outline: 'none'
                           }}
@@ -364,7 +364,7 @@ const AdminDashboard = () => {
       {activeTab === 'leads' && (
         <div>
           {/* Pipeline Sub-Navigation */}
-          <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1rem' }}>
+          <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '1rem' }}>
             <button 
               onClick={() => setPipelineStage('inbox')}
               style={{ 
@@ -483,7 +483,7 @@ const AdminDashboard = () => {
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
                     
                     {/* Client Info */}
-                    <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1.5rem', borderRadius: '16px' }}>
+                    <div style={{ background: '#fdfdfd', padding: '1.5rem', borderRadius: '16px' }}>
                       <h4 style={{ marginBottom: '1rem', color: '#a388ff', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Client Information</h4>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -498,7 +498,7 @@ const AdminDashboard = () => {
                         )}
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <span style={{ color: '#888' }}>Email</span>
-                          <span style={{ color: '#fff' }}>{lead.email}</span>
+                          <span style={{ color: '#1a1a1a' }}>{lead.email}</span>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <span style={{ color: '#888' }}>WhatsApp</span>
@@ -547,9 +547,9 @@ const AdminDashboard = () => {
                             style={{ 
                               padding: '0.6rem 1rem', 
                               borderRadius: '8px', 
-                              background: 'rgba(0,0,0,0.5)', 
+                              background: '#fdfdfd', 
                               color: lead.assignedTo ? '#38bdf8' : '#888', 
-                              border: '1px solid rgba(255,255,255,0.2)',
+                              border: '1px solid rgba(0,0,0,0.1)',
                               cursor: 'pointer',
                               outline: 'none',
                               minWidth: '200px'
@@ -564,7 +564,7 @@ const AdminDashboard = () => {
 
                         {/* Progress */}
                         {lead.assignedTo && (
-                          <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1rem', borderRadius: '8px' }}>
+                          <div style={{ background: '#fdfdfd', padding: '1rem', borderRadius: '8px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                               <span style={{ fontSize: '0.85rem', color: '#aaa' }}>Employee Progress</span>
                               <span style={{ color: '#38bdf8', fontWeight: 'bold', fontSize: '0.85rem' }}>{lead.progress || 0}%</span>
@@ -589,9 +589,9 @@ const AdminDashboard = () => {
                             style={{ 
                               padding: '0.6rem 1rem', 
                               borderRadius: '8px', 
-                              background: 'rgba(0,0,0,0.5)', 
+                              background: '#fdfdfd', 
                               color: lead.status === 'completed' ? '#2ecc71' : (lead.status === 'building' ? '#38bdf8' : '#a388ff'), 
-                              border: '1px solid rgba(255,255,255,0.2)',
+                              border: '1px solid rgba(0,0,0,0.1)',
                               cursor: 'pointer',
                               outline: 'none'
                             }}
@@ -632,7 +632,7 @@ const AdminDashboard = () => {
                             handleUpdateLeadLink(lead.id, link);
                           }
                         }}
-                        style={{ flex: 1, padding: '1rem 1.5rem', background: 'rgba(0,0,0,0.5)', color: '#fff', border: lead.projectLink ? '1px solid rgba(46, 204, 113, 0.5)' : '1px solid rgba(255,255,255,0.2)', borderRadius: '12px', fontSize: '1rem', outline: 'none', transition: 'border 0.3s ease' }}
+                        style={{ flex: 1, padding: '1rem 1.5rem', background: '#fdfdfd', color: '#1a1a1a', border: lead.projectLink ? '1px solid rgba(46, 204, 113, 0.5)' : '1px solid rgba(255,255,255,0.2)', borderRadius: '12px', fontSize: '1rem', outline: 'none', transition: 'border 0.3s ease' }}
                       />
                       {lead.projectLink && (
                         <span style={{ color: '#2ecc71', fontWeight: 'bold', fontSize: '0.9rem' }}><CheckCircle2 size={20} /></span>
