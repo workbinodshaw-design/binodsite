@@ -13,7 +13,7 @@ const Footer = () => {
     if (isSubdomain && to.startsWith('/')) {
       return <a href={`https://castflow.in${to}`} {...props}>{children}</a>;
     }
-    return <CustomLink to={to} {...props}>{children}</CustomLink>;
+    return <Link to={to} {...props}>{children}</Link>;
   };
   
   const [user, setUser] = useState(null);
