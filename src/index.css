@@ -276,16 +276,13 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 
 /* Floating HTML Cards */
 .floating-card {
-    width: 90vw !important;
-    max-width: 320px !important;
-    margin: 0 auto 1.5rem auto !important;
-    position: relative !important;
-    left: auto !important;
-    top: auto !important;
-    bottom: auto !important;
-    right: auto !important;
-    /* allow inline animations by removing transform: none */
-  }
+  width: 320px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+}
 
 /* We no longer need app-container as fixed, we can just delete it or ignore it, 
    but since active-card blur uses it, let's keep active-card filter logic on hero-sticky-container now. */
@@ -474,16 +471,18 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 
 /* Floating HTML Cards */
 .floating-card {
-    width: 90vw !important;
-    max-width: 320px !important;
-    margin: 0 auto 1.5rem auto !important;
-    position: relative !important;
-    left: auto !important;
-    top: auto !important;
-    bottom: auto !important;
-    right: auto !important;
-    /* allow inline animations by removing transform: none */
-  }
+  width: 320px;
+  padding: 1.5rem;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 240, 255, 0.85));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(147, 51, 234, 0.5); /* Violet border */
+  box-shadow: 0 20px 40px rgba(147, 51, 234, 0.2), 0 0 20px rgba(79, 70, 229, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 1);
+  color: var(--text-primary);
+  user-select: none;
+  transform-origin: center center;
+}
 
 .card-header {
   display: flex;
@@ -2388,16 +2387,11 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     justify-content: center;
   }
 
-  /* 2. Hero Section & 3D Model Flow */
-  .hero-sticky-container {
-    flex-direction: column !important;
-    height: 100vh !important;
-    justify-content: flex-start !important;
-  }
-  
+  /* 2. Hero Section Flow */
+  /* We do NOT change flex direction. We let absolute positioning handle it. */
   .ui-overlay {
     width: 100% !important;
-    height: 55% !important; 
+    height: 60vh !important;
     padding: 7rem 1.5rem 1rem 1.5rem !important;
     align-items: center !important;
     text-align: center !important;
@@ -2412,23 +2406,17 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
   }
   
   .canvas-container {
-    position: relative !important;
     width: 100% !important;
-    height: 45% !important; 
-    z-index: 10 !important;
+    height: 40vh !important;
+    top: 60vh !important; 
+    left: 0 !important;
   }
   
   /* 3. Floating Cards */
+  /* Scale them down so they fit mobile screens without rewriting their core Drei CSS */
   .floating-card {
-    width: 90vw !important;
-    max-width: 320px !important;
-    margin: 0 auto 1.5rem auto !important;
-    position: relative !important;
-    left: auto !important;
-    top: auto !important;
-    bottom: auto !important;
-    right: auto !important;
-    /* allow inline animations by removing transform: none */
+    transform: scale(0.65) !important;
+    transform-origin: center center !important;
   }
   
   /* 4. Services Page, Portfolio Grids & Process Steps */
@@ -2453,8 +2441,10 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     width: 100% !important;
   }
   
-  /* 5. Flexbox overrides for overlapping text (About Me, Pricing etc) */
-  div[style*="display: flex"][style*="flex-wrap: wrap"] {
+  /* 5. Flexbox overrides for specific sections (About Me, Pricing etc)
+     Avoid global override that breaks layout! Target specific pages. */
+  .pricing-page section > div[style*="display: flex"],
+  .portfolio-page section > div[style*="display: flex"] {
     flex-direction: column !important;
   }
   
@@ -2462,7 +2452,6 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
   .pricing-card {
     width: 100% !important;
     margin: 0 !important;
-    
   }
   
   /* 6. Navigation & Safe Area */
@@ -2496,8 +2485,6 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     white-space: nowrap;
   }
   
-  /* Hide the dashboard button on mobile nav to save space if needed, 
-     or just let it scale. Let's scale it. */
   .nav-links .btn {
     padding: 0.3rem 0.8rem !important;
     width: auto !important;

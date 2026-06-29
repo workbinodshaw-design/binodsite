@@ -8,6 +8,13 @@ import FloatingPanels from './FloatingPanels';
 import Particles from './Particles';
 
 const HolographicScene = ({ scrollProgress, setActiveCard }) => {
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const groupRef = useRef();
   const { camera, pointer } = useThree();
 
@@ -31,7 +38,7 @@ const HolographicScene = ({ scrollProgress, setActiveCard }) => {
   });
 
   return (
-    <group ref={groupRef} position={[6, 0, 0]}>
+    <group ref={groupRef} position={isMobile ? [0, 0, 0] : [6, 0, 0]} scale={isMobile ? 0.7 : 1}>
       <React.Suspense fallback={null}>
         <BabySpiderman />
       </React.Suspense>
