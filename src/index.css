@@ -276,13 +276,16 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 
 /* Floating HTML Cards */
 .floating-card {
-  width: 320px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  box-shadow: var(--glass-shadow);
-}
+    width: 90vw !important;
+    max-width: 320px !important;
+    margin: 0 auto 1.5rem auto !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    right: auto !important;
+    /* allow inline animations by removing transform: none */
+  }
 
 /* We no longer need app-container as fixed, we can just delete it or ignore it, 
    but since active-card blur uses it, let's keep active-card filter logic on hero-sticky-container now. */
@@ -471,18 +474,16 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 
 /* Floating HTML Cards */
 .floating-card {
-  width: 320px;
-  padding: 1.5rem;
-  border-radius: 24px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 240, 255, 0.85));
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(147, 51, 234, 0.5); /* Violet border */
-  box-shadow: 0 20px 40px rgba(147, 51, 234, 0.2), 0 0 20px rgba(79, 70, 229, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 1);
-  color: var(--text-primary);
-  user-select: none;
-  transform-origin: center center;
-}
+    width: 90vw !important;
+    max-width: 320px !important;
+    margin: 0 auto 1.5rem auto !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    right: auto !important;
+    /* allow inline animations by removing transform: none */
+  }
 
 .card-header {
   display: flex;
@@ -2333,5 +2334,195 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
   100% {
     transform: translateY(-120vh) translateX(-50px) scale(1);
     opacity: 0;
+  }
+}
+
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS FIX (Max Width: 768px)
+   Do NOT affect desktop layout.
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* 1. Global Scale and Overflow */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100vw !important;
+  }
+  
+  /* Prevent horizontal scrolling on all major containers */
+  #root, .app, .page-container, .home-page, .services-container, .process-container, .contact-container, .portfolio-page {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+  
+  /* Typography Scale */
+  .headline {
+    font-size: 2.8rem !important;
+    line-height: 1.1 !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .headline span {
+    font-size: 3.5rem !important;
+  }
+  
+  .section-title, h1, h2 {
+    font-size: 2.2rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  h3, h4, .card-header {
+    font-size: 1.5rem !important;
+  }
+  
+  .description, p, li {
+    font-size: 1.05rem !important;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .btn {
+    font-size: 1rem !important;
+    padding: 0.8rem 1.5rem !important;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* 2. Hero Section & 3D Model Flow */
+  .hero-sticky-container {
+    flex-direction: column !important;
+    height: 100vh !important;
+    justify-content: flex-start !important;
+  }
+  
+  .ui-overlay {
+    width: 100% !important;
+    height: 55% !important; 
+    padding: 7rem 1.5rem 1rem 1.5rem !important;
+    align-items: center !important;
+    text-align: center !important;
+    z-index: 20 !important;
+  }
+  
+  .button-group {
+    justify-content: center !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    padding: 0 1rem;
+  }
+  
+  .canvas-container {
+    position: relative !important;
+    width: 100% !important;
+    height: 45% !important; 
+    z-index: 10 !important;
+  }
+  
+  /* 3. Floating Cards */
+  .floating-card {
+    width: 90vw !important;
+    max-width: 320px !important;
+    margin: 0 auto 1.5rem auto !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    right: auto !important;
+    /* allow inline animations by removing transform: none */
+  }
+  
+  /* 4. Services Page, Portfolio Grids & Process Steps */
+  .funnel-tiles-grid, 
+  .process-steps,
+  .pricing-grid,
+  .portfolio-page .glass-container, 
+  div[style*="display: grid"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .content-section, section {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  
+  .funnel-tile, .process-step {
+    padding: 2.5rem 1.5rem !important;
+    width: 100% !important;
+  }
+  
+  /* 5. Flexbox overrides for overlapping text (About Me, Pricing etc) */
+  div[style*="display: flex"][style*="flex-wrap: wrap"] {
+    flex-direction: column !important;
+  }
+  
+  /* Pricing Page specifics */
+  .pricing-card {
+    width: 100% !important;
+    margin: 0 !important;
+    
+  }
+  
+  /* 6. Navigation & Safe Area */
+  .navbar {
+    padding: 1rem 1rem !important;
+    background: rgba(250, 250, 250, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    flex-wrap: wrap; 
+  }
+  
+  .logo-text {
+    font-size: 1.1rem !important;
+  }
+  
+  .logo-img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  .nav-links {
+    gap: 0.75rem !important;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  
+  .nav-link {
+    font-size: 0.85rem !important;
+    white-space: nowrap;
+  }
+  
+  /* Hide the dashboard button on mobile nav to save space if needed, 
+     or just let it scale. Let's scale it. */
+  .nav-links .btn {
+    padding: 0.3rem 0.8rem !important;
+    width: auto !important;
+  }
+
+  /* Portfolio Image overlapping fix */
+  .portfolio-page img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Floating Stack Cards (Featured Projects) */
+  .portfolio-page div[style*="transform: translateZ"] {
+    transform: translateZ(-800px) rotateX(5deg) scale(0.6) !important;
+  }
+  
+  .portfolio-page .glass {
+    width: 95vw !important;
+  }
+  
+  /* Floating Chat Widget */
+  .ai-agent-widget, .chat-widget-button {
+    bottom: 20px !important;
+    right: 20px !important;
+    transform: scale(0.85) !important;
+    transform-origin: bottom right !important;
   }
 }
