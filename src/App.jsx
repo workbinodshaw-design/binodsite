@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import ServicesPage from './pages/ServicesPage';
@@ -23,6 +23,67 @@ import ClientDashboard from './pages/ClientDashboard';
 import ClientLogin from './pages/ClientLogin';
 
 function App() {
+  const hostname = window.location.hostname;
+
+  // Subdomain: privacypolicy.castflow.in
+  if (hostname.startsWith('privacypolicy.')) {
+    return (
+      <Router basename={import.meta.env.BASE_URL}>
+        <Navbar />
+        <Routes>
+          <Route path="*" element={<PrivacyPolicy />} />
+        </Routes>
+        <Footer />
+        <AiAgentWidget />
+      </Router>
+    );
+  }
+
+  // Subdomain: admin.castflow.in
+  if (hostname.startsWith('admin.')) {
+    return (
+      <Router basename={import.meta.env.BASE_URL}>
+        <Routes>
+          <Route path="/" element={<AdminLogin />} />
+          <Route path="/admin-login" element={<Navigate to="/" replace />} />
+          <Route 
+            path="/dashboard" 
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        <AiAgentWidget />
+      </Router>
+    );
+  }
+
+  // Subdomain: team.castflow.in
+  if (hostname.startsWith('team.')) {
+    return (
+      <Router basename={import.meta.env.BASE_URL}>
+        <Routes>
+          <Route path="/" element={<TeamLogin />} />
+          <Route path="/team-login" element={<Navigate to="/" replace />} />
+          <Route 
+            path="/dashboard" 
+            element={
+              <ProtectedRoute requiredRole="employee">
+                <EmployeeDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        <AiAgentWidget />
+      </Router>
+    );
+  }
+
+  // Default Main Domain (castflow.in, www.castflow.in, localhost)
   return (
     <Router basename={import.meta.env.BASE_URL}>
       <Navbar />
