@@ -6,6 +6,17 @@ import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 
 const Navbar = () => {
+
+  const currentHost = window.location.hostname;
+  const isSubdomain = currentHost.split('.').length > 2 && !currentHost.includes('localhost') && currentHost !== 'www.castflow.in';
+  
+  const CustomLink = ({ to, children, ...props }) => {
+    if (isSubdomain && to.startsWith('/')) {
+      return <a href={`https://castflow.in${to}`} {...props}>{children}</a>;
+    }
+    return <CustomLink to={to} {...props}>{children}</CustomLink>;
+  };
+  
   const location = useLocation();
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState(null);
@@ -55,24 +66,24 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="logo-container">
+      <CustomLink to="/" className="logo-container">
         <img src={import.meta.env.BASE_URL + 'logo.png'} alt="CastFlow Logo" className="logo-img" onError={(e) => { e.target.style.display = 'none' }} />
         <span className="logo-text">CASTFLOW</span>
-      </Link>
+      </CustomLink>
       
       <button className="mobile-menu-btn" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
         {isMenuOpen ? <X size={28} color="#000" /> : <Menu size={28} color="#000" />}
       </button>
 
       <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
-        <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
-        <Link to="/services" className={`nav-link ${location.pathname === '/services' ? 'active' : ''}`}>Services</Link>
+        <CustomLink to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</CustomLink>
+        <CustomLink to="/services" className={`nav-link ${location.pathname === '/services' ? 'active' : ''}`}>Services</CustomLink>
         <a href="https://portfolio.castflow.in" className="nav-link">Portfolio</a>
-        <Link to="/pricing" className={`nav-link ${location.pathname === '/pricing' ? 'active' : ''}`}>Pricing</Link>
+        <CustomLink to="/pricing" className={`nav-link ${location.pathname === '/pricing' ? 'active' : ''}`}>Pricing</CustomLink>
 
         
         {user ? (
-          <Link 
+          <CustomLink 
             to={getDashboardRoute()} 
             className="nav-link btn btn-primary small" 
             style={{ 
@@ -111,9 +122,9 @@ const Navbar = () => {
             }}>
               {userRole ? getRoleBadgeColor().icon : <User size={16} />}
             </div>
-          </Link>
+          </CustomLink>
         ) : (
-          <Link 
+          <CustomLink 
             to="/client-login" 
             className="nav-link btn btn-primary small" 
             style={{ 
@@ -127,7 +138,7 @@ const Navbar = () => {
             }}
           >
             Login
-          </Link>
+          </CustomLink>
         )}
       </div>
     </nav>
