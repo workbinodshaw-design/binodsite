@@ -133,7 +133,7 @@ const EmployeeDashboard = () => {
       {error && <div style={{ color: '#FF6B6B', padding: '1rem', background: 'rgba(255,107,107,0.1)', borderRadius: '8px', marginBottom: '2rem' }}>{error}</div>}
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '4rem', color: '#aaa' }}>
+        <div style={{ textAlign: 'center', padding: '4rem', color: '#666' }}>
           <p>Loading your assigned tasks...</p>
         </div>
       ) : tasks.length === 0 ? (
@@ -164,7 +164,7 @@ const EmployeeDashboard = () => {
                   
                   {/* Status Override (Optional fallback) */}
                   <div style={{ background: '#fdfdfd', padding: '1rem', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '1rem', border: '1px solid rgba(255,255,255,0.05)' }}>
-                    <span style={{ fontSize: '0.9rem', color: '#aaa', fontWeight: 'bold' }}>Status Override:</span>
+                    <span style={{ fontSize: '0.9rem', color: '#666', fontWeight: 'bold' }}>Status Override:</span>
                     <select 
                       value={task.status || 'new'} 
                       onChange={(e) => handleUpdateStatus(task.id, e.target.value)}
@@ -245,7 +245,7 @@ const EmployeeDashboard = () => {
                       )
                     })}
                   </div>
-                  <p style={{ textAlign: 'center', marginTop: '2rem', fontSize: '0.85rem', color: '#aaa' }}>
+                  <p style={{ textAlign: 'center', marginTop: '2rem', fontSize: '0.85rem', color: '#666' }}>
                     Click a phase above to instantly update the Client Dashboard. 100% automatically marks the project as completed.
                   </p>
                 </div>
@@ -259,7 +259,7 @@ const EmployeeDashboard = () => {
                   {task.company && (
                     <div>
                       <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Company</span>
-                      <p style={{ margin: '0.2rem 0 0 0', color: '#ccc' }}>{task.company}</p>
+                      <p style={{ margin: '0.2rem 0 0 0', color: '#666' }}>{task.company}</p>
                     </div>
                   )}
                   <div>
@@ -273,13 +273,13 @@ const EmployeeDashboard = () => {
                   {task.phone && task.whatsapp && (
                     <div>
                       <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Alt Phone</span>
-                      <p style={{ margin: '0.2rem 0 0 0', color: '#ccc' }}>{task.phone}</p>
+                      <p style={{ margin: '0.2rem 0 0 0', color: '#666' }}>{task.phone}</p>
                     </div>
                   )}
                   {task.address && (
                     <div>
                       <span style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Location</span>
-                      <p style={{ margin: '0.2rem 0 0 0', color: '#ccc' }}>{task.address}</p>
+                      <p style={{ margin: '0.2rem 0 0 0', color: '#666' }}>{task.address}</p>
                     </div>
                   )}
                   {task.deadline && (
@@ -292,14 +292,14 @@ const EmployeeDashboard = () => {
 
                 {/* Project Requirements */}
                 <div>
-                  <h4 style={{ marginBottom: '0.8rem', color: '#ccc' }}>Project Requirements</h4>
-                  <p style={{ background: 'rgba(255,255,255,0.02)', padding: '1.5rem', borderRadius: '12px', lineHeight: '1.6', color: '#eee', whiteSpace: 'pre-wrap' }}>
+                  <h4 style={{ marginBottom: '0.8rem', color: '#666' }}>Project Requirements</h4>
+                  <p style={{ background: 'rgba(255,255,255,0.02)', padding: '1.5rem', borderRadius: '12px', lineHeight: '1.6', color: '#1a1a1a', whiteSpace: 'pre-wrap' }}>
                     {task.details}
                   </p>
                 </div>
 
                 {/* Delivery Section */}
-                <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem', marginTop: '0.5rem' }}>
+                <div style={{ borderTop: '1px solid rgba(0,0,0,0.1)', paddingTop: '2rem', marginTop: '0.5rem' }}>
                   <h4 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <CheckCircle2 color={task.projectLink ? '#2ecc71' : '#888'} size={20} /> 
                     Deliverable Link

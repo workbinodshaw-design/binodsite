@@ -324,7 +324,7 @@ const AdminDashboard = () => {
                 <tbody>
                   {systemUsers.map((user) => (
                     <tr key={user.id} style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
-                      <td style={{ padding: '1rem 0', whiteSpace: 'nowrap', color: '#aaa' }}>
+                      <td style={{ padding: '1rem 0', whiteSpace: 'nowrap', color: '#666' }}>
                         {user.createdAt?.toDate ? user.createdAt.toDate().toLocaleDateString() : 'Just now'}
                       </td>
                       <td>
@@ -540,7 +540,7 @@ const AdminDashboard = () => {
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {/* Assignment */}
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ color: '#aaa', fontSize: '0.9rem' }}>Assign To:</span>
+                          <span style={{ color: '#666', fontSize: '0.9rem' }}>Assign To:</span>
                           <select 
                             value={lead.assignedTo || ''} 
                             onChange={(e) => handleAssignLead(lead.id, e.target.value)}
@@ -566,7 +566,7 @@ const AdminDashboard = () => {
                         {lead.assignedTo && (
                           <div style={{ background: '#fdfdfd', padding: '1rem', borderRadius: '8px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                              <span style={{ fontSize: '0.85rem', color: '#aaa' }}>Employee Progress</span>
+                              <span style={{ fontSize: '0.85rem', color: '#666' }}>Employee Progress</span>
                               <span style={{ color: '#38bdf8', fontWeight: 'bold', fontSize: '0.85rem' }}>{lead.progress || 0}%</span>
                             </div>
                             <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: '3px', overflow: 'hidden', marginBottom: '8px' }}>
@@ -582,7 +582,7 @@ const AdminDashboard = () => {
 
                         {/* Status Override */}
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: lead.assignedTo ? '0' : '1rem' }}>
-                          <span style={{ color: '#aaa', fontSize: '0.9rem' }}>Project Status:</span>
+                          <span style={{ color: '#666', fontSize: '0.9rem' }}>Project Status:</span>
                           <select 
                             value={lead.status || 'new'} 
                             onChange={(e) => handleUpdateLeadStatus(lead.id, e.target.value)}
@@ -608,16 +608,16 @@ const AdminDashboard = () => {
 
                   {/* Project Requirements */}
                   <div>
-                    <h4 style={{ marginBottom: '0.8rem', color: '#ccc' }}>Project Requirements & Notes</h4>
-                    <p style={{ background: 'rgba(255,255,255,0.02)', padding: '1.5rem', borderRadius: '12px', lineHeight: '1.6', color: '#eee', whiteSpace: 'pre-wrap', margin: 0 }}>
+                    <h4 style={{ marginBottom: '0.8rem', color: '#666' }}>Project Requirements & Notes</h4>
+                    <p style={{ background: 'rgba(255,255,255,0.02)', padding: '1.5rem', borderRadius: '12px', lineHeight: '1.6', color: '#1a1a1a', whiteSpace: 'pre-wrap', margin: 0 }}>
                       {lead.details}
                     </p>
                   </div>
 
                   {/* Delivery Link Overrride */}
-                  <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1.5rem' }}>
+                  <div style={{ borderTop: '1px solid rgba(0,0,0,0.1)', paddingTop: '1.5rem' }}>
                     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                      <span style={{ color: '#aaa', whiteSpace: 'nowrap' }}>Delivery URL:</span>
+                      <span style={{ color: '#666', whiteSpace: 'nowrap' }}>Delivery URL:</span>
                       <input 
                         type="text" 
                         placeholder="Attach Final Live URL (e.g. https://site.com) to deliver to client" 
