@@ -6,6 +6,8 @@ const PrivacyPolicy = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const currentDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
   return (
     <div className="privacy-page" style={{ paddingTop: '100px', minHeight: '100vh', background: 'var(--bg-color)', color: 'var(--text-primary)' }}>
       
@@ -20,7 +22,7 @@ const PrivacyPolicy = () => {
             Privacy Policy
           </h1>
           <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-            Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            Effective Date: {currentDate}
           </p>
         </div>
       </section>
@@ -32,52 +34,161 @@ const PrivacyPolicy = () => {
           <div className="policy-content" style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
             
             <div>
-              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: '#fff' }}>1. Introduction</h2>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>1. Introduction</h2>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem' }}>
-                Welcome to Castflow. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.
+                Welcome to CastFlow ("CastFlow", "we", "our", or "us"). We value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and protect your information when you use our website or services.
+              </p>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginTop: '1rem' }}>
+                By using our website, you agree to this Privacy Policy.
               </p>
             </div>
 
             <div>
-              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: '#fff' }}>2. The Data We Collect About You</h2>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>2. Information We Collect</h2>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1rem' }}>
-                Personal data, or personal information, means any information about an individual from which that person can be identified. We may collect, use, store and transfer different kinds of personal data about you which we have grouped together as follows:
+                Depending on the services you request, we may collect:
               </p>
               <ul style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <li><strong>Identity Data:</strong> includes first name, last name, username or similar identifier.</li>
-                <li><strong>Contact Data:</strong> includes email address and telephone numbers.</li>
-                <li><strong>Technical Data:</strong> includes internet protocol (IP) address, your login data, browser type and version, time zone setting and location.</li>
-                <li><strong>Usage Data:</strong> includes information about how you use our website, products and services.</li>
+                <li>Full Name</li>
+                <li>Email Address</li>
+                <li>Phone Number</li>
+                <li>Company Name</li>
+                <li>Project Details</li>
+                <li>Files and documents you upload</li>
+                <li>Social media account information only when you voluntarily connect your accounts for automation</li>
+                <li>Browser information</li>
+                <li>Device information</li>
+                <li>IP Address</li>
+                <li>Contact form submissions</li>
+              </ul>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginTop: '1rem' }}>
+                We only collect information necessary to provide our services.
+              </p>
+            </div>
+
+            <div>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>3. How We Use Your Information</h2>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1rem' }}>
+                Your information may be used to:
+              </p>
+              <ul style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <li>Respond to inquiries</li>
+                <li>Deliver our services</li>
+                <li>Build websites and automation systems</li>
+                <li>Configure API integrations</li>
+                <li>Improve our services</li>
+                <li>Provide customer support</li>
+                <li>Send project updates</li>
+                <li>Prevent fraud and abuse</li>
+                <li>Comply with legal obligations</li>
               </ul>
             </div>
 
             <div>
-              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: '#fff' }}>3. How We Use Your Data</h2>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>4. Client Confidentiality</h2>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1rem' }}>
+                All client information is treated as confidential.
+              </p>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1rem' }}>
+                We never sell your information.
+              </p>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1rem' }}>
+                Only authorized personnel who require access for project completion may access client data.
+              </p>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem' }}>
-                We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:
-                Where we need to perform the contract we are about to enter into or have entered into with you.
-                Where it is necessary for our legitimate interests (or those of a third party) and your interests and fundamental rights do not override those interests.
+                Access permissions are granted on a need-to-know basis.
               </p>
             </div>
 
             <div>
-              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: '#fff' }}>4. Data Security</h2>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>5. Social Media & Third-Party Integrations</h2>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1rem' }}>
+                If you authorize CastFlow to connect your accounts (such as Meta, Instagram, Facebook, WhatsApp, Google, etc.), authentication is completed using the official authorization systems provided by those platforms.
+              </p>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1rem' }}>
+                We only use the permissions you explicitly grant to deliver the requested services.
+              </p>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem' }}>
-                We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed. In addition, we limit access to your personal data to those employees, agents, contractors and other third parties who have a business need to know.
+                We never request unnecessary permissions.
               </p>
             </div>
 
             <div>
-              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: '#fff' }}>5. Your Legal Rights</h2>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>6. Data Security</h2>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1rem' }}>
+                Protecting client information is a priority. We implement appropriate technical and organizational security measures including:
+              </p>
+              <ul style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1rem' }}>
+                <li>Secure infrastructure</li>
+                <li>HTTPS encryption</li>
+                <li>Restricted administrative access</li>
+                <li>Authentication controls</li>
+                <li>Encrypted storage where applicable</li>
+                <li>Regular security monitoring</li>
+                <li>Access logging where applicable</li>
+              </ul>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem' }}>
-                Under certain circumstances, you have rights under data protection laws in relation to your personal data, including the right to request access, correction, erasure, restriction, transfer, to object to processing, to portability of data and (where the lawful ground of processing is consent) to withdraw consent.
+                Although we take reasonable precautions, no internet transmission can be guaranteed to be 100% secure.
               </p>
             </div>
 
             <div>
-              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: '#fff' }}>6. Contact Us</h2>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>7. Cookies</h2>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1rem' }}>
+                We may use cookies to:
+              </p>
+              <ul style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1rem' }}>
+                <li>Improve website performance</li>
+                <li>Remember user preferences</li>
+                <li>Analyze website traffic</li>
+                <li>Enhance user experience</li>
+              </ul>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem' }}>
-                If you have any questions about this privacy policy or our privacy practices, please contact us by email at <strong>work.binodshaw@gmail.com</strong>.
+                You may disable cookies through your browser settings.
+              </p>
+            </div>
+
+            <div>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>8. Data Retention</h2>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem' }}>
+                We retain information only as long as necessary to provide services, comply with legal obligations, resolve disputes, or protect our business interests.
+              </p>
+            </div>
+            
+            <div>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>9. Your Rights</h2>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1rem' }}>
+                You may request to:
+              </p>
+              <ul style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <li>Access your information</li>
+                <li>Correct inaccurate information</li>
+                <li>Delete your information (where legally permitted)</li>
+                <li>Withdraw consent where applicable</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>10. Children's Privacy</h2>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem' }}>
+                Our services are not intended for children under 13 years of age.
+              </p>
+            </div>
+            
+            <div>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>11. Policy Updates</h2>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem' }}>
+                We may update this Privacy Policy periodically. Changes become effective immediately after publication.
+              </p>
+            </div>
+            
+            <div>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>12. Contact</h2>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '0.5rem' }}>
+                Email: <a href="mailto:support@castflow.in" style={{ color: 'var(--primary-color)' }}>support@castflow.in</a>
+              </p>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem' }}>
+                Website: <a href="https://castflow.in" target="_blank" rel="noreferrer" style={{ color: 'var(--primary-color)' }}>https://castflow.in</a>
               </p>
             </div>
 
