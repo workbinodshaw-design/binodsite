@@ -2523,21 +2523,22 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 }
 
 
+
 /* ==========================================================================
-   MOBILE HERO SECTION FIX (Eliminates 500vh blank space)
+   MOBILE HERO SECTION FIX (200vh Interactive Scroll & Clip Fix)
    ========================================================================== */
 @media (max-width: 768px) {
-  /* Remove the 500vh forced scroll height on mobile */
+  /* Give enough height for one full swipe to rotate the model */
   .hero-pin-wrapper {
-    height: auto !important; 
-    min-height: 100vh !important;
+    height: 200vh !important; 
+    min-height: 200vh !important;
   }
 
-  /* Disable sticky behavior and make it a normal flex column */
+  /* Restore sticky behavior but keep it stacked with extra height to avoid clipping */
   .hero-sticky-container {
-    position: relative !important;
-    height: auto !important;
-    min-height: 100vh !important;
+    position: sticky !important;
+    top: 0 !important;
+    height: 115vh !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
@@ -2546,15 +2547,15 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
   /* Make UI Overlay take natural height at top */
   .ui-overlay {
     width: 100% !important;
-    height: auto !important;
+    height: 55vh !important;
     position: relative !important;
-    padding: 7rem 1.5rem 2rem 1.5rem !important;
+    padding: 7rem 1.5rem 0rem 1.5rem !important;
   }
 
   /* Make Canvas Container take the remaining space and sit below UI Overlay */
   .canvas-container {
     width: 100% !important;
-    height: 70vh !important;
+    height: 60vh !important;
     position: relative !important;
     top: 0 !important;
     left: 0 !important;
