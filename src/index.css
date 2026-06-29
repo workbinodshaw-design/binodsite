@@ -2343,16 +2343,24 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
    ========================================================================== */
 @media (max-width: 768px) {
   /* 1. Global Scale and Overflow */
+  
+  /* 1. Global Scale (Removed overflow-x: hidden on ancestors to fix position: sticky) */
   html, body {
-    overflow-x: hidden !important;
     width: 100vw !important;
+    max-width: 100% !important;
   }
   
-  /* Prevent horizontal scrolling on all major containers */
-  #root, .app, .page-container, .home-page, .services-container, .process-container, .contact-container, .portfolio-page {
+  #root, .app, .page-container, .home-page {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* We can hide overflow on specific sections that don't have sticky children */
+  .services-container, .process-container, .contact-container, .portfolio-page {
     overflow-x: hidden !important;
     width: 100% !important;
   }
+  
   
   /* Typography Scale */
   .headline {
