@@ -173,7 +173,7 @@ const PortfolioPage = () => {
             <div style={{
               position: 'absolute', top: '50%', left: '50%', 
               transform: `translate(-50%, -50%) scale(${1 + Math.sin(progress * Math.PI) * 0.05})`,
-              width: '1200px', height: '1200px',
+              width: isMobile ? '500px' : '1200px', height: isMobile ? '500px' : '1200px',
               transition: 'transform 0.1s ease-out',
               zIndex: -1,
               opacity: 0.6,
@@ -199,7 +199,7 @@ const PortfolioPage = () => {
               const angle = clampedDelta * -90; 
               const translateY = clampedDelta * -45; 
               const isMobile = windowWidth < 768;
-              const radius = isMobile ? 300 : 600; 
+              const radius = isMobile ? 180 : 600; 
               
               // Fade out entirely before turning around
               const opacity = Math.max(0, 1 - Math.abs(clampedDelta) * 0.65); 
