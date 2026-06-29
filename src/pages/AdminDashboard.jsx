@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs, orderBy, query, doc, updateDoc, setDoc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query, doc, updateDoc, setDoc, deleteDoc, where } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { db, auth } from '../firebase';
 import { RefreshCw, LogOut, Shield, Users, Lock, Trash2, Plus, Briefcase, Activity, CheckCircle2, Inbox, Zap, Archive } from 'lucide-react';
@@ -98,8 +98,21 @@ const AdminDashboard = () => {
         addedAt: new Date(),
         addedBy: 'Admin'
       });
+      
+      // Check if user already exists as a client and upgrade them automatically
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("email", "==", formattedEmail));
+      const querySnapshot = await getDocs(q);
+      
+      querySnapshot.forEach(async (userDoc) => {
+        if (userDoc.data().role !== 'admin') {
+          await updateDoc(doc(db, "users", userDoc.id), { role: 'employee' });
+        }
+      });
+
       setNewTeamEmail('');
       fetchWhitelisted();
+      fetchUsers(); // Refresh users table to show updated role
     } catch (error) {
       console.error("Error adding to whitelist:", error);
       alert("Failed to authorize email.");

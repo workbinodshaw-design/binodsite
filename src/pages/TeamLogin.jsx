@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { useNavigate } from 'react-router-dom';
@@ -19,10 +19,17 @@ const TeamLogin = () => {
       if (user) {
         try {
           const userDoc = await getDoc(doc(db, 'users', user.uid));
-          if (userDoc.exists() && userDoc.data().role === 'employee') {
-            navigate('/employee');
-          } else if (userDoc.exists() && userDoc.data().role === 'admin') {
-            navigate('/admin');
+          if (userDoc.exists()) {
+            const role = userDoc.data().role;
+            if (role === 'employee') {
+              navigate('/employee');
+            } else if (role === 'admin') {
+              await signOut(auth);
+              setError('ACCESS DENIED: Admins must use the Admin Portal.');
+            } else {
+              await signOut(auth);
+              setError('ACCESS DENIED: Clients must use the Client Portal.');
+            }
           }
         } catch (e) {
           console.error("Session check error", e);
