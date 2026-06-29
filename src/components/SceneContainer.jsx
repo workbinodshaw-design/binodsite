@@ -22,16 +22,12 @@ const HolographicScene = ({ scrollProgress, setActiveCard }) => {
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      if (isMobile) {
-        // Auto-rotate smoothly on mobile since it's not a sticky scroll container anymore
-        groupRef.current.rotation.y -= delta * 0.3;
-      } else {
-        groupRef.current.rotation.y = THREE.MathUtils.lerp(
-          groupRef.current.rotation.y,
-          -targetRotation,
-          0.15
-        );
-      }
+      // Both mobile and desktop now use scroll-based rotation!
+      groupRef.current.rotation.y = THREE.MathUtils.lerp(
+        groupRef.current.rotation.y,
+        -targetRotation,
+        0.15
+      );
     }
 
     const targetX = pointer.x * 3;
