@@ -39,6 +39,20 @@ function App() {
     );
   }
 
+  // Subdomain: portfolio.castflow.in
+  if (hostname.startsWith('portfolio.')) {
+    return (
+      <Router basename={import.meta.env.BASE_URL}>
+        <Navbar />
+        <Routes>
+          <Route path="*" element={<PortfolioPage />} />
+        </Routes>
+        <Footer />
+        <AiAgentWidget />
+      </Router>
+    );
+  }
+
   // Subdomain: admin.castflow.in
   if (hostname.startsWith('admin.')) {
     return (
