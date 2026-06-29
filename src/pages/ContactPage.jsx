@@ -4,6 +4,7 @@ import { saveLeadToDatabase, auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Link, useLocation } from 'react-router-dom';
 import ProtectedWhatsAppLink from '../components/ProtectedWhatsAppLink';
+import { Country, State, City } from 'country-state-city';
 
 const ContactPage = () => {
   const location = useLocation();
@@ -13,6 +14,15 @@ const ContactPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [user, setUser] = useState(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
+
+  // Location States (isoCodes)
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedState, setSelectedState] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
+
+  const countries = Country.getAllCountries();
+  const states = selectedCountry ? State.getStatesOfCountry(selectedCountry) : [];
+  const cities = selectedState ? City.getCitiesOfState(selectedCountry, selectedState) : [];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -32,6 +42,20 @@ const ContactPage = () => {
     try {
       const formData = new FormData(e.target);
       const leadData = Object.fromEntries(formData.entries());
+      
+      // Format location properly
+      const countryName = Country.getCountryByCode(selectedCountry)?.name || '';
+      const stateName = State.getStateByCodeAndCountry(selectedState, selectedCountry)?.name || '';
+      const cityName = selectedCity || ''; 
+      const pincode = formData.get('pincode') || '';
+      
+      leadData.address = `${cityName}, ${stateName}, ${countryName} - ${pincode}`;
+      
+      // Cleanup temporary location fields from leadData
+      delete leadData.country;
+      delete leadData.state;
+      delete leadData.city;
+      delete leadData.pincode;
       
       // Forcefully attach the logged-in user's email to tie it to their dashboard
       leadData.email = user.email;
@@ -143,8 +167,67 @@ const ContactPage = () => {
               </div>
 
               <div className="form-group" style={{ marginTop: '1.5rem' }}>
-                <label>Location / Address (City, Country)</label>
-                <input type="text" name="address" required placeholder="New York, USA" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }} />
+                <label style={{ display: 'block', marginBottom: '0.5rem', color: '#ccc' }}>Location / Address</label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <select 
+                      name="country" 
+                      required 
+                      value={selectedCountry}
+                      onChange={(e) => {
+                        setSelectedCountry(e.target.value);
+                        setSelectedState(''); // reset state
+                        setSelectedCity('');  // reset city
+                      }}
+                      style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }}
+                    >
+                      <option value="">Select Country</option>
+                      {countries.map(c => <option key={c.isoCode} value={c.isoCode}>{c.name}</option>)}
+                    </select>
+                  </div>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <select 
+                      name="state" 
+                      required 
+                      value={selectedState}
+                      onChange={(e) => {
+                        setSelectedState(e.target.value);
+                        setSelectedCity(''); // reset city
+                      }}
+                      disabled={!selectedCountry}
+                      style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }}
+                    >
+                      <option value="">Select State</option>
+                      {states.map(s => <option key={s.isoCode} value={s.isoCode}>{s.name}</option>)}
+                    </select>
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <select 
+                      name="city" 
+                      required 
+                      value={selectedCity}
+                      onChange={(e) => setSelectedCity(e.target.value)}
+                      disabled={!selectedState}
+                      style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }}
+                    >
+                      <option value="">Select City</option>
+                      {cities.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
+                    </select>
+                  </div>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <input 
+                      type="text" 
+                      name="pincode" 
+                      required 
+                      placeholder="PIN / Zip Code" 
+                      disabled={!selectedCity} 
+                      style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)' }} 
+                    />
+                  </div>
+                </div>
               </div>
 
               <h4 style={{ color: '#a388ff', marginBottom: '1.5rem', marginTop: '3rem', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '8px' }}>

@@ -3,11 +3,21 @@ import { X, Send, Lock } from 'lucide-react';
 import { saveLeadToDatabase, auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+import { Country, State, City } from 'country-state-city';
 
 const LeadFormModal = ({ serviceName, onClose }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [user, setUser] = useState(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
+
+  // Location States (isoCodes)
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedState, setSelectedState] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
+
+  const countries = Country.getAllCountries();
+  const states = selectedCountry ? State.getStatesOfCountry(selectedCountry) : [];
+  const cities = selectedState ? City.getCitiesOfState(selectedCountry, selectedState) : [];
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -23,6 +33,20 @@ const LeadFormModal = ({ serviceName, onClose }) => {
     // Extract form data
     const formData = new FormData(e.target);
     const leadData = Object.fromEntries(formData.entries());
+
+    // Format location properly
+    const countryName = Country.getCountryByCode(selectedCountry)?.name || '';
+    const stateName = State.getStateByCodeAndCountry(selectedState, selectedCountry)?.name || '';
+    const cityName = selectedCity || ''; 
+    const pincode = formData.get('pincode') || '';
+    
+    leadData.address = `${cityName}, ${stateName}, ${countryName} - ${pincode}`;
+    
+    // Cleanup temporary location fields from leadData
+    delete leadData.country;
+    delete leadData.state;
+    delete leadData.city;
+    delete leadData.pincode;
 
     // Attach user context to lead
     leadData.clientUid = user ? user.uid : 'anonymous';
@@ -97,9 +121,57 @@ const LeadFormModal = ({ serviceName, onClose }) => {
                   <label>Alternative Phone</label>
                   <input type="tel" name="phone" placeholder="Optional" />
                 </div>
+              </div>
+
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: '#ccc' }}>Location / Address</label>
+              <div className="form-row" style={{ marginBottom: '1rem' }}>
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <select 
+                    name="country" 
+                    required 
+                    value={selectedCountry}
+                    onChange={(e) => {
+                      setSelectedCountry(e.target.value);
+                      setSelectedState(''); // reset state
+                      setSelectedCity('');  // reset city
+                    }}
+                  >
+                    <option value="">Select Country</option>
+                    {countries.map(c => <option key={c.isoCode} value={c.isoCode}>{c.name}</option>)}
+                  </select>
+                </div>
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <select 
+                    name="state" 
+                    required 
+                    value={selectedState}
+                    onChange={(e) => {
+                      setSelectedState(e.target.value);
+                      setSelectedCity(''); // reset city
+                    }}
+                    disabled={!selectedCountry}
+                  >
+                    <option value="">Select State</option>
+                    {states.map(s => <option key={s.isoCode} value={s.isoCode}>{s.name}</option>)}
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-row">
                 <div className="form-group">
-                  <label>Location / Address</label>
-                  <input type="text" name="address" required placeholder="City, Country" />
+                  <select 
+                    name="city" 
+                    required 
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.target.value)}
+                    disabled={!selectedState}
+                  >
+                    <option value="">Select City</option>
+                    {cities.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
+                  </select>
+                </div>
+                <div className="form-group">
+                  <input type="text" name="pincode" required placeholder="PIN / Zip Code" disabled={!selectedCity} />
                 </div>
               </div>
 
