@@ -127,7 +127,7 @@ const LeadFormModal = ({ serviceName, onClose }) => {
                 </div>
               </div>
 
-              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: '#ccc' }}>Location / Address</label>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Location / Address</label>
               <div className="form-row" style={{ marginBottom: '1rem' }}>
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <select 
