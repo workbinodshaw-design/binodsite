@@ -75,7 +75,7 @@ const LoginPortal = () => {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.5)', color: '#fff', marginBottom: '1rem' }}
+            style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)', background: '#fdfdfd', color: '#1a1a1a', marginBottom: '1rem', fontSize: '1rem' }}
           />
           <input 
             type="password" 
@@ -83,7 +83,7 @@ const LoginPortal = () => {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.5)', color: '#fff', marginBottom: '1.5rem' }}
+            style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)', background: '#fdfdfd', color: '#1a1a1a', marginBottom: '1.5rem', fontSize: '1rem' }}
           />
           <button type="submit" disabled={loading} className="btn btn-primary" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
             <Lock size={18} /> {loading ? 'Processing...' : 'Secure Login'}

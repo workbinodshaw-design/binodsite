@@ -7,6 +7,7 @@ import { Lock, User, UserPlus } from 'lucide-react';
 
 const ClientLogin = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -57,6 +58,7 @@ const ClientLogin = () => {
         const role = email.toLowerCase() === 'work.binodshaw@gmail.com' ? 'admin' : 'client';
         
         await setDoc(doc(db, 'users', user.uid), {
+          name: name || email.split('@')[0],
           email: email,
           role: role,
           createdAt: new Date()
@@ -108,13 +110,23 @@ const ClientLogin = () => {
         {error && <div style={{ color: '#FF6B6B', background: 'rgba(255,107,107,0.1)', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem', fontSize: '0.9rem' }}>{error}</div>}
         
         <form onSubmit={handleSubmit}>
+          {!isLogin && (
+            <input 
+              type="text" 
+              placeholder="Full Name" 
+              required={!isLogin}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)', background: '#fdfdfd', color: '#1a1a1a', marginBottom: '1rem', fontSize: '1rem' }}
+            />
+          )}
           <input 
             type="email" 
             placeholder="Email Address" 
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.5)', color: '#fff', marginBottom: '1rem' }}
+            style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)', background: '#fdfdfd', color: '#1a1a1a', marginBottom: '1rem', fontSize: '1rem' }}
           />
           <input 
             type="password" 
@@ -122,7 +134,7 @@ const ClientLogin = () => {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.5)', color: '#fff', marginBottom: '1.5rem' }}
+            style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)', background: '#fdfdfd', color: '#1a1a1a', marginBottom: '1.5rem', fontSize: '1rem' }}
           />
           <button type="submit" disabled={loading} className="btn btn-primary" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
             <Lock size={18} /> {loading ? 'Processing...' : (isLogin ? 'Secure Login' : 'Create Account')}
