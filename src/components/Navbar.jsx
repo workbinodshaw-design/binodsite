@@ -67,8 +67,9 @@ const Navbar = () => {
       <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
         <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
         <Link to="/services" className={`nav-link ${location.pathname === '/services' ? 'active' : ''}`}>Services</Link>
-        <Link to="/portfolio" className={`nav-link ${location.pathname === '/portfolio' ? 'active' : ''}`}>Portfolio</Link>
+        <a href="https://portfolio.castflow.in" className="nav-link">Portfolio</a>
         <Link to="/pricing" className={`nav-link ${location.pathname === '/pricing' ? 'active' : ''}`}>Pricing</Link>
+
         
         {user ? (
           <Link 
