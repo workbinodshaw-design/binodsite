@@ -170,57 +170,6 @@ const TermsOfService = () => {
               </p>
             </div>
             
-            <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.1)', margin: '2rem 0' }} />
-
-            {/* REFUND POLICY */}
-            <div id="refund-policy">
-              <h1 className="headline" style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: 900 }}>
-                Refund Policy
-              </h1>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '2rem' }}>
-                At CastFlow, we strive to deliver high-quality services and ensure client satisfaction. If you are not satisfied with the work delivered, please contact us first so we can understand your concerns and, where possible, make reasonable revisions.
-              </p>
-              
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>Refund Eligibility</h3>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1rem' }}>
-                If a refund is approved, CastFlow reserves the right to deduct reasonable costs already incurred, including but not limited to:
-              </p>
-              <ul style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem' }}>
-                <li>Initial consultation and planning</li>
-                <li>Research and project analysis</li>
-                <li>UI/UX design work</li>
-                <li>Development work completed</li>
-                <li>Automation setup and configuration</li>
-                <li>API integration work</li>
-                <li>Third-party service charges</li>
-                <li>Payment gateway transaction fees (if applicable)</li>
-                <li>Any other resources or expenses directly related to your project</li>
-              </ul>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '2rem' }}>
-                The remaining eligible amount will be refunded using the original payment method whenever possible.
-              </p>
-              
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>Non-Refundable Situations</h3>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1rem' }}>
-                Refunds may not be provided if:
-              </p>
-              <ul style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '2rem' }}>
-                <li>The agreed work has been completed and delivered.</li>
-                <li>The client changes their mind after development has started.</li>
-                <li>The client fails to provide required information or approvals, causing project delays.</li>
-                <li>Third-party services or platforms (such as hosting providers, Meta, Google, payment gateways, or API providers) cause issues beyond CastFlow's control.</li>
-                <li>The project is cancelled after a significant portion of the work has already been completed.</li>
-              </ul>
-              
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>Our Commitment</h3>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1rem' }}>
-                Client satisfaction is important to us. Before processing any refund request, we will make reasonable efforts to resolve issues through revisions, corrections, or alternative solutions whenever appropriate.
-              </p>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem' }}>
-                All refund requests are reviewed individually based on the project's progress, work completed, and expenses incurred.
-              </p>
-            </div>
-
           </div>
         </div>
       </section>
