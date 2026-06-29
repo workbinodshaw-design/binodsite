@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { User, Shield, Briefcase } from 'lucide-react';
+import { User, Shield, Briefcase, Menu, X } from 'lucide-react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
@@ -9,6 +9,12 @@ const Navbar = () => {
   const location = useLocation();
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Close menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -54,7 +60,11 @@ const Navbar = () => {
         <span className="logo-text">CASTFLOW</span>
       </Link>
       
-      <div className="nav-links">
+      <button className="mobile-menu-btn" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+        {isMenuOpen ? <X size={28} color="#000" /> : <Menu size={28} color="#000" />}
+      </button>
+
+      <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
         <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
         <Link to="/services" className={`nav-link ${location.pathname === '/services' ? 'active' : ''}`}>Services</Link>
         <Link to="/portfolio" className={`nav-link ${location.pathname === '/portfolio' ? 'active' : ''}`}>Portfolio</Link>
