@@ -2554,7 +2554,7 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     padding: 6rem 1rem 0rem 1rem !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: flex-start !important;
+    justify-content: center !important; /* Changed from flex-start to fill the white space evenly */
   }
   
   /* Reduce bottom margins on text elements to save space on small screens */
