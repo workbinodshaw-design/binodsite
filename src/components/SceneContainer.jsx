@@ -22,11 +22,16 @@ const HolographicScene = ({ scrollProgress, setActiveCard }) => {
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = THREE.MathUtils.lerp(
-        groupRef.current.rotation.y,
-        -targetRotation,
-        0.15
-      );
+      if (isMobile) {
+        // Auto-rotate smoothly on mobile since it's not a sticky scroll container anymore
+        groupRef.current.rotation.y -= delta * 0.3;
+      } else {
+        groupRef.current.rotation.y = THREE.MathUtils.lerp(
+          groupRef.current.rotation.y,
+          -targetRotation,
+          0.15
+        );
+      }
     }
 
     const targetX = pointer.x * 3;
@@ -38,7 +43,7 @@ const HolographicScene = ({ scrollProgress, setActiveCard }) => {
   });
 
   return (
-    <group ref={groupRef} position={isMobile ? [0, -1, 0] : [6, 0, 0]} scale={isMobile ? 1.1 : 1}>
+    <group ref={groupRef} position={isMobile ? [0, -2, 0] : [6, 0, 0]} scale={isMobile ? 1.3 : 1}>
       <React.Suspense fallback={null}>
         <BabySpiderman />
       </React.Suspense>

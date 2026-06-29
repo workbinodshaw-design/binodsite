@@ -2521,3 +2521,42 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     transform-origin: bottom right !important;
   }
 }
+
+
+/* ==========================================================================
+   MOBILE HERO SECTION FIX (Eliminates 500vh blank space)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Remove the 500vh forced scroll height on mobile */
+  .hero-pin-wrapper {
+    height: auto !important; 
+    min-height: 100vh !important;
+  }
+
+  /* Disable sticky behavior and make it a normal flex column */
+  .hero-sticky-container {
+    position: relative !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+
+  /* Make UI Overlay take natural height at top */
+  .ui-overlay {
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
+    padding: 7rem 1.5rem 2rem 1.5rem !important;
+  }
+
+  /* Make Canvas Container take the remaining space and sit below UI Overlay */
+  .canvas-container {
+    width: 100% !important;
+    height: 70vh !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+}
