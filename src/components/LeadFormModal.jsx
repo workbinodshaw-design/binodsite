@@ -107,10 +107,10 @@ const LeadFormModal = ({ serviceName, onClose }) => {
                 <label>Estimated Budget</label>
                 <select name="budget">
                   <option value="">Select a range</option>
-                  <option value="< $1,000">Less than $1,000</option>
-                  <option value="$1,000 - $5,000">$1,000 - $5,000</option>
-                  <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-                  <option value="$10,000+">$10,000+</option>
+                  <option value="< ₹10,000 / $120">Less than ₹10,000 / $120</option>
+                  <option value="₹10,000 - ₹40,000 / $120 - $500">₹10,000 - ₹40,000 / $120 - $500</option>
+                  <option value="₹40,000 - ₹80,000 / $500 - $1,000">₹40,000 - ₹80,000 / $500 - $1,000</option>
+                  <option value="₹80,000+ / $1,000+">₹80,000+ / $1,000+</option>
                 </select>
               </div>
 
