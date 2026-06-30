@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   MessageCircle, 
   Code, 
@@ -8,6 +8,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { saveJobApplicationToDatabase } from '../firebase';
+import { Country, State, City } from 'country-state-city';
 
 const JoinTeamPage = () => {
   const formRef = useRef(null);
@@ -16,8 +17,6 @@ const JoinTeamPage = () => {
     fullName: '',
     email: '',
     phone: '',
-    country: 'India',
-    city: '',
     address: '',
     pinCode: '',
     position: '',
@@ -29,9 +28,26 @@ const JoinTeamPage = () => {
     bestProject: '',
     confirmAccurate: false
   });
+
+  // Location States (isoCodes)
+  const [selectedCountry, setSelectedCountry] = useState('IN');
+  const [selectedState, setSelectedState] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
+
+  const allCountries = Country.getAllCountries();
+  const priorityCodes = ['IN', 'US', 'GB', 'CA', 'AU'];
+  const priorityCountries = priorityCodes.map(code => allCountries.find(c => c.isoCode === code)).filter(Boolean);
+  const otherCountries = allCountries.filter(c => !priorityCodes.includes(c.isoCode));
   
+  const states = selectedCountry ? State.getStatesOfCountry(selectedCountry) : [];
+  const cities = selectedState ? City.getCitiesOfState(selectedCountry, selectedState) : [];
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const roles = [
     {
@@ -86,12 +102,20 @@ const JoinTeamPage = () => {
       alert("Please confirm that the information provided is accurate.");
       return;
     }
+
+    if (!selectedCountry || !selectedState || (!selectedCity && cities.length > 0)) {
+        alert("Please complete your address selection (Country, State, City).");
+        return;
+    }
     
     setIsSubmitting(true);
     
     try {
       const applicationData = {
         ...formData,
+        country: Country.getCountryByCode(selectedCountry)?.name || '',
+        state: State.getStateByCodeAndCountry(selectedState, selectedCountry)?.name || '',
+        city: selectedCity,
         submittedAt: new Date().toISOString()
       };
       
@@ -204,35 +228,99 @@ const JoinTeamPage = () => {
               </div>
 
               <h4 style={{ color: '#38bdf8', marginBottom: '1.5rem', fontSize: '1.1rem' }}>Address Details</h4>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
                 <div className="form-group">
                   <label style={{ color: 'var(--text-primary)' }}>Country *</label>
-                  <select name="country" value={formData.country} onChange={handleInputChange} required className="form-control" style={inputStyle}>
-                    <option value="India">India</option>
-                    <option value="United States">United States</option>
-                    <option value="United Kingdom">United Kingdom</option>
-                    <option value="Canada">Canada</option>
-                    <option value="Australia">Australia</option>
-                    <option value="Other">Other</option>
+                  <select 
+                    name="country" 
+                    value={selectedCountry} 
+                    onChange={(e) => {
+                      setSelectedCountry(e.target.value);
+                      setSelectedState('');
+                      setSelectedCity('');
+                    }} 
+                    required 
+                    className="form-control" 
+                    style={inputStyle}
+                  >
+                    <option value="" disabled>Select Country</option>
+                    <optgroup label="Popular">
+                      {priorityCountries.map(c => (
+                        <option key={c.isoCode} value={c.isoCode}>{c.name}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="All Countries">
+                      {otherCountries.map(c => (
+                        <option key={c.isoCode} value={c.isoCode}>{c.name}</option>
+                      ))}
+                    </optgroup>
                   </select>
                 </div>
+                
                 <div className="form-group">
-                  <label style={{ color: 'var(--text-primary)' }}>City / State *</label>
-                  <input type="text" name="city" value={formData.city} onChange={handleInputChange} required className="form-control" placeholder="Mumbai, Maharashtra" style={inputStyle} />
+                  <label style={{ color: 'var(--text-primary)' }}>State / Province *</label>
+                  <select 
+                    name="state" 
+                    value={selectedState} 
+                    onChange={(e) => {
+                      setSelectedState(e.target.value);
+                      setSelectedCity('');
+                    }} 
+                    required 
+                    className="form-control" 
+                    style={inputStyle}
+                    disabled={states.length === 0}
+                  >
+                    <option value="" disabled>Select State</option>
+                    {states.map(s => (
+                      <option key={s.isoCode} value={s.isoCode}>{s.name}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
                 <div className="form-group">
-                  <label style={{ color: 'var(--text-primary)' }}>Full Address *</label>
-                  <input type="text" name="address" value={formData.address} onChange={handleInputChange} required className="form-control" placeholder="Street, Area, Landmark..." style={inputStyle} />
+                  <label style={{ color: 'var(--text-primary)' }}>City / Town / Village *</label>
+                  {cities.length > 0 ? (
+                    <select 
+                      name="city" 
+                      value={selectedCity} 
+                      onChange={(e) => setSelectedCity(e.target.value)} 
+                      required 
+                      className="form-control" 
+                      style={inputStyle}
+                    >
+                      <option value="" disabled>Select City</option>
+                      {cities.map(c => (
+                        <option key={c.name} value={c.name}>{c.name}</option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input 
+                      type="text" 
+                      name="city" 
+                      value={selectedCity} 
+                      onChange={(e) => setSelectedCity(e.target.value)} 
+                      required 
+                      className="form-control" 
+                      placeholder="Enter City" 
+                      style={inputStyle}
+                      disabled={!selectedState && states.length > 0} 
+                    />
+                  )}
                 </div>
-              </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
                 <div className="form-group">
                   <label style={{ color: 'var(--text-primary)' }}>PIN / ZIP Code *</label>
-                  <input type="text" name="pinCode" value={formData.pinCode} onChange={handleInputChange} required className="form-control" placeholder="400001" style={inputStyle} />
+                  <input type="text" name="pinCode" value={formData.pinCode} onChange={handleInputChange} required className="form-control" placeholder="Manual Entry (e.g., 400001)" style={inputStyle} />
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem', marginBottom: '2.5rem' }}>
+                <div className="form-group">
+                  <label style={{ color: 'var(--text-primary)' }}>Full Street Address *</label>
+                  <input type="text" name="address" value={formData.address} onChange={handleInputChange} required className="form-control" placeholder="Street, Area, Landmark, House No." style={inputStyle} />
                 </div>
               </div>
 
