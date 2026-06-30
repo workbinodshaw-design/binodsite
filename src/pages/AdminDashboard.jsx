@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, onSnapshot, orderBy, query, doc, updateDoc, setDoc, deleteDoc, where } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { db, auth } from '../firebase';
-import { RefreshCw, LogOut, Shield, Users, Lock, Trash2, Plus, Briefcase, Activity, CheckCircle2, Inbox, Zap, Archive } from 'lucide-react';
+import { RefreshCw, LogOut, Shield, Users, Lock, Trash2, Plus, Briefcase, Activity, CheckCircle2, Inbox, Zap, Archive, BarChart2 } from 'lucide-react';
 
 const AdminDashboard = () => {
   const [leads, setLeads] = useState([]);
@@ -15,6 +15,8 @@ const AdminDashboard = () => {
   const [newTeamEmail, setNewTeamEmail] = useState('');
   const [teamApps, setTeamApps] = useState([]);
   const [appSubTab, setAppSubTab] = useState('New');
+  const [analyticsData, setAnalyticsData] = useState([]);
+  const [analyticsFilter, setAnalyticsFilter] = useState('24h');
 
   useEffect(() => {
     if (activeTab === 'leads') {
@@ -27,6 +29,9 @@ const AdminDashboard = () => {
     }
     if (activeTab === 'teamApps') {
       fetchTeamApps();
+    }
+    if (activeTab === 'analytics') {
+      fetchAnalytics();
     }
     
     return () => {
@@ -99,6 +104,47 @@ const AdminDashboard = () => {
       setLoading(false);
     }
   };
+
+  const fetchAnalytics = () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const analyticsRef = collection(db, "analytics");
+      
+      // Calculate timestamp based on filter
+      let timeLimit = new Date();
+      if (analyticsFilter === '24h') timeLimit.setHours(timeLimit.getHours() - 24);
+      else if (analyticsFilter === '7d') timeLimit.setDate(timeLimit.getDate() - 7);
+      else if (analyticsFilter === '30d') timeLimit.setDate(timeLimit.getDate() - 30);
+      
+      const q = query(analyticsRef, where("timestamp", ">=", timeLimit), orderBy("timestamp", "desc"));
+      
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const fetchedData = [];
+        querySnapshot.forEach((doc) => {
+          fetchedData.push({ id: doc.id, ...doc.data() });
+        });
+        setAnalyticsData(fetchedData);
+        setLoading(false);
+      }, (err) => {
+        console.error("Error in onSnapshot analytics:", err);
+        setError("Failed to load analytics.");
+        setLoading(false);
+      });
+      
+      if(window.analyticsUnsubscribe) window.analyticsUnsubscribe();
+      window.analyticsUnsubscribe = unsubscribe;
+    } catch (err) {
+      console.error("Error setting up analytics listener:", err);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab === 'analytics') {
+      fetchAnalytics();
+    }
+  }, [analyticsFilter]);
 
   const handleUpdateAppStatus = async (appId, newStatus) => {
     try {
@@ -331,6 +377,25 @@ const AdminDashboard = () => {
           }}
         >
           <Users size={20} /> Team Applications
+        </button>
+        <button 
+          onClick={() => setActiveTab('analytics')}
+          style={{ 
+            background: activeTab === 'analytics' ? '#a388ff' : 'transparent', 
+            color: activeTab === 'analytics' ? '#1a1a1a' : '#888', 
+            border: 'none', 
+            padding: '1rem 2rem', 
+            borderRadius: '12px', 
+            cursor: 'pointer', 
+            fontWeight: 'bold', 
+            display: 'flex', 
+            gap: '8px', 
+            alignItems: 'center',
+            transition: 'all 0.3s ease',
+            fontSize: '1rem'
+          }}
+        >
+          <BarChart2 size={20} /> Site Analytics
         </button>
       </div>
 
@@ -846,6 +911,57 @@ const AdminDashboard = () => {
               ))}
             </div>
           )}
+        </div>
+      )}
+
+      {activeTab === 'analytics' && (
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+            <h2 style={{ fontSize: '1.8rem', color: '#fff', margin: 0 }}>Site Analytics</h2>
+            <div style={{ display: 'flex', gap: '0.5rem', background: 'rgba(255,255,255,0.05)', padding: '0.5rem', borderRadius: '12px' }}>
+              <button onClick={() => setAnalyticsFilter('24h')} style={{ background: analyticsFilter === '24h' ? '#38bdf8' : 'transparent', color: analyticsFilter === '24h' ? '#1a1a1a' : '#888', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>24 Hours</button>
+              <button onClick={() => setAnalyticsFilter('7d')} style={{ background: analyticsFilter === '7d' ? '#38bdf8' : 'transparent', color: analyticsFilter === '7d' ? '#1a1a1a' : '#888', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>7 Days</button>
+              <button onClick={() => setAnalyticsFilter('30d')} style={{ background: analyticsFilter === '30d' ? '#38bdf8' : 'transparent', color: analyticsFilter === '30d' ? '#1a1a1a' : '#888', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>30 Days</button>
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
+            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', padding: '2rem', borderRadius: '16px' }}>
+              <h3 style={{ color: '#888', fontSize: '1rem', marginBottom: '0.5rem' }}>Total Page Views ({analyticsFilter})</h3>
+              <div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#38bdf8' }}>{analyticsData.length}</div>
+            </div>
+          </div>
+
+          <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', padding: '2rem', borderRadius: '16px' }}>
+            <h3 style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '1.5rem' }}>Top Visited Pages</h3>
+            {loading ? (
+              <p style={{ color: '#888' }}>Loading...</p>
+            ) : analyticsData.length === 0 ? (
+              <p style={{ color: '#888' }}>No data found for this time period.</p>
+            ) : (
+              <table style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse' }}>
+                <thead>
+                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                    <th style={{ padding: '1rem 0', color: '#888' }}>Page Path</th>
+                    <th style={{ padding: '1rem 0', color: '#888' }}>Views</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.entries(
+                    analyticsData.reduce((acc, view) => {
+                      acc[view.path] = (acc[view.path] || 0) + 1;
+                      return acc;
+                    }, {})
+                  ).sort((a, b) => b[1] - a[1]).map(([path, views], index) => (
+                    <tr key={path} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                      <td style={{ padding: '1rem 0', color: '#fff' }}>{path}</td>
+                      <td style={{ padding: '1rem 0', color: '#38bdf8', fontWeight: 'bold' }}>{views}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
         </div>
       )}
     </div>

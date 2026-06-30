@@ -78,4 +78,25 @@ export const saveJobApplicationToDatabase = async (applicationData) => {
   }
 };
 
+/**
+ * Utility to record a page view for analytics
+ * @param {string} path - The path of the page visited
+ */
+export const recordPageView = async (path) => {
+  if (!db) return;
+  
+  try {
+    // Only track non-admin paths to avoid skewing data with our own visits
+    if (!path.startsWith('/admin') && !window.location.hostname.startsWith('admin.')) {
+      await addDoc(collection(db, "analytics"), {
+        path: path,
+        hostname: window.location.hostname,
+        timestamp: serverTimestamp()
+      });
+    }
+  } catch (e) {
+    console.error("Error recording page view: ", e);
+  }
+};
+
 export { db, auth, storage };

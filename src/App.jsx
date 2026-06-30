@@ -23,6 +23,7 @@ import EmployeeDashboard from './pages/EmployeeDashboard';
 import ClientDashboard from './pages/ClientDashboard';
 import ClientLogin from './pages/ClientLogin';
 import ScrollReveal from './components/ScrollReveal';
+import AnalyticsTracker from './components/AnalyticsTracker';
 
 function App() {
   const hostname = window.location.hostname;
@@ -31,6 +32,7 @@ function App() {
   if (hostname.startsWith('privacypolicy.')) {
     return (
       <Router basename={import.meta.env.BASE_URL}>
+        <AnalyticsTracker />
         <Navbar />
         <Routes>
           <Route path="*" element={<PrivacyPolicy />} />
@@ -45,6 +47,7 @@ function App() {
   if (hostname.startsWith('portfolio.')) {
     return (
       <Router basename={import.meta.env.BASE_URL}>
+        <AnalyticsTracker />
         <Navbar />
         <Routes>
           <Route path="*" element={<PortfolioPage />} />
@@ -59,6 +62,7 @@ function App() {
   if (hostname.startsWith('admin.')) {
     return (
       <Router basename={import.meta.env.BASE_URL}>
+        <AnalyticsTracker />
         <Routes>
           <Route path="/" element={<AdminLogin />} />
           <Route path="/admin-login" element={<Navigate to="/" replace />} />
@@ -81,6 +85,7 @@ function App() {
   if (hostname.startsWith('team.')) {
     return (
       <Router basename={import.meta.env.BASE_URL}>
+        <AnalyticsTracker />
         <Routes>
           <Route path="/" element={<TeamLogin />} />
           <Route path="/team-login" element={<Navigate to="/" replace />} />
@@ -102,6 +107,7 @@ function App() {
   // Default Main Domain (castflow.in, www.castflow.in, localhost)
   return (
     <Router basename={import.meta.env.BASE_URL}>
+      <AnalyticsTracker />
       <ScrollReveal />
       <Navbar />
       
