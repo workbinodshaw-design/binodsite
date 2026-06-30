@@ -358,10 +358,13 @@ const AdminDashboard = () => {
                         {app.fullName}
                       </h3>
                       <p style={{ color: '#a388ff', fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '0.5rem' }}>{app.position}</p>
-                      <div style={{ display: 'flex', gap: '1.5rem', color: '#888', fontSize: '0.9rem' }}>
+                      <div style={{ display: 'flex', gap: '1.5rem', color: '#888', fontSize: '0.9rem', marginBottom: '0.5rem' }}>
                         <span>{app.email}</span>
                         <span>{app.phone}</span>
                         <span>Exp: {app.experience}</span>
+                      </div>
+                      <div style={{ display: 'flex', gap: '1.5rem', color: '#888', fontSize: '0.85rem' }}>
+                        <span>{app.address}, {app.city}, {app.country} - {app.pinCode}</span>
                       </div>
                     </div>
                     

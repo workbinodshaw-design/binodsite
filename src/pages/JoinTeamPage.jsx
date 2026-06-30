@@ -4,13 +4,10 @@ import {
   Code, 
   Settings, 
   TrendingUp, 
-  Upload, 
   CheckCircle2, 
-  ChevronRight,
   ArrowRight
 } from 'lucide-react';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { saveJobApplicationToDatabase, storage } from '../firebase';
+import { saveJobApplicationToDatabase } from '../firebase';
 
 const JoinTeamPage = () => {
   const formRef = useRef(null);
@@ -19,6 +16,10 @@ const JoinTeamPage = () => {
     fullName: '',
     email: '',
     phone: '',
+    country: 'India',
+    city: '',
+    address: '',
+    pinCode: '',
     position: '',
     experience: 'Fresher',
     skills: '',
@@ -110,6 +111,9 @@ const JoinTeamPage = () => {
     }
   };
 
+  // Centralized style for all form inputs on this dark theme page
+  const inputStyle = { backgroundColor: 'rgba(0,0,0,0.5)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' };
+
   return (
     <div className="page-container" style={{ paddingTop: '8rem' }}>
       
@@ -180,25 +184,63 @@ const JoinTeamPage = () => {
             <p style={{ color: 'var(--text-secondary)', marginBottom: '3rem' }}>Fill out the details below to apply for a position.</p>
             
             <form onSubmit={handleSubmit} className="lead-form">
+              <h4 style={{ color: '#a388ff', marginBottom: '1.5rem', fontSize: '1.1rem' }}>Personal Details</h4>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
                 <div className="form-group">
-                  <label>Full Name *</label>
-                  <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} required className="form-control" placeholder="John Doe" />
+                  <label style={{ color: '#fff' }}>Full Name *</label>
+                  <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} required className="form-control" placeholder="John Doe" style={inputStyle} />
                 </div>
                 <div className="form-group">
-                  <label>Email Address *</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="form-control" placeholder="john@example.com" />
+                  <label style={{ color: '#fff' }}>Email Address *</label>
+                  <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="form-control" placeholder="john@example.com" style={inputStyle} />
                 </div>
               </div>
 
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
+                <div className="form-group">
+                  <label style={{ color: '#fff' }}>Phone Number *</label>
+                  <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required className="form-control" placeholder="+91 9876543210" style={inputStyle} />
+                </div>
+              </div>
+
+              <h4 style={{ color: '#38bdf8', marginBottom: '1.5rem', fontSize: '1.1rem' }}>Address Details</h4>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
                 <div className="form-group">
-                  <label>Phone Number *</label>
-                  <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required className="form-control" placeholder="+91 9876543210" />
+                  <label style={{ color: '#fff' }}>Country *</label>
+                  <select name="country" value={formData.country} onChange={handleInputChange} required className="form-control" style={inputStyle}>
+                    <option value="India">India</option>
+                    <option value="United States">United States</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
                 <div className="form-group">
-                  <label>Position Applying For *</label>
-                  <select name="position" value={formData.position} onChange={handleInputChange} required className="form-control" style={{ backgroundColor: 'rgba(0,0,0,0.5)', color: '#fff' }}>
+                  <label style={{ color: '#fff' }}>City / State *</label>
+                  <input type="text" name="city" value={formData.city} onChange={handleInputChange} required className="form-control" placeholder="Mumbai, Maharashtra" style={inputStyle} />
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                <div className="form-group">
+                  <label style={{ color: '#fff' }}>Full Address *</label>
+                  <input type="text" name="address" value={formData.address} onChange={handleInputChange} required className="form-control" placeholder="Street, Area, Landmark..." style={inputStyle} />
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
+                <div className="form-group">
+                  <label style={{ color: '#fff' }}>PIN / ZIP Code *</label>
+                  <input type="text" name="pinCode" value={formData.pinCode} onChange={handleInputChange} required className="form-control" placeholder="400001" style={inputStyle} />
+                </div>
+              </div>
+
+              <h4 style={{ color: '#fbbf24', marginBottom: '1.5rem', fontSize: '1.1rem' }}>Professional Profile</h4>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                <div className="form-group">
+                  <label style={{ color: '#fff' }}>Position Applying For *</label>
+                  <select name="position" value={formData.position} onChange={handleInputChange} required className="form-control" style={inputStyle}>
                     <option value="" disabled>Select a role</option>
                     {roles.map(r => (
                       <option key={r.id} value={r.title}>{r.title}</option>
@@ -206,41 +248,40 @@ const JoinTeamPage = () => {
                     <option value="Other">Other</option>
                   </select>
                 </div>
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
                 <div className="form-group">
-                  <label>Experience Level *</label>
-                  <select name="experience" value={formData.experience} onChange={handleInputChange} required className="form-control" style={{ backgroundColor: 'rgba(0,0,0,0.5)', color: '#fff' }}>
+                  <label style={{ color: '#fff' }}>Experience Level *</label>
+                  <select name="experience" value={formData.experience} onChange={handleInputChange} required className="form-control" style={inputStyle}>
                     <option value="Fresher">Fresher</option>
                     <option value="Intermediate">Intermediate</option>
                     <option value="Experienced">Experienced</option>
                   </select>
                 </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
                 <div className="form-group">
-                  <label>Skills *</label>
-                  <input type="text" name="skills" value={formData.skills} onChange={handleInputChange} required className="form-control" placeholder="e.g. React, Node.js, Communication" />
+                  <label style={{ color: '#fff' }}>Skills *</label>
+                  <input type="text" name="skills" value={formData.skills} onChange={handleInputChange} required className="form-control" placeholder="e.g. React, Node.js, Communication" style={inputStyle} />
+                </div>
+                <div className="form-group">
+                  <label style={{ color: '#fff' }}>Portfolio / GitHub / LinkedIn (Optional)</label>
+                  <input type="url" name="portfolio" value={formData.portfolio} onChange={handleInputChange} className="form-control" placeholder="https://" style={inputStyle} />
                 </div>
               </div>
 
               <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                <label>Portfolio / GitHub / LinkedIn (Optional)</label>
-                <input type="url" name="portfolio" value={formData.portfolio} onChange={handleInputChange} className="form-control" placeholder="https://" />
+                <label style={{ color: '#fff' }}>Tell us about yourself *</label>
+                <textarea name="tellUs" value={formData.tellUs} onChange={handleInputChange} required className="form-control" rows="3" placeholder="Brief intro..." style={inputStyle}></textarea>
               </div>
 
               <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                <label>Tell us about yourself *</label>
-                <textarea name="tellUs" value={formData.tellUs} onChange={handleInputChange} required className="form-control" rows="3" placeholder="Brief intro..."></textarea>
-              </div>
-
-              <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                <label>Why do you want to join CastFlow? *</label>
-                <textarea name="whyCastFlow" value={formData.whyCastFlow} onChange={handleInputChange} required className="form-control" rows="3" placeholder="What excites you about us?"></textarea>
+                <label style={{ color: '#fff' }}>Why do you want to join CastFlow? *</label>
+                <textarea name="whyCastFlow" value={formData.whyCastFlow} onChange={handleInputChange} required className="form-control" rows="3" placeholder="What excites you about us?" style={inputStyle}></textarea>
               </div>
 
               <div className="form-group" style={{ marginBottom: '2.5rem' }}>
-                <label>Best Project You've Built (or Achievement) *</label>
-                <textarea name="bestProject" value={formData.bestProject} onChange={handleInputChange} required className="form-control" rows="3" placeholder="Tell us about something you are proud of..."></textarea>
+                <label style={{ color: '#fff' }}>Best Project You've Built (or Achievement) *</label>
+                <textarea name="bestProject" value={formData.bestProject} onChange={handleInputChange} required className="form-control" rows="3" placeholder="Tell us about something you are proud of..." style={inputStyle}></textarea>
               </div>
 
               <div style={{ marginBottom: '2.5rem', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
