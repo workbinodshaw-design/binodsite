@@ -2607,10 +2607,10 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 /* Services Responsive Fixes */
 @media (max-width: 768px) {
   .responsive-text-center {
-    text-align: center !important;
+    text-align: left !important;
   }
   .responsive-text-center h1, .responsive-text-center p {
-    text-align: center !important;
+    text-align: left !important;
   }
   .mobile-small-card {
     padding: 1rem !important;
