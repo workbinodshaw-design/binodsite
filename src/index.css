@@ -2630,3 +2630,56 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     margin: -1rem 0;
   }
 }
+
+/* More Services Mobile Fixes */
+@media (max-width: 768px) {
+  /* Center the section title */
+  .service-detail-content h3 {
+    text-align: center !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Left align the paragraphs for readability, but center them as a block */
+  .service-detail-content p.text-secondary {
+    text-align: left !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* Center the features list container but left-align text inside it */
+  .service-features-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 1rem !important;
+  }
+  
+  /* Make the features items smaller */
+  .service-features-list strong {
+    font-size: 1rem !important;
+  }
+  
+  .service-features-list p {
+    font-size: 0.9rem !important;
+  }
+  
+  /* Center the button */
+  .service-detail-content .btn-primary {
+    align-self: center;
+    margin: 2rem auto 0 !important;
+    display: flex !important;
+  }
+
+  /* Make the AI / Manual cards even more compact */
+  .comparison-card {
+    padding: 0.8rem !important;
+  }
+  .comparison-card .comp-header {
+    font-size: 0.9rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .comparison-card .comp-body {
+    font-size: 0.8rem !important;
+  }
+}
