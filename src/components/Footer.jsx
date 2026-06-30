@@ -91,7 +91,6 @@ const Footer = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <CustomLink to="/services/ai-automation" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Automation</CustomLink>
               <CustomLink to="/services/web-development" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Web Development</CustomLink>
-              <CustomLink to="/services/ai-solutions" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>AI Solutions</CustomLink>
             </div>
           </div>
 
