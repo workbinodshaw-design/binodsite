@@ -12,7 +12,14 @@ import { Layers, Box, Cpu, HardDrive } from 'lucide-react';
 function HomePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeCard, setActiveCard] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const heroWrapperRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,12 +47,19 @@ function HomePage() {
     <div className="home-page">
       <ActiveCardOverlay activeCard={activeCard} onClose={() => setActiveCard(null)} />
 
+      {/* MOBILE ONLY: Normal scrolling UI text */}
+      {isMobile && (
+        <div style={{ paddingTop: '100px', background: 'var(--bg-color)', position: 'relative', zIndex: 20 }}>
+          <UIOverlay />
+        </div>
+      )}
+
       {/* 1. PINNED HERO WRAPPER */}
       <div className="hero-pin-wrapper" ref={heroWrapperRef}>
         <div className="hero-sticky-container" style={{ filter: activeCard ? 'blur(8px)' : 'none', transition: 'filter 0.3s ease' }}>
           
           <FloatingBubbles />
-          <UIOverlay />
+          {!isMobile && <UIOverlay />}
 
           <ErrorBoundary>
             <div className="canvas-container">
