@@ -2633,10 +2633,11 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 
 /* More Services Mobile Fixes */
 @media (max-width: 768px) {
-  /* Center the section title */
+  /* Left align the section title */
   .service-detail-content h3 {
-    text-align: center !important;
+    text-align: left !important;
     margin-bottom: 1rem !important;
+    width: 100%;
   }
   
   /* Left align the paragraphs for readability, but center them as a block */
@@ -2644,6 +2645,7 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     text-align: left !important;
     font-size: 0.95rem !important;
     line-height: 1.6 !important;
+    width: 100%;
   }
   
   /* Center the features list container but left-align text inside it */
