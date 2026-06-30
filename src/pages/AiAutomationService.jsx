@@ -4,6 +4,7 @@ import ContactSection from '../components/ContactSection';
 import LeadFormModal from '../components/LeadFormModal';
 import InteractiveDemo from '../components/InteractiveDemo';
 import ProtectedWhatsAppLink from '../components/ProtectedWhatsAppLink';
+import SEO from '../components/SEO';
 
 const AiAutomationService = () => {
   const [selectedService, setSelectedService] = useState(null);
@@ -48,71 +49,79 @@ const AiAutomationService = () => {
   ];
 
   return (
-    <div className="page-container">
-      <div className="page-header text-center">
-        <div className="badge">
-          <div className="badge-dot"></div>
-          AI & AUTOMATION
+    <>
+      <SEO 
+        title="AI Automation Services & n8n Experts India"
+        description="Automate your entire business workflow with custom AI Agents, n8n, Make.com, and ChatGPT integrations. Stop doing manual work."
+        keywords="AI Automation Agency India, n8n expert, Make.com developer, AI Agent Developer, ChatGPT Integration, Business Automation"
+        url="/services/ai-automation"
+      />
+      <div className="page-container" style={{ paddingTop: '8rem' }}>
+        <div className="page-header text-center">
+          <div className="badge">
+            <div className="badge-dot"></div>
+            AI & AUTOMATION
+          </div>
+          <h1 className="headline" style={{ fontSize: '3.5rem' }}>We Build Systems That Scale.</h1>
+          <p className="description" style={{ margin: '0 auto', maxWidth: '700px', fontSize: '1.2rem' }}>
+            Stop losing leads and wasting time on manual entry. Experience our custom automation workflows directly below.
+          </p>
         </div>
-        <h1 className="headline" style={{ fontSize: '3.5rem' }}>We Build Systems That Scale.</h1>
-        <p className="description" style={{ margin: '0 auto', maxWidth: '700px', fontSize: '1.2rem' }}>
-          Stop losing leads and wasting time on manual entry. Experience our custom automation workflows directly below.
-        </p>
-      </div>
 
-      {/* INTERACTIVE DEMO INJECTED HERE */}
-      <InteractiveDemo />
+        {/* INTERACTIVE DEMO INJECTED HERE */}
+        <InteractiveDemo />
 
-      <div className="text-center" style={{ marginTop: '2rem', marginBottom: '4rem' }}>
-        <h2 style={{ fontSize: '2.5rem' }}>What process can we automate?</h2>
-        <p className="text-secondary" style={{ maxWidth: '600px', margin: '1rem auto' }}>
-          Select the type of automation you need, and we'll gather some quick details to get started.
-        </p>
-      </div>
+        <div className="text-center" style={{ marginTop: '2rem', marginBottom: '4rem' }}>
+          <h2 style={{ fontSize: '2.5rem' }}>What process can we automate?</h2>
+          <p className="text-secondary" style={{ maxWidth: '600px', margin: '1rem auto' }}>
+            Select the type of automation you need, and we'll gather some quick details to get started.
+          </p>
+        </div>
 
-      <div className="service-options-grid">
-        {serviceOptions.map((option) => (
-          <div 
-            key={option.id} 
-            className="service-option-card glass"
-            onClick={() => openLeadForm(`AI Automation: ${option.title}`)}
-          >
-            <div className="service-icon lavender mb-4">
-              {option.icon}
+        <div className="service-options-grid">
+          {serviceOptions.map((option) => (
+            <div 
+              key={option.id} 
+              className="service-option-card glass"
+              onClick={() => openLeadForm(`AI Automation: ${option.title}`)}
+            >
+              <div className="service-icon lavender mb-4">
+                {option.icon}
+              </div>
+              <h3>{option.title}</h3>
+              <p>{option.description}</p>
+              <div className="service-action">
+                Request this service <ArrowRight size={16} />
+              </div>
             </div>
-            <h3>{option.title}</h3>
-            <p>{option.description}</p>
-            <div className="service-action">
-              Request this service <ArrowRight size={16} />
+          ))}
+        </div>
+
+        {/* WhatsApp Trust Tile */}
+        <div className="whatsapp-trust-wrapper" style={{ marginTop: '4rem' }}>
+          <ProtectedWhatsAppLink phoneNumber="919394683474" className="whatsapp-trust-tile glass">
+            <div className="whatsapp-icon-bg">
+              <MessageSquare size={32} color="#fff" />
             </div>
-          </div>
-        ))}
-      </div>
+            <div className="whatsapp-trust-text">
+              <h4>Need immediate AI advice?</h4>
+              <p>Trusted by forward-thinking businesses. Skip the automated forms and chat with an expert on WhatsApp.</p>
+            </div>
+          </ProtectedWhatsAppLink>
+        </div>
 
-      {/* WhatsApp Trust Tile */}
-      <div className="whatsapp-trust-wrapper" style={{ marginTop: '4rem' }}>
-        <ProtectedWhatsAppLink phoneNumber="919394683474" className="whatsapp-trust-tile glass">
-          <div className="whatsapp-icon-bg">
-            <MessageSquare size={32} color="#fff" />
-          </div>
-          <div className="whatsapp-trust-text">
-            <h4>Need immediate AI advice?</h4>
-            <p>Trusted by forward-thinking businesses. Skip the automated forms and chat with an expert on WhatsApp.</p>
-          </div>
-        </ProtectedWhatsAppLink>
-      </div>
+        <div className="content-section" style={{ minHeight: 'auto', paddingBottom: '4rem', marginTop: '2rem' }}>
+          <ContactSection />
+        </div>
 
-      <div className="content-section" style={{ minHeight: 'auto', paddingBottom: '4rem', marginTop: '2rem' }}>
-        <ContactSection />
+        {selectedService && (
+          <LeadFormModal 
+            serviceName={selectedService} 
+            onClose={closeLeadForm} 
+          />
+        )}
       </div>
-
-      {selectedService && (
-        <LeadFormModal 
-          serviceName={selectedService} 
-          onClose={closeLeadForm} 
-        />
-      )}
-    </div>
+    </>
   );
 };
 

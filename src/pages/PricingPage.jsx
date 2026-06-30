@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, CheckCircle2, Zap, Shield, Target, Rocket, BarChart, ChevronDown, ChevronUp, HeartHandshake, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const pricingData = [
   {
@@ -165,159 +166,167 @@ const PricingPage = () => {
   };
 
   return (
-    <div className="pricing-page" style={{ paddingTop: '100px', minHeight: '100vh', background: '#f8f9fa', color: '#111', fontFamily: '"Inter", sans-serif' }}>
-      
-      <section style={{ padding: '6rem 2rem 2rem 2rem', textAlign: 'center', position: 'relative' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <div style={{ display: 'inline-flex', padding: '6px 16px', background: 'rgba(138,43,226,0.1)', color: 'var(--primary-color)', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 'bold', letterSpacing: '1px', marginBottom: '2rem' }}>
-            RUTHLESSLY TRANSPARENT PRICING
+    <>
+      <SEO 
+        title="Transparent Pricing | Web Development & AI Automation"
+        description="Clear, transparent pricing for custom web development, MVP creation, and AI workflow automation. No hidden fees."
+        keywords="Web Development Cost India, AI Automation Pricing, Custom MVP Development Price, React Developer Rates"
+        url="/pricing"
+      />
+      <div className="pricing-page" style={{ paddingTop: '100px', minHeight: '100vh', background: '#f8f9fa', color: '#111', fontFamily: '"Inter", sans-serif' }}>
+        
+        <section style={{ padding: '6rem 2rem 2rem 2rem', textAlign: 'center', position: 'relative' }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <div style={{ display: 'inline-flex', padding: '6px 16px', background: 'rgba(138,43,226,0.1)', color: 'var(--primary-color)', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 'bold', letterSpacing: '1px', marginBottom: '2rem' }}>
+              RUTHLESSLY TRANSPARENT PRICING
+            </div>
+            <h1 style={{ fontSize: isMobile ? '2.5rem' : '4.5rem', fontWeight: 900, lineHeight: 1.1, marginBottom: '1.5rem', letterSpacing: '-1.5px', color: '#111' }}>
+              We Refuse to <br />
+              <span style={{ color: 'var(--primary-color)' }}>Overcharge You.</span>
+            </h1>
+            <p style={{ fontSize: isMobile ? '1rem' : '1.3rem', color: '#555', lineHeight: 1.6, marginBottom: '2rem', maxWidth: '800px', margin: '0 auto' }}>
+              We analyze your exact requirements, calculate the precise cost of development, and charge you exactly that amount. <strong>Not a single rupee more.</strong>
+            </p>
           </div>
-          <h1 style={{ fontSize: isMobile ? '2.5rem' : '4.5rem', fontWeight: 900, lineHeight: 1.1, marginBottom: '1.5rem', letterSpacing: '-1.5px', color: '#111' }}>
-            We Refuse to <br />
-            <span style={{ color: 'var(--primary-color)' }}>Overcharge You.</span>
-          </h1>
-          <p style={{ fontSize: isMobile ? '1rem' : '1.3rem', color: '#555', lineHeight: 1.6, marginBottom: '2rem', maxWidth: '800px', margin: '0 auto' }}>
-            We analyze your exact requirements, calculate the precise cost of development, and charge you exactly that amount. <strong>Not a single rupee more.</strong>
-          </p>
-        </div>
-      </section>
+        </section>
 
-      {/* PRICING CARDS */}
-      <section style={{ padding: isMobile ? '1rem' : '2rem 2rem 6rem 2rem' }}>
-        {!isMobile ? (
-          /* DESKTOP FULL GRID */
-          <div style={{ maxWidth: '1300px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem', alignItems: 'center' }}>
-            {pricingData.map(plan => (
-              <React.Fragment key={plan.id}>
-                {renderFullCard(plan)}
-              </React.Fragment>
-            ))}
-          </div>
-        ) : (
-          /* MOBILE MINI CARDS (Side-by-Side) */
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', maxWidth: '100%' }}>
-            {pricingData.map((plan) => (
-              <div 
-                key={plan.id}
-                onClick={() => setSelectedMobileCard(plan)}
-                style={{ 
-                  background: plan.highlight ? '#111' : '#fff', 
-                  color: plan.highlight ? '#fff' : '#111',
-                  borderRadius: '16px', 
-                  padding: '1.5rem 0.25rem',
-                  display: 'flex', 
-                  flexDirection: 'column', 
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  textAlign: 'center',
-                  boxShadow: plan.highlight ? '0 10px 25px rgba(138,43,226,0.25)' : '0 8px 15px rgba(0,0,0,0.04)',
-                  border: plan.highlight ? '1px solid rgba(138,43,226,0.6)' : '1px solid rgba(0,0,0,0.04)',
-                  cursor: 'pointer',
-                  transform: 'scale(1)',
-                  transition: 'transform 0.2s',
-                  position: 'relative',
-                  overflow: 'hidden'
-                }}
-              >
-                {plan.highlight && (
-                  <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', padding: '3px', background: 'var(--primary-color)', color: '#fff', fontSize: '0.6rem', fontWeight: 800 }}>POPULAR</div>
-                )}
-                <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: plan.iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.75rem', marginTop: plan.highlight ? '0.75rem' : '0' }}>
-                  {React.cloneElement(plan.icon, { size: 18 })}
+        {/* PRICING CARDS */}
+        <section style={{ padding: isMobile ? '1rem' : '2rem 2rem 6rem 2rem' }}>
+          {!isMobile ? (
+            /* DESKTOP FULL GRID */
+            <div style={{ maxWidth: '1300px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem', alignItems: 'center' }}>
+              {pricingData.map(plan => (
+                <React.Fragment key={plan.id}>
+                  {renderFullCard(plan)}
+                </React.Fragment>
+              ))}
+            </div>
+          ) : (
+            /* MOBILE MINI CARDS (Side-by-Side) */
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', maxWidth: '100%' }}>
+              {pricingData.map((plan) => (
+                <div 
+                  key={plan.id}
+                  onClick={() => setSelectedMobileCard(plan)}
+                  style={{ 
+                    background: plan.highlight ? '#111' : '#fff', 
+                    color: plan.highlight ? '#fff' : '#111',
+                    borderRadius: '16px', 
+                    padding: '1.5rem 0.25rem',
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    boxShadow: plan.highlight ? '0 10px 25px rgba(138,43,226,0.25)' : '0 8px 15px rgba(0,0,0,0.04)',
+                    border: plan.highlight ? '1px solid rgba(138,43,226,0.6)' : '1px solid rgba(0,0,0,0.04)',
+                    cursor: 'pointer',
+                    transform: 'scale(1)',
+                    transition: 'transform 0.2s',
+                    position: 'relative',
+                    overflow: 'hidden'
+                  }}
+                >
+                  {plan.highlight && (
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', padding: '3px', background: 'var(--primary-color)', color: '#fff', fontSize: '0.6rem', fontWeight: 800 }}>POPULAR</div>
+                  )}
+                  <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: plan.iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.75rem', marginTop: plan.highlight ? '0.75rem' : '0' }}>
+                    {React.cloneElement(plan.icon, { size: 18 })}
+                  </div>
+                  <div style={{ fontSize: '1rem', fontWeight: 900, color: plan.highlight ? '#fff' : '#111', marginBottom: '0.2rem' }}>{plan.priceINR}</div>
+                  <h4 style={{ fontSize: '0.65rem', fontWeight: 600, color: plan.highlight ? '#e0b3ff' : '#888', lineHeight: 1.3, padding: '0 2px' }}>{plan.shortTitle}</h4>
+                  <div style={{ fontSize: '0.65rem', fontWeight: 700, color: plan.featureColor, marginTop: '0.5rem' }}>View Info</div>
                 </div>
-                <div style={{ fontSize: '1rem', fontWeight: 900, color: plan.highlight ? '#fff' : '#111', marginBottom: '0.2rem' }}>{plan.priceINR}</div>
-                <h4 style={{ fontSize: '0.65rem', fontWeight: 600, color: plan.highlight ? '#e0b3ff' : '#888', lineHeight: 1.3, padding: '0 2px' }}>{plan.shortTitle}</h4>
-                <div style={{ fontSize: '0.65rem', fontWeight: 700, color: plan.featureColor, marginTop: '0.5rem' }}>View Info</div>
-              </div>
-            ))}
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* MOBILE MODAL POPUP */}
+        {isMobile && selectedMobileCard && (
+          <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.7)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', backdropFilter: 'blur(5px)' }} onClick={() => setSelectedMobileCard(null)}>
+            <div style={{ width: '100%', maxWidth: '400px', maxHeight: '90vh', overflowY: 'auto', position: 'relative', animation: 'popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} onClick={(e) => e.stopPropagation()}>
+              <button onClick={() => setSelectedMobileCard(null)} style={{ position: 'absolute', top: '15px', right: '15px', background: 'rgba(255,255,255,0.2)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: selectedMobileCard.highlight ? '#fff' : '#111', cursor: 'pointer', zIndex: 99 }}>
+                <X size={20} />
+              </button>
+              {renderFullCard(selectedMobileCard, true)}
+            </div>
           </div>
         )}
-      </section>
 
-      {/* MOBILE MODAL POPUP */}
-      {isMobile && selectedMobileCard && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.7)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', backdropFilter: 'blur(5px)' }} onClick={() => setSelectedMobileCard(null)}>
-          <div style={{ width: '100%', maxWidth: '400px', maxHeight: '90vh', overflowY: 'auto', position: 'relative', animation: 'popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setSelectedMobileCard(null)} style={{ position: 'absolute', top: '15px', right: '15px', background: 'rgba(255,255,255,0.2)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: selectedMobileCard.highlight ? '#fff' : '#111', cursor: 'pointer', zIndex: 99 }}>
-              <X size={20} />
-            </button>
-            {renderFullCard(selectedMobileCard, true)}
-          </div>
-        </div>
-      )}
-
-      {/* TRUST SECTION */}
-      <section className="stagger-item" style={{ animationDelay: '0.7s', padding: isMobile ? '3rem 1rem' : '6rem 2rem', background: '#fafafa', borderTop: '1px solid #eee', marginTop: '2rem', borderRadius: '32px' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontSize: isMobile ? '1.8rem' : '2.5rem', fontWeight: 900, marginBottom: '2rem' }}>Why Choose CastFlow?</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
-            <div style={{ padding: '1.5rem', background: '#fff', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)' }}>
-              <Zap size={28} color="#3b82f6" style={{ margin: '0 auto 0.5rem auto', display: 'block' }} />
-              <h3 style={{ fontSize: '1rem', fontWeight: 800 }}>Fast Delivery</h3>
-            </div>
-            <div style={{ padding: '1.5rem', background: '#fff', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)' }}>
-              <Shield size={28} color="#10b981" style={{ margin: '0 auto 0.5rem auto', display: 'block' }} />
-              <h3 style={{ fontSize: '1rem', fontWeight: 800 }}>Secure Code</h3>
-            </div>
-            <div style={{ padding: '1.5rem', background: '#fff', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)' }}>
-              <Target size={28} color="#b673f8" style={{ margin: '0 auto 0.5rem auto', display: 'block' }} />
-              <h3 style={{ fontSize: '1rem', fontWeight: 800 }}>Modern UI</h3>
-            </div>
-            <div style={{ padding: '1.5rem', background: '#fff', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)' }}>
-              <CheckCircle2 size={28} color="#3b82f6" style={{ margin: '0 auto 0.5rem auto', display: 'block' }} />
-              <h3 style={{ fontSize: '1rem', fontWeight: 800 }}>Free Support</h3>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. VALUE PROPOSITION BANNER */}
-      <section style={{ padding: isMobile ? '3rem 1.5rem' : '4rem 2rem', background: 'var(--primary-color)', color: '#fff', textAlign: 'center' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <HeartHandshake size={isMobile ? 36 : 48} style={{ margin: '0 auto 1.5rem auto', opacity: 0.9 }} />
-          <h2 style={{ fontSize: isMobile ? '1.8rem' : '2.5rem', fontWeight: 800, marginBottom: '1.5rem', lineHeight: 1.2 }}>
-            Honest Pricing. Zero Surprises.
-          </h2>
-          <p style={{ fontSize: isMobile ? '1rem' : '1.2rem', opacity: 0.9, lineHeight: 1.6, marginBottom: '2rem' }}>
-            We only charge for the exact value and architecture you require.
-          </p>
-          <Link to="/contact" state={{ service: "Other" }} className="btn" style={{ background: '#fff', color: 'var(--primary-color)', padding: '1rem 2rem', borderRadius: '30px', fontWeight: 800, fontSize: '1rem', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-            Get an Honest Quote <ArrowRight size={18} />
-          </Link>
-        </div>
-      </section>
-
-      {/* 4. FAQ SECTION */}
-      <section style={{ padding: isMobile ? '3rem 1rem' : '6rem 2rem', background: '#fff' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <h2 style={{ fontSize: isMobile ? '2rem' : '3rem', fontWeight: 800, marginBottom: '1rem' }}>Pricing FAQ</h2>
-            <p style={{ color: '#666', fontSize: isMobile ? '1rem' : '1.2rem' }}>Everything you need to know about our honest pricing model.</p>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {faqs.map((faq, idx) => (
-              <div 
-                key={idx} 
-                onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                style={{ background: '#f8f9fa', padding: isMobile ? '1.2rem' : '1.5rem', borderRadius: '16px', border: '1px solid #eee', cursor: 'pointer', transition: 'all 0.3s ease' }}
-              >
-                <div style={{ fontSize: isMobile ? '1rem' : '1.2rem', fontWeight: 700, color: '#111', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  {faq.q}
-                  {openFaq === idx ? <ChevronUp size={20} color="#888" /> : <ChevronDown size={20} color="#888" />}
-                </div>
-                <div style={{ maxHeight: openFaq === idx ? '200px' : '0', overflow: 'hidden', transition: 'max-height 0.4s ease', opacity: openFaq === idx ? 1 : 0 }}>
-                  <p style={{ marginTop: '1rem', color: '#555', lineHeight: 1.6, fontSize: isMobile ? '0.95rem' : '1.1rem', borderTop: '1px solid #ddd', paddingTop: '1rem' }}>
-                    {faq.a}
-                  </p>
-                </div>
+        {/* TRUST SECTION */}
+        <section className="stagger-item" style={{ animationDelay: '0.7s', padding: isMobile ? '3rem 1rem' : '6rem 2rem', background: '#fafafa', borderTop: '1px solid #eee', marginTop: '2rem', borderRadius: '32px' }}>
+          <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
+            <h2 style={{ fontSize: isMobile ? '1.8rem' : '2.5rem', fontWeight: 900, marginBottom: '2rem' }}>Why Choose CastFlow?</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+              <div style={{ padding: '1.5rem', background: '#fff', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)' }}>
+                <Zap size={28} color="#3b82f6" style={{ margin: '0 auto 0.5rem auto', display: 'block' }} />
+                <h3 style={{ fontSize: '1rem', fontWeight: 800 }}>Fast Delivery</h3>
               </div>
-            ))}
+              <div style={{ padding: '1.5rem', background: '#fff', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)' }}>
+                <Shield size={28} color="#10b981" style={{ margin: '0 auto 0.5rem auto', display: 'block' }} />
+                <h3 style={{ fontSize: '1rem', fontWeight: 800 }}>Secure Code</h3>
+              </div>
+              <div style={{ padding: '1.5rem', background: '#fff', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)' }}>
+                <Target size={28} color="#b673f8" style={{ margin: '0 auto 0.5rem auto', display: 'block' }} />
+                <h3 style={{ fontSize: '1rem', fontWeight: 800 }}>Modern UI</h3>
+              </div>
+              <div style={{ padding: '1.5rem', background: '#fff', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)' }}>
+                <CheckCircle2 size={28} color="#3b82f6" style={{ margin: '0 auto 0.5rem auto', display: 'block' }} />
+                <h3 style={{ fontSize: '1rem', fontWeight: 800 }}>Free Support</h3>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-    </div>
+        {/* 3. VALUE PROPOSITION BANNER */}
+        <section style={{ padding: isMobile ? '3rem 1.5rem' : '4rem 2rem', background: 'var(--primary-color)', color: '#fff', textAlign: 'center' }}>
+          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <HeartHandshake size={isMobile ? 36 : 48} style={{ margin: '0 auto 1.5rem auto', opacity: 0.9 }} />
+            <h2 style={{ fontSize: isMobile ? '1.8rem' : '2.5rem', fontWeight: 800, marginBottom: '1.5rem', lineHeight: 1.2 }}>
+              Honest Pricing. Zero Surprises.
+            </h2>
+            <p style={{ fontSize: isMobile ? '1rem' : '1.2rem', opacity: 0.9, lineHeight: 1.6, marginBottom: '2rem' }}>
+              We only charge for the exact value and architecture you require.
+            </p>
+            <Link to="/contact" state={{ service: "Other" }} className="btn" style={{ background: '#fff', color: 'var(--primary-color)', padding: '1rem 2rem', borderRadius: '30px', fontWeight: 800, fontSize: '1rem', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+              Get an Honest Quote <ArrowRight size={18} />
+            </Link>
+          </div>
+        </section>
+
+        {/* 4. FAQ SECTION */}
+        <section style={{ padding: isMobile ? '3rem 1rem' : '6rem 2rem', background: '#fff' }}>
+          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+              <h2 style={{ fontSize: isMobile ? '2rem' : '3rem', fontWeight: 800, marginBottom: '1rem' }}>Pricing FAQ</h2>
+              <p style={{ color: '#666', fontSize: isMobile ? '1rem' : '1.2rem' }}>Everything you need to know about our honest pricing model.</p>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {faqs.map((faq, idx) => (
+                <div 
+                  key={idx} 
+                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                  style={{ background: '#f8f9fa', padding: isMobile ? '1.2rem' : '1.5rem', borderRadius: '16px', border: '1px solid #eee', cursor: 'pointer', transition: 'all 0.3s ease' }}
+                >
+                  <div style={{ fontSize: isMobile ? '1rem' : '1.2rem', fontWeight: 700, color: '#111', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    {faq.q}
+                    {openFaq === idx ? <ChevronUp size={20} color="#888" /> : <ChevronDown size={20} color="#888" />}
+                  </div>
+                  <div style={{ maxHeight: openFaq === idx ? '200px' : '0', overflow: 'hidden', transition: 'max-height 0.4s ease', opacity: openFaq === idx ? 1 : 0 }}>
+                    <p style={{ marginTop: '1rem', color: '#555', lineHeight: 1.6, fontSize: isMobile ? '0.95rem' : '1.1rem', borderTop: '1px solid #ddd', paddingTop: '1rem' }}>
+                      {faq.a}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </>
   );
 };
 
