@@ -917,8 +917,8 @@ const AdminDashboard = () => {
       {activeTab === 'analytics' && (
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-            <h2 style={{ fontSize: '1.8rem', color: '#fff', margin: 0 }}>Site Analytics</h2>
-            <div style={{ display: 'flex', gap: '0.5rem', background: 'rgba(255,255,255,0.05)', padding: '0.5rem', borderRadius: '12px' }}>
+            <h2 style={{ fontSize: '1.8rem', color: 'var(--text-primary)', margin: 0 }}>Site Analytics</h2>
+            <div style={{ display: 'flex', gap: '0.5rem', background: 'rgba(0,0,0,0.05)', padding: '0.5rem', borderRadius: '12px' }}>
               <button onClick={() => setAnalyticsFilter('24h')} style={{ background: analyticsFilter === '24h' ? '#38bdf8' : 'transparent', color: analyticsFilter === '24h' ? '#1a1a1a' : '#888', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>24 Hours</button>
               <button onClick={() => setAnalyticsFilter('7d')} style={{ background: analyticsFilter === '7d' ? '#38bdf8' : 'transparent', color: analyticsFilter === '7d' ? '#1a1a1a' : '#888', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>7 Days</button>
               <button onClick={() => setAnalyticsFilter('30d')} style={{ background: analyticsFilter === '30d' ? '#38bdf8' : 'transparent', color: analyticsFilter === '30d' ? '#1a1a1a' : '#888', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>30 Days</button>
@@ -926,14 +926,14 @@ const AdminDashboard = () => {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', padding: '2rem', borderRadius: '16px' }}>
-              <h3 style={{ color: '#888', fontSize: '1rem', marginBottom: '0.5rem' }}>Total Page Views ({analyticsFilter})</h3>
+            <div style={{ background: 'var(--glass-bg, rgba(0,0,0,0.02))', border: '1px solid var(--glass-border, rgba(0,0,0,0.05))', padding: '2rem', borderRadius: '16px' }}>
+              <h3 style={{ color: 'var(--text-secondary, #888)', fontSize: '1rem', marginBottom: '0.5rem' }}>Total Page Views ({analyticsFilter})</h3>
               <div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#38bdf8' }}>{analyticsData.length}</div>
             </div>
           </div>
 
-          <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', padding: '2rem', borderRadius: '16px' }}>
-            <h3 style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '1.5rem' }}>Top Visited Pages</h3>
+          <div style={{ background: 'var(--glass-bg, rgba(0,0,0,0.02))', border: '1px solid var(--glass-border, rgba(0,0,0,0.05))', padding: '2rem', borderRadius: '16px' }}>
+            <h3 style={{ color: 'var(--text-primary)', fontSize: '1.2rem', marginBottom: '1.5rem' }}>Top Visited Pages</h3>
             {loading ? (
               <p style={{ color: '#888' }}>Loading...</p>
             ) : analyticsData.length === 0 ? (
@@ -941,9 +941,9 @@ const AdminDashboard = () => {
             ) : (
               <table style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                    <th style={{ padding: '1rem 0', color: '#888' }}>Page Path</th>
-                    <th style={{ padding: '1rem 0', color: '#888' }}>Views</th>
+                  <tr style={{ borderBottom: '1px solid var(--glass-border, rgba(0,0,0,0.1))' }}>
+                    <th style={{ padding: '1rem 0', color: 'var(--text-secondary, #888)' }}>Page Path</th>
+                    <th style={{ padding: '1rem 0', color: 'var(--text-secondary, #888)' }}>Views</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -953,8 +953,8 @@ const AdminDashboard = () => {
                       return acc;
                     }, {})
                   ).sort((a, b) => b[1] - a[1]).map(([path, views], index) => (
-                    <tr key={path} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                      <td style={{ padding: '1rem 0', color: '#fff' }}>{path}</td>
+                    <tr key={path} style={{ borderBottom: '1px solid var(--glass-border, rgba(0,0,0,0.05))' }}>
+                      <td style={{ padding: '1rem 0', color: 'var(--text-primary)' }}>{path}</td>
                       <td style={{ padding: '1rem 0', color: '#38bdf8', fontWeight: 'bold' }}>{views}</td>
                     </tr>
                   ))}
