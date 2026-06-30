@@ -350,11 +350,11 @@ const AdminDashboard = () => {
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }}>
               {teamApps.map((app) => (
-                <div key={app.id} className="glass" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <div key={app.id} className="glass" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid rgba(0,0,0,0.1)' }}>
                   
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '2rem', marginBottom: '1.5rem' }}>
                     <div>
-                      <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '10px' }}>
                         {app.fullName}
                       </h3>
                       <p style={{ color: '#a388ff', fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '0.5rem' }}>{app.position}</p>
@@ -364,7 +364,7 @@ const AdminDashboard = () => {
                         <span>Exp: {app.experience}</span>
                       </div>
                       <div style={{ display: 'flex', gap: '1.5rem', color: '#888', fontSize: '0.85rem' }}>
-                        <span>{app.address}, {app.city}, {app.country} - {app.pinCode}</span>
+                        <span>{app.address}, {app.city}, {app.state ? `${app.state}, ` : ''}{app.country} - {app.pinCode}</span>
                       </div>
                     </div>
                     
@@ -396,10 +396,10 @@ const AdminDashboard = () => {
                     </div>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '1.5rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', borderTop: '1px solid rgba(0,0,0,0.05)', paddingTop: '1.5rem' }}>
                     <div>
                       <h4 style={{ color: '#888', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Skills</h4>
-                      <p style={{ color: '#fff' }}>{app.skills}</p>
+                      <p style={{ color: 'var(--text-primary)' }}>{app.skills}</p>
                       
                       {app.portfolio && (
                         <div style={{ marginTop: '1rem' }}>
@@ -410,15 +410,15 @@ const AdminDashboard = () => {
                     </div>
                   </div>
 
-                  <div style={{ marginTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '1.5rem' }}>
+                  <div style={{ marginTop: '2rem', borderTop: '1px solid rgba(0,0,0,0.05)', paddingTop: '1.5rem' }}>
                     <h4 style={{ color: '#888', marginBottom: '0.5rem', fontSize: '0.9rem' }}>About</h4>
-                    <p style={{ color: '#1a1a1a', background: 'rgba(255,255,255,0.8)', padding: '1rem', borderRadius: '8px', margin: '0 0 1rem 0' }}>{app.tellUs}</p>
+                    <p style={{ color: '#1a1a1a', background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', padding: '1rem', borderRadius: '8px', margin: '0 0 1rem 0' }}>{app.tellUs}</p>
                     
                     <h4 style={{ color: '#888', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Why CastFlow?</h4>
-                    <p style={{ color: '#1a1a1a', background: 'rgba(255,255,255,0.8)', padding: '1rem', borderRadius: '8px', margin: '0 0 1rem 0' }}>{app.whyCastFlow}</p>
+                    <p style={{ color: '#1a1a1a', background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', padding: '1rem', borderRadius: '8px', margin: '0 0 1rem 0' }}>{app.whyCastFlow}</p>
                     
                     <h4 style={{ color: '#888', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Best Project</h4>
-                    <p style={{ color: '#1a1a1a', background: 'rgba(255,255,255,0.8)', padding: '1rem', borderRadius: '8px', margin: 0 }}>{app.bestProject}</p>
+                    <p style={{ color: '#1a1a1a', background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', padding: '1rem', borderRadius: '8px', margin: 0 }}>{app.bestProject}</p>
                   </div>
 
                 </div>
