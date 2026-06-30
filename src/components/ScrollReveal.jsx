@@ -15,8 +15,9 @@ const ScrollReveal = () => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('active');
-            // Stop observing once animated if we only want it to happen once
-            // observer.unobserve(entry.target);
+          } else {
+            // Remove active class when scrolling out of view to enable fade out / fade in repeatedly
+            entry.target.classList.remove('active');
           }
         });
       }, {
