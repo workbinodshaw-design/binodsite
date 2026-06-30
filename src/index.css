@@ -2735,3 +2735,37 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     padding: 1.5rem !important;
   }
 }
+
+/* --- GLOBAL SCROLL ANIMATIONS --- */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+  will-change: opacity;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.3, 1.5, 0.4, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-up.active,
+.reveal-fade.active,
+.reveal-scale.active {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+/* Stagger delays for sibling elements */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }

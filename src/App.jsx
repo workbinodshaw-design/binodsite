@@ -21,6 +21,7 @@ import TeamLogin from './pages/TeamLogin';
 import EmployeeDashboard from './pages/EmployeeDashboard';
 import ClientDashboard from './pages/ClientDashboard';
 import ClientLogin from './pages/ClientLogin';
+import ScrollReveal from './components/ScrollReveal';
 
 function App() {
   const hostname = window.location.hostname;
@@ -100,6 +101,7 @@ function App() {
   // Default Main Domain (castflow.in, www.castflow.in, localhost)
   return (
     <Router basename={import.meta.env.BASE_URL}>
+      <ScrollReveal />
       <Navbar />
       
       <Routes>

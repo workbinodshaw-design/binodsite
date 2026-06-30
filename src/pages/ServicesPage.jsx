@@ -17,7 +17,7 @@ const ServicesPage = () => {
           <div className="badge-dot"></div>
           OUR EXPERTISE
         </div>
-        <h1 className="headline" style={{ fontSize: 'clamp(1.8rem, 6vw, 3rem)', marginBottom: '1.5rem' }}>Scale With Certainty</h1>
+        <h1 className="headline reveal-fade" style={{ fontSize: 'clamp(1.8rem, 6vw, 3rem)', marginBottom: '1.5rem' }}>Scale With Certainty</h1>
         <p className="description responsive-text-center" style={{ margin: '0 auto', maxWidth: '750px', fontSize: 'clamp(0.95rem, 3vw, 1.1rem)', lineHeight: '1.8' }}>
           We provide end-to-end digital solutions combining powerful AI automation pipelines with state-of-the-art web architectures. We don't just build software; we build robust business systems designed to save you time and exponentially increase your revenue.
         </p>

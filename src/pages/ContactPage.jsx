@@ -85,7 +85,7 @@ const ContactPage = () => {
           <div className="badge-dot"></div>
           BOOK DISCOVERY CALL
         </div>
-        <h1 className="headline" style={{ fontSize: '3.5rem' }}>Ready to scale?</h1>
+        <h1 className="headline reveal-fade" style={{ fontSize: '3.5rem' }}>Ready to scale?</h1>
         <p className="description" style={{ margin: '0 auto', maxWidth: '600px', fontSize: '1.2rem' }}>
           Fill out the details below. Our founders will review your architecture and contact you within 24 hours.
         </p>
@@ -94,7 +94,7 @@ const ContactPage = () => {
       <div className="contact-grid">
         
         {/* Contact Info Side */}
-        <div className="contact-info" style={{ flex: '1', minWidth: '300px' }}>
+        <div className="contact-info reveal-up" style={{ flex: '1', minWidth: '300px' }}>
           <div className="glass" style={{ padding: '2rem', borderRadius: '24px', marginBottom: '2rem' }}>
             <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Direct Contact</h3>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Skip the form and chat with us immediately.</p>
@@ -116,7 +116,7 @@ const ContactPage = () => {
         </div>
 
         {/* Lead Form Side */}
-        <div className="contact-form-container glass" style={{ flex: '2', minWidth: '350px', padding: '3rem', borderRadius: '24px' }}>
+        <div className="contact-form-container glass reveal-up" style={{ flex: '2', minWidth: '350px', padding: '3rem', borderRadius: '24px' }}>
           
           {loadingAuth ? (
             <div style={{ textAlign: 'center', padding: '4rem 0' }}>Checking security...</div>
