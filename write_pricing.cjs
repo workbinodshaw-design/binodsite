@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+const fs = require('fs');
+
+const code = `import React, { useEffect, useState } from 'react';
 import { ArrowRight, CheckCircle2, Zap, Shield, Target, Rocket, BarChart, ChevronDown, ChevronUp, HeartHandshake, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -105,7 +107,7 @@ const PricingPage = () => {
   const renderFullCard = (plan, isModal = false) => {
     if (plan.highlight) {
       return (
-        <div className={`pricing-card-hover ${!isModal ? 'stagger-item' : ''}`} style={{ animationDelay: plan.delay, background: '#111', padding: isMobile && isModal ? '2rem 1.5rem' : '4.5rem 3rem', borderRadius: '32px', boxShadow: '0 0 40px rgba(138,43,226,0.4)', position: 'relative', border: '2px solid rgba(138,43,226,0.6)', transform: !isModal && !isMobile ? 'scale(1.05)' : 'none', zIndex: 2, overflow: 'hidden' }}>
+        <div className={\`pricing-card-hover \${!isModal ? 'stagger-item' : ''}\`} style={{ animationDelay: plan.delay, background: '#111', padding: isMobile && isModal ? '2rem 1.5rem' : '4.5rem 3rem', borderRadius: '32px', boxShadow: '0 0 40px rgba(138,43,226,0.4)', position: 'relative', border: '2px solid rgba(138,43,226,0.6)', transform: !isModal && !isMobile ? 'scale(1.05)' : 'none', zIndex: 2, overflow: 'hidden' }}>
           {!isModal && <div style={{ position: 'absolute', top: 0, left: '-100%', width: '50%', height: '100%', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)', transform: 'skewX(-20deg)', animation: 'shimmer 3s infinite' }}></div>}
           <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', background: 'var(--primary-color)', color: '#fff', padding: '8px 24px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 800, letterSpacing: '1px', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 10 }}>
             🔥 MOST POPULAR
@@ -137,7 +139,7 @@ const PricingPage = () => {
     }
 
     return (
-      <div className={`pricing-card-hover ${!isModal ? 'stagger-item' : ''}`} style={{ animationDelay: plan.delay, background: '#fff', padding: isMobile && isModal ? '2rem 1.5rem' : '3.5rem 3rem', borderRadius: '32px', boxShadow: '0 20px 60px rgba(0,0,0,0.08)', border: '1px solid rgba(0,0,0,0.05)', position: 'relative' }}>
+      <div className={\`pricing-card-hover \${!isModal ? 'stagger-item' : ''}\`} style={{ animationDelay: plan.delay, background: '#fff', padding: isMobile && isModal ? '2rem 1.5rem' : '3.5rem 3rem', borderRadius: '32px', boxShadow: '0 20px 60px rgba(0,0,0,0.08)', border: '1px solid rgba(0,0,0,0.05)', position: 'relative' }}>
         <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: plan.iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
           {plan.icon}
         </div>
@@ -322,3 +324,6 @@ const PricingPage = () => {
 };
 
 export default PricingPage;
+`;
+
+fs.writeFileSync('src/pages/PricingPage.jsx', code);
