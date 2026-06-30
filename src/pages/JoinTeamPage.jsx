@@ -111,8 +111,8 @@ const JoinTeamPage = () => {
     }
   };
 
-  // Centralized style for all form inputs on this dark theme page
-  const inputStyle = { backgroundColor: 'rgba(0,0,0,0.5)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' };
+  // Light theme input style
+  const inputStyle = { backgroundColor: 'rgba(0,0,0,0.02)', color: 'var(--text-primary)', border: '1px solid rgba(0,0,0,0.1)' };
 
   return (
     <div className="page-container" style={{ paddingTop: '8rem' }}>
@@ -123,10 +123,10 @@ const JoinTeamPage = () => {
           <div className="badge-dot"></div>
           CAREERS AT CASTFLOW
         </div>
-        <h1 className="headline" style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>
+        <h1 className="headline" style={{ fontSize: '3.5rem', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
           Join the CastFlow Team
         </h1>
-        <p className="description" style={{ margin: '0 auto 2.5rem auto', maxWidth: '700px', fontSize: '1.2rem' }}>
+        <p className="description" style={{ margin: '0 auto 2.5rem auto', maxWidth: '700px', fontSize: '1.2rem', color: 'var(--text-secondary)' }}>
           We're building AI Automation, AI Agents, and Modern Web Solutions. We're looking for passionate people who want to grow with us and build something meaningful together.
         </p>
         <button 
@@ -142,7 +142,7 @@ const JoinTeamPage = () => {
         <>
           {/* Open Positions Section */}
           <div style={{ margin: '6rem auto', maxWidth: '1200px' }}>
-            <h2 className="headline reveal-fade" style={{ fontSize: '2.5rem', textAlign: 'center', marginBottom: '3rem' }}>
+            <h2 className="headline reveal-fade" style={{ fontSize: '2.5rem', textAlign: 'center', marginBottom: '3rem', color: 'var(--text-primary)' }}>
               Open Positions
             </h2>
             
@@ -156,7 +156,7 @@ const JoinTeamPage = () => {
                   <div style={{ background: role.color, width: '48px', height: '48px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
                     {role.icon}
                   </div>
-                  <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem', color: '#fff' }}>{role.title}</h3>
+                  <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>{role.title}</h3>
                   <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '2rem', flexGrow: 1 }}>
                     {role.description}
                   </p>
@@ -165,9 +165,9 @@ const JoinTeamPage = () => {
                     className="btn" 
                     style={{ 
                       width: '100%', 
-                      background: 'rgba(255,255,255,0.05)', 
-                      border: '1px solid rgba(255,255,255,0.1)',
-                      color: '#fff',
+                      background: 'rgba(0,0,0,0.05)', 
+                      border: '1px solid rgba(0,0,0,0.1)',
+                      color: 'var(--text-primary)',
                       marginTop: 'auto'
                     }}
                   >
@@ -180,25 +180,25 @@ const JoinTeamPage = () => {
 
           {/* Application Form */}
           <div ref={formRef} className="glass reveal-up" style={{ margin: '4rem auto', maxWidth: '800px', padding: '3rem', borderRadius: '24px' }}>
-            <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: '#fff' }}>Application Form</h2>
+            <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Application Form</h2>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '3rem' }}>Fill out the details below to apply for a position.</p>
             
             <form onSubmit={handleSubmit} className="lead-form">
               <h4 style={{ color: '#a388ff', marginBottom: '1.5rem', fontSize: '1.1rem' }}>Personal Details</h4>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
                 <div className="form-group">
-                  <label style={{ color: '#fff' }}>Full Name *</label>
+                  <label style={{ color: 'var(--text-primary)' }}>Full Name *</label>
                   <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} required className="form-control" placeholder="John Doe" style={inputStyle} />
                 </div>
                 <div className="form-group">
-                  <label style={{ color: '#fff' }}>Email Address *</label>
+                  <label style={{ color: 'var(--text-primary)' }}>Email Address *</label>
                   <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="form-control" placeholder="john@example.com" style={inputStyle} />
                 </div>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
                 <div className="form-group">
-                  <label style={{ color: '#fff' }}>Phone Number *</label>
+                  <label style={{ color: 'var(--text-primary)' }}>Phone Number *</label>
                   <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required className="form-control" placeholder="+91 9876543210" style={inputStyle} />
                 </div>
               </div>
@@ -206,7 +206,7 @@ const JoinTeamPage = () => {
               <h4 style={{ color: '#38bdf8', marginBottom: '1.5rem', fontSize: '1.1rem' }}>Address Details</h4>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
                 <div className="form-group">
-                  <label style={{ color: '#fff' }}>Country *</label>
+                  <label style={{ color: 'var(--text-primary)' }}>Country *</label>
                   <select name="country" value={formData.country} onChange={handleInputChange} required className="form-control" style={inputStyle}>
                     <option value="India">India</option>
                     <option value="United States">United States</option>
@@ -217,21 +217,21 @@ const JoinTeamPage = () => {
                   </select>
                 </div>
                 <div className="form-group">
-                  <label style={{ color: '#fff' }}>City / State *</label>
+                  <label style={{ color: 'var(--text-primary)' }}>City / State *</label>
                   <input type="text" name="city" value={formData.city} onChange={handleInputChange} required className="form-control" placeholder="Mumbai, Maharashtra" style={inputStyle} />
                 </div>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
                 <div className="form-group">
-                  <label style={{ color: '#fff' }}>Full Address *</label>
+                  <label style={{ color: 'var(--text-primary)' }}>Full Address *</label>
                   <input type="text" name="address" value={formData.address} onChange={handleInputChange} required className="form-control" placeholder="Street, Area, Landmark..." style={inputStyle} />
                 </div>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
                 <div className="form-group">
-                  <label style={{ color: '#fff' }}>PIN / ZIP Code *</label>
+                  <label style={{ color: 'var(--text-primary)' }}>PIN / ZIP Code *</label>
                   <input type="text" name="pinCode" value={formData.pinCode} onChange={handleInputChange} required className="form-control" placeholder="400001" style={inputStyle} />
                 </div>
               </div>
@@ -239,7 +239,7 @@ const JoinTeamPage = () => {
               <h4 style={{ color: '#fbbf24', marginBottom: '1.5rem', fontSize: '1.1rem' }}>Professional Profile</h4>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
                 <div className="form-group">
-                  <label style={{ color: '#fff' }}>Position Applying For *</label>
+                  <label style={{ color: 'var(--text-primary)' }}>Position Applying For *</label>
                   <select name="position" value={formData.position} onChange={handleInputChange} required className="form-control" style={inputStyle}>
                     <option value="" disabled>Select a role</option>
                     {roles.map(r => (
@@ -249,7 +249,7 @@ const JoinTeamPage = () => {
                   </select>
                 </div>
                 <div className="form-group">
-                  <label style={{ color: '#fff' }}>Experience Level *</label>
+                  <label style={{ color: 'var(--text-primary)' }}>Experience Level *</label>
                   <select name="experience" value={formData.experience} onChange={handleInputChange} required className="form-control" style={inputStyle}>
                     <option value="Fresher">Fresher</option>
                     <option value="Intermediate">Intermediate</option>
@@ -260,27 +260,27 @@ const JoinTeamPage = () => {
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
                 <div className="form-group">
-                  <label style={{ color: '#fff' }}>Skills *</label>
+                  <label style={{ color: 'var(--text-primary)' }}>Skills *</label>
                   <input type="text" name="skills" value={formData.skills} onChange={handleInputChange} required className="form-control" placeholder="e.g. React, Node.js, Communication" style={inputStyle} />
                 </div>
                 <div className="form-group">
-                  <label style={{ color: '#fff' }}>Portfolio / GitHub / LinkedIn (Optional)</label>
+                  <label style={{ color: 'var(--text-primary)' }}>Portfolio / GitHub / LinkedIn (Optional)</label>
                   <input type="url" name="portfolio" value={formData.portfolio} onChange={handleInputChange} className="form-control" placeholder="https://" style={inputStyle} />
                 </div>
               </div>
 
               <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                <label style={{ color: '#fff' }}>Tell us about yourself *</label>
+                <label style={{ color: 'var(--text-primary)' }}>Tell us about yourself *</label>
                 <textarea name="tellUs" value={formData.tellUs} onChange={handleInputChange} required className="form-control" rows="3" placeholder="Brief intro..." style={inputStyle}></textarea>
               </div>
 
               <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                <label style={{ color: '#fff' }}>Why do you want to join CastFlow? *</label>
+                <label style={{ color: 'var(--text-primary)' }}>Why do you want to join CastFlow? *</label>
                 <textarea name="whyCastFlow" value={formData.whyCastFlow} onChange={handleInputChange} required className="form-control" rows="3" placeholder="What excites you about us?" style={inputStyle}></textarea>
               </div>
 
               <div className="form-group" style={{ marginBottom: '2.5rem' }}>
-                <label style={{ color: '#fff' }}>Best Project You've Built (or Achievement) *</label>
+                <label style={{ color: 'var(--text-primary)' }}>Best Project You've Built (or Achievement) *</label>
                 <textarea name="bestProject" value={formData.bestProject} onChange={handleInputChange} required className="form-control" rows="3" placeholder="Tell us about something you are proud of..." style={inputStyle}></textarea>
               </div>
 
@@ -306,7 +306,7 @@ const JoinTeamPage = () => {
                 borderRadius: '0 12px 12px 0',
                 marginBottom: '2rem'
               }}>
-                <p style={{ color: '#e0f2fe', margin: 0, lineHeight: '1.6', fontSize: '0.95rem' }}>
+                <p style={{ color: 'var(--text-primary)', margin: 0, lineHeight: '1.6', fontSize: '0.95rem' }}>
                   CastFlow is currently an early-stage startup. We're building a passionate core team to grow together. At this stage, contributions are project-based, with opportunities to grow alongside the company as we expand.
                 </p>
               </div>
@@ -328,7 +328,7 @@ const JoinTeamPage = () => {
           <div style={{ background: 'rgba(37, 211, 102, 0.2)', width: '80px', height: '80px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem auto' }}>
             <CheckCircle2 size={40} color="#25D366" />
           </div>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', color: '#fff' }}>Application Submitted Successfully</h2>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Application Submitted Successfully</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '2rem' }}>
             Thank you for your interest in CastFlow. We appreciate your application. Our team will review your profile and contact you if there's a suitable opportunity.
           </p>
