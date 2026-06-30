@@ -7,6 +7,7 @@ import WebDevService from './pages/WebDevService';
 import AiAutomationService from './pages/AiAutomationService';
 import ContactPage from './pages/ContactPage';
 import PortfolioPage from './pages/PortfolioPage';
+import JoinTeamPage from './pages/JoinTeamPage';
 import PricingPage from './pages/PricingPage';
 import AdminDashboard from './pages/AdminDashboard';
 import AiAgentWidget from './components/AiAgentWidget';
@@ -110,6 +111,7 @@ function App() {
         <Route path="/services/web-development" element={<WebDevService />} />
         <Route path="/services/ai-automation" element={<AiAutomationService />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/join-team" element={<JoinTeamPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />

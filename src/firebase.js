@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+import { getStorage } from 'firebase/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,11 +17,13 @@ const firebaseConfig = {
 let app;
 let db;
 let auth;
+let storage;
 
 try {
   app = initializeApp(firebaseConfig);
   db = getFirestore(app);
   auth = getAuth(app);
+  storage = getStorage(app);
 } catch (error) {
   console.error("Firebase initialization error. Did you forget to add your .env variables?", error);
 }
@@ -51,4 +54,28 @@ export const saveLeadToDatabase = async (leadData, source = 'website') => {
   }
 };
 
-export { db, auth };
+/**
+ * Utility to save a job application to the Firestore database
+ * @param {Object} applicationData - The data from the form
+ */
+export const saveJobApplicationToDatabase = async (applicationData) => {
+  if (!db) {
+    console.warn("Database not connected. Application was not saved.");
+    return false;
+  }
+  
+  try {
+    const docRef = await addDoc(collection(db, "team_applications"), {
+      ...applicationData,
+      createdAt: serverTimestamp(),
+      status: 'New'
+    });
+    console.log("Application successfully saved with ID: ", docRef.id);
+    return true;
+  } catch (e) {
+    console.error("Error adding document: ", e);
+    return false;
+  }
+};
+
+export { db, auth, storage };

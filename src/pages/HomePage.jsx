@@ -7,7 +7,8 @@ import SceneContainer from '../components/SceneContainer';
 import ActiveCardOverlay from '../components/ActiveCardOverlay';
 import ErrorBoundary from '../components/ErrorBoundary';
 import FloatingBubbles from '../components/FloatingBubbles';
-import { Layers, Box, Cpu, HardDrive } from 'lucide-react';
+import { Layers, Box, Cpu, HardDrive, Users, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -102,6 +103,24 @@ function HomePage() {
                 <h3 style={{ fontSize: '1.5rem', color: '#ec4899', marginBottom: '1rem', fontWeight: 700 }}>Built to Scale</h3>
                 <p style={{ color: '#aaa', lineHeight: 1.6, fontSize: '1.1rem' }}>We don't build temporary solutions. Every platform is architected to handle millions of users from day one with flawless security.</p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* JOIN OUR TEAM BANNER */}
+        <div style={{ padding: '4rem 2rem', background: 'var(--bg-color)' }}>
+          <div className="glass reveal-up" style={{ maxWidth: '1000px', margin: '0 auto', padding: '3rem', borderRadius: '24px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '2rem', border: '1px solid rgba(163, 136, 255, 0.2)' }}>
+            <div style={{ flex: '1', minWidth: '300px' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(163, 136, 255, 0.1)', color: '#a388ff', padding: '0.4rem 1rem', borderRadius: '30px', fontSize: '0.9rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                <Users size={16} /> We are Hiring!
+              </div>
+              <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#fff' }}>Join the CastFlow Team</h2>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.6' }}>We are looking for passionate developers, AI specialists, and communicators to build the future of automation with us.</p>
+            </div>
+            <div>
+              <Link to="/join-team" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '1rem 2rem', fontSize: '1.1rem', textDecoration: 'none' }}>
+                View Open Positions <ArrowRight size={20} />
+              </Link>
             </div>
           </div>
         </div>

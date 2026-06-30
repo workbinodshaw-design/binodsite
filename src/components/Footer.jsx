@@ -94,6 +94,14 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* Company Col */}
+          <div>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', color: '#fff' }}>Company</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <CustomLink to="/join-team" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Join Our Team</CustomLink>
+            </div>
+          </div>
+
           {/* Support Col */}
           <div>
             <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', color: '#fff' }}>Support</h4>
