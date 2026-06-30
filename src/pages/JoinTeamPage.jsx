@@ -77,6 +77,13 @@ const JoinTeamPage = () => {
       icon: <TrendingUp size={24} color="#fbbf24" />,
       description: 'Lead generation, client outreach, sales, networking, business development, LinkedIn and email outreach.',
       color: 'rgba(251, 191, 36, 0.2)'
+    },
+    {
+      id: 'expertvibe',
+      title: 'Expert Vibe Coder',
+      icon: <Code size={24} color="#10b981" />,
+      description: 'Someone with exceptional coding skills and a great vibe. You write clean code, solve complex problems effortlessly, and bring positive energy to the team.',
+      color: 'rgba(16, 185, 129, 0.2)'
     }
   ];
 
