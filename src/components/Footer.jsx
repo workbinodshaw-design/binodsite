@@ -47,24 +47,10 @@ const Footer = () => {
   };
 
   return (
-    <footer style={{ background: '#050505', color: '#fff', paddingTop: '4rem', paddingBottom: '2rem', borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: 'auto' }}>
+    <footer style={{ background: '#050505', color: '#fff', paddingTop: '3rem', paddingBottom: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: 'auto' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
         
-        {/* Top CTA Section (Made Smaller) */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-1px' }}>
-            Ready to <span style={{ color: '#b673f8' }}>Scale?</span>
-          </h2>
-          <p style={{ color: '#888', fontSize: '1.1rem', marginBottom: '1.5rem', maxWidth: '500px' }}>
-            Stop wasting time on manual tasks. Let us architect your future.
-          </p>
-          <CustomLink to="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#fff', color: '#000', padding: '0.8rem 2rem', borderRadius: '50px', fontWeight: 'bold', textDecoration: 'none', transition: 'transform 0.2s', boxShadow: '0 10px 30px rgba(255,255,255,0.1)' }}
-            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-            onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          >
-            Start Your Project
-          </CustomLink>
-        </div>
+        {/* Main Footer Content */ }
 
         {/* Links Flexbox (More responsive than Grid for odd column counts) */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3rem', marginBottom: '3rem', justifyContent: 'space-between' }}>
@@ -114,8 +100,7 @@ const Footer = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '0.9rem' }}>
               <CustomLink to="/services/ai-automation" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>AI Automation</CustomLink>
               <CustomLink to="/services/web-development" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>Web Development</CustomLink>
-              <CustomLink to="/services" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>MVP Development</CustomLink>
-              <CustomLink to="/services" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>CRM Solutions</CustomLink>
+              <CustomLink to="/services" style={{ color: '#888', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#fff'} onMouseOut={e=>e.target.style.color='#888'}>All Services</CustomLink>
             </div>
           </div>
 
