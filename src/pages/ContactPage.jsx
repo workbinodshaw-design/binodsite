@@ -91,7 +91,7 @@ const ContactPage = () => {
         </p>
       </div>
 
-      <div className="contact-grid" style={{ display: 'flex', flexWrap: 'wrap-reverse', gap: '3rem', margin: '4rem auto', maxWidth: '1000px' }}>
+      <div className="contact-grid">
         
         {/* Contact Info Side */}
         <div className="contact-info" style={{ flex: '1', minWidth: '300px' }}>
@@ -122,7 +122,7 @@ const ContactPage = () => {
             <div style={{ textAlign: 'center', padding: '4rem 0' }}>Checking security...</div>
           ) : !user ? (
             // Authentication Required Wall
-            <div className="text-center" style={{ padding: '2rem 0' }}>
+            <div className="text-center" style={{ padding: '1rem 0' }}>
               <div style={{ background: 'rgba(163, 136, 255, 0.1)', width: '80px', height: '80px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto' }}>
                 <Lock size={32} color="#a388ff" />
               </div>
