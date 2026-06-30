@@ -105,7 +105,7 @@ const PricingPage = () => {
   const renderFullCard = (plan, isModal = false) => {
     if (plan.highlight) {
       return (
-        <div className={`pricing-card-hover ${!isModal ? 'stagger-item' : ''}`} style={{ animationDelay: plan.delay, background: '#111', padding: isMobile && isModal ? '2rem 1.5rem' : '4.5rem 3rem', borderRadius: '32px', boxShadow: '0 0 40px rgba(138,43,226,0.4)', position: 'relative', border: '2px solid rgba(138,43,226,0.6)', transform: !isModal && !isMobile ? 'scale(1.05)' : 'none', zIndex: 2, overflow: 'hidden' }}>
+        <div className={`pricing-card-hover ${!isModal ? 'stagger-item' : ''}`} style={{ animationDelay: plan.delay, background: '#111', padding: isMobile && isModal ? '2rem 1.5rem' : '3.5rem 3rem', borderRadius: '32px', boxShadow: '0 0 40px rgba(138,43,226,0.4)', position: 'relative', border: '2px solid rgba(138,43,226,0.6)', transform: !isModal && !isMobile ? 'scale(1.02)' : 'none', zIndex: 2, overflow: 'hidden' }}>
           {!isModal && <div style={{ position: 'absolute', top: 0, left: '-100%', width: '50%', height: '100%', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)', transform: 'skewX(-20deg)', animation: 'shimmer 3s infinite' }}></div>}
           <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', background: 'var(--primary-color)', color: '#fff', padding: '8px 24px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 800, letterSpacing: '1px', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 10 }}>
             🔥 MOST POPULAR
@@ -121,7 +121,7 @@ const PricingPage = () => {
             {plan.priceNote && <div style={{ fontSize: '0.9rem', color: '#888', marginTop: '0.5rem' }}>{plan.priceNote}</div>}
           </div>
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '3rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '2rem' }}>
             {plan.features.map((feat, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#eee', fontWeight: 500, fontSize: '0.95rem' }}>
                 <CheckCircle2 size={20} color={plan.featureColor} style={{ flexShrink: 0 }} /> {feat}
