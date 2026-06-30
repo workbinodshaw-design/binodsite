@@ -412,7 +412,7 @@ const JoinTeamPage = () => {
         </>
       ) : (
         /* Success State */
-        <div className="glass reveal-scale" style={{ margin: '4rem auto', maxWidth: '600px', padding: '4rem 2rem', borderRadius: '24px', textAlign: 'center' }}>
+        <div className="glass" style={{ margin: '4rem auto', maxWidth: '600px', padding: '4rem 2rem', borderRadius: '24px', textAlign: 'center', animation: 'fadeIn 0.5s ease-in' }}>
           <div style={{ background: 'rgba(37, 211, 102, 0.2)', width: '80px', height: '80px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem auto' }}>
             <CheckCircle2 size={40} color="#25D366" />
           </div>
