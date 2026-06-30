@@ -2698,3 +2698,28 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     padding: 1rem !important;
   }
 }
+
+.contact-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  margin: 4rem auto;
+  max-width: 1000px;
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    flex-direction: column-reverse;
+    margin: 2rem auto;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    margin-bottom: 2rem !important;
+  }
+  .page-container {
+    padding-top: 5rem !important;
+  }
+}
