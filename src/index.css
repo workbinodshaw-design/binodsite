@@ -2603,3 +2603,30 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     z-index: 1 !important;
   }
 }
+
+/* Services Responsive Fixes */
+@media (max-width: 768px) {
+  .responsive-text-center {
+    text-align: center !important;
+  }
+  .responsive-text-center h1, .responsive-text-center p {
+    text-align: center !important;
+  }
+  .mobile-small-card {
+    padding: 1rem !important;
+    font-size: 0.9rem !important;
+  }
+  .mobile-small-card .comp-header {
+    font-size: 1rem !important;
+  }
+  .service-detail-section {
+    margin-bottom: 4rem !important;
+  }
+  .service-grid-2-col {
+    gap: 2rem !important;
+  }
+  .premium-animated-visual {
+    transform: scale(0.85);
+    margin: -1rem 0;
+  }
+}

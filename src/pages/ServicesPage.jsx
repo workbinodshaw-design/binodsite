@@ -12,13 +12,13 @@ const ServicesPage = () => {
   return (
     <div className="page-container">
       {/* Page Header */}
-      <div className="page-header text-center" style={{ marginBottom: '4rem' }}>
+      <div className="page-header responsive-text-center" style={{ marginBottom: '4rem' }}>
         <div className="badge">
           <div className="badge-dot"></div>
           OUR EXPERTISE
         </div>
-        <h1 className="headline" style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>Scale With Certainty</h1>
-        <p className="description" style={{ margin: '0 auto', maxWidth: '750px', fontSize: '1.2rem', lineHeight: '1.8' }}>
+        <h1 className="headline" style={{ fontSize: 'clamp(2rem, 8vw, 3.5rem)', marginBottom: '1.5rem' }}>Scale With Certainty</h1>
+        <p className="description responsive-text-center" style={{ margin: '0 auto', maxWidth: '750px', fontSize: 'clamp(1rem, 3vw, 1.2rem)', lineHeight: '1.8' }}>
           We provide end-to-end digital solutions combining powerful AI automation pipelines with state-of-the-art web architectures. We don't just build software; we build robust business systems designed to save you time and exponentially increase your revenue.
         </p>
       </div>
@@ -30,8 +30,8 @@ const ServicesPage = () => {
             <Bot size={48} />
           </div>
           <div>
-            <h2 style={{ margin: 0, fontSize: '2.5rem' }}>AI & Automation</h2>
-            <p className="text-secondary" style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Fire your manual tasks. Hire code.</p>
+            <h2 style={{ margin: 0, fontSize: 'clamp(1.8rem, 6vw, 2.5rem)' }}>AI & Automation</h2>
+            <p className="text-secondary" style={{ margin: '0.5rem 0 0 0', fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)' }}>Fire your manual tasks. Hire code.</p>
           </div>
         </div>
 
@@ -39,13 +39,13 @@ const ServicesPage = () => {
           
           {/* Content Side */}
           <div className="service-detail-content">
-            <h3 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Stop wasting time on tasks a robot can do.</h3>
+            <h3 style={{ fontSize: 'clamp(1.4rem, 5vw, 1.8rem)', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Stop wasting time on tasks a robot can do.</h3>
             
-            <p className="text-secondary" style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+            <p className="text-secondary" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)', lineHeight: '1.8', marginBottom: '1.5rem' }}>
               Imagine having an employee who works 24/7, never sleeps, never takes a vacation, and absolutely never makes a mistake. That is what custom AI automation brings to your business. Most companies leak thousands of dollars every month by paying humans to do repetitive, manual data entry.
             </p>
 
-            <p className="text-secondary" style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '2.5rem' }}>
+            <p className="text-secondary" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)', lineHeight: '1.8', marginBottom: '2.5rem' }}>
               We build intelligent pipelines that connect your entire business. When an email comes in, our AI reads the intent, extracts the important information, updates your CRM (like HubSpot or Salesforce), drafts a highly personalized reply, and notifies your team in Slack—all in exactly 2 seconds.
             </p>
             
@@ -53,7 +53,7 @@ const ServicesPage = () => {
               <div className="feature-item" style={{ alignItems: 'flex-start', marginBottom: '1.5rem' }}>
                 <CheckCircle size={24} className="text-lavender" style={{ marginTop: '4px' }} />
                 <div>
-                  <strong style={{ fontSize: '1.2rem', marginBottom: '0.5rem', display: 'block' }}>Customer Support AI Agents</strong>
+                  <strong style={{ fontSize: 'clamp(1rem, 3vw, 1.2rem)', marginBottom: '0.5rem', display: 'block' }}>Customer Support AI Agents</strong>
                   <p style={{ lineHeight: '1.6' }}>We train AI models directly on your company's knowledge base. When customers ask complex questions at 3 AM, our agents resolve them instantly, completely eliminating support tickets.</p>
                 </div>
               </div>
@@ -61,13 +61,13 @@ const ServicesPage = () => {
               <div className="feature-item" style={{ alignItems: 'flex-start', marginBottom: '1.5rem' }}>
                 <Workflow size={24} className="text-lavender" style={{ marginTop: '4px' }} />
                 <div>
-                  <strong style={{ fontSize: '1.2rem', marginBottom: '0.5rem', display: 'block' }}>Complete Workflow Automation</strong>
+                  <strong style={{ fontSize: 'clamp(1rem, 3vw, 1.2rem)', marginBottom: '0.5rem', display: 'block' }}>Complete Workflow Automation</strong>
                   <p style={{ lineHeight: '1.6' }}>We seamlessly bridge the gap between tools like Gmail, Stripe, Slack, and your CRM. Invoicing, onboarding, and data syncing happen entirely in the background.</p>
                 </div>
               </div>
             </div>
 
-            <Link to="/services/ai-automation" className="btn btn-primary" style={{ marginTop: '1.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', background: '#5D3FD3', padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
+            <Link to="/services/ai-automation" className="btn btn-primary" style={{ marginTop: '1.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', background: '#5D3FD3', padding: '1.2rem 2.5rem', fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)' }}>
               Explore AI Automation Options <ArrowRight size={20} />
             </Link>
           </div>
@@ -98,7 +98,7 @@ const ServicesPage = () => {
             {/* Custom Visual: Manual vs AI */}
             <div className="service-detail-visual glass flex-center" style={{ flexDirection: 'column', gap: '1.5rem', padding: '2rem', background: 'rgba(255,255,255,0.02)' }}>
                <h4 style={{ margin: '0 0 1rem 0', color: 'var(--text-secondary)' }}>The Speed Difference</h4>
-               <div className="comparison-card manual">
+               <div className="comparison-card manual mobile-small-card">
                   <div className="comp-header">
                      <Clock size={18} /> <span>Manual Human Process</span>
                   </div>
@@ -107,7 +107,7 @@ const ServicesPage = () => {
                   </div>
                </div>
                
-               <div className="comparison-card ai">
+               <div className="comparison-card ai mobile-small-card">
                   <div className="comp-header">
                      <Zap size={18} /> <span>Custom AI Automation</span>
                   </div>
@@ -130,8 +130,8 @@ const ServicesPage = () => {
             <Code size={48} />
           </div>
           <div>
-            <h2 style={{ margin: 0, fontSize: '2.5rem' }}>High-End Web Design & Development</h2>
-            <p className="text-secondary" style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>We don't build brochures. We build digital salespeople.</p>
+            <h2 style={{ margin: 0, fontSize: 'clamp(1.8rem, 6vw, 2.5rem)' }}>High-End Web Design & Development</h2>
+            <p className="text-secondary" style={{ margin: '0.5rem 0 0 0', fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)' }}>We don't build brochures. We build digital salespeople.</p>
           </div>
         </div>
 
@@ -191,13 +191,13 @@ const ServicesPage = () => {
 
           {/* Content Side */}
           <div className="service-detail-content">
-            <h3 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Your website is your ultimate first impression.</h3>
+            <h3 style={{ fontSize: 'clamp(1.4rem, 5vw, 1.8rem)', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Your website is your ultimate first impression.</h3>
             
-            <p className="text-secondary" style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+            <p className="text-secondary" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)', lineHeight: '1.8', marginBottom: '1.5rem' }}>
               In today's digital landscape, attention spans are practically zero. If your website takes more than 3 seconds to load, or if it looks like a cheap template, your potential clients will instantly bounce to a competitor. A bad website doesn't just cost you the design fee; it costs you millions in lost revenue.
             </p>
 
-            <p className="text-secondary" style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '2.5rem' }}>
+            <p className="text-secondary" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)', lineHeight: '1.8', marginBottom: '2.5rem' }}>
               We specialize in custom-coded, ultra-premium web architectures built on Next.js and React. These aren't WordPress templates. These are high-performance software applications designed with psychological precision to guide visitors directly into your sales funnel. 
             </p>
             
@@ -205,7 +205,7 @@ const ServicesPage = () => {
               <div className="feature-item" style={{ alignItems: 'flex-start', marginBottom: '1.5rem' }}>
                 <CheckCircle size={24} className="text-coral" style={{ marginTop: '4px' }} />
                 <div>
-                  <strong style={{ fontSize: '1.2rem', marginBottom: '0.5rem', display: 'block' }}>Conversion-Optimized Landing Pages</strong>
+                  <strong style={{ fontSize: 'clamp(1rem, 3vw, 1.2rem)', marginBottom: '0.5rem', display: 'block' }}>Conversion-Optimized Landing Pages</strong>
                   <p style={{ lineHeight: '1.6' }}>We map out the perfect user journey, utilizing elite copywriting and jaw-dropping design to ensure maximum conversion rates.</p>
                 </div>
               </div>
@@ -213,13 +213,13 @@ const ServicesPage = () => {
               <div className="feature-item" style={{ alignItems: 'flex-start', marginBottom: '1.5rem' }}>
                 <Server size={24} className="text-coral" style={{ marginTop: '4px' }} />
                 <div>
-                  <strong style={{ fontSize: '1.2rem', marginBottom: '0.5rem', display: 'block' }}>SaaS & Complex Architectures</strong>
+                  <strong style={{ fontSize: 'clamp(1rem, 3vw, 1.2rem)', marginBottom: '0.5rem', display: 'block' }}>SaaS & Complex Architectures</strong>
                   <p style={{ lineHeight: '1.6' }}>Need a complete custom web app? We build secure, scalable backend systems and gorgeous frontend dashboards for complex software products.</p>
                 </div>
               </div>
             </div>
 
-            <Link to="/services/web-development" className="btn btn-primary" style={{ marginTop: '1.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', padding: '1.2rem 2.5rem', fontSize: '1.1rem' }}>
+            <Link to="/services/web-development" className="btn btn-primary" style={{ marginTop: '1.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', padding: '1.2rem 2.5rem', fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)' }}>
               Explore Web Design & Development Options <ArrowRight size={20} />
             </Link>
           </div>
