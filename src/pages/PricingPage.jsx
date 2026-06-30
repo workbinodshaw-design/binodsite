@@ -195,7 +195,7 @@ const PricingPage = () => {
           </div>
         ) : (
           /* MOBILE MINI CARDS (Side-by-Side) */
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem', maxWidth: '100%' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', maxWidth: '100%' }}>
             {pricingData.map((plan) => (
               <div 
                 key={plan.id}
@@ -204,14 +204,14 @@ const PricingPage = () => {
                   background: plan.highlight ? '#111' : '#fff', 
                   color: plan.highlight ? '#fff' : '#111',
                   borderRadius: '16px', 
-                  padding: '1.25rem 0.5rem',
+                  padding: '1.5rem 0.25rem',
                   display: 'flex', 
                   flexDirection: 'column', 
                   alignItems: 'center', 
                   justifyContent: 'center',
                   textAlign: 'center',
-                  boxShadow: plan.highlight ? '0 10px 20px rgba(138,43,226,0.3)' : '0 10px 20px rgba(0,0,0,0.05)',
-                  border: plan.highlight ? '2px solid rgba(138,43,226,0.6)' : '1px solid rgba(0,0,0,0.05)',
+                  boxShadow: plan.highlight ? '0 10px 25px rgba(138,43,226,0.25)' : '0 8px 15px rgba(0,0,0,0.04)',
+                  border: plan.highlight ? '1px solid rgba(138,43,226,0.6)' : '1px solid rgba(0,0,0,0.04)',
                   cursor: 'pointer',
                   transform: 'scale(1)',
                   transition: 'transform 0.2s',
@@ -223,11 +223,11 @@ const PricingPage = () => {
                   <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', padding: '3px', background: 'var(--primary-color)', color: '#fff', fontSize: '0.6rem', fontWeight: 800 }}>POPULAR</div>
                 )}
                 <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: plan.iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.75rem', marginTop: plan.highlight ? '0.75rem' : '0' }}>
-                  {React.cloneElement(plan.icon, { size: 20 })}
+                  {React.cloneElement(plan.icon, { size: 18 })}
                 </div>
-                <h4 style={{ fontSize: '0.8rem', fontWeight: 800, marginBottom: '0.25rem', lineHeight: 1.2 }}>{plan.shortTitle}</h4>
-                <div style={{ fontSize: '0.9rem', fontWeight: 900, color: plan.highlight ? '#fff' : '#111' }}>{plan.priceINR}</div>
-                <div style={{ fontSize: '0.75rem', color: plan.highlight ? '#aaa' : '#666', marginTop: '0.25rem' }}>Tap to view</div>
+                <div style={{ fontSize: '1rem', fontWeight: 900, color: plan.highlight ? '#fff' : '#111', marginBottom: '0.2rem' }}>{plan.priceINR}</div>
+                <h4 style={{ fontSize: '0.65rem', fontWeight: 600, color: plan.highlight ? '#e0b3ff' : '#888', lineHeight: 1.3, padding: '0 2px' }}>{plan.shortTitle}</h4>
+                <div style={{ fontSize: '0.65rem', fontWeight: 700, color: plan.featureColor, marginTop: '0.5rem' }}>View Info</div>
               </div>
             ))}
           </div>
