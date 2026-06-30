@@ -14,6 +14,7 @@ const AdminDashboard = () => {
   const [pipelineStage, setPipelineStage] = useState('inbox');
   const [newTeamEmail, setNewTeamEmail] = useState('');
   const [teamApps, setTeamApps] = useState([]);
+  const [appSubTab, setAppSubTab] = useState('New');
 
   useEffect(() => {
     if (activeTab === 'leads') {
@@ -336,20 +337,43 @@ const AdminDashboard = () => {
 
       {activeTab === 'teamApps' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+
+          <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
+            {['New', 'Reviewing', 'Interview', 'Accepted', 'Rejected'].map(tab => (
+              <button 
+                key={tab}
+                onClick={() => setAppSubTab(tab)}
+                style={{
+                  background: appSubTab === tab ? '#1a1a1a' : 'transparent',
+                  color: appSubTab === tab ? '#fff' : '#666',
+                  border: appSubTab === tab ? 'none' : '1px solid rgba(0,0,0,0.1)',
+                  padding: '0.6rem 1.5rem',
+                  borderRadius: '50px',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  whiteSpace: 'nowrap',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                {tab === 'Reviewing' ? 'Under Review' : tab === 'Interview' ? 'Interview Scheduled' : tab}
+              </button>
+            ))}
+          </div>
+
           {loading ? (
             <div style={{ textAlign: 'center', padding: '4rem', color: '#666' }}>
               <RefreshCw size={40} className="spin" style={{ marginBottom: '1rem' }} />
               <p>Loading applications...</p>
             </div>
-          ) : teamApps.length === 0 ? (
+          ) : teamApps.filter(app => (app.status || 'New') === appSubTab).length === 0 ? (
             <div className="glass" style={{ textAlign: 'center', padding: '4rem', borderRadius: '24px' }}>
-              <Inbox size={48} color="rgba(255,255,255,0.2)" style={{ marginBottom: '1rem' }} />
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: '#fff' }}>No Applications Yet</h3>
-              <p className="text-secondary">When someone applies to join the team, it will show up here.</p>
+              <Inbox size={48} color="rgba(0,0,0,0.1)" style={{ marginBottom: '1rem' }} />
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>No {appSubTab === 'Reviewing' ? 'Under Review' : appSubTab} Applications</h3>
+              <p className="text-secondary">When an application is marked as {appSubTab}, it will show up here.</p>
             </div>
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }}>
-              {teamApps.map((app) => (
+              {teamApps.filter(app => (app.status || 'New') === appSubTab).map((app) => (
                 <div key={app.id} className="glass" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid rgba(0,0,0,0.1)' }}>
                   
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '2rem', marginBottom: '1.5rem' }}>
