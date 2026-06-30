@@ -91,7 +91,7 @@ const ContactPage = () => {
         </p>
       </div>
 
-      <div className="contact-grid" style={{ display: 'flex', flexWrap: 'wrap', gap: '3rem', margin: '4rem auto', maxWidth: '1000px' }}>
+      <div className="contact-grid" style={{ display: 'flex', flexWrap: 'wrap-reverse', gap: '3rem', margin: '4rem auto', maxWidth: '1000px' }}>
         
         {/* Contact Info Side */}
         <div className="contact-info" style={{ flex: '1', minWidth: '300px' }}>
@@ -99,14 +99,14 @@ const ContactPage = () => {
             <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Direct Contact</h3>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Skip the form and chat with us immediately.</p>
             
-            <ProtectedWhatsAppLink phoneNumber="919394683474" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none', color: '#fff', marginBottom: '1.5rem' }}>
+            <ProtectedWhatsAppLink phoneNumber="919394683474" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none', color: 'var(--text-primary)', marginBottom: '1.5rem' }}>
               <div style={{ background: 'rgba(37, 211, 102, 0.2)', width: '48px', height: '48px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <MessageCircle size={24} color="#25D366" />
               </div>
               <span style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>WhatsApp Us</span>
             </ProtectedWhatsAppLink>
 
-            <a href="mailto:work.binodshaw@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none', color: '#fff' }}>
+            <a href="mailto:work.binodshaw@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none', color: 'var(--text-primary)' }}>
               <div style={{ background: 'rgba(163, 136, 255, 0.2)', width: '48px', height: '48px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Mail size={24} color="#a388ff" />
               </div>
@@ -135,7 +135,7 @@ const ContactPage = () => {
               </Link>
             </div>
           ) : !isSubmitted ? (
-            <form onSubmit={handleSubmit} className="lead-form" style={{ color: '#fff' }}>
+            <form onSubmit={handleSubmit} className="lead-form" style={{ color: 'var(--text-primary)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1rem' }}>
                 <div>
                   <h3 style={{ fontSize: '1.8rem', margin: 0 }}>Comprehensive Project Request</h3>
@@ -151,22 +151,22 @@ const ContactPage = () => {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label>Full Name</label>
-                  <input type="text" name="name" required placeholder="John Doe" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+                  <input type="text" name="name" required placeholder="John Doe" style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)' }} />
                 </div>
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label>Company / Business Name</label>
-                  <input type="text" name="company" placeholder="e.g. Acme Corp (Optional)" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+                  <input type="text" name="company" placeholder="e.g. Acme Corp (Optional)" style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)' }} />
                 </div>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1.5rem' }}>
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label>WhatsApp Number</label>
-                  <input type="tel" name="whatsapp" required placeholder="+1 234 567 8900" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+                  <input type="tel" name="whatsapp" required placeholder="+1 234 567 8900" style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)' }} />
                 </div>
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label>Alternative Phone</label>
-                  <input type="tel" name="phone" placeholder="Optional" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+                  <input type="tel" name="phone" placeholder="Optional" style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)' }} />
                 </div>
               </div>
 
@@ -183,7 +183,7 @@ const ContactPage = () => {
                         setSelectedState(''); // reset state
                         setSelectedCity('');  // reset city
                       }}
-                      style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }}
+                      style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)' }}
                     >
                       <option value="">Select Country</option>
                       {priorityCountries.map(c => <option key={`p-${c.isoCode}`} value={c.isoCode}>{c.name}</option>)}
@@ -201,7 +201,7 @@ const ContactPage = () => {
                         setSelectedCity(''); // reset city
                       }}
                       disabled={!selectedCountry}
-                      style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }}
+                      style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)' }}
                     >
                       <option value="">Select State</option>
                       {states.map(s => <option key={s.isoCode} value={s.isoCode}>{s.name}</option>)}
@@ -217,7 +217,7 @@ const ContactPage = () => {
                       value={selectedCity}
                       onChange={(e) => setSelectedCity(e.target.value)}
                       disabled={!selectedState}
-                      style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }}
+                      style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)' }}
                     >
                       <option value="">Select City</option>
                       {cities.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
@@ -230,7 +230,7 @@ const ContactPage = () => {
                       required 
                       placeholder="PIN / Zip Code" 
                       disabled={!selectedCity} 
-                      style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} 
+                      style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)' }} 
                     />
                   </div>
                 </div>
@@ -244,7 +244,7 @@ const ContactPage = () => {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label>Service Requested</label>
-                  <select name="service_requested" required defaultValue={defaultService} style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }}>
+                  <select name="service_requested" required defaultValue={defaultService} style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)' }}>
                     <option value="">Select a service</option>
                     <option value="Web Design & Development">Web Design & Development</option>
                     <option value="AI Automation">AI Automation</option>
@@ -253,7 +253,7 @@ const ContactPage = () => {
                 </div>
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label>Estimated Budget</label>
-                  <select name="budget" required style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }}>
+                  <select name="budget" required style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)' }}>
                     <option value="">Select a range</option>
                     <option value="< ₹10,000 / $120">Less than ₹10,000 / $120</option>
                     <option value="₹10,000 - ₹40,000 / $120 - $500">₹10,000 - ₹40,000 / $120 - $500</option>
@@ -267,7 +267,7 @@ const ContactPage = () => {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1.5rem' }}>
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label>Ideal Deadline</label>
-                  <select name="deadline" required style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }}>
+                  <select name="deadline" required style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)' }}>
                     <option value="">Select a timeline</option>
                     <option value="ASAP (Urgent)">ASAP (Urgent)</option>
                     <option value="Within 1 Month">Within 1 Month</option>
@@ -277,7 +277,7 @@ const ContactPage = () => {
                 </div>
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label>How did you hear about us?</label>
-                  <select name="source" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }}>
+                  <select name="source" style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)' }}>
                     <option value="">Select an option (Optional)</option>
                     <option value="Google Search">Google Search</option>
                     <option value="Social Media">Social Media</option>
@@ -294,7 +294,7 @@ const ContactPage = () => {
                   required 
                   placeholder="Tell us everything we need to know about your project, goals, and specific features..."
                   rows="6"
-                  style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }}
+                  style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)' }}
                 ></textarea>
               </div>
 
