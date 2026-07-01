@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { ArrowRight, Code, Cpu, MessageSquare, Mail, Camera, ExternalLink, Zap, Terminal, Server } from 'lucide-react';
+import { ArrowRight, Code, Cpu, MessageSquare, Mail, Camera, ExternalLink, Zap, Terminal, Server, Phone, Video, Layers } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
@@ -61,6 +61,46 @@ const PortfolioPage = () => {
       icon: <Terminal size={40} color="#8A2BE2" />,
       tags: ['Node.js', 'Social APIs', 'CRM'],
       color: 'rgba(138, 43, 226, 0.1)'
+    },
+    {
+      id: 6,
+      title: 'AI Calling Agent',
+      description: 'An intelligent voice agent that handles inbound and outbound calls, schedules appointments, and provides customer support 24/7.',
+      icon: <Phone size={40} color="#FF7F50" />,
+      tags: ['Voice AI', 'WebRTC', 'NLP'],
+      color: 'rgba(255, 127, 80, 0.1)'
+    },
+    {
+      id: 7,
+      title: 'AI Manager',
+      description: 'An autonomous digital manager that oversees team tasks, generates progress reports, and optimizes daily workflows using AI.',
+      icon: <Server size={40} color="#38bdf8" />,
+      tags: ['Autonomous AI', 'Management', 'LLM'],
+      color: 'rgba(56, 189, 248, 0.1)'
+    },
+    {
+      id: 8,
+      title: 'AI YouTube Creator',
+      description: 'A fully automated pipeline that generates video scripts, creates voiceovers, edits clips, and schedules YouTube uploads autonomously.',
+      icon: <Video size={40} color="#ff0000" />,
+      tags: ['Video AI', 'YouTube API', 'Automation'],
+      color: 'rgba(255, 0, 0, 0.1)'
+    },
+    {
+      id: 9,
+      title: 'Frontend UI Design',
+      description: 'Premium, modern website interfaces built with React and Tailwind. Focusing on glassmorphism, fluid animations, and UX.',
+      icon: <Code size={40} color="#a388ff" />,
+      tags: ['React', 'UI/UX', 'Figma'],
+      color: 'rgba(163, 136, 255, 0.1)'
+    },
+    {
+      id: 10,
+      title: '3D Web Experiences',
+      description: 'Immersive websites utilizing React Three Fiber and WebGL to render interactive 3D models and breathtaking spatial environments.',
+      icon: <Layers size={40} color="#2ecc71" />,
+      tags: ['Three.js', 'WebGL', '3D Models'],
+      color: 'rgba(46, 204, 113, 0.1)'
     }
   ];
 
