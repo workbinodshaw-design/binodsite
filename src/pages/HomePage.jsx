@@ -7,21 +7,40 @@ import SceneContainer from '../components/SceneContainer';
 import ActiveCardOverlay from '../components/ActiveCardOverlay';
 import ErrorBoundary from '../components/ErrorBoundary';
 import FloatingBubbles from '../components/FloatingBubbles';
-import { Layers, Box, Cpu, HardDrive, Users, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Layers, Box, Cpu, HardDrive, Users, ArrowRight, X, CheckCircle, Rocket, Award, Briefcase } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO';
 
 function HomePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeCard, setActiveCard] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [showHiringPopup, setShowHiringPopup] = useState(false);
   const heroWrapperRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    
+    // Show popup shortly after page load
+    const popupTimer = setTimeout(() => {
+      // Check session storage to not annoy user every single refresh, but for now we'll just show it once per session
+      if (!sessionStorage.getItem('hiringPopupSeen')) {
+        setShowHiringPopup(true);
+      }
+    }, 1500);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(popupTimer);
+    };
   }, []);
+
+  const closePopup = () => {
+    setShowHiringPopup(false);
+    sessionStorage.setItem('hiringPopupSeen', 'true');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,6 +73,64 @@ function HomePage() {
         url="/"
       />
       <div className="home-page">
+        {showHiringPopup && (
+          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', zIndex: 99999, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '1rem', backdropFilter: 'blur(8px)' }}>
+            <div style={{ background: 'var(--bg-color, #fff)', border: '1px solid rgba(138,43,226,0.3)', borderRadius: '24px', padding: '2.5rem', maxWidth: '500px', width: '100%', position: 'relative', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', textAlign: 'center', overflow: 'hidden' }}>
+              
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '6px', background: 'linear-gradient(90deg, #38bdf8, #a388ff)' }}></div>
+              
+              <button 
+                onClick={closePopup}
+                style={{ position: 'absolute', top: '15px', right: '15px', background: 'rgba(128,128,128,0.1)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', color: 'var(--text-primary)', transition: 'all 0.3s ease' }}
+                onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255,107,107,0.2)'}
+                onMouseOut={(e) => e.currentTarget.style.background = 'rgba(128,128,128,0.1)'}
+              >
+                <X size={20} />
+              </button>
+
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
+                <div style={{ background: 'rgba(138,43,226,0.1)', padding: '1rem', borderRadius: '50%', color: '#a388ff' }}>
+                  <Rocket size={40} />
+                </div>
+              </div>
+
+              <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Need For Team!</h2>
+              <p style={{ color: 'var(--text-secondary, #666)', marginBottom: '2rem', fontSize: '1.1rem', lineHeight: '1.6' }}>We are looking for passionate individuals to join CastFlow. If you truly deserve it, here is what we offer:</p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left', marginBottom: '2.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <span style={{ color: '#2ecc71' }}><CheckCircle size={22} /></span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: '500', fontSize: '1.05rem' }}>Revenue sharing</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <span style={{ color: '#a388ff' }}><Award size={22} /></span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: '500', fontSize: '1.05rem' }}>Co-founder opportunity <span style={{ color: 'var(--text-secondary, #888)', fontSize: '0.85rem', fontWeight: 'normal' }}>(only if deserved)</span></span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <span style={{ color: '#38bdf8' }}><Briefcase size={22} /></span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: '500', fontSize: '1.05rem' }}>Portfolio projects</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <span style={{ color: '#2ecc71' }}><CheckCircle size={22} /></span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: '500', fontSize: '1.05rem' }}>Experience letter & LinkedIn recommendation</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <span style={{ color: '#2ecc71' }}><CheckCircle size={22} /></span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: '500', fontSize: '1.05rem' }}>Public credit on the website</span>
+                </div>
+              </div>
+
+              <button 
+                onClick={() => { closePopup(); navigate('/join-team'); }}
+                className="btn btn-primary"
+                style={{ width: '100%', padding: '1.2rem', fontSize: '1.2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', background: 'linear-gradient(45deg, #38bdf8, #a388ff)', border: 'none', borderRadius: '12px', color: '#fff', fontWeight: 'bold', cursor: 'pointer' }}
+              >
+                Join the Team <ArrowRight size={20} />
+              </button>
+            </div>
+          </div>
+        )}
+
         <ActiveCardOverlay activeCard={activeCard} onClose={() => setActiveCard(null)} />
 
         {/* MOBILE ONLY: Normal scrolling UI text */}
