@@ -27,8 +27,7 @@ const FloatingBubbles = () => {
           animationDuration: `${animationDuration}s`,
           animationDelay: `${delay}s`,
           background: bg,
-          boxShadow: `0 0 ${size/2}px ${bg}, inset 0 0 ${size/4}px rgba(255,255,255,0.5)`,
-          backdropFilter: 'blur(4px)'
+          boxShadow: `0 0 ${size/2}px ${bg}, inset 0 0 ${size/4}px rgba(255,255,255,0.5)`
         }}
       />
     );

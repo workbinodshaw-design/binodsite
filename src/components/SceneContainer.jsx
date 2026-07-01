@@ -52,7 +52,7 @@ const SceneContainer = ({ scrollProgress, setActiveCard }) => {
   return (
     <Canvas
       camera={{ position: [0, 5, 22], fov: 35 }}
-      dpr={[1, 2]}
+      dpr={[1, 1.5]}
       gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
     >
       <color attach="background" args={['#FAFAFA']} />
