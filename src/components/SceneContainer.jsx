@@ -1,7 +1,6 @@
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import BabySpiderman from './BabySpiderman';
 import FloatingPanels from './FloatingPanels';
@@ -52,8 +51,8 @@ const SceneContainer = ({ scrollProgress, setActiveCard }) => {
   return (
     <Canvas
       camera={{ position: [0, 5, 22], fov: 35 }}
-      dpr={[1, 1.5]}
-      gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
+      dpr={1}
+      gl={{ antialias: false, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
     >
       <color attach="background" args={['#FAFAFA']} />
       
@@ -74,17 +73,8 @@ const SceneContainer = ({ scrollProgress, setActiveCard }) => {
       <HolographicScene scrollProgress={scrollProgress} setActiveCard={setActiveCard} />
       
       {/* Environment / Background */}
-      <Particles count={150} />
+      <Particles count={50} />
 
-      {/* Post Processing */}
-      <EffectComposer disableNormalPass>
-        <Bloom 
-          luminanceThreshold={0.7} 
-          luminanceSmoothing={0.9} 
-          intensity={1.2} 
-          radius={0.8}
-        />
-      </EffectComposer>
     </Canvas>
   );
 };
