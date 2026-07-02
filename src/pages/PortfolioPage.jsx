@@ -23,6 +23,15 @@ const PortfolioPage = () => {
 
   const projects = [
     {
+      id: 0,
+      title: 'AIVerse Hub',
+      description: 'The ultimate community-curated directory for discovering, comparing, and mastering the world\'s best Artificial Intelligence tools. Includes a library of 3,000+ AI tools.',
+      icon: <ExternalLink size={40} color="#ff007f" />,
+      tags: ['React', 'Directory', 'AI Tools'],
+      color: 'rgba(255, 0, 127, 0.1)',
+      url: 'https://testpush-mauve.vercel.app/'
+    },
+    {
       id: 1,
       title: 'WhatsApp Automation',
       description: 'A powerful automated system that handles customer inquiries and acts as a 24/7 intelligent agent directly on WhatsApp.',
@@ -289,6 +298,13 @@ const PortfolioPage = () => {
                         </span>
                       ))}
                     </div>
+                    {project.url && (
+                      <div style={{ marginTop: 'auto' }}>
+                        <a href={project.url} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.8rem 1.5rem', fontSize: '1rem' }}>
+                          Visit Live Project <ArrowRight size={16} />
+                        </a>
+                      </div>
+                    )}
                   </div>
                 );
               })}
