@@ -2931,3 +2931,38 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 .mobile-menu-btn svg {
   stroke: #FFFFFF !important;
 }
+
+
+
+/* Light Theme Revert Overrides */
+.navbar {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+.logo-text {
+  color: #1A1A1A !important;
+}
+
+.nav-link {
+  color: #666 !important;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #1A1A1A !important;
+}
+
+.nav-link.btn {
+  background: #1A1A1A !important;
+  color: #FFFFFF !important;
+  border: none !important;
+}
+
+.nav-links.open {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+}
+
+.mobile-menu-btn svg {
+  stroke: #1A1A1A !important;
+}
