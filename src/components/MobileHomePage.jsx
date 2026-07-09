@@ -91,6 +91,8 @@ const MobileHomePage = () => {
               <p style={{ margin: 0, fontSize: '0.95rem', color: '#666', lineHeight: '1.5' }}>Premium UX/UI design focusing on clean aesthetics and seamless user journeys.</p>
             </div>
           </div>
+        </div>
+      </section>
 
     </div>
   );
