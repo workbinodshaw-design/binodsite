@@ -361,6 +361,71 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* CAPABILITIES SECTION - Mobile Friendly List */}
+      <section style={{ padding: '6rem 1.5rem', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <div style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '2px', marginBottom: '3rem', textAlign: 'center' }}>• CAPABILITIES</div>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+            
+            {/* Feature 1 */}
+            <div style={{ padding: '2rem 0', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '1.5rem', alignItems: isMobile ? 'flex-start' : 'center' }}>
+              <div style={{ width: '48px', height: '48px', background: 'rgba(26, 115, 232, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1A73E8', flexShrink: 0 }}>
+                <Cpu size={24} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>AI Agents & Automation</h3>
+                <p style={{ color: '#666', lineHeight: 1.6 }}>We build custom LLM agents and workflow automations that integrate directly with your existing software stack, eliminating repetitive tasks.</p>
+              </div>
+            </div>
+
+            {/* Feature 2 */}
+            <div style={{ padding: '2rem 0', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '1.5rem', alignItems: isMobile ? 'flex-start' : 'center' }}>
+              <div style={{ width: '48px', height: '48px', background: 'rgba(196, 240, 66, 0.2)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#8db31c', flexShrink: 0 }}>
+                <Globe size={24} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>Web Applications</h3>
+                <p style={{ color: '#666', lineHeight: 1.6 }}>High-performance, scalable web applications built with modern frameworks. From complex dashboards to enterprise SaaS platforms.</p>
+              </div>
+            </div>
+
+            {/* Feature 3 */}
+            <div style={{ padding: '2rem 0', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '1.5rem', alignItems: isMobile ? 'flex-start' : 'center' }}>
+              <div style={{ width: '48px', height: '48px', background: 'rgba(0, 0, 0, 0.05)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1A1A1A', flexShrink: 0 }}>
+                <Zap size={24} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>Digital Transformation</h3>
+                <p style={{ color: '#666', lineHeight: 1.6 }}>Complete audits of your business processes followed by custom software solutions that 10x your operational efficiency.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* CTA SECTION */}
+      <section style={{ padding: '8rem 1.5rem', background: '#FAFAFA', textAlign: 'center' }}>
+        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', letterSpacing: '-1px' }}>Ready to scale?</h2>
+        <p style={{ color: '#666', marginBottom: '3rem', fontSize: '1.1rem', maxWidth: '500px', margin: '0 auto 3rem' }}>Stop wasting time on manual processes. Let's build the systems that will power your next phase of growth.</p>
+        <button className="btn btn-primary" onClick={() => navigate('/services')} style={{ fontSize: '1.1rem', padding: '1rem 2.5rem', borderRadius: '30px' }}>
+          Explore Services
+        </button>
+      </section>
+
+      {/* FOOTER */}
+      <footer style={{ padding: '3rem 1.5rem', borderTop: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'center', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
+        <div>
+          <div style={{ fontWeight: 800, fontSize: '1.2rem', marginBottom: '0.5rem' }}>CASTFLOW</div>
+          <div style={{ color: '#A0A0A0', fontSize: '0.9rem' }}>© 2026 CastFlow Agency. All rights reserved.</div>
+        </div>
+        <div style={{ display: 'flex', gap: '2rem' }}>
+          <a href="#" style={{ color: '#1A1A1A', textDecoration: 'none', fontWeight: 500 }}>Twitter</a>
+          <a href="#" style={{ color: '#1A1A1A', textDecoration: 'none', fontWeight: 500 }}>LinkedIn</a>
+          <a href="/contact" onClick={(e) => { e.preventDefault(); navigate('/join-team'); }} style={{ color: '#1A1A1A', textDecoration: 'none', fontWeight: 500 }}>Contact</a>
+        </div>
+      </footer>
     </div>
   );
 };
