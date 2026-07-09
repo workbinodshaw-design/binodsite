@@ -3019,7 +3019,7 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 }
 
 .logo-text {
-  color: #FFFFFF !important;
+  color: #1A1A1A !important;
 }
 
 .nav-link {
@@ -3038,5 +3038,5 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 }
 
 .mobile-menu-btn svg {
-  stroke: #FFFFFF !important;
+  stroke: #1A1A1A !important;
 }
