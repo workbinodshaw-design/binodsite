@@ -2896,3 +2896,38 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
     line-height: 1.4;
   }
 }
+
+
+
+/* Dark Theme Revert Overrides */
+.navbar {
+  background: rgba(5, 5, 5, 0.9) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+.logo-text {
+  color: #FFFFFF !important;
+}
+
+.nav-link {
+  color: #A0A0A0 !important;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #FFFFFF !important;
+}
+
+.nav-link.btn {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  border: none !important;
+}
+
+.nav-links.open {
+  background: #050505 !important;
+  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+.mobile-menu-btn svg {
+  stroke: #FFFFFF !important;
+}
