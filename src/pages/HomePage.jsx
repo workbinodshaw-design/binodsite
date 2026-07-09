@@ -85,48 +85,64 @@ const HomePage = () => {
           Automate your repetitive tasks, build intelligent agents, and launch premium web products tailored to your exact business needs.
         </p>
 
-        {/* SERVICES GRID */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+        {/* SERVICES HORIZONTAL SCROLL (APP-LIKE) */}
+        <div style={{ 
+          display: 'flex', 
+          overflowX: 'auto', 
+          gap: '1rem', 
+          paddingBottom: '1rem',
+          scrollSnapType: 'x mandatory',
+          WebkitOverflowScrolling: 'touch',
+          msOverflowStyle: 'none',  /* IE and Edge */
+          scrollbarWidth: 'none'    /* Firefox */
+        }}>
           
+          <style>{`
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            div::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
+
           {/* Service 1 */}
-          <div onClick={() => navigate('/services/web-development')} style={{ background: '#FFF', padding: '2rem', borderRadius: '4px', boxShadow: '0 10px 40px rgba(0,0,0,0.03)', textAlign: 'left', border: '1px solid rgba(0,0,0,0.02)', cursor: 'pointer' }}>
-            <div style={{ height: '160px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1.5rem' }}>
-              <HolographicAsset variant={2} width="120px" height="120px" />
+          <div onClick={() => navigate('/services/web-development')} style={{ flex: '0 0 85%', maxWidth: '300px', scrollSnapAlign: 'center', background: '#FFF', padding: '1.2rem', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', textAlign: 'left', border: '1px solid rgba(0,0,0,0.02)', cursor: 'pointer' }}>
+            <div style={{ height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1rem' }}>
+              <HolographicAsset variant={2} width="80px" height="80px" />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, letterSpacing: '-0.5px' }}>Web Development</h3>
-              <ArrowRight size={20} color="#1A1A1A" />
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, letterSpacing: '-0.5px' }}>Web Development</h3>
+              <ArrowRight size={16} color="#1A1A1A" />
             </div>
-            <p style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.5 }}>
+            <p style={{ color: '#888', fontSize: '0.85rem', lineHeight: 1.4 }}>
               High-performance web apps built with React, Next.js, and modern architecture.
             </p>
           </div>
 
           {/* Service 2 */}
-          <div onClick={() => navigate('/services/ai-automation')} style={{ background: '#FFF', padding: '2rem', borderRadius: '4px', boxShadow: '0 10px 40px rgba(0,0,0,0.03)', textAlign: 'left', border: '1px solid rgba(0,0,0,0.02)', cursor: 'pointer' }}>
-            <div style={{ height: '160px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1.5rem' }}>
-              <HolographicAsset variant={3} width="120px" height="120px" />
+          <div onClick={() => navigate('/services/ai-automation')} style={{ flex: '0 0 85%', maxWidth: '300px', scrollSnapAlign: 'center', background: '#FFF', padding: '1.2rem', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', textAlign: 'left', border: '1px solid rgba(0,0,0,0.02)', cursor: 'pointer' }}>
+            <div style={{ height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1rem' }}>
+              <HolographicAsset variant={3} width="80px" height="80px" />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, letterSpacing: '-0.5px' }}>AI Automation</h3>
-              <ArrowRight size={20} color="#1A1A1A" />
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, letterSpacing: '-0.5px' }}>AI Automation</h3>
+              <ArrowRight size={16} color="#1A1A1A" />
             </div>
-            <p style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.5 }}>
-              Custom intelligent agents and workflows using n8n to completely automate repetitive tasks.
+            <p style={{ color: '#888', fontSize: '0.85rem', lineHeight: 1.4 }}>
+              Custom intelligent agents and workflows using n8n to completely automate tasks.
             </p>
           </div>
 
           {/* Service 3 */}
-          <div onClick={() => navigate('/services')} style={{ background: '#FFF', padding: '2rem', borderRadius: '4px', boxShadow: '0 10px 40px rgba(0,0,0,0.03)', textAlign: 'left', border: '1px solid rgba(0,0,0,0.02)', cursor: 'pointer' }}>
-            <div style={{ height: '160px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1.5rem' }}>
-              <HolographicAsset variant={4} width="120px" height="120px" />
+          <div onClick={() => navigate('/services')} style={{ flex: '0 0 85%', maxWidth: '300px', scrollSnapAlign: 'center', background: '#FFF', padding: '1.2rem', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', textAlign: 'left', border: '1px solid rgba(0,0,0,0.02)', cursor: 'pointer' }}>
+            <div style={{ height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1rem' }}>
+              <HolographicAsset variant={4} width="80px" height="80px" />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, letterSpacing: '-0.5px' }}>MVP Development</h3>
-              <ArrowRight size={20} color="#1A1A1A" />
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, letterSpacing: '-0.5px' }}>MVP Development</h3>
+              <ArrowRight size={16} color="#1A1A1A" />
             </div>
-            <p style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.5 }}>
-              Turn your idea into reality fast. Rapid prototyping and robust foundational builds.
+            <p style={{ color: '#888', fontSize: '0.85rem', lineHeight: 1.4 }}>
+              Turn your idea into reality fast. Rapid prototyping and robust builds.
             </p>
           </div>
 
