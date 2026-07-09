@@ -181,6 +181,8 @@ const HomePage = () => {
           </button>
         </div>
 
+        {/* 3D Curved Cards (Desktop) vs Swipeable Row (Mobile) */}
+        {!isMobile ? (
           <div className="carousel-container">
             {/* Card 1: Web Dev */}
             <div className="glass-card card-far-left" onClick={() => navigate('/services/web-development')} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', padding: '1.2rem' }}>
