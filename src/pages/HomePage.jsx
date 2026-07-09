@@ -185,42 +185,42 @@ const HomePage = () => {
         {!isMobile ? (
           <div className="carousel-container">
             <div className="glass-card card-far-left" onClick={() => navigate('/services/web-development')} style={{ cursor: 'pointer', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-               <div style={{ height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={2} /></div>
+               <div style={{ width: '80px', height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={2} /></div>
                <div style={{ fontSize: '1.2rem', fontWeight: 700 }}>Web Dev</div>
             </div>
             
             <div className="glass-card card-left" onClick={() => navigate('/services')} style={{ cursor: 'pointer', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-               <div style={{ height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={4} /></div>
+               <div style={{ width: '80px', height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={4} /></div>
                <div style={{ fontSize: '1.2rem', fontWeight: 700 }}>MVP Build</div>
             </div>
 
             <div className="glass-card card-center" onClick={() => navigate('/services/ai-automation')} style={{ cursor: 'pointer', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-               <div style={{ height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={3} /></div>
+               <div style={{ width: '80px', height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={3} /></div>
                <div style={{ fontSize: '1.4rem', fontWeight: 700 }}>AI Automation</div>
             </div>
 
             <div className="glass-card card-right" onClick={() => navigate('/services')} style={{ cursor: 'pointer', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-               <div style={{ height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={1} /></div>
+               <div style={{ width: '80px', height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={1} /></div>
                <div style={{ fontSize: '1.2rem', fontWeight: 700 }}>UX/UI Design</div>
             </div>
 
             <div className="glass-card card-far-right" onClick={() => navigate('/services')} style={{ cursor: 'pointer', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-               <div style={{ height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={5} /></div>
+               <div style={{ width: '80px', height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={5} /></div>
                <div style={{ fontSize: '1.2rem', fontWeight: 700 }}>Cloud Solutions</div>
             </div>
           </div>
         ) : (
           <div className="mobile-carousel">
             <div className="mobile-glass-card" onClick={() => navigate('/services/ai-automation')} style={{ cursor: 'pointer', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-               <div style={{ height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={3} /></div>
+               <div style={{ width: '80px', height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={3} /></div>
                <div style={{ fontSize: '1.4rem', fontWeight: 700, color: '#1A1A1A' }}>AI Automation</div>
             </div>
             <div className="mobile-glass-card" onClick={() => navigate('/services/web-development')} style={{ cursor: 'pointer', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-               <div style={{ height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={2} /></div>
+               <div style={{ width: '80px', height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={2} /></div>
                <div style={{ fontSize: '1.4rem', fontWeight: 700, color: '#1A1A1A' }}>Web Development</div>
             </div>
             <div className="mobile-glass-card" onClick={() => navigate('/services')} style={{ cursor: 'pointer', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-               <div style={{ height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={4} /></div>
+               <div style={{ width: '80px', height: '80px', display: 'flex', alignItems: 'center', marginBottom: '1rem' }}><HolographicAsset variant={4} /></div>
                <div style={{ fontSize: '1.4rem', fontWeight: 700, color: '#1A1A1A' }}>MVP Build</div>
             </div>
           </div>
