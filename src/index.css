@@ -2769,3 +2769,40 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 .stagger-2 { transition-delay: 0.2s; }
 .stagger-3 { transition-delay: 0.3s; }
 .stagger-4 { transition-delay: 0.4s; }
+
+
+
+/* Light Theme Overrides */
+.navbar {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+.logo-text {
+  color: #1A1A1A !important;
+}
+
+.nav-link {
+  color: #666 !important;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #1A1A1A !important;
+}
+
+/* Light buttons for navbar login */
+.nav-link.btn {
+  background: #FAFAFA !important;
+  color: #1A1A1A !important;
+  border: 1px solid #E0E0E0 !important;
+}
+
+.nav-links.open {
+  background: #FAFAFA !important;
+  border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+}
+
+/* Fix mobile menu icon color */
+.mobile-menu-btn svg {
+  stroke: #1A1A1A !important;
+}
