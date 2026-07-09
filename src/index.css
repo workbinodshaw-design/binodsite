@@ -2966,3 +2966,34 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 .mobile-menu-btn svg {
   stroke: #1A1A1A !important;
 }
+
+
+
+/* Sky Theme Navbar Overrides */
+.navbar {
+  background: transparent !important;
+  border-bottom: none !important;
+}
+
+.logo-text {
+  color: #FFFFFF !important;
+}
+
+.nav-link {
+  color: rgba(255,255,255,0.8) !important;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #FFFFFF !important;
+}
+
+.nav-link.btn {
+  background: #C4F042 !important; /* Lime green */
+  color: #1A1A1A !important;
+  border: none !important;
+  font-weight: 700 !important;
+}
+
+.mobile-menu-btn svg {
+  stroke: #FFFFFF !important;
+}
