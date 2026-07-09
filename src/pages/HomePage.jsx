@@ -294,16 +294,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* LOGOS MARQUEE */}
-      <section style={{ padding: '3rem 1.5rem', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
-        <div style={{ display: 'flex', gap: '3rem', alignItems: 'center', margin: '0 auto', maxWidth: '1200px', width: '100%', flexWrap: 'wrap', justifyContent: 'space-between', opacity: 0.4 }}>
-          {['Airbnb', 'Fivetran', 'Pendo', 'Airtable', 'Framer', 'Linear'].map(company => (
-            <div key={company} style={{ fontWeight: 800, fontSize: '1.4rem', letterSpacing: '-0.5px' }}>
-              {company}
-            </div>
-          ))}
-        </div>
-      </section>
+
 
       {/* MAIN CONTENT AREA */}
       <section style={{ padding: '6rem 1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
