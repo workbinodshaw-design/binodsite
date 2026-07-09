@@ -175,9 +175,9 @@ const HomePage = () => {
         </p>
         
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <button className="btn-hollow" onClick={() => navigate('/portfolio')}>VIEW DEMO</button>
-          <button className="btn-solid" onClick={() => navigate('/services')}>
-            GET STARTED <div style={{ background: '#1A1A1A', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#C4F042' }}><ArrowUpRight size={14} /></div>
+          <button className="btn-hollow" onClick={() => navigate('/services')}>EXPLORE SERVICES</button>
+          <button className="btn-solid" onClick={() => navigate('/contact')}>
+            BOOK CONSULTATION <div style={{ background: '#1A1A1A', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#C4F042' }}><ArrowUpRight size={14} /></div>
           </button>
         </div>
 
