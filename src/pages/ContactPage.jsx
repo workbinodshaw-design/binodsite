@@ -115,29 +115,7 @@ const ContactPage = () => {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', maxWidth: '1000px', margin: '0 auto' }}>
-          
-          {/* Contact Info Side */}
-          <div>
-            <div style={{ background: '#fff', padding: '2.5rem', borderRadius: '24px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 10px 40px rgba(0,0,0,0.02)' }}>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem' }}>Direct Contact</h3>
-              <p style={{ color: '#666', marginBottom: '2rem' }}>Skip the form and chat with us immediately.</p>
-              
-              <ProtectedWhatsAppLink phoneNumber="919394683474" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none', color: '#1A1A1A', marginBottom: '1.5rem', padding: '1rem', background: '#f5f5f5', borderRadius: '16px', transition: 'background 0.2s' }} onMouseOver={(e) => e.currentTarget.style.background = '#e8e8e8'} onMouseOut={(e) => e.currentTarget.style.background = '#f5f5f5'}>
-                <div style={{ background: '#25D366', width: '40px', height: '40px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <MessageCircle size={20} color="#fff" />
-                </div>
-                <span style={{ fontSize: '1.05rem', fontWeight: 600 }}>WhatsApp Us</span>
-              </ProtectedWhatsAppLink>
-
-              <a href="mailto:work.binodshaw@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none', color: '#1A1A1A', padding: '1rem', background: '#f5f5f5', borderRadius: '16px', transition: 'background 0.2s' }} onMouseOver={(e) => e.currentTarget.style.background = '#e8e8e8'} onMouseOut={(e) => e.currentTarget.style.background = '#f5f5f5'}>
-                <div style={{ background: '#1A73E8', width: '40px', height: '40px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Mail size={20} color="#fff" />
-                </div>
-                <span style={{ fontSize: '1.05rem', fontWeight: 600 }}>Email Us</span>
-              </a>
-            </div>
-          </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem', maxWidth: '800px', margin: '0 auto' }}>
 
           {/* Lead Form Side */}
           <div style={{ background: '#fff', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 10px 40px rgba(0,0,0,0.02)' }}>
@@ -324,6 +302,28 @@ const ContactPage = () => {
                 </div>
               </div>
             )}
+          </div>
+
+          {/* Contact Info Side */}
+          <div>
+            <div style={{ background: '#fff', padding: '2.5rem', borderRadius: '24px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 10px 40px rgba(0,0,0,0.02)' }}>
+              <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem' }}>Direct Contact</h3>
+              <p style={{ color: '#666', marginBottom: '2rem' }}>Skip the form and chat with us immediately.</p>
+              
+              <ProtectedWhatsAppLink phoneNumber="919394683474" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none', color: '#1A1A1A', marginBottom: '1.5rem', padding: '1rem', background: '#f5f5f5', borderRadius: '16px', transition: 'background 0.2s' }} onMouseOver={(e) => e.currentTarget.style.background = '#e8e8e8'} onMouseOut={(e) => e.currentTarget.style.background = '#f5f5f5'}>
+                <div style={{ background: '#25D366', width: '40px', height: '40px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <MessageCircle size={20} color="#fff" />
+                </div>
+                <span style={{ fontSize: '1.05rem', fontWeight: 600 }}>WhatsApp Us</span>
+              </ProtectedWhatsAppLink>
+
+              <a href="mailto:work.binodshaw@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none', color: '#1A1A1A', padding: '1rem', background: '#f5f5f5', borderRadius: '16px', transition: 'background 0.2s' }} onMouseOver={(e) => e.currentTarget.style.background = '#e8e8e8'} onMouseOut={(e) => e.currentTarget.style.background = '#f5f5f5'}>
+                <div style={{ background: '#1A73E8', width: '40px', height: '40px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Mail size={20} color="#fff" />
+                </div>
+                <span style={{ fontSize: '1.05rem', fontWeight: 600 }}>Email Us</span>
+              </a>
+            </div>
           </div>
 
         </div>
