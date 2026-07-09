@@ -306,7 +306,7 @@ const HomePage = () => {
         <div className="bento-grid">
           
           {/* Blue Block */}
-          <div className="bento-blue" style={{ gridColumn: isMobile ? '1' : '1 / span 1', gridRow: isMobile ? 'auto' : '1 / span 2', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div className="bento-blue reveal-up" style={{ gridColumn: isMobile ? '1' : '1 / span 1', gridRow: isMobile ? 'auto' : '1 / span 2', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4rem' }}>
               <div style={{ fontSize: '1.2rem', fontWeight: 800 }}>CASTFLOW ECOSYSTEM</div>
               <div style={{ width: '32px', height: '32px', background: 'white', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -321,7 +321,7 @@ const HomePage = () => {
           </div>
 
           {/* White Center Block */}
-          <div className="bento-white" style={{ gridColumn: isMobile ? '1' : '2 / span 1', gridRow: isMobile ? 'auto' : '1 / span 2', display: 'flex', flexDirection: 'column' }}>
+          <div className="bento-white reveal-up" style={{ gridColumn: isMobile ? '1' : '2 / span 1', gridRow: isMobile ? 'auto' : '1 / span 2', display: 'flex', flexDirection: 'column' }}>
             <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>Partnership & Delivery</div>
             <div style={{ fontSize: '3.5rem', fontWeight: 500, letterSpacing: '-2px', marginBottom: 'auto' }}>99%</div>
             
@@ -338,14 +338,14 @@ const HomePage = () => {
           </div>
 
           {/* Lime Green Block */}
-          <div className="bento-green" style={{ gridColumn: isMobile ? '1' : '3 / span 1', display: 'flex', flexDirection: 'column' }}>
+          <div className="bento-green reveal-up" style={{ gridColumn: isMobile ? '1' : '3 / span 1', display: 'flex', flexDirection: 'column' }}>
             <div style={{ fontSize: '0.9rem', marginBottom: '1rem', fontWeight: 500 }}>Manual Hours Saved</div>
             <div style={{ fontSize: '3.5rem', fontWeight: 500, letterSpacing: '-2px', marginBottom: '2rem' }}>1.2M+</div>
             <p style={{ fontSize: '1rem', fontWeight: 500 }}>Hours of manual labor eliminated across our client portfolio through intelligent automations.</p>
           </div>
 
           {/* Black Block */}
-          <div className="bento-black" style={{ gridColumn: isMobile ? '1' : '3 / span 1', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div className="bento-black reveal-up" style={{ gridColumn: isMobile ? '1' : '3 / span 1', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ color: '#A0A0A0' }}>Successful Deployments</div>
             <div style={{ fontSize: '2.5rem', fontWeight: 500 }}>150+</div>
           </div>
@@ -361,7 +361,7 @@ const HomePage = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
             
             {/* Feature 1 */}
-            <div style={{ padding: '2rem 0', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '1.5rem', alignItems: isMobile ? 'flex-start' : 'center' }}>
+            <div className="reveal-up" style={{ padding: '2rem 0', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '1.5rem', alignItems: isMobile ? 'flex-start' : 'center' }}>
               <div style={{ width: '48px', height: '48px', background: 'rgba(26, 115, 232, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1A73E8', flexShrink: 0 }}>
                 <Cpu size={24} />
               </div>
@@ -372,7 +372,7 @@ const HomePage = () => {
             </div>
 
             {/* Feature 2 */}
-            <div style={{ padding: '2rem 0', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '1.5rem', alignItems: isMobile ? 'flex-start' : 'center' }}>
+            <div className="reveal-up" style={{ padding: '2rem 0', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '1.5rem', alignItems: isMobile ? 'flex-start' : 'center', transitionDelay: '0.1s' }}>
               <div style={{ width: '48px', height: '48px', background: 'rgba(196, 240, 66, 0.2)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#8db31c', flexShrink: 0 }}>
                 <Globe size={24} />
               </div>
@@ -383,7 +383,7 @@ const HomePage = () => {
             </div>
 
             {/* Feature 3 */}
-            <div style={{ padding: '2rem 0', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '1.5rem', alignItems: isMobile ? 'flex-start' : 'center' }}>
+            <div className="reveal-up" style={{ padding: '2rem 0', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '1.5rem', alignItems: isMobile ? 'flex-start' : 'center', transitionDelay: '0.2s' }}>
               <div style={{ width: '48px', height: '48px', background: 'rgba(0, 0, 0, 0.05)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1A1A1A', flexShrink: 0 }}>
                 <TrendingUp size={24} />
               </div>
@@ -398,7 +398,7 @@ const HomePage = () => {
       </section>
 
       {/* CTA SECTION */}
-      <section style={{ padding: '8rem 1.5rem', background: '#FAFAFA', textAlign: 'center' }}>
+      <section className="reveal-scale" style={{ padding: '8rem 1.5rem', background: '#FAFAFA', textAlign: 'center' }}>
         <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', letterSpacing: '-1px' }}>Ready to scale?</h2>
         <p style={{ color: '#666', marginBottom: '3rem', fontSize: '1.1rem', maxWidth: '500px', margin: '0 auto 3rem' }}>Stop wasting time on manual processes. Let's build the systems that will power your next phase of growth.</p>
         <button className="btn btn-primary" onClick={() => navigate('/services')} style={{ fontSize: '1.1rem', padding: '1rem 2.5rem', borderRadius: '30px' }}>
