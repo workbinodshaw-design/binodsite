@@ -10,6 +10,7 @@ import FloatingBubbles from '../components/FloatingBubbles';
 import { Layers, Box, Cpu, HardDrive, Users, ArrowRight, X, CheckCircle, Rocket, Award, Briefcase } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO';
+import MobileHomePage from '../components/MobileHomePage';
 
 function HomePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -23,17 +24,18 @@ function HomePage() {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener('resize', handleResize);
     
-    // Show popup shortly after page load
+    // Popup temporarily disabled per user request
+    /*
     const popupTimer = setTimeout(() => {
-      // Check session storage to not annoy user every single refresh, but for now we'll just show it once per session
       if (!sessionStorage.getItem('hiringPopupSeen')) {
         setShowHiringPopup(true);
       }
     }, 1500);
+    */
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      clearTimeout(popupTimer);
+      // clearTimeout(popupTimer);
     };
   }, []);
 
@@ -72,6 +74,10 @@ function HomePage() {
         keywords="Web Developer India, AI Automation India, MVP Development, React Developer, Custom CRM, Full Stack Web Development, Business Automation"
         url="/"
       />
+      
+      {isMobile ? (
+        <MobileHomePage />
+      ) : (
       <div className="home-page">
         {showHiringPopup && (
           <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', zIndex: 99999, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '1rem', backdropFilter: 'blur(8px)' }}>
@@ -216,6 +222,7 @@ function HomePage() {
           
         </div>
       </div>
+      )}
     </>
   );
 }
