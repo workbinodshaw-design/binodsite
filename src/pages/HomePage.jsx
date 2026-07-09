@@ -85,63 +85,47 @@ const HomePage = () => {
           Automate your repetitive tasks, build intelligent agents, and launch premium web products tailored to your exact business needs.
         </p>
 
-        {/* SERVICES HORIZONTAL SCROLL (APP-LIKE) */}
-        <div style={{ 
-          display: 'flex', 
-          overflowX: 'auto', 
-          gap: '1rem', 
-          paddingBottom: '1rem',
-          scrollSnapType: 'x mandatory',
-          WebkitOverflowScrolling: 'touch',
-          msOverflowStyle: 'none',  /* IE and Edge */
-          scrollbarWidth: 'none'    /* Firefox */
-        }}>
-          
-          <style>{`
-            /* Hide scrollbar for Chrome, Safari and Opera */
-            div::-webkit-scrollbar {
-              display: none;
-            }
-          `}</style>
+        {/* SERVICES GRID (Responsive via index.css) */}
+        <div className="services-grid">
 
           {/* Service 1 */}
-          <div onClick={() => navigate('/services/web-development')} style={{ flex: '0 0 85%', maxWidth: '300px', scrollSnapAlign: 'center', background: '#FFF', padding: '1.2rem', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', textAlign: 'left', border: '1px solid rgba(0,0,0,0.02)', cursor: 'pointer' }}>
-            <div style={{ height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1rem' }}>
-              <HolographicAsset variant={2} width="80px" height="80px" />
+          <div className="service-card" onClick={() => navigate('/services/web-development')}>
+            <div className="service-asset">
+              <HolographicAsset variant={2} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, letterSpacing: '-0.5px' }}>Web Development</h3>
-              <ArrowRight size={16} color="#1A1A1A" />
+              <h3 className="service-title">Web Development</h3>
+              <ArrowRight size={20} color="#1A1A1A" />
             </div>
-            <p style={{ color: '#888', fontSize: '0.85rem', lineHeight: 1.4 }}>
+            <p className="service-desc">
               High-performance web apps built with React, Next.js, and modern architecture.
             </p>
           </div>
 
           {/* Service 2 */}
-          <div onClick={() => navigate('/services/ai-automation')} style={{ flex: '0 0 85%', maxWidth: '300px', scrollSnapAlign: 'center', background: '#FFF', padding: '1.2rem', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', textAlign: 'left', border: '1px solid rgba(0,0,0,0.02)', cursor: 'pointer' }}>
-            <div style={{ height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1rem' }}>
-              <HolographicAsset variant={3} width="80px" height="80px" />
+          <div className="service-card" onClick={() => navigate('/services/ai-automation')}>
+            <div className="service-asset">
+              <HolographicAsset variant={3} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, letterSpacing: '-0.5px' }}>AI Automation</h3>
-              <ArrowRight size={16} color="#1A1A1A" />
+              <h3 className="service-title">AI Automation</h3>
+              <ArrowRight size={20} color="#1A1A1A" />
             </div>
-            <p style={{ color: '#888', fontSize: '0.85rem', lineHeight: 1.4 }}>
+            <p className="service-desc">
               Custom intelligent agents and workflows using n8n to completely automate tasks.
             </p>
           </div>
 
           {/* Service 3 */}
-          <div onClick={() => navigate('/services')} style={{ flex: '0 0 85%', maxWidth: '300px', scrollSnapAlign: 'center', background: '#FFF', padding: '1.2rem', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', textAlign: 'left', border: '1px solid rgba(0,0,0,0.02)', cursor: 'pointer' }}>
-            <div style={{ height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1rem' }}>
-              <HolographicAsset variant={4} width="80px" height="80px" />
+          <div className="service-card" onClick={() => navigate('/services')}>
+            <div className="service-asset">
+              <HolographicAsset variant={4} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, letterSpacing: '-0.5px' }}>MVP Development</h3>
-              <ArrowRight size={16} color="#1A1A1A" />
+              <h3 className="service-title">MVP Development</h3>
+              <ArrowRight size={20} color="#1A1A1A" />
             </div>
-            <p style={{ color: '#888', fontSize: '0.85rem', lineHeight: 1.4 }}>
+            <p className="service-desc">
               Turn your idea into reality fast. Rapid prototyping and robust builds.
             </p>
           </div>

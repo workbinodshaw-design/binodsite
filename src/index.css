@@ -2806,3 +2806,93 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 .mobile-menu-btn svg {
   stroke: #1A1A1A !important;
 }
+
+
+
+/* Desktop: Regular Grid */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.service-card {
+  background: #FFF;
+  padding: 2rem;
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+  text-align: left;
+  border: 1px solid rgba(0,0,0,0.02);
+  cursor: pointer;
+  width: 100%;
+}
+
+.service-asset {
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.service-asset > div {
+  width: 120px !important;
+  height: 120px !important;
+}
+
+.service-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.service-desc {
+  color: #888;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Mobile: App-like Swipeable Row */
+@media (max-width: 768px) {
+  .services-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .services-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .service-card {
+    flex: 0 0 85%;
+    max-width: 300px;
+    scroll-snap-align: center;
+    padding: 1.2rem;
+    border-radius: 12px;
+  }
+
+  .service-asset {
+    height: 100px;
+    margin-bottom: 1rem;
+  }
+  
+  .service-asset > div {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .service-title {
+    font-size: 1.1rem;
+  }
+
+  .service-desc {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+}
