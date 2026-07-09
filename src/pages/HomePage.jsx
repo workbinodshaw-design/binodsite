@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, ArrowUpRight, BarChart, Globe, Zap, Cpu } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, BarChart, Globe, Zap, Cpu, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import HolographicAsset from '../components/HolographicAsset';
 import SEO from '../components/SEO';
@@ -306,7 +306,7 @@ const HomePage = () => {
         <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
           <div style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '2px', marginBottom: '2rem' }}>• ABOUT US</div>
           <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 500, lineHeight: 1.2, letterSpacing: '-1.5px', maxWidth: '900px', margin: '0 auto' }}>
-            Transforming workflows with <span style={{ color: '#1A73E8' }}><Globe size={32} style={{ display: 'inline', verticalAlign: 'middle' }} /> AI</span>. Scaling brands with <span style={{ color: '#A0A0A0' }}><Zap size={32} style={{ display: 'inline', verticalAlign: 'middle', color: '#C4F042' }} /> high-performance</span> web apps.
+            Trusted by visionary brands to engineer <span style={{ color: '#1A73E8' }}><Shield size={32} style={{ display: 'inline', verticalAlign: 'middle', marginBottom: '4px' }} /> secure</span> web apps and <span style={{ color: '#A0A0A0' }}><Zap size={32} style={{ display: 'inline', verticalAlign: 'middle', color: '#C4F042', marginBottom: '4px' }} /> high-performance</span> AI workflows.
           </h2>
         </div>
 
