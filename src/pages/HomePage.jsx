@@ -224,7 +224,6 @@ const HomePage = () => {
                <div style={{ fontSize: '1.4rem', fontWeight: 700, color: '#1A1A1A' }}>MVP Build</div>
             </div>
           </div>
-          </div>
         )}
 
         <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem', paddingBottom: '2rem', marginTop: isMobile ? '0' : '2rem' }}>
