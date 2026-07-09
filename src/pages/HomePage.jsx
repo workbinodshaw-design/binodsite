@@ -30,6 +30,8 @@ const HomePage = () => {
       />
 
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
         .sky-hero {
           background-image: url(/blue_sky.png);
           background-size: cover;
@@ -44,6 +46,7 @@ const HomePage = () => {
         }
         
         .hero-title {
+          font-family: 'Playfair Display', serif;
           font-size: clamp(3rem, 6vw, 5rem);
           font-weight: 500;
           letter-spacing: -1.5px;
