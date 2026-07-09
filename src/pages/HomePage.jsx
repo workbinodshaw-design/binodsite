@@ -232,16 +232,12 @@ const HomePage = () => {
                </div>
             </div>
 
-            {/* Card 4: UX/UI Design */}
-            <div className="glass-card card-right" onClick={() => navigate('/services')} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', padding: '1.2rem' }}>
-               <div style={{ height: '90px', display: 'flex', gap: '8px', marginBottom: '1rem' }}>
-                 <div style={{ flex: 1, background: '#f0f0f0', borderRadius: '6px' }} />
-                 <div style={{ flex: 2, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                   <div style={{ flex: 1, background: '#e0e0e0', borderRadius: '6px' }} />
-                   <div style={{ flex: 2, background: '#1A73E8', borderRadius: '6px', opacity: 0.8 }} />
-                 </div>
+            {/* Card 4: Ads & Marketing */}
+            <div className="glass-card card-right" onClick={() => navigate('/services')} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', padding: '1.2rem', alignItems: 'center', justifyContent: 'center' }}>
+               <div style={{ width: '70px', height: '70px', borderRadius: '20px', background: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.2rem', boxShadow: '0 10px 25px rgba(245, 158, 11, 0.4)' }}>
+                 <TrendingUp size={32} color="#FFF" />
                </div>
-               <div style={{ fontSize: '1.1rem', fontWeight: 700, textAlign: 'center' }}>UX/UI Design</div>
+               <div style={{ fontSize: '1.1rem', fontWeight: 700, textAlign: 'center' }}>Ads & Marketing</div>
             </div>
 
             {/* Card 5: Cloud Solutions */}
@@ -280,14 +276,10 @@ const HomePage = () => {
                <div style={{ fontSize: '1.4rem', fontWeight: 700, color: '#1A1A1A' }}>Web Development</div>
             </div>
             <div className="mobile-glass-card" onClick={() => navigate('/services')} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', padding: '1.2rem', alignItems: 'center', justifyContent: 'center' }}>
-               <div style={{ height: '90px', width: '100%', maxWidth: '200px', display: 'flex', gap: '8px', marginBottom: '1rem' }}>
-                 <div style={{ flex: 1, background: '#f0f0f0', borderRadius: '6px' }} />
-                 <div style={{ flex: 2, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                   <div style={{ flex: 1, background: '#e0e0e0', borderRadius: '6px' }} />
-                   <div style={{ flex: 2, background: '#1A73E8', borderRadius: '6px', opacity: 0.8 }} />
-                 </div>
+               <div style={{ width: '70px', height: '70px', borderRadius: '20px', background: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', boxShadow: '0 10px 25px rgba(245, 158, 11, 0.4)' }}>
+                 <TrendingUp size={32} color="#FFF" />
                </div>
-               <div style={{ fontSize: '1.4rem', fontWeight: 700, color: '#1A1A1A' }}>UX/UI Design</div>
+               <div style={{ fontSize: '1.4rem', fontWeight: 700, color: '#1A1A1A' }}>Ads & Marketing</div>
             </div>
           </div>
         )}
