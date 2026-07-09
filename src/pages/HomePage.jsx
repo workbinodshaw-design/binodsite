@@ -312,7 +312,7 @@ const HomePage = () => {
         <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
           <div style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '2px', marginBottom: '2rem' }}>• ABOUT US</div>
           <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 500, lineHeight: 1.2, letterSpacing: '-1.5px', maxWidth: '900px', margin: '0 auto' }}>
-            A global engineering partner dedicated to building <span style={{ color: '#1A73E8' }}><Globe size={32} style={{ display: 'inline', verticalAlign: 'middle' }} /> smarter</span> automations and <span style={{ color: '#A0A0A0' }}><Zap size={32} style={{ display: 'inline', verticalAlign: 'middle', color: '#C4F042' }} /> faster web apps</span>
+            Transforming workflows with <span style={{ color: '#1A73E8' }}><Globe size={32} style={{ display: 'inline', verticalAlign: 'middle' }} /> AI</span>. Scaling brands with <span style={{ color: '#A0A0A0' }}><Zap size={32} style={{ display: 'inline', verticalAlign: 'middle', color: '#C4F042' }} /> high-performance</span> web apps.
           </h2>
         </div>
 
@@ -322,22 +322,22 @@ const HomePage = () => {
           {/* Blue Block */}
           <div className="bento-blue" style={{ gridColumn: isMobile ? '1' : '1 / span 1', gridRow: isMobile ? 'auto' : '1 / span 2', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4rem' }}>
-              <div style={{ fontSize: '1.2rem', fontWeight: 800 }}>CASTFLOW</div>
+              <div style={{ fontSize: '1.2rem', fontWeight: 800 }}>CASTFLOW ECOSYSTEM</div>
               <div style={{ width: '32px', height: '32px', background: 'white', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <BarChart size={16} color="#1A73E8" />
               </div>
             </div>
             
             <div style={{ background: 'white', color: '#1A1A1A', padding: '1.5rem', borderRadius: '16px', marginTop: 'auto' }}>
-              <div style={{ fontSize: '3rem', fontWeight: 500, letterSpacing: '-1px', marginBottom: '0.5rem' }}>120+</div>
-              <p style={{ fontSize: '0.9rem', color: '#666', lineHeight: 1.5 }}>Collaborating with leading AI and cloud technology providers to scale operations.</p>
+              <div style={{ fontSize: '3rem', fontWeight: 500, letterSpacing: '-1px', marginBottom: '0.5rem' }}>10x ROI</div>
+              <p style={{ fontSize: '0.9rem', color: '#666', lineHeight: 1.5 }}>We build custom internal tools and AI agents that eliminate manual data entry and scale your margins.</p>
             </div>
           </div>
 
           {/* White Center Block */}
           <div className="bento-white" style={{ gridColumn: isMobile ? '1' : '2 / span 1', gridRow: isMobile ? 'auto' : '1 / span 2', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>Commitment to measurable impact</div>
-            <div style={{ fontSize: '3.5rem', fontWeight: 500, letterSpacing: '-2px', marginBottom: 'auto' }}>100%</div>
+            <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>Partnership & Delivery</div>
+            <div style={{ fontSize: '3.5rem', fontWeight: 500, letterSpacing: '-2px', marginBottom: 'auto' }}>99%</div>
             
             <div style={{ marginTop: '3rem' }}>
               <div style={{ display: 'flex', gap: '-10px', marginBottom: '1rem' }}>
@@ -346,22 +346,22 @@ const HomePage = () => {
                 ))}
               </div>
               <p style={{ fontSize: '1.1rem', fontWeight: 500, lineHeight: 1.5 }}>
-                "Their automation strategy completely reshaped how we work. It's efficient, intelligent, and seamless."
+                "CastFlow didn't just write code. They audited our entire process, integrated AI, and fundamentally upgraded our operational efficiency."
               </p>
             </div>
           </div>
 
           {/* Lime Green Block */}
           <div className="bento-green" style={{ gridColumn: isMobile ? '1' : '3 / span 1', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ fontSize: '0.9rem', marginBottom: '1rem', fontWeight: 500 }}>Tasks Automated</div>
-            <div style={{ fontSize: '3.5rem', fontWeight: 500, letterSpacing: '-2px', marginBottom: '2rem' }}>520k+</div>
-            <p style={{ fontSize: '1rem', fontWeight: 500 }}>Analyzed and executed monthly to power smarter business workflows.</p>
+            <div style={{ fontSize: '0.9rem', marginBottom: '1rem', fontWeight: 500 }}>Manual Hours Saved</div>
+            <div style={{ fontSize: '3.5rem', fontWeight: 500, letterSpacing: '-2px', marginBottom: '2rem' }}>1.2M+</div>
+            <p style={{ fontSize: '1rem', fontWeight: 500 }}>Hours of manual labor eliminated across our client portfolio through intelligent automations.</p>
           </div>
 
           {/* Black Block */}
           <div className="bento-black" style={{ gridColumn: isMobile ? '1' : '3 / span 1', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ color: '#A0A0A0' }}>Engineers</div>
-            <div style={{ fontSize: '2.5rem', fontWeight: 500 }}>20+</div>
+            <div style={{ color: '#A0A0A0' }}>Successful Deployments</div>
+            <div style={{ fontSize: '2.5rem', fontWeight: 500 }}>150+</div>
           </div>
 
         </div>
