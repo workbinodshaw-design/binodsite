@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, ArrowUpRight, BarChart, Globe, Zap, Cpu, Shield } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, BarChart, Globe, Zap, Cpu, Shield, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import HolographicAsset from '../components/HolographicAsset';
 import SEO from '../components/SEO';
@@ -393,11 +393,11 @@ const HomePage = () => {
             {/* Feature 3 */}
             <div style={{ padding: '2rem 0', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '1.5rem', alignItems: isMobile ? 'flex-start' : 'center' }}>
               <div style={{ width: '48px', height: '48px', background: 'rgba(0, 0, 0, 0.05)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1A1A1A', flexShrink: 0 }}>
-                <Zap size={24} />
+                <TrendingUp size={24} />
               </div>
               <div style={{ flex: 1 }}>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>Digital Transformation</h3>
-                <p style={{ color: '#666', lineHeight: 1.6 }}>Complete audits of your business processes followed by custom software solutions that 10x your operational efficiency.</p>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>Performance Marketing & Ads</h3>
+                <p style={{ color: '#666', lineHeight: 1.6 }}>We drive high-quality leads through targeted advertising on Google, Meta (Facebook & Instagram), and WhatsApp to rapidly scale your revenue.</p>
               </div>
             </div>
 

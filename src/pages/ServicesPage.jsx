@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Code, Bot, CheckCircle, ArrowRight, Zap, Clock, TrendingUp, Users, Globe, Mail, Database, Server, Workflow } from 'lucide-react';
+import { Code, Bot, CheckCircle, ArrowRight, Zap, Clock, TrendingUp, Users, Globe, Mail, Database, Server, Workflow, Target, Megaphone, Smartphone } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
 import SEO from '../components/SEO';
 
@@ -233,6 +233,94 @@ const ServicesPage = () => {
               <Link to="/services/web-development" style={{ marginTop: '2.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', background: '#1A1A1A', color: '#fff', padding: '1rem 2rem', borderRadius: '30px', fontSize: '1rem', fontWeight: 600 }}>
                 Explore Web Development Options <ArrowRight size={20} />
               </Link>
+            </div>
+
+          </div>
+        </div>
+
+        <div style={{ width: '100%', height: '1px', background: 'rgba(0,0,0,0.05)', marginBottom: '8rem' }}></div>
+
+        {/* Marketing & Advertising Section */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem', marginBottom: '8rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '2rem' }}>
+            <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: '#fff9e6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Megaphone size={32} color="#f59e0b" />
+            </div>
+            <div>
+              <h2 style={{ margin: 0, fontSize: 'clamp(1.5rem, 5vw, 2.2rem)', color: '#1A1A1A', fontWeight: 600 }}>Performance Marketing & Ads</h2>
+              <p style={{ margin: '0.5rem 0 0 0', fontSize: 'clamp(0.9rem, 2.5vw, 1rem)', color: '#666' }}>We don't just generate clicks. We generate revenue.</p>
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'start' }}>
+            
+            {/* Content Side */}
+            <div>
+              <h3 style={{ fontSize: 'clamp(1.2rem, 4vw, 1.6rem)', marginBottom: '1.5rem', color: '#1A1A1A', fontWeight: 600 }}>Stop burning money on bad ads.</h3>
+              
+              <p style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: '1.8', marginBottom: '1.5rem', color: '#666' }}>
+                Most agencies focus on vanity metrics like "impressions" and "clicks." We focus purely on ROI. We build aggressive, highly-targeted ad campaigns on Google, Facebook, Instagram, and WhatsApp that put your business directly in front of buyers who are ready to purchase.
+              </p>
+
+              <p style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: '1.8', marginBottom: '2.5rem', color: '#666' }}>
+                Combining our elite web development with our ad strategies means we control the entire funnel. We run the traffic, we build the landing page that converts that traffic, and we deploy the AI that follows up with the leads. It is a completely closed loop of profitability.
+              </p>
+              
+              <div style={{ marginTop: '2rem' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2rem' }}>
+                  <Target size={24} color="#f59e0b" style={{ marginTop: '4px', flexShrink: 0 }} />
+                  <div>
+                    <strong style={{ fontSize: '1.1rem', marginBottom: '0.5rem', display: 'block', color: '#1A1A1A' }}>Google & Meta Ads</strong>
+                    <p style={{ lineHeight: '1.6', color: '#666', margin: 0 }}>Search intent campaigns on Google and highly visual, disruptive creative on Facebook and Instagram to dominate your market.</p>
+                  </div>
+                </div>
+                
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1.5rem' }}>
+                  <Smartphone size={24} color="#27c93f" style={{ marginTop: '4px', flexShrink: 0 }} />
+                  <div>
+                    <strong style={{ fontSize: '1.1rem', marginBottom: '0.5rem', display: 'block', color: '#1A1A1A' }}>WhatsApp & Direct Lead Gen</strong>
+                    <p style={{ lineHeight: '1.6', color: '#666', margin: 0 }}>We utilize WhatsApp Business API to run direct-message ads, immediately starting a conversation between your brand and the prospect.</p>
+                  </div>
+                </div>
+              </div>
+
+              <Link to="/contact" style={{ marginTop: '2.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', background: '#1A1A1A', color: '#fff', padding: '1rem 2rem', borderRadius: '30px', fontSize: '1rem', fontWeight: 600 }}>
+                Start Scaling Your Leads <ArrowRight size={20} />
+              </Link>
+            </div>
+            
+            {/* Visual Side */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+              <div style={{ background: '#f5f5f5', borderRadius: '24px', padding: '3rem', position: 'relative', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.05)' }}>
+                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center', position: 'relative', zIndex: 2 }}>
+                    
+                    <div style={{ background: '#fff', padding: '1.5rem', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '1rem', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', width: '100%', maxWidth: '300px', border: '1px solid rgba(0,0,0,0.05)' }}>
+                       <div style={{ background: '#ffebee', padding: '0.5rem', borderRadius: '12px' }}><Megaphone size={24} color="#f43f5e" /></div>
+                       <div>
+                         <span style={{ fontWeight: 600, color: '#1A1A1A', display: 'block' }}>Meta Ad Campaign</span>
+                         <span style={{ fontSize: '0.8rem', color: '#666' }}>Targeted audience</span>
+                       </div>
+                    </div>
+                    
+                    <div style={{ background: '#f59e0b', padding: '1.5rem 2rem', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '1rem', boxShadow: '0 15px 40px rgba(245,158,11,0.2)', width: '100%', maxWidth: '320px', color: '#fff', transform: 'scale(1.05)' }}>
+                       <div style={{ background: 'rgba(255,255,255,0.2)', padding: '0.5rem', borderRadius: '12px' }}><Target size={32} color="#fff" /></div>
+                       <div>
+                         <span style={{ fontWeight: 600, fontSize: '1.1rem', display: 'block' }}>High-Intent Lead</span>
+                         <span style={{ fontSize: '0.9rem', opacity: 0.9 }}>Captured via landing page</span>
+                       </div>
+                    </div>
+                    
+                    <div style={{ background: '#fff', padding: '1.5rem', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '1rem', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', width: '100%', maxWidth: '300px', border: '1px solid rgba(0,0,0,0.05)' }}>
+                       <div style={{ background: '#e0fae5', padding: '0.5rem', borderRadius: '12px' }}><TrendingUp size={24} color="#27c93f" /></div>
+                       <div>
+                         <span style={{ fontWeight: 600, color: '#1A1A1A', display: 'block' }}>Sale Closed</span>
+                         <span style={{ fontSize: '0.8rem', color: '#666' }}>Revenue generated</span>
+                       </div>
+                    </div>
+                 </div>
+                 
+                 <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '2px', height: '100%', background: 'rgba(0,0,0,0.1)', zIndex: 1 }}></div>
+              </div>
             </div>
 
           </div>
