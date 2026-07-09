@@ -68,17 +68,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* CLIENT LOGOS MARQUEE */}
-      <section style={{ padding: '2rem 1.5rem', borderTop: '1px solid rgba(0,0,0,0.05)', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', overflow: 'hidden' }}>
-        <div style={{ display: 'flex', gap: '4rem', alignItems: 'center', margin: '0 auto', maxWidth: '1200px', width: '100%', flexWrap: 'wrap', justifyContent: 'space-between', opacity: 0.5 }}>
-          <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#1A1A1A', flexShrink: 0 }}>We Help many<br/>Companies</div>
-          {['Airbnb', 'Fivetran', 'Pendo', 'Airtable', 'Framer', 'Pipedrive'].map(company => (
-            <div key={company} style={{ fontWeight: 800, fontSize: '1.2rem', color: '#1A1A1A', letterSpacing: '-0.5px' }}>
-              {company}
-            </div>
-          ))}
-        </div>
-      </section>
+
 
       {/* TABS SECTION */}
       <section style={{ padding: '4rem 1.5rem', maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
