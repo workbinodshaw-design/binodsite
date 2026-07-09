@@ -9,7 +9,6 @@ const MobileHomePage = () => {
     <div style={{ 
       background: '#F5F5F7', // Apple's signature light grey background
       minHeight: '100vh', 
-      paddingBottom: '100px', // Space for bottom nav
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
       color: '#1D1D1F'
     }}>
@@ -92,41 +91,6 @@ const MobileHomePage = () => {
 
         </div>
       </section>
-
-      {/* APPLE-STYLE BOTTOM NAVIGATION */}
-      <div style={{ 
-        position: 'fixed', 
-        bottom: 0, 
-        left: 0, 
-        width: '100%', 
-        background: 'rgba(255, 255, 255, 0.8)', 
-        backdropFilter: 'blur(20px) saturate(180%)', 
-        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-        borderTop: '1px solid rgba(0,0,0,0.05)',
-        display: 'flex', 
-        justifyContent: 'space-around', 
-        alignItems: 'center', 
-        padding: '1rem 0',
-        paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))',
-        zIndex: 1000
-      }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', color: '#2F95F4' }}>
-          <Home size={22} strokeWidth={2.5} />
-          <span style={{ fontSize: '0.7rem', fontWeight: 600 }}>Home</span>
-        </div>
-        <div onClick={() => navigate('/services')} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', color: '#86868B' }}>
-          <Zap size={22} />
-          <span style={{ fontSize: '0.7rem', fontWeight: 500 }}>Services</span>
-        </div>
-        <div onClick={() => navigate('/portfolio')} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', color: '#86868B' }}>
-          <Layers size={22} />
-          <span style={{ fontSize: '0.7rem', fontWeight: 500 }}>Work</span>
-        </div>
-        <div onClick={() => navigate('/join-team')} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', color: '#86868B' }}>
-          <User size={22} />
-          <span style={{ fontSize: '0.7rem', fontWeight: 500 }}>Team</span>
-        </div>
-      </div>
 
     </div>
   );
