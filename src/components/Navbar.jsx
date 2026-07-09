@@ -64,8 +64,10 @@ const Navbar = () => {
     return { bg: 'rgba(255, 255, 255, 0.1)', text: '#fff', icon: <User size={14} /> };
   };
 
+  const isHomePage = location.pathname === '/';
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isHomePage ? 'navbar-transparent' : 'navbar-glass'}`}>
       <CustomLink to="/" className="logo-container">
         <img src={import.meta.env.BASE_URL + 'logo.png'} alt="CastFlow Logo" className="logo-img" onError={(e) => { e.target.style.display = 'none' }} />
         <span className="logo-text">CASTFLOW</span>
@@ -129,13 +131,23 @@ const Navbar = () => {
             to="/client-login" 
             className="nav-link btn btn-primary small" 
             style={{ 
-              color: '#fff', 
-              background: '#000', 
+              color: '#1A1A1A', 
+              background: '#C4F042', 
               padding: '0.6rem 1.5rem', 
               borderRadius: '30px', 
-              fontWeight: '600', 
+              fontWeight: '700', 
               marginLeft: '1rem',
-              textDecoration: 'none'
+              textDecoration: 'none',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+              boxShadow: '0 4px 15px rgba(196, 240, 66, 0.2)'
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 6px 20px rgba(196, 240, 66, 0.4)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 15px rgba(196, 240, 66, 0.2)';
             }}
           >
             Login
