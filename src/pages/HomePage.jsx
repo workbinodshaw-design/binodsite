@@ -81,7 +81,7 @@ function HomePage() {
       <div className="home-page">
         {showHiringPopup && (
           <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', zIndex: 99999, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '1rem', backdropFilter: 'blur(8px)' }}>
-            <div style={{ background: 'var(--bg-color, #fff)', border: '1px solid rgba(138,43,226,0.3)', borderRadius: '24px', padding: '2.5rem', maxWidth: '500px', width: '100%', position: 'relative', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', textAlign: 'center', overflow: 'hidden' }}>
+            <div style={{ background: 'var(--bg-color, #fff)', border: '1px solid rgba(138,43,226,0.3)', borderRadius: '4px', padding: '2.5rem', maxWidth: '500px', width: '100%', position: 'relative', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', textAlign: 'center', overflow: 'hidden' }}>
               
               <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '6px', background: 'linear-gradient(90deg, #38bdf8, #a388ff)' }}></div>
               
@@ -129,7 +129,7 @@ function HomePage() {
               <button 
                 onClick={() => { closePopup(); navigate('/join-team'); }}
                 className="btn btn-primary"
-                style={{ width: '100%', padding: '1.2rem', fontSize: '1.2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', background: 'linear-gradient(45deg, #38bdf8, #a388ff)', border: 'none', borderRadius: '12px', color: '#fff', fontWeight: 'bold', cursor: 'pointer' }}
+                style={{ width: '100%', padding: '1.2rem', fontSize: '1.2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', background: 'linear-gradient(45deg, #38bdf8, #a388ff)', border: 'none', borderRadius: '4px', color: '#fff', fontWeight: 'bold', cursor: 'pointer' }}
               >
                 Join the Team <ArrowRight size={20} />
               </button>
@@ -182,15 +182,15 @@ function HomePage() {
               <h2 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '4rem', color: '#fff' }}>The Castflow Advantage</h2>
               
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
-                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '3rem 2rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '3rem 2rem', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.05)' }}>
                   <h3 style={{ fontSize: '1.5rem', color: '#b673f8', marginBottom: '1rem', fontWeight: 700 }}>100% Transparent Pricing</h3>
                   <p style={{ color: '#aaa', lineHeight: 1.6, fontSize: '1.1rem' }}>We mathematically calculate the exact scope of your project. No hidden fees, no agency bloat. You pay for pure development.</p>
                 </div>
-                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '3rem 2rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '3rem 2rem', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.05)' }}>
                   <h3 style={{ fontSize: '1.5rem', color: '#3b82f6', marginBottom: '1rem', fontWeight: 700 }}>Lightning Fast Delivery</h3>
                   <p style={{ color: '#aaa', lineHeight: 1.6, fontSize: '1.1rem' }}>Because we utilize our own AI automation pipelines internally, we ship enterprise-grade software 3x faster than traditional agencies.</p>
                 </div>
-                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '3rem 2rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '3rem 2rem', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.05)' }}>
                   <h3 style={{ fontSize: '1.5rem', color: '#ec4899', marginBottom: '1rem', fontWeight: 700 }}>Built to Scale</h3>
                   <p style={{ color: '#aaa', lineHeight: 1.6, fontSize: '1.1rem' }}>We don't build temporary solutions. Every platform is architected to handle millions of users from day one with flawless security.</p>
                 </div>
@@ -200,9 +200,9 @@ function HomePage() {
 
           {/* JOIN OUR TEAM BANNER */}
           <div style={{ padding: '4rem 2rem', background: 'var(--bg-color)' }}>
-            <div className="glass reveal-up" style={{ maxWidth: '1000px', margin: '0 auto', padding: '3rem', borderRadius: '24px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '2rem', border: '1px solid rgba(163, 136, 255, 0.2)' }}>
+            <div className="glass reveal-up" style={{ maxWidth: '1000px', margin: '0 auto', padding: '3rem', borderRadius: '4px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '2rem', border: '1px solid rgba(163, 136, 255, 0.2)' }}>
               <div style={{ flex: '1', minWidth: '300px' }}>
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(163, 136, 255, 0.1)', color: '#a388ff', padding: '0.4rem 1rem', borderRadius: '30px', fontSize: '0.9rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(163, 136, 255, 0.1)', color: '#a388ff', padding: '0.4rem 1rem', borderRadius: '4px', fontSize: '0.9rem', fontWeight: 'bold', marginBottom: '1rem' }}>
                   <Users size={16} /> We are Hiring!
                 </div>
                 <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#fff' }}>Join the CastFlow Team</h2>

@@ -191,7 +191,7 @@ const JoinTeamPage = () => {
               gap: '2rem' 
             }}>
               {roles.map((role) => (
-                <div key={role.id} className="glass reveal-up" style={{ padding: '2rem', borderRadius: '24px', display: 'flex', flexDirection: 'column' }}>
+                <div key={role.id} className="glass reveal-up" style={{ padding: '2rem', borderRadius: '4px', display: 'flex', flexDirection: 'column' }}>
                   <div style={{ background: role.color, width: '48px', height: '48px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
                     {role.icon}
                   </div>
@@ -218,7 +218,7 @@ const JoinTeamPage = () => {
           </div>
 
           {/* Application Form */}
-          <div ref={formRef} className="glass reveal-up" style={{ margin: '4rem auto', maxWidth: '800px', padding: '3rem', borderRadius: '24px' }}>
+          <div ref={formRef} className="glass reveal-up" style={{ margin: '4rem auto', maxWidth: '800px', padding: '3rem', borderRadius: '4px' }}>
             <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Application Form</h2>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '3rem' }}>Fill out the details below to apply for a position.</p>
             
@@ -427,7 +427,7 @@ const JoinTeamPage = () => {
         </>
       ) : (
         /* Success State */
-        <div className="glass" style={{ margin: '4rem auto', maxWidth: '600px', padding: '4rem 2rem', borderRadius: '24px', textAlign: 'center', animation: 'fadeIn 0.5s ease-in' }}>
+        <div className="glass" style={{ margin: '4rem auto', maxWidth: '600px', padding: '4rem 2rem', borderRadius: '4px', textAlign: 'center', animation: 'fadeIn 0.5s ease-in' }}>
           <div style={{ background: 'rgba(37, 211, 102, 0.2)', width: '80px', height: '80px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem auto' }}>
             <CheckCircle2 size={40} color="#25D366" />
           </div>

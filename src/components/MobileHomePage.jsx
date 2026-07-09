@@ -60,7 +60,7 @@ const MobileHomePage = () => {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }}>
           
           {/* Card 1 */}
-          <div onClick={() => navigate('/services/web-development')} style={{ background: '#fff', padding: '1.5rem', border: '1px solid #E8E8ED', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '1.5rem', cursor: 'pointer' }}>
+          <div onClick={() => navigate('/services/web-development')} style={{ background: '#fff', padding: '1.5rem', border: '1px solid #E8E8ED', borderRadius: '4px', display: 'flex', alignItems: 'flex-start', gap: '1.5rem', cursor: 'pointer' }}>
             <div style={{ color: '#1D1D1F', marginTop: '0.2rem' }}>
               <Code size={24} strokeWidth={1.5} />
             </div>
@@ -71,7 +71,7 @@ const MobileHomePage = () => {
           </div>
 
           {/* Card 2 */}
-          <div onClick={() => navigate('/services/ai-automation')} style={{ background: '#fff', padding: '1.5rem', border: '1px solid #E8E8ED', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '1.5rem', cursor: 'pointer' }}>
+          <div onClick={() => navigate('/services/ai-automation')} style={{ background: '#fff', padding: '1.5rem', border: '1px solid #E8E8ED', borderRadius: '4px', display: 'flex', alignItems: 'flex-start', gap: '1.5rem', cursor: 'pointer' }}>
             <div style={{ color: '#1D1D1F', marginTop: '0.2rem' }}>
               <Cpu size={24} strokeWidth={1.5} />
             </div>
@@ -82,7 +82,7 @@ const MobileHomePage = () => {
           </div>
 
           {/* Card 3 */}
-          <div onClick={() => navigate('/portfolio')} style={{ background: '#fff', padding: '1.5rem', border: '1px solid #E8E8ED', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '1.5rem', cursor: 'pointer' }}>
+          <div onClick={() => navigate('/portfolio')} style={{ background: '#fff', padding: '1.5rem', border: '1px solid #E8E8ED', borderRadius: '4px', display: 'flex', alignItems: 'flex-start', gap: '1.5rem', cursor: 'pointer' }}>
             <div style={{ color: '#1D1D1F', marginTop: '0.2rem' }}>
               <Layers size={24} strokeWidth={1.5} />
             </div>

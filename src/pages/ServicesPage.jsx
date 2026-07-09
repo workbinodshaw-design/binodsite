@@ -148,7 +148,7 @@ const ServicesPage = () => {
           {/* Visual Side (Left for Web Dev to alternate layout) */}
           <div className="service-visual-column" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             <div className="premium-animated-visual web-visual" style={{ position: 'relative', height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-               <div className="browser-mockup" style={{ width: '80%', height: '80%', background: '#0f0f0f', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', position: 'relative' }}>
+               <div className="browser-mockup" style={{ width: '80%', height: '80%', background: '#0f0f0f', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', position: 'relative' }}>
                  {/* Browser Header */}
                  <div style={{ height: '30px', background: '#1a1a1a', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', padding: '0 12px', gap: '6px' }}>
                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ff5f56' }}></div>
@@ -162,17 +162,17 @@ const ServicesPage = () => {
                     <div className="skeleton-pulse" style={{ height: '15px', width: '80%', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', animationDelay: '0.4s' }}></div>
                     
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
-                      <div className="skeleton-pulse" style={{ height: '60px', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', animationDelay: '0.6s' }}></div>
-                      <div className="skeleton-pulse" style={{ height: '60px', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', animationDelay: '0.8s' }}></div>
+                      <div className="skeleton-pulse" style={{ height: '60px', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', animationDelay: '0.6s' }}></div>
+                      <div className="skeleton-pulse" style={{ height: '60px', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', animationDelay: '0.8s' }}></div>
                     </div>
                  </div>
                </div>
                
                {/* Floating elements popping out of browser */}
-               <div className="floating-badge text-coral pulse" style={{ position: 'absolute', right: '5%', top: '15%', background: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem', borderRadius: '20px', border: '1px solid rgba(255,107,107,0.3)', backdropFilter: 'blur(10px)', fontSize: '0.9rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 2 }}>
+               <div className="floating-badge text-coral pulse" style={{ position: 'absolute', right: '5%', top: '15%', background: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem', borderRadius: '4px', border: '1px solid rgba(255,107,107,0.3)', backdropFilter: 'blur(10px)', fontSize: '0.9rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 2 }}>
                   <TrendingUp size={16} /> +320% Conversion
                </div>
-               <div className="floating-badge text-lavender pulse" style={{ position: 'absolute', left: '0%', bottom: '20%', background: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem', borderRadius: '20px', border: '1px solid rgba(138,43,226,0.3)', backdropFilter: 'blur(10px)', fontSize: '0.9rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 2, animationDelay: '1s' }}>
+               <div className="floating-badge text-lavender pulse" style={{ position: 'absolute', left: '0%', bottom: '20%', background: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem', borderRadius: '4px', border: '1px solid rgba(138,43,226,0.3)', backdropFilter: 'blur(10px)', fontSize: '0.9rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 2, animationDelay: '1s' }}>
                   <Clock size={16} /> 0.8s Load Time
                </div>
             </div>
@@ -343,7 +343,7 @@ const ServicesPage = () => {
           {/* Visual Side (Left for Web Dev to alternate layout) */}
           <div className="service-visual-column" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             <div className="premium-animated-visual web-visual" style={{ position: 'relative', height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-               <div className="browser-mockup" style={{ width: '80%', height: '80%', background: '#0f0f0f', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', position: 'relative' }}>
+               <div className="browser-mockup" style={{ width: '80%', height: '80%', background: '#0f0f0f', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', position: 'relative' }}>
                  {/* Browser Header */}
                  <div style={{ height: '30px', background: '#1a1a1a', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', padding: '0 12px', gap: '6px' }}>
                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ff5f56' }}></div>
@@ -357,17 +357,17 @@ const ServicesPage = () => {
                     <div className="skeleton-pulse" style={{ height: '15px', width: '80%', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', animationDelay: '0.4s' }}></div>
                     
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
-                      <div className="skeleton-pulse" style={{ height: '60px', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', animationDelay: '0.6s' }}></div>
-                      <div className="skeleton-pulse" style={{ height: '60px', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', animationDelay: '0.8s' }}></div>
+                      <div className="skeleton-pulse" style={{ height: '60px', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', animationDelay: '0.6s' }}></div>
+                      <div className="skeleton-pulse" style={{ height: '60px', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', animationDelay: '0.8s' }}></div>
                     </div>
                  </div>
                </div>
                
                {/* Floating elements popping out of browser */}
-               <div className="floating-badge text-coral pulse" style={{ position: 'absolute', right: '5%', top: '15%', background: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem', borderRadius: '20px', border: '1px solid rgba(255,107,107,0.3)', backdropFilter: 'blur(10px)', fontSize: '0.9rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 2 }}>
+               <div className="floating-badge text-coral pulse" style={{ position: 'absolute', right: '5%', top: '15%', background: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem', borderRadius: '4px', border: '1px solid rgba(255,107,107,0.3)', backdropFilter: 'blur(10px)', fontSize: '0.9rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 2 }}>
                   <TrendingUp size={16} /> +320% Conversion
                </div>
-               <div className="floating-badge text-lavender pulse" style={{ position: 'absolute', left: '0%', bottom: '20%', background: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem', borderRadius: '20px', border: '1px solid rgba(138,43,226,0.3)', backdropFilter: 'blur(10px)', fontSize: '0.9rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 2, animationDelay: '1s' }}>
+               <div className="floating-badge text-lavender pulse" style={{ position: 'absolute', left: '0%', bottom: '20%', background: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem', borderRadius: '4px', border: '1px solid rgba(138,43,226,0.3)', backdropFilter: 'blur(10px)', fontSize: '0.9rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 2, animationDelay: '1s' }}>
                   <Clock size={16} /> 0.8s Load Time
                </div>
             </div>

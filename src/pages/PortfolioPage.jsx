@@ -172,13 +172,13 @@ const PortfolioPage = () => {
           <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '2rem' : '4rem', alignItems: 'center' }}>
             <div style={{ flex: '1 1 auto', width: '100%', maxWidth: '400px', display: 'flex', justifyContent: 'center' }}>
               <div style={{ position: 'relative' }}>
-                <div style={{ position: 'absolute', inset: '-15px', background: 'linear-gradient(45deg, #8A2BE2, #FF7F50)', borderRadius: '24px', opacity: 0.5, filter: 'blur(20px)' }}></div>
+                <div style={{ position: 'absolute', inset: '-15px', background: 'linear-gradient(45deg, #8A2BE2, #FF7F50)', borderRadius: '4px', opacity: 0.5, filter: 'blur(20px)' }}></div>
                 <img 
                   src="/binod-profile.png" 
                   alt="Binod Shaw" 
-                  style={{ width: '100%', maxWidth: '450px', height: '500px', objectFit: 'cover', borderRadius: '24px', position: 'relative', zIndex: 1, border: '1px solid rgba(255,255,255,0.1)' }}
+                  style={{ width: '100%', maxWidth: '450px', height: '500px', objectFit: 'cover', borderRadius: '4px', position: 'relative', zIndex: 1, border: '1px solid rgba(255,255,255,0.1)' }}
                 />
-                <div className="glass" style={{ position: 'absolute', bottom: '-20px', right: '-20px', zIndex: 2, padding: '1.5rem', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '1rem', border: '1px solid rgba(138,43,226,0.3)' }}>
+                <div className="glass" style={{ position: 'absolute', bottom: '-20px', right: '-20px', zIndex: 2, padding: '1.5rem', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '1rem', border: '1px solid rgba(138,43,226,0.3)' }}>
                   <Cpu color="#8A2BE2" size={32} />
                   <div>
                     <h4 style={{ margin: 0, fontSize: '1.1rem' }}>AI Automation</h4>
@@ -202,7 +202,7 @@ const PortfolioPage = () => {
               
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
                 {skills.map((skill, idx) => (
-                  <div key={idx} className="glass" style={{ padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div key={idx} className="glass" style={{ padding: '1.5rem', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <div style={{ color: '#8A2BE2', marginBottom: '1rem' }}>{skill.icon}</div>
                     <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem', color: 'var(--text-primary)' }}>{skill.name}</h4>
                     <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{skill.desc}</p>
@@ -271,7 +271,7 @@ const PortfolioPage = () => {
                     bottom: '0',
                     margin: 'auto',
                     padding: isMobile ? '1.5rem' : '3rem',
-                    borderRadius: '32px',
+                    borderRadius: '4px',
                     border: '1px solid rgba(255,255,255,1)',
                     transform: `translateY(${translateY}vh) rotateY(${angle}deg) translateZ(${radius}px) ${isMobile ? 'scale(0.8)' : 'scale(1)'}`,
                     opacity: opacity,
@@ -293,7 +293,7 @@ const PortfolioPage = () => {
                     </p>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem', marginBottom: '1.5rem' }}>
                       {project.tags.map((tag, idx) => (
-                        <span key={idx} style={{ padding: '0.4rem 1.2rem', background: 'rgba(138,43,226,0.1)', borderRadius: '30px', fontSize: '0.85rem', fontWeight: 'bold', letterSpacing: '1px', color: '#8A2BE2' }}>
+                        <span key={idx} style={{ padding: '0.4rem 1.2rem', background: 'rgba(138,43,226,0.1)', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 'bold', letterSpacing: '1px', color: '#8A2BE2' }}>
                           {tag}
                         </span>
                       ))}
