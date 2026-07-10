@@ -20,7 +20,7 @@ const ServicesPage = () => {
       <div style={{ padding: '6rem 1.5rem', maxWidth: '1200px', margin: '0 auto', minHeight: '100vh', background: '#fff' }}>
         
         {/* Page Header */}
-        <div className="reveal-fade" style={{ textAlign: 'center', marginBottom: '6rem' }}>
+        <div className="" style={{ textAlign: 'center', marginBottom: '6rem' }}>
           <div style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '2px', marginBottom: '2rem', color: '#1A1A1A' }}>• OUR EXPERTISE</div>
           <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: 500, lineHeight: 1.1, letterSpacing: '-1.5px', maxWidth: '800px', margin: '0 auto 1.5rem auto', color: '#1A1A1A' }}>
             Scale with <span style={{ color: '#1A73E8' }}>certainty.</span>
@@ -31,7 +31,7 @@ const ServicesPage = () => {
         </div>
 
         {/* AI Automation Section (Expanded) */}
-        <div className="reveal-up" style={{ display: 'flex', flexDirection: 'column', gap: '3rem', marginBottom: '8rem' }}>
+        <div className="" style={{ display: 'flex', flexDirection: 'column', gap: '3rem', marginBottom: '8rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '2rem' }}>
             <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: '#e6f0fd', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Bot size={32} color="#1A73E8" />
@@ -135,7 +135,7 @@ const ServicesPage = () => {
         <div style={{ width: '100%', height: '1px', background: 'rgba(0,0,0,0.05)', marginBottom: '8rem' }}></div>
 
         {/* Web Design & Development Section (Expanded) */}
-        <div className="reveal-up" style={{ display: 'flex', flexDirection: 'column', gap: '3rem', marginBottom: '8rem' }}>
+        <div className="" style={{ display: 'flex', flexDirection: 'column', gap: '3rem', marginBottom: '8rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '2rem' }}>
             <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Code size={32} color="#1A1A1A" />
@@ -241,7 +241,7 @@ const ServicesPage = () => {
         <div style={{ width: '100%', height: '1px', background: 'rgba(0,0,0,0.05)', marginBottom: '8rem' }}></div>
 
         {/* Marketing & Advertising Section */}
-        <div className="reveal-up" style={{ display: 'flex', flexDirection: 'column', gap: '3rem', marginBottom: '8rem' }}>
+        <div className="" style={{ display: 'flex', flexDirection: 'column', gap: '3rem', marginBottom: '8rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '2rem' }}>
             <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: '#fff9e6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Megaphone size={32} color="#f59e0b" />
@@ -327,7 +327,7 @@ const ServicesPage = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="reveal-scale" style={{ paddingBottom: '4rem' }}>
+        <div className="" style={{ paddingBottom: '4rem' }}>
           <ContactSection />
         </div>
       </div>
