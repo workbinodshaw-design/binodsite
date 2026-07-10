@@ -401,7 +401,7 @@ const HomePage = () => {
       <section className="reveal-scale" style={{ padding: '8rem 1.5rem', background: '#FAFAFA', textAlign: 'center' }}>
         <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', letterSpacing: '-1px' }}>Ready to scale?</h2>
         <p style={{ color: '#666', marginBottom: '3rem', fontSize: '1.1rem', maxWidth: '500px', margin: '0 auto 3rem' }}>Stop wasting time on manual processes. Let's build the systems that will power your next phase of growth.</p>
-        <button className="btn btn-primary" onClick={() => navigate('/services')} style={{ fontSize: '1.1rem', padding: '1rem 2.5rem', borderRadius: '30px' }}>
+        <button className="btn btn-primary" onClick={() => navigate('/services')} style={{ fontSize: '1.1rem', padding: '1rem 2.5rem', borderRadius: '30px', margin: '0 auto', display: 'inline-flex', justifyContent: 'center' }}>
           Explore Services
         </button>
       </section>
