@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, Twitter, ArrowRight, Code, PenTool, Database, Megaphone } from 'lucide-react';
+import { Terminal, Briefcase, MessageCircle, ArrowRight, Code, PenTool, Database, Megaphone } from 'lucide-react';
 import SEO from '../components/SEO';
 import ContactSection from '../components/ContactSection';
 
@@ -103,13 +103,13 @@ const TeamPage = () => {
               
               <div style={{ display: 'flex', gap: '1rem', marginTop: 'auto' }}>
                 <a href={member.social.twitter} target="_blank" rel="noreferrer" style={{ color: '#A0A0A0', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#1A1A1A'} onMouseOut={e=>e.target.style.color='#A0A0A0'}>
-                  <Twitter size={20} />
+                  <MessageCircle size={20} />
                 </a>
                 <a href={member.social.linkedin} target="_blank" rel="noreferrer" style={{ color: '#A0A0A0', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#1A1A1A'} onMouseOut={e=>e.target.style.color='#A0A0A0'}>
-                  <Linkedin size={20} />
+                  <Briefcase size={20} />
                 </a>
                 <a href={member.social.github} target="_blank" rel="noreferrer" style={{ color: '#A0A0A0', transition: 'color 0.2s' }} onMouseOver={e=>e.target.style.color='#1A1A1A'} onMouseOut={e=>e.target.style.color='#A0A0A0'}>
-                  <Github size={20} />
+                  <Terminal size={20} />
                 </a>
               </div>
             </div>
