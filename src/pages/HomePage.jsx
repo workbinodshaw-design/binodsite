@@ -406,18 +406,6 @@ const HomePage = () => {
         </button>
       </section>
 
-      {/* FOOTER */}
-      <footer style={{ padding: '3rem 1.5rem', borderTop: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'center', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-        <div>
-          <div style={{ fontWeight: 800, fontSize: '1.2rem', marginBottom: '0.5rem' }}>CASTFLOW</div>
-          <div style={{ color: '#A0A0A0', fontSize: '0.9rem' }}>© 2026 CastFlow Agency. All rights reserved.</div>
-        </div>
-        <div style={{ display: 'flex', gap: '2rem' }}>
-          <a href="#" style={{ color: '#1A1A1A', textDecoration: 'none', fontWeight: 500 }}>Twitter</a>
-          <a href="#" style={{ color: '#1A1A1A', textDecoration: 'none', fontWeight: 500 }}>LinkedIn</a>
-          <a href="/contact" onClick={(e) => { e.preventDefault(); navigate('/join-team'); }} style={{ color: '#1A1A1A', textDecoration: 'none', fontWeight: 500 }}>Contact</a>
-        </div>
-      </footer>
     </div>
   );
 };
