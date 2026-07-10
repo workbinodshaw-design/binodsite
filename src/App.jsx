@@ -1,29 +1,29 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import HomePage from './pages/HomePage';
-import ServicesPage from './pages/ServicesPage';
-import WebDevService from './pages/WebDevService';
-import AiAutomationService from './pages/AiAutomationService';
-import ContactPage from './pages/ContactPage';
-import PortfolioPage from './pages/PortfolioPage';
-import ProjectsPage from './pages/ProjectsPage';
-import JoinTeamPage from './pages/JoinTeamPage';
-import TeamPage from './pages/TeamPage';
-import PricingPage from './pages/PricingPage';
-import AdminDashboard from './pages/AdminDashboard';
+const HomePage = React.lazy(() => import('./pages/HomePage'));
+const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
+const WebDevService = React.lazy(() => import('./pages/WebDevService'));
+const AiAutomationService = React.lazy(() => import('./pages/AiAutomationService'));
+const ContactPage = React.lazy(() => import('./pages/ContactPage'));
+const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage'));
+const ProjectsPage = React.lazy(() => import('./pages/ProjectsPage'));
+const JoinTeamPage = React.lazy(() => import('./pages/JoinTeamPage'));
+const TeamPage = React.lazy(() => import('./pages/TeamPage'));
+const PricingPage = React.lazy(() => import('./pages/PricingPage'));
+const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
+const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = React.lazy(() => import('./pages/TermsOfService'));
+const RefundPolicy = React.lazy(() => import('./pages/RefundPolicy'));
+
+const AdminLogin = React.lazy(() => import('./pages/AdminLogin'));
+const TeamLogin = React.lazy(() => import('./pages/TeamLogin'));
+const EmployeeDashboard = React.lazy(() => import('./pages/EmployeeDashboard'));
+const ClientDashboard = React.lazy(() => import('./pages/ClientDashboard'));
+const ClientLogin = React.lazy(() => import('./pages/ClientLogin'));
 import AiAgentWidget from './components/AiAgentWidget';
 import Footer from './components/Footer';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsOfService from './pages/TermsOfService';
-import RefundPolicy from './pages/RefundPolicy';
-
 import ProtectedRoute from './components/ProtectedRoute';
-import AdminLogin from './pages/AdminLogin';
-import TeamLogin from './pages/TeamLogin';
-import EmployeeDashboard from './pages/EmployeeDashboard';
-import ClientDashboard from './pages/ClientDashboard';
-import ClientLogin from './pages/ClientLogin';
 import ScrollReveal from './components/ScrollReveal';
 import AnalyticsTracker from './components/AnalyticsTracker';
 
@@ -36,9 +36,11 @@ function App() {
       <Router basename={import.meta.env.BASE_URL}>
         <AnalyticsTracker />
         <Navbar />
-        <Routes>
-          <Route path="*" element={<PrivacyPolicy />} />
-        </Routes>
+        <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
+          <Routes>
+            <Route path="*" element={<PrivacyPolicy />} />
+          </Routes>
+        </React.Suspense>
         <Footer />
         <AiAgentWidget />
       </Router>
@@ -51,9 +53,11 @@ function App() {
       <Router basename={import.meta.env.BASE_URL}>
         <AnalyticsTracker />
         <Navbar />
-        <Routes>
-          <Route path="*" element={<PortfolioPage />} />
-        </Routes>
+        <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
+          <Routes>
+            <Route path="*" element={<PortfolioPage />} />
+          </Routes>
+        </React.Suspense>
         <Footer />
         <AiAgentWidget />
       </Router>
@@ -65,19 +69,21 @@ function App() {
     return (
       <Router basename={import.meta.env.BASE_URL}>
         <AnalyticsTracker />
-        <Routes>
-          <Route path="/" element={<AdminLogin />} />
-          <Route path="/admin-login" element={<Navigate to="/" replace />} />
-          <Route 
-            path="/dashboard" 
-            element={
-              <ProtectedRoute requiredRole="admin">
-                <AdminDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<AdminLogin />} />
+            <Route path="/admin-login" element={<Navigate to="/" replace />} />
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </React.Suspense>
         <AiAgentWidget />
       </Router>
     );
@@ -88,19 +94,21 @@ function App() {
     return (
       <Router basename={import.meta.env.BASE_URL}>
         <AnalyticsTracker />
-        <Routes>
-          <Route path="/" element={<TeamLogin />} />
-          <Route path="/team-login" element={<Navigate to="/" replace />} />
-          <Route 
-            path="/dashboard" 
-            element={
-              <ProtectedRoute requiredRole="employee">
-                <EmployeeDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<TeamLogin />} />
+            <Route path="/team-login" element={<Navigate to="/" replace />} />
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute requiredRole="employee">
+                  <EmployeeDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </React.Suspense>
         <AiAgentWidget />
       </Router>
     );
@@ -113,50 +121,52 @@ function App() {
       <ScrollReveal />
       <Navbar />
       
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/services/web-development" element={<WebDevService />} />
-        <Route path="/services/ai-automation" element={<AiAutomationService />} />
-        <Route path="/portfolio" element={<PortfolioPage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/team" element={<TeamPage />} />
-        <Route path="/join-team" element={<JoinTeamPage />} />
-        <Route path="/pricing" element={<PricingPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<TermsOfService />} />
-        <Route path="/refund-policy" element={<RefundPolicy />} />
-        
-        {/* Authentication & Role-Based Portals */}
-        <Route path="/admin-login" element={<AdminLogin />} />
-        <Route path="/team-login" element={<TeamLogin />} />
-        <Route path="/client-login" element={<ClientLogin />} />
-        <Route 
-          path="/admin" 
-          element={
-            <ProtectedRoute requiredRole="admin">
-              <AdminDashboard />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/employee" 
-          element={
-            <ProtectedRoute requiredRole="employee">
-              <EmployeeDashboard />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/client" 
-          element={
-            <ProtectedRoute requiredRole="client">
-              <ClientDashboard />
-            </ProtectedRoute>
-          } 
-        />
-      </Routes>
+      <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-color)' }}></div>}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/web-development" element={<WebDevService />} />
+          <Route path="/services/ai-automation" element={<AiAutomationService />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/team" element={<TeamPage />} />
+          <Route path="/join-team" element={<JoinTeamPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+          
+          {/* Authentication & Role-Based Portals */}
+          <Route path="/admin-login" element={<AdminLogin />} />
+          <Route path="/team-login" element={<TeamLogin />} />
+          <Route path="/client-login" element={<ClientLogin />} />
+          <Route 
+            path="/admin" 
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/employee" 
+            element={
+              <ProtectedRoute requiredRole="employee">
+                <EmployeeDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/client" 
+            element={
+              <ProtectedRoute requiredRole="client">
+                <ClientDashboard />
+              </ProtectedRoute>
+            } 
+          />
+        </Routes>
+      </React.Suspense>
 
       <Footer />
       {/* Global AI Agent Widget */}
