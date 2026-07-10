@@ -5,35 +5,42 @@ const ScrollReveal = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Wait a brief moment for DOM to paint
-    const timer = setTimeout(() => {
-      const revealElements = document.querySelectorAll('.reveal-up, .reveal-fade, .reveal-scale');
-      
-      if (revealElements.length === 0) return;
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          } else {
-            // Remove active class when scrolling out of view to enable fade out / fade in repeatedly
-            entry.target.classList.remove('active');
-          }
-        });
-      }, {
-        threshold: 0.1, // Trigger when 10% visible
-        rootMargin: '0px 0px -50px 0px' // Slightly before it fully comes into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        } else {
+          entry.target.classList.remove('active');
+        }
       });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
 
-      revealElements.forEach(el => observer.observe(el));
+    const observeElements = () => {
+      const revealElements = document.querySelectorAll('.reveal-up:not(.observed), .reveal-fade:not(.observed), .reveal-scale:not(.observed)');
+      revealElements.forEach(el => {
+        el.classList.add('observed');
+        observer.observe(el);
+      });
+    };
 
-      return () => {
-        revealElements.forEach(el => observer.unobserve(el));
-      };
-    }, 100);
+    // Initial check
+    observeElements();
 
-    return () => clearTimeout(timer);
-  }, [location.pathname]); // Re-run when route changes
+    // Watch for lazy-loaded elements being added to the DOM
+    const mutationObserver = new MutationObserver(() => {
+      observeElements();
+    });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      mutationObserver.disconnect();
+      observer.disconnect();
+    };
+  }, [location.pathname]);
 
   return null; // This component doesn't render anything
 };

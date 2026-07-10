@@ -21,11 +21,21 @@ const Navbar = () => {
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   // Close menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
+
+  // Handle scroll for navbar background
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -67,7 +77,7 @@ const Navbar = () => {
   const isHomePage = location.pathname === '/';
 
   return (
-    <nav className={`navbar ${isHomePage ? 'navbar-transparent' : 'navbar-glass'}`}>
+    <nav className={`navbar ${isHomePage && !scrolled ? 'navbar-transparent' : 'navbar-glass'} ${scrolled ? 'scrolled' : ''}`}>
       <CustomLink to="/" className="logo-container">
         <img src={import.meta.env.BASE_URL + 'logo.png'} alt="CastFlow Logo" className="logo-img" onError={(e) => { e.target.style.display = 'none' }} />
         <span className="logo-text">CASTFLOW</span>
