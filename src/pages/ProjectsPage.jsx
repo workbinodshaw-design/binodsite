@@ -18,7 +18,8 @@ const ProjectsPage = () => {
       tags: ['React', 'Next.js', 'Tailwind CSS'],
       liveUrl: 'https://testpush-mauve.vercel.app/',
       githubUrl: '#',
-      bgColor: '#111111'
+      bgColor: 'linear-gradient(135deg, #1A1A2E 0%, #16213E 100%)',
+      image: 'project-aiverse.jpg'
     },
     {
       id: 2,
@@ -28,7 +29,8 @@ const ProjectsPage = () => {
       tags: ['Node.js', 'WhatsApp API', 'OpenAI'],
       liveUrl: '#',
       githubUrl: '#',
-      bgColor: '#1A73E8'
+      bgColor: 'linear-gradient(135deg, #0f9b0f 0%, #000000 100%)',
+      image: 'project-whatsapp.jpg'
     },
     {
       id: 3,
@@ -38,7 +40,8 @@ const ProjectsPage = () => {
       tags: ['Python', 'SMTP', 'React'],
       liveUrl: '#',
       githubUrl: '#',
-      bgColor: '#8A2BE2'
+      bgColor: 'linear-gradient(135deg, #8A2BE2 0%, #4B0082 100%)',
+      image: 'project-email.jpg'
     },
     {
       id: 4,
@@ -48,7 +51,8 @@ const ProjectsPage = () => {
       tags: ['Python', 'IMAP', 'NLP'],
       liveUrl: '#',
       githubUrl: '#',
-      bgColor: '#FF7F50'
+      bgColor: 'linear-gradient(135deg, #FF7F50 0%, #FF4500 100%)',
+      image: 'project-inbox.jpg'
     },
     {
       id: 5,
@@ -58,7 +62,8 @@ const ProjectsPage = () => {
       tags: ['JavaScript', 'Graph API', 'Webhooks'],
       liveUrl: '#',
       githubUrl: '#',
-      bgColor: '#E1306C'
+      bgColor: 'linear-gradient(135deg, #E1306C 0%, #833AB4 100%)',
+      image: 'project-insta.jpg'
     },
     {
       id: 6,
@@ -68,7 +73,8 @@ const ProjectsPage = () => {
       tags: ['React', 'UI/UX', 'Figma'],
       liveUrl: '#',
       githubUrl: '#',
-      bgColor: '#111111'
+      bgColor: 'linear-gradient(135deg, #111111 0%, #333333 100%)',
+      image: 'project-ui.jpg'
     }
   ];
 
@@ -121,11 +127,21 @@ const ProjectsPage = () => {
                 e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.03)';
               }}
             >
-              {/* Top Banner Area (Dark) */}
-              <div style={{ background: project.bgColor, height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', textAlign: 'center', position: 'relative' }}>
-                <h2 style={{ color: '#fff', fontSize: '2rem', fontWeight: 700, margin: 0, letterSpacing: '-0.5px', zIndex: 2 }}>{project.shortName}</h2>
-                {/* Subtle overlay gradient */}
-                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 100%)', zIndex: 1 }}></div>
+              {/* Top Banner Area (Image or Gradient) */}
+              <div style={{ background: project.bgColor, height: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+                <img 
+                  src={import.meta.env.BASE_URL + project.image} 
+                  alt={project.title} 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0, zIndex: 1 }}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'block';
+                  }}
+                />
+                {/* Fallback Title if Image Fails */}
+                <h2 style={{ color: '#fff', fontSize: '2.5rem', fontWeight: 800, margin: 0, letterSpacing: '-1px', zIndex: 2, display: 'none' }}>{project.shortName}</h2>
+                {/* Overlay gradient to make images look premium */}
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%)', zIndex: 1 }}></div>
               </div>
 
               {/* Bottom Content Area (Light) */}
