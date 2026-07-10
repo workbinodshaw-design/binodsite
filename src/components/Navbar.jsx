@@ -82,7 +82,6 @@ const Navbar = () => {
         <CustomLink to="/services" className={`nav-link ${location.pathname === '/services' ? 'active' : ''}`}>Services</CustomLink>
         <a href="https://portfolio.castflow.in" className="nav-link">Portfolio</a>
         <CustomLink to="/pricing" className={`nav-link ${location.pathname === '/pricing' ? 'active' : ''}`}>Pricing</CustomLink>
-        <CustomLink to="/team" className={`nav-link ${location.pathname === '/team' ? 'active' : ''}`}>Our Team</CustomLink>
         <CustomLink to="/join-team" className={`nav-link ${location.pathname === '/join-team' ? 'active' : ''}`}>Careers</CustomLink>
 
         
