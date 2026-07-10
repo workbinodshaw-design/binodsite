@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import { ExternalLink, Terminal, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import ContactSection from '../components/ContactSection';
@@ -200,7 +200,7 @@ const PortfolioPage = () => {
                       e.currentTarget.style.borderColor = '#ddd';
                     }}
                   >
-                    <Github size={18} /> GitHub
+                    <Terminal size={18} /> GitHub
                   </a>
                 </div>
               </div>
