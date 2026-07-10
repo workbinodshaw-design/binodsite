@@ -7,6 +7,7 @@ import WebDevService from './pages/WebDevService';
 import AiAutomationService from './pages/AiAutomationService';
 import ContactPage from './pages/ContactPage';
 import PortfolioPage from './pages/PortfolioPage';
+import ProjectsPage from './pages/ProjectsPage';
 import JoinTeamPage from './pages/JoinTeamPage';
 import TeamPage from './pages/TeamPage';
 import PricingPage from './pages/PricingPage';
@@ -118,6 +119,7 @@ function App() {
         <Route path="/services/web-development" element={<WebDevService />} />
         <Route path="/services/ai-automation" element={<AiAutomationService />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/team" element={<TeamPage />} />
         <Route path="/join-team" element={<JoinTeamPage />} />
         <Route path="/pricing" element={<PricingPage />} />
