@@ -38,13 +38,16 @@ export const createEmployee = async (employeeData) => {
   const employeeId = await getNextEmployeeId();
   
   const newEmployee = {
+    id: employeeId,
     ...employeeData,
+    status: employeeData.status || 'active',
+    joiningDate: new Date().toISOString(),
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
   };
   
   await setDoc(doc(db, EMPLOYEES_COLLECTION, employeeId), newEmployee);
-  return { id: employeeId, ...newEmployee };
+  return newEmployee;
 };
 
 export const updateEmployee = async (id, employeeData) => {
@@ -67,12 +70,12 @@ export const getActiveEmployees = async () => {
   querySnapshot.forEach((doc) => {
     const data = doc.data();
     if (data.status === 'active') {
-      employees.push(data);
+      employees.push({ id: doc.id, ...data });
     }
   });
   
-  // Sort by ID
-  return employees.sort((a, b) => a.id.localeCompare(b.id));
+  // Sort by ID safely
+  return employees.sort((a, b) => (a.id || '').localeCompare(b.id || ''));
 };
 
 export const getAllEmployees = async () => {
@@ -81,10 +84,10 @@ export const getAllEmployees = async () => {
   
   const employees = [];
   querySnapshot.forEach((doc) => {
-    employees.push(doc.data());
+    employees.push({ id: doc.id, ...doc.data() });
   });
   
-  return employees.sort((a, b) => a.id.localeCompare(b.id));
+  return employees.sort((a, b) => (a.id || '').localeCompare(b.id || ''));
 };
 
 export const getEmployeeById = async (id) => {
@@ -92,7 +95,7 @@ export const getEmployeeById = async (id) => {
   const employeeSnap = await getDoc(employeeRef);
   
   if (employeeSnap.exists()) {
-    return employeeSnap.data();
+    return { id: employeeSnap.id, ...employeeSnap.data() };
   }
   
   return null;
