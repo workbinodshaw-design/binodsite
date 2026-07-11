@@ -201,7 +201,7 @@ const EmployeeAdminPanel = () => {
                   </div>
                   
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, padding: '10px' }}>
-                    <div style={{ width: '25mm', height: '25mm', borderRadius: '50%', background: '#eee', marginTop: '-15mm', border: '3px solid white', overflow: 'hidden', zIndex: 10, boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                    <div style={{ width: '25mm', height: '25mm', borderRadius: '50%', background: '#eee', marginTop: '-15mm', border: '3px solid white', overflow: 'hidden', position: 'relative', zIndex: 10, boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
                       {emp.photoUrl ? (
                         <img 
                           src={emp.photoUrl} 
