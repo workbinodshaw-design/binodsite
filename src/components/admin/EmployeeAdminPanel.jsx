@@ -22,7 +22,6 @@ const EmployeeAdminPanel = () => {
     about: '',
     skills: ''
   });
-  const [photoFile, setPhotoFile] = useState(null);
   
   const idCardRef = useRef(null);
   const [generatingPdf, setGeneratingPdf] = useState(false);
@@ -46,7 +45,6 @@ const EmployeeAdminPanel = () => {
 
   const handleOpenModal = (employee = null) => {
     setError('');
-    setPhotoFile(null);
     if (employee) {
       setEditingId(employee.id);
       setFormData({
@@ -86,9 +84,9 @@ const EmployeeAdminPanel = () => {
 
     try {
       if (editingId) {
-        await updateEmployee(editingId, formattedData, photoFile);
+        await updateEmployee(editingId, formattedData);
       } else {
-        await createEmployee(formattedData, photoFile);
+        await createEmployee(formattedData);
       }
       await fetchEmployees();
       setShowModal(false);
@@ -271,16 +269,14 @@ const EmployeeAdminPanel = () => {
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
               
               <div>
-                <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600', fontSize: '0.9rem' }}>Profile Photo</label>
+                <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600', fontSize: '0.9rem' }}>Profile Photo URL</label>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                   <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#eee', overflow: 'hidden' }}>
-                    {photoFile ? (
-                      <img src={URL.createObjectURL(photoFile)} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    ) : formData.photoUrl ? (
-                      <img src={formData.photoUrl} alt="Current" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    {formData.photoUrl ? (
+                      <img src={formData.photoUrl} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     ) : null}
                   </div>
-                  <input type="file" accept="image/jpeg, image/png, image/webp" onChange={(e) => setPhotoFile(e.target.files[0])} />
+                  <input type="text" placeholder="https://example.com/photo.jpg" value={formData.photoUrl || ''} onChange={(e) => setFormData({...formData, photoUrl: e.target.value})} style={{ flex: 1, padding: '10px', borderRadius: '8px', border: '1px solid #ccc' }} />
                 </div>
               </div>
 
