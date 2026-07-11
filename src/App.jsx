@@ -30,14 +30,13 @@ import AnalyticsTracker from './components/AnalyticsTracker';
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import PageTransition from './components/PageTransition';
-import HomeTransition from './components/HomeTransition';
 
 function AnimatedMainRoutes() {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<HomeTransition><HomePage /></HomeTransition>} />
+        <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
         <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
         <Route path="/services/web-development" element={<PageTransition><WebDevService /></PageTransition>} />
         <Route path="/services/ai-automation" element={<PageTransition><AiAutomationService /></PageTransition>} />
