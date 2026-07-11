@@ -27,6 +27,62 @@ import ProtectedRoute from './components/ProtectedRoute';
 import ScrollReveal from './components/ScrollReveal';
 import AnalyticsTracker from './components/AnalyticsTracker';
 
+import { useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import PageTransition from './components/PageTransition';
+
+function AnimatedMainRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
+        <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
+        <Route path="/services/web-development" element={<PageTransition><WebDevService /></PageTransition>} />
+        <Route path="/services/ai-automation" element={<PageTransition><AiAutomationService /></PageTransition>} />
+        <Route path="/portfolio" element={<PageTransition><PortfolioPage /></PageTransition>} />
+        <Route path="/projects" element={<PageTransition><ProjectsPage /></PageTransition>} />
+        <Route path="/team" element={<PageTransition><TeamPage /></PageTransition>} />
+        <Route path="/join-team" element={<PageTransition><JoinTeamPage /></PageTransition>} />
+        <Route path="/pricing" element={<PageTransition><PricingPage /></PageTransition>} />
+        <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
+        <Route path="/privacy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
+        <Route path="/terms" element={<PageTransition><TermsOfService /></PageTransition>} />
+        <Route path="/refund-policy" element={<PageTransition><RefundPolicy /></PageTransition>} />
+        
+        {/* Authentication & Role-Based Portals */}
+        <Route path="/admin-login" element={<PageTransition><AdminLogin /></PageTransition>} />
+        <Route path="/team-login" element={<PageTransition><TeamLogin /></PageTransition>} />
+        <Route path="/client-login" element={<PageTransition><ClientLogin /></PageTransition>} />
+        <Route 
+          path="/admin" 
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <PageTransition><AdminDashboard /></PageTransition>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/employee" 
+          element={
+            <ProtectedRoute requiredRole="employee">
+              <PageTransition><EmployeeDashboard /></PageTransition>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/client" 
+          element={
+            <ProtectedRoute requiredRole="client">
+              <PageTransition><ClientDashboard /></PageTransition>
+            </ProtectedRoute>
+          } 
+        />
+      </Routes>
+    </AnimatePresence>
+  );
+}
+
 function App() {
   const hostname = window.location.hostname;
 
@@ -38,7 +94,7 @@ function App() {
         <Navbar />
         <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
           <Routes>
-            <Route path="*" element={<PrivacyPolicy />} />
+            <Route path="*" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
           </Routes>
         </React.Suspense>
         <Footer />
@@ -55,7 +111,7 @@ function App() {
         <Navbar />
         <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
           <Routes>
-            <Route path="*" element={<PortfolioPage />} />
+            <Route path="*" element={<PageTransition><PortfolioPage /></PageTransition>} />
           </Routes>
         </React.Suspense>
         <Footer />
@@ -71,13 +127,13 @@ function App() {
         <AnalyticsTracker />
         <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
           <Routes>
-            <Route path="/" element={<AdminLogin />} />
+            <Route path="/" element={<PageTransition><AdminLogin /></PageTransition>} />
             <Route path="/admin-login" element={<Navigate to="/" replace />} />
             <Route 
               path="/dashboard" 
               element={
                 <ProtectedRoute requiredRole="admin">
-                  <AdminDashboard />
+                  <PageTransition><AdminDashboard /></PageTransition>
                 </ProtectedRoute>
               } 
             />
@@ -96,13 +152,13 @@ function App() {
         <AnalyticsTracker />
         <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
           <Routes>
-            <Route path="/" element={<TeamLogin />} />
+            <Route path="/" element={<PageTransition><TeamLogin /></PageTransition>} />
             <Route path="/team-login" element={<Navigate to="/" replace />} />
             <Route 
               path="/dashboard" 
               element={
                 <ProtectedRoute requiredRole="employee">
-                  <EmployeeDashboard />
+                  <PageTransition><EmployeeDashboard /></PageTransition>
                 </ProtectedRoute>
               } 
             />
@@ -122,50 +178,7 @@ function App() {
       <Navbar />
       
       <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-color)' }}></div>}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/services/web-development" element={<WebDevService />} />
-          <Route path="/services/ai-automation" element={<AiAutomationService />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/team" element={<TeamPage />} />
-          <Route path="/join-team" element={<JoinTeamPage />} />
-          <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/terms" element={<TermsOfService />} />
-          <Route path="/refund-policy" element={<RefundPolicy />} />
-          
-          {/* Authentication & Role-Based Portals */}
-          <Route path="/admin-login" element={<AdminLogin />} />
-          <Route path="/team-login" element={<TeamLogin />} />
-          <Route path="/client-login" element={<ClientLogin />} />
-          <Route 
-            path="/admin" 
-            element={
-              <ProtectedRoute requiredRole="admin">
-                <AdminDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/employee" 
-            element={
-              <ProtectedRoute requiredRole="employee">
-                <EmployeeDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/client" 
-            element={
-              <ProtectedRoute requiredRole="client">
-                <ClientDashboard />
-              </ProtectedRoute>
-            } 
-          />
-        </Routes>
+        <AnimatedMainRoutes />
       </React.Suspense>
 
       <Footer />
