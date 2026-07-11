@@ -11,6 +11,17 @@ const ProjectsPage = () => {
 
   const projects = [
     {
+      id: 7,
+      title: 'Premium Resort Experience',
+      shortName: 'Resort Demo',
+      description: 'A luxurious and immersive web experience for a premium resort. Features stunning imagery, smooth animations, and an elegant booking interface.',
+      tags: ['Web Design', 'UI/UX', 'Animations'],
+      liveUrl: 'https://workbinodshaw-design.github.io/DEMO-RESORT/',
+      githubUrl: '#',
+      bgColor: 'linear-gradient(135deg, #232526 0%, #414345 100%)',
+      image: 'project-resort.jpg'
+    },
+    {
       id: 1,
       title: 'AIVerse Hub',
       shortName: 'AIVerse Hub',
