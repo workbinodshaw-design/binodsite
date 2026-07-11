@@ -174,7 +174,15 @@ const TeamPage = () => {
                       boxShadow: '0 5px 15px rgba(0,0,0,0.05)'
                     }}>
                       {employee.photoUrl ? (
-                        <img src={employee.photoUrl} alt={employee.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <img 
+                          src={employee.photoUrl} 
+                          alt={employee.name} 
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(employee.name)}&background=f0f0f0&color=999`;
+                          }}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                        />
                       ) : (
                         <span style={{ fontSize: '2rem', color: '#999', fontWeight: 'bold' }}>
                           {employee.name.charAt(0)}
@@ -187,9 +195,24 @@ const TeamPage = () => {
                       <ShieldCheck size={18} color="#10B981" title="Verified Member" />
                     </div>
                     
-                    <p style={{ color: 'var(--text-secondary)', fontWeight: '500', marginBottom: '15px' }}>
+                    <p style={{ color: 'var(--text-secondary)', fontWeight: '500', marginBottom: '10px' }}>
                       {employee.designation}
                     </p>
+
+                    {employee.about && (
+                      <p style={{ 
+                        fontSize: '0.9rem', 
+                        color: '#666', 
+                        marginBottom: '15px', 
+                        display: '-webkit-box', 
+                        WebkitLineClamp: 3, 
+                        WebkitBoxOrient: 'vertical', 
+                        overflow: 'hidden',
+                        lineHeight: '1.5'
+                      }}>
+                        {employee.about}
+                      </p>
+                    )}
                     
                     <div style={{ display: 'flex', gap: '10px', marginBottom: '25px', width: '100%', justifyContent: 'center' }}>
                       <span className="mono" style={{ 

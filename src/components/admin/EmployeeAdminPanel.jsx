@@ -191,7 +191,16 @@ const EmployeeAdminPanel = () => {
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, padding: '10px' }}>
                     <div style={{ width: '25mm', height: '25mm', borderRadius: '50%', background: '#eee', marginTop: '-15mm', border: '3px solid white', overflow: 'hidden', zIndex: 10, boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
                       {emp.photoUrl ? (
-                        <img src={emp.photoUrl} crossOrigin="anonymous" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Profile" />
+                        <img 
+                          src={emp.photoUrl} 
+                          crossOrigin="anonymous" 
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(emp.name)}&background=f0f0f0&color=999`;
+                          }}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                          alt="Profile" 
+                        />
                       ) : null}
                     </div>
                     
@@ -210,7 +219,17 @@ const EmployeeAdminPanel = () => {
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '20px' }}>
                 <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#eee', overflow: 'hidden' }}>
-                  {emp.photoUrl && <img src={emp.photoUrl} alt={emp.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
+                  {emp.photoUrl && (
+                    <img 
+                      src={emp.photoUrl} 
+                      alt={emp.name} 
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(emp.name)}&background=f0f0f0&color=999`;
+                      }}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                    />
+                  )}
                 </div>
                 <div>
                   <h3 style={{ margin: '0 0 5px 0', fontSize: '1.2rem' }}>{emp.name}</h3>
@@ -273,7 +292,15 @@ const EmployeeAdminPanel = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                   <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#eee', overflow: 'hidden' }}>
                     {formData.photoUrl ? (
-                      <img src={formData.photoUrl} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img 
+                        src={formData.photoUrl} 
+                        alt="Preview" 
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(formData.name || 'User')}&background=f0f0f0&color=999`;
+                        }}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                      />
                     ) : null}
                   </div>
                   <input type="text" placeholder="https://example.com/photo.jpg" value={formData.photoUrl || ''} onChange={(e) => setFormData({...formData, photoUrl: e.target.value})} style={{ flex: 1, padding: '10px', borderRadius: '8px', border: '1px solid #ccc' }} />

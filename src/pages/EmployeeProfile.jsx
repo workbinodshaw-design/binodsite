@@ -109,7 +109,15 @@ const EmployeeProfile = () => {
                   justifyContent: 'center'
                 }}>
                   {employee.photoUrl ? (
-                    <img src={employee.photoUrl} alt={employee.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img 
+                      src={employee.photoUrl} 
+                      alt={employee.name} 
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(employee.name)}&background=f0f0f0&color=999`;
+                      }}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                    />
                   ) : (
                     <User size={60} color="#ccc" />
                   )}
