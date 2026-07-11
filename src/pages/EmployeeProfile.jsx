@@ -12,6 +12,22 @@ const EmployeeProfile = () => {
 
   useEffect(() => {
     const fetchProfile = async () => {
+      if (id === 'CF-FOUNDER') {
+        setEmployee({
+          id: 'CF-FOUNDER',
+          name: 'Binod Shaw',
+          designation: 'Founder & CEO',
+          status: 'active',
+          photoUrl: '/binod-profile.png',
+          about: 'Visionary leader driving innovation and digital excellence at CastFlow. Dedicated to empowering businesses with cutting-edge technology solutions.',
+          skills: ['Leadership', 'Business Strategy', 'Web Development', 'Digital Marketing'],
+          email: 'founder@castflow.in', // Feel free to change
+          joiningDate: '2022-01-01T00:00:00.000Z'
+        });
+        setLoading(false);
+        return;
+      }
+
       try {
         const data = await getEmployeeById(id);
         if (data) {

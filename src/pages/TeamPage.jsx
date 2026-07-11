@@ -138,9 +138,25 @@ const TeamPage = () => {
                     Founder & CEO
                   </span>
                   
-                  <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' }}>
+                  <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 25px auto', lineHeight: '1.6' }}>
                     Visionary leader driving innovation and digital excellence at CastFlow. Dedicated to empowering businesses with cutting-edge technology solutions.
                   </p>
+                  
+                  <Link 
+                    to="/team/CF-FOUNDER" 
+                    className="btn" 
+                    style={{ 
+                      background: '#111', 
+                      color: 'white', 
+                      padding: '10px 30px',
+                      borderRadius: '8px',
+                      textDecoration: 'none',
+                      display: 'inline-block',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    View Founder Profile & QR
+                  </Link>
                 </div>
               </div>
             </div>
