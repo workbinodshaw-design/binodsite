@@ -197,38 +197,6 @@ const ProjectsPage = () => {
                   >
                     <ExternalLink size={18} /> Live Demo
                   </a>
-                  
-                  <a 
-                    href={project.githubUrl} 
-                    target="_blank" 
-                    rel="noreferrer"
-                    style={{ 
-                      flex: 1, 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center', 
-                      gap: '8px', 
-                      background: '#fff', 
-                      color: '#111', 
-                      border: '1px solid #ddd',
-                      padding: '0.8rem', 
-                      borderRadius: '12px', 
-                      textDecoration: 'none', 
-                      fontWeight: 600, 
-                      fontSize: '0.95rem',
-                      transition: 'background 0.2s, borderColor 0.2s'
-                    }}
-                    onMouseOver={(e) => {
-                      e.currentTarget.style.background = '#f9f9f9';
-                      e.currentTarget.style.borderColor = '#ccc';
-                    }}
-                    onMouseOut={(e) => {
-                      e.currentTarget.style.background = '#fff';
-                      e.currentTarget.style.borderColor = '#ddd';
-                    }}
-                  >
-                    <Terminal size={18} /> GitHub
-                  </a>
                 </div>
               </div>
             </div>
