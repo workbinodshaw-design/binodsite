@@ -155,7 +155,7 @@ const TeamPage = () => {
                       fontWeight: 'bold'
                     }}
                   >
-                    View Founder Profile & QR
+                    View Profile
                   </Link>
                 </div>
               </div>
