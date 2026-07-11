@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Plus, Check, X, ShieldAlert, Upload, Download, RefreshCw, Briefcase, FileBadge } from 'lucide-react';
-import { getAllEmployees, createEmployee, updateEmployee } from '../../services/employeeService';
+import { Plus, Check, X, ShieldAlert, Upload, Download, RefreshCw, Briefcase, FileBadge, Trash2 } from 'lucide-react';
+import { getAllEmployees, createEmployee, updateEmployee, deleteEmployee } from '../../services/employeeService';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { QRCodeSVG } from 'qrcode.react';
@@ -106,6 +106,18 @@ const EmployeeAdminPanel = () => {
     } catch (err) {
       console.error(err);
       alert('Failed to update status');
+    }
+  };
+
+  const handleDelete = async (employee) => {
+    if (window.confirm(`Are you sure you want to PERMANENTLY delete ${employee.name}?`)) {
+      try {
+        await deleteEmployee(employee.id);
+        setEmployees(employees.filter(e => e.id !== employee.id));
+      } catch (err) {
+        console.error(err);
+        alert('Failed to delete employee');
+      }
     }
   };
 
@@ -268,6 +280,12 @@ const EmployeeAdminPanel = () => {
                   style={{ width: '100%', padding: '8px', background: emp.status === 'active' ? 'rgba(239, 68, 68, 0.1)' : 'rgba(16, 185, 129, 0.1)', color: emp.status === 'active' ? '#EF4444' : '#10B981', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600' }}
                 >
                   Mark as {emp.status === 'active' ? 'Inactive' : 'Active'}
+                </button>
+                <button 
+                  onClick={() => handleDelete(emp)}
+                  style={{ width: '100%', padding: '8px', background: '#fff0f0', color: '#EF4444', border: '1px solid #ffcccc', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}
+                >
+                  <Trash2 size={16} /> Delete Permanently
                 </button>
               </div>
             </div>

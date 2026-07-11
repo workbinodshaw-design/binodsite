@@ -6,6 +6,7 @@ import {
   getDoc, 
   setDoc, 
   updateDoc, 
+  deleteDoc,
   query, 
   orderBy 
 } from 'firebase/firestore';
@@ -60,6 +61,11 @@ export const updateEmployee = async (id, employeeData) => {
   
   await updateDoc(employeeRef, updatedData);
   return { id, ...updatedData };
+};
+
+export const deleteEmployee = async (id) => {
+  const employeeRef = doc(db, EMPLOYEES_COLLECTION, id);
+  await deleteDoc(employeeRef);
 };
 
 export const getActiveEmployees = async () => {
