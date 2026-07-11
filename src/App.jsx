@@ -10,6 +10,7 @@ const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage'));
 const ProjectsPage = React.lazy(() => import('./pages/ProjectsPage'));
 const JoinTeamPage = React.lazy(() => import('./pages/JoinTeamPage'));
 const TeamPage = React.lazy(() => import('./pages/TeamPage'));
+const EmployeeProfile = React.lazy(() => import('./pages/EmployeeProfile'));
 const PricingPage = React.lazy(() => import('./pages/PricingPage'));
 const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
 const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
@@ -43,6 +44,7 @@ function AnimatedMainRoutes() {
         <Route path="/portfolio" element={<PageTransition><PortfolioPage /></PageTransition>} />
         <Route path="/projects" element={<PageTransition><ProjectsPage /></PageTransition>} />
         <Route path="/team" element={<PageTransition><TeamPage /></PageTransition>} />
+        <Route path="/team/:id" element={<PageTransition><EmployeeProfile /></PageTransition>} />
         <Route path="/join-team" element={<PageTransition><JoinTeamPage /></PageTransition>} />
         <Route path="/pricing" element={<PageTransition><PricingPage /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />

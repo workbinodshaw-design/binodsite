@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, onSnapshot, orderBy, query, doc, updateDoc, setDoc, deleteDoc, where } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { db, auth } from '../firebase';
-import { RefreshCw, LogOut, Shield, Users, Lock, Trash2, Plus, Briefcase, Activity, CheckCircle2, Inbox, Zap, Archive, BarChart2 } from 'lucide-react';
-
+import { RefreshCw, LogOut, Shield, Users, Lock, Trash2, Plus, Briefcase, Activity, CheckCircle2, Inbox, Zap, Archive, BarChart2, BadgeCheck } from 'lucide-react';
+import EmployeeAdminPanel from '../components/admin/EmployeeAdminPanel';
 const AdminDashboard = () => {
   const [leads, setLeads] = useState([]);
   const [systemUsers, setSystemUsers] = useState([]);
@@ -379,6 +379,25 @@ const AdminDashboard = () => {
           <Users size={20} /> Team Applications
         </button>
         <button 
+          onClick={() => setActiveTab('employees')}
+          style={{ 
+            background: activeTab === 'employees' ? '#a388ff' : 'transparent', 
+            color: activeTab === 'employees' ? '#1a1a1a' : '#888', 
+            border: 'none', 
+            padding: '1rem 2rem', 
+            borderRadius: '12px', 
+            cursor: 'pointer', 
+            fontWeight: 'bold', 
+            display: 'flex', 
+            gap: '8px', 
+            alignItems: 'center',
+            transition: 'all 0.3s ease',
+            fontSize: '1rem'
+          }}
+        >
+          <BadgeCheck size={20} /> Public Team Profiles
+        </button>
+        <button 
           onClick={() => setActiveTab('analytics')}
           style={{ 
             background: activeTab === 'analytics' ? '#a388ff' : 'transparent', 
@@ -399,6 +418,9 @@ const AdminDashboard = () => {
         </button>
       </div>
 
+      {activeTab === 'employees' && (
+        <EmployeeAdminPanel />
+      )}
 
       {activeTab === 'teamApps' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
