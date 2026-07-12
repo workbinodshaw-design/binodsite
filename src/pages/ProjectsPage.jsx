@@ -22,6 +22,17 @@ const ProjectsPage = () => {
       image: 'project-resort.jpg'
     },
     {
+      id: 8,
+      title: 'Water Park Experience',
+      shortName: 'Water Park',
+      description: 'A vibrant and engaging web experience for a water park. Features dynamic layouts, refreshing design elements, and interactive booking sections.',
+      tags: ['Web Design', 'UI/UX', 'Animations'],
+      liveUrl: 'https://workbinodshaw-design.github.io/waterPark-demo/',
+      githubUrl: '#',
+      bgColor: 'linear-gradient(135deg, #00C9FF 0%, #92FE9D 100%)',
+      image: 'project-waterpark.jpg'
+    },
+    {
       id: 1,
       title: 'AIVerse Hub',
       shortName: 'AIVerse Hub',

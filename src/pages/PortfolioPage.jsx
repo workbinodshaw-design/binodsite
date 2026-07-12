@@ -23,6 +23,15 @@ const PortfolioPage = () => {
 
   const projects = [
     {
+      id: 11,
+      title: 'Water Park Experience',
+      description: 'A vibrant and engaging web experience for a water park. Features dynamic layouts, refreshing design elements, and interactive sections.',
+      icon: <ExternalLink size={40} color="#00C9FF" />,
+      tags: ['Web Design', 'UI/UX', 'Interactive'],
+      color: 'rgba(0, 201, 255, 0.1)',
+      url: 'https://workbinodshaw-design.github.io/waterPark-demo/'
+    },
+    {
       id: 0,
       title: 'AIVerse Hub',
       description: 'The ultimate community-curated directory for discovering, comparing, and mastering the world\'s best Artificial Intelligence tools. Includes a library of 3,000+ AI tools.',
