@@ -109,6 +109,7 @@ const HomePage = () => {
         .glass-card {
           background: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
           border-radius: 16px;
           padding: 1.5rem;
           box-shadow: 0 20px 40px rgba(0,0,0,0.1);
@@ -117,6 +118,12 @@ const HomePage = () => {
           position: absolute;
           transition: transform 0.5s ease;
           border: 1px solid rgba(255,255,255,0.5);
+          
+          /* GPU Acceleration */
+          transform: translateZ(0);
+          -webkit-transform: translateZ(0);
+          will-change: transform, backdrop-filter;
+          backface-visibility: hidden;
         }
 
         .card-center { transform: translateZ(50px) scale(1.1); z-index: 3; background: #1A1A1A; color: white; }
@@ -146,6 +153,12 @@ const HomePage = () => {
           scroll-snap-align: center;
           min-height: 180px;
           box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+          
+          /* GPU Acceleration */
+          transform: translateZ(0);
+          -webkit-transform: translateZ(0);
+          will-change: transform;
+          backface-visibility: hidden;
         }
 
         /* Colorful Bento */
