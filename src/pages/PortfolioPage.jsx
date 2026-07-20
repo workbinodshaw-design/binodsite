@@ -290,7 +290,7 @@ const PortfolioPage = () => {
                     flexDirection: 'column',
                     background: 'linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(248,248,255,0.9) 100%)',
                     backdropFilter: 'blur(20px)',
-                    -webkit-backdrop-filter: 'blur(20px)',
+                    WebkitBackdropFilter: 'blur(20px)',
                     /* Enhanced 3D shadow */
                     boxShadow: '0 40px 100px -10px rgba(0,0,0,0.15), 0 10px 40px -10px rgba(138,43,226,0.15), inset 0 1px 2px rgba(255,255,255,1)',
                     backfaceVisibility: 'hidden',
