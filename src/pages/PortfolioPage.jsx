@@ -280,18 +280,23 @@ const PortfolioPage = () => {
                     bottom: '0',
                     margin: 'auto',
                     padding: isMobile ? '1.5rem' : '3rem',
-                    borderRadius: '4px',
-                    border: '1px solid rgba(255,255,255,1)',
+                    borderRadius: '24px', /* Curved corners */
+                    border: '1px solid rgba(255,255,255,0.7)',
                     transform: `translateY(${translateY}vh) rotateY(${angle}deg) translateZ(${radius}px) ${isMobile ? 'scale(0.8)' : 'scale(1)'}`,
                     opacity: opacity,
-                    transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
+                    transition: 'transform 0.2s cubic-bezier(0.1, 0.7, 0.1, 1), opacity 0.2s ease-out, box-shadow 0.3s ease',
                     pointerEvents: isPointerActive ? 'auto' : 'none',
                     display: 'flex',
                     flexDirection: 'column',
-                    background: 'rgba(255, 255, 255, 0.95)',
+                    background: 'linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(248,248,255,0.9) 100%)',
                     backdropFilter: 'blur(20px)',
-                    boxShadow: '0 30px 60px rgba(0,0,0,0.08), 0 0 40px rgba(138,43,226,0.05)',
-                    backfaceVisibility: 'hidden'
+                    -webkit-backdrop-filter: 'blur(20px)',
+                    /* Enhanced 3D shadow */
+                    boxShadow: '0 40px 100px -10px rgba(0,0,0,0.15), 0 10px 40px -10px rgba(138,43,226,0.15), inset 0 1px 2px rgba(255,255,255,1)',
+                    backfaceVisibility: 'hidden',
+                    /* Hardware acceleration for smooth scrolling */
+                    willChange: 'transform, opacity',
+                    transformStyle: 'preserve-3d'
                   }}>
                     <div style={{ width: isMobile ? '50px' : '80px', height: isMobile ? '50px' : '80px', borderRadius: isMobile ? '12px' : '20px', background: project.color, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
                       {project.icon}
