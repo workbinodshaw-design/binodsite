@@ -238,20 +238,19 @@ const PortfolioPage = () => {
               {/* Real 3D Tornado Graphic Background */}
               <div style={{
                 position: 'absolute', top: '50%', left: '50%', 
-                transform: `translate(-50%, -50%) scale(${1 + Math.sin(progress * Math.PI) * 0.05})`,
+                transform: `translate(-50%, -50%) scale(${1 + Math.sin(progress * Math.PI) * 0.05}) translateZ(0)`,
                 width: isMobile ? '500px' : '1200px', height: isMobile ? '500px' : '1200px',
                 transition: 'transform 0.1s ease-out',
                 zIndex: -1,
                 opacity: 0.6,
-                pointerEvents: 'none'
+                pointerEvents: 'none',
+                willChange: 'transform'
               }}>
                 <img src="/tornado_bg.png" alt="Tornado Vortex" style={{ 
                   width: '100%', 
                   height: '100%', 
                   objectFit: 'contain', 
-                  mixBlendMode: 'multiply',
-                  WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 65%)',
-                  maskImage: 'radial-gradient(circle at center, black 30%, transparent 65%)'
+                  opacity: 0.5 /* Replaced heavy filters with simple opacity */
                 }} />
               </div>
 
@@ -289,8 +288,8 @@ const PortfolioPage = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     background: 'linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(248,248,255,0.9) 100%)',
-                    backdropFilter: 'blur(20px)',
-                    WebkitBackdropFilter: 'blur(20px)',
+                    backdropFilter: isMobile ? 'none' : 'blur(20px)',
+                    WebkitBackdropFilter: isMobile ? 'none' : 'blur(20px)',
                     /* Enhanced 3D shadow */
                     boxShadow: '0 40px 100px -10px rgba(0,0,0,0.15), 0 10px 40px -10px rgba(138,43,226,0.15), inset 0 1px 2px rgba(255,255,255,1)',
                     backfaceVisibility: 'hidden',
