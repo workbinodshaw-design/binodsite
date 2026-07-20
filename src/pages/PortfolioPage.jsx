@@ -250,7 +250,9 @@ const PortfolioPage = () => {
                   width: '100%', 
                   height: '100%', 
                   objectFit: 'contain', 
-                  opacity: 0.5 /* Replaced heavy filters with simple opacity */
+                  mixBlendMode: 'multiply',
+                  WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 65%)',
+                  maskImage: 'radial-gradient(circle at center, black 30%, transparent 65%)'
                 }} />
               </div>
 
@@ -288,8 +290,8 @@ const PortfolioPage = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     background: 'linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(248,248,255,0.9) 100%)',
-                    backdropFilter: isMobile ? 'none' : 'blur(20px)',
-                    WebkitBackdropFilter: isMobile ? 'none' : 'blur(20px)',
+                    backdropFilter: 'blur(20px)',
+                    WebkitBackdropFilter: 'blur(20px)',
                     /* Enhanced 3D shadow */
                     boxShadow: '0 40px 100px -10px rgba(0,0,0,0.15), 0 10px 40px -10px rgba(138,43,226,0.15), inset 0 1px 2px rgba(255,255,255,1)',
                     backfaceVisibility: 'hidden',
