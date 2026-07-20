@@ -238,9 +238,8 @@ const PortfolioPage = () => {
               {/* Real 3D Tornado Graphic Background */}
               <div style={{
                 position: 'absolute', top: '50%', left: '50%', 
-                transform: `translate(-50%, -50%) scale(${1 + Math.sin(progress * Math.PI) * 0.05}) translateZ(0)`,
+                transform: `translate(-50%, -50%) translateZ(0)`,
                 width: isMobile ? '500px' : '1200px', height: isMobile ? '500px' : '1200px',
-                transition: 'transform 0.1s ease-out',
                 zIndex: -1,
                 opacity: 0.6,
                 pointerEvents: 'none',
