@@ -298,7 +298,7 @@ const HomePage = () => {
         )}
 
         <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem', paddingBottom: '2rem', marginTop: isMobile ? '0' : '2rem' }}>
-          Rated 4.9/5 by 4,900+ clients ★★★★★
+          Rated 4.9/5 by 20+ clients ★★★★★
         </div>
       </section>
 
