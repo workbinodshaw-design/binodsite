@@ -3,13 +3,32 @@ import { Helmet } from 'react-helmet-async';
 
 const SEO = ({ title, description, keywords, url }) => {
   const siteName = "CastFlow";
-  const defaultDescription = "CastFlow is a premier Web Development and AI Automation Agency based in India. We build high-performance web applications, automate business workflows, and develop autonomous AI systems that drive growth globally.";
-  const defaultKeywords = "Web Developer, AI Automation Services, React Developer India, Custom CRM Development, AI Agent Developer, n8n Automation, Make.com Expert, Full Stack Web Development India, MVP Development";
+  const defaultDescription = "CastFlow is a premier Digital Marketing and AI Automation Agency founded by Binod Shaw. We build high-performance web applications, automate business workflows, and develop autonomous AI systems that drive growth globally.";
+  const defaultKeywords = "Digital Marketing Agency, AI Automation Services, React Developer India, Binod Shaw, Custom CRM Development, AI Agent Developer, n8n Automation, Make.com Expert, Full Stack Web Development";
 
   const seoTitle = title ? `${title} | ${siteName}` : siteName;
   const seoDescription = description || defaultDescription;
   const seoKeywords = keywords || defaultKeywords;
   const canonicalUrl = `https://castflow.in${url || ''}`;
+
+  // Organization Schema for Google Knowledge Graph
+  const schemaOrgJSONLD = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "CastFlow",
+    "url": "https://www.castflow.in",
+    "logo": "https://www.castflow.in/logo.png",
+    "description": seoDescription,
+    "founder": {
+      "@type": "Person",
+      "name": "Binod Shaw",
+      "jobTitle": "Founder & CEO"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/castflow",
+      "https://twitter.com/castflow"
+    ]
+  };
 
   return (
     <Helmet>
@@ -17,6 +36,7 @@ const SEO = ({ title, description, keywords, url }) => {
       <title>{seoTitle}</title>
       <meta name="description" content={seoDescription} />
       <meta name="keywords" content={seoKeywords} />
+      <meta name="author" content="Binod Shaw" />
       <link rel="canonical" href={canonicalUrl} />
 
       {/* OpenGraph tags (for Facebook, LinkedIn, etc.) */}
@@ -30,6 +50,11 @@ const SEO = ({ title, description, keywords, url }) => {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={seoTitle} />
       <meta name="twitter:description" content={seoDescription} />
+
+      {/* Inject JSON-LD Schema explicitly on every page load */}
+      <script type="application/ld+json">
+        {JSON.stringify(schemaOrgJSONLD)}
+      </script>
     </Helmet>
   );
 };
