@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { RefreshCcw } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const RefundPolicy = () => {
   useEffect(() => {
@@ -82,6 +83,52 @@ const RefundPolicy = () => {
                 All refund requests are reviewed individually based on the project's progress, work completed, and expenses incurred.
               </p>
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              style={{ 
+                marginTop: '1rem',
+                paddingTop: '3.5rem',
+                borderTop: '1px solid rgba(0,0,0,0.08)'
+              }}
+            >
+              <h2 style={{ fontSize: '2rem', fontWeight: 600, marginBottom: '2rem', color: '#1A1A1A', letterSpacing: '-0.5px' }}>
+                Digital Advertising Services
+              </h2>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                <div>
+                  <h3 style={{ fontSize: '1.3rem', fontWeight: 600, marginBottom: '0.75rem', color: '#1A1A1A' }}>Advertising Budget</h3>
+                  <p style={{ color: '#666', lineHeight: 1.8, fontSize: '1.05rem' }}>
+                    The advertising budget is paid directly to the respective advertising platform (including but not limited to Meta, Google, LinkedIn, YouTube, X, TikTok, or other third-party advertising platforms). Any amount already spent on advertising is strictly non-refundable.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 style={{ fontSize: '1.3rem', fontWeight: 600, marginBottom: '0.75rem', color: '#1A1A1A' }}>Service Fee</h3>
+                  <p style={{ color: '#666', lineHeight: 1.8, fontSize: '1.05rem' }}>
+                    Once campaign planning, strategy, audience research, creative preparation, campaign setup, optimization, or management has started, the CastFlow service fee is strictly non-refundable.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 style={{ fontSize: '1.3rem', fontWeight: 600, marginBottom: '0.75rem', color: '#1A1A1A' }}>Performance Disclaimer</h3>
+                  <p style={{ color: '#666', lineHeight: 1.8, fontSize: '1.05rem' }}>
+                    CastFlow does not guarantee any specific number of leads, sales, appointments, conversions, revenue, or return on ad spend (ROAS). Advertising performance depends on multiple factors, including advertising budget, competition, audience behavior, market conditions, client response time, landing page quality, and third-party advertising platform algorithms.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 style={{ fontSize: '1.3rem', fontWeight: 600, marginBottom: '0.75rem', color: '#1A1A1A' }}>Campaign Cancellation</h3>
+                  <p style={{ color: '#666', lineHeight: 1.8, fontSize: '1.05rem' }}>
+                    Clients may request to pause or stop an advertising campaign at any time. However, all service fees and advertising costs incurred before cancellation are non-refundable.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
 
           </div>
         </div>
