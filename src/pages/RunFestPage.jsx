@@ -1,39 +1,50 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
 const RunFestPage = () => {
+  // Mobile detection
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Global Scroll for parallax
   const { scrollYProgress } = useScroll();
   
   // Custom Styles matching the exact typography system
   const styles = {
     bg: { backgroundColor: '#FFFFFF', color: '#111827', overflowX: 'hidden' },
-    heroTitle: { fontFamily: '"Clash Display", sans-serif', fontWeight: 800, fontSize: 'clamp(52px, 10vw, 140px)', letterSpacing: '-2px', lineHeight: 0.9, textTransform: 'uppercase', margin: 0 },
-    bgNumber: { position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)', fontFamily: '"Clash Display", sans-serif', fontWeight: 900, fontSize: 'clamp(150px, 20vw, 320px)', opacity: 0.05, zIndex: 0, pointerEvents: 'none' },
-    tagline: { fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400, fontSize: 'clamp(24px, 4vw, 30px)', color: '#4B5563', margin: '20px 0' },
-    subheading: { fontFamily: '"Inter", sans-serif', fontWeight: 500, fontSize: 'clamp(18px, 2vw, 22px)', color: '#6B7280', margin: '0 0 40px 0' },
-    sectionHeading: { fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: 'clamp(40px, 6vw, 72px)', margin: '0 0 20px 0', letterSpacing: '-1px', lineHeight: 1.1 },
+    heroTitle: { fontFamily: '"Clash Display", sans-serif', fontWeight: 800, fontSize: isMobile ? '52px' : 'clamp(90px, 10vw, 140px)', letterSpacing: '-2px', lineHeight: 0.9, textTransform: 'uppercase', margin: 0 },
+    bgNumber: { position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)', fontFamily: '"Clash Display", sans-serif', fontWeight: 900, fontSize: isMobile ? '180px' : 'clamp(220px, 20vw, 320px)', opacity: 0.05, zIndex: 0, pointerEvents: 'none' },
+    tagline: { fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400, fontSize: isMobile ? '24px' : '30px', color: '#4B5563', margin: '20px 0' },
+    subheading: { fontFamily: '"Inter", sans-serif', fontWeight: 500, fontSize: isMobile ? '18px' : '22px', color: '#6B7280', margin: '0 0 40px 0' },
+    sectionHeading: { fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: isMobile ? '40px' : '72px', margin: '0 0 20px 0', letterSpacing: '-1px', lineHeight: 1.1 },
     sectionDesc: { fontFamily: '"Inter", sans-serif', fontWeight: 400, fontSize: '18px', lineHeight: 1.8, maxWidth: '700px', color: '#4B5563' },
-    btn: { fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', borderRadius: '999px', padding: '16px 32px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', textDecoration: 'none', transition: 'all 0.3s ease' },
+    btn: { fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', borderRadius: '999px', padding: '16px 32px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', textDecoration: 'none', transition: 'all 0.3s ease', width: isMobile ? '100%' : 'auto' },
     btnPrimary: { backgroundColor: '#111827', color: '#FFFFFF', border: '1px solid #111827' },
     btnGlowing: { backgroundColor: '#F97316', color: '#FFFFFF', border: 'none', boxShadow: '0 10px 30px rgba(249, 115, 22, 0.4)' },
+    sectionPadding: { padding: isMobile ? '80px 5vw' : '150px 5vw' }
   };
 
   // Parallax Values for Hero
-  const heroY = useTransform(scrollYProgress, [0, 0.2], [0, 150]);
+  const heroY = useTransform(scrollYProgress, [0, 0.2], [0, isMobile ? 50 : 150]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   // Framer Variants
   const revealUp = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: isMobile ? 30 : 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
   };
   
   const stagger = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+    visible: { opacity: 1, transition: { staggerChildren: isMobile ? 0.05 : 0.1 } }
   };
 
   return (
@@ -48,7 +59,7 @@ const RunFestPage = () => {
         </motion.div>
 
         {/* Content */}
-        <motion.div style={{ zIndex: 1, textAlign: 'center', opacity: heroOpacity }} initial="hidden" animate="visible" variants={stagger}>
+        <motion.div style={{ zIndex: 1, textAlign: 'center', opacity: heroOpacity, padding: '0 20px', width: '100%' }} initial="hidden" animate="visible" variants={stagger}>
           <div style={styles.bgNumber}>26</div>
           <motion.h1 variants={revealUp} style={styles.heroTitle}>RUNFEST</motion.h1>
           <motion.div variants={revealUp} style={styles.tagline}>Run Beyond Limits.</motion.div>
@@ -67,40 +78,40 @@ const RunFestPage = () => {
         {/* Scroll Indicator */}
         <motion.div 
           animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ position: 'absolute', bottom: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center', opacity: 0.5 }}
+          style={{ position: 'absolute', bottom: isMobile ? '20px' : '40px', display: 'flex', flexDirection: 'column', alignItems: 'center', opacity: 0.5 }}
         >
           <div style={{ width: '1px', height: '40px', backgroundColor: '#111827' }}></div>
         </motion.div>
       </section>
 
       {/* ================= THE STORY ================= */}
-      <section style={{ padding: '150px 5vw', backgroundColor: '#FFFFFF' }}>
+      <section style={{ ...styles.sectionPadding, backgroundColor: '#FFFFFF' }}>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={revealUp} style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <h2 style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 500, fontSize: 'clamp(40px, 8vw, 100px)', lineHeight: 1, color: '#111827', margin: '0 0 100px 0', letterSpacing: '-1px' }}>
+          <h2 style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 500, fontSize: isMobile ? '48px' : 'clamp(40px, 8vw, 100px)', lineHeight: 1, color: '#111827', margin: isMobile ? '0 0 50px 0' : '0 0 100px 0', letterSpacing: '-1px' }}>
             "Every Finish<br/>Has A Story."
           </h2>
         </motion.div>
         
         {/* Full Width Cinematic Image */}
-        <motion.div initial={{ scale: 0.95, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }} viewport={{ once: true }} style={{ width: '100%', height: '70vh', borderRadius: '4px', overflow: 'hidden' }}>
+        <motion.div initial={{ scale: 0.95, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }} viewport={{ once: true }} style={{ width: '100%', height: isMobile ? '50vh' : '70vh', borderRadius: '4px', overflow: 'hidden' }}>
           <img src="/runfest_story.png" alt="Exhausted Runner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </motion.div>
       </section>
 
       {/* ================= DISTANCE SELECTOR ================= */}
-      <section style={{ padding: '150px 5vw', backgroundColor: '#FAFAFA' }}>
+      <section style={{ ...styles.sectionPadding, backgroundColor: '#FAFAFA' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={styles.sectionHeading}>Choose Your Distance</motion.h2>
           
-          <div style={{ marginTop: '80px', display: 'flex', overflowX: 'auto', gap: '40px', paddingBottom: '40px', scrollbarWidth: 'none' }}>
+          <div style={{ marginTop: isMobile ? '40px' : '80px', display: 'flex', overflowX: 'auto', gap: isMobile ? '20px' : '40px', paddingBottom: '40px', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', scrollSnapType: 'x mandatory' }}>
             {['3K', '5K', '10K', '21K', '42K'].map((dist, i) => (
               <motion.div key={dist} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: i * 0.1 }}
-                whileHover={{ scale: 1.05, x: 10 }}
+                whileHover={!isMobile ? { scale: 1.05, x: 10 } : {}}
                 style={{ 
                   flex: '0 0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                  width: '300px', height: '200px', borderBottom: '2px solid #E5E7EB', cursor: 'pointer' 
+                  width: isMobile ? '220px' : '300px', height: isMobile ? '150px' : '200px', borderBottom: '2px solid #E5E7EB', cursor: 'pointer', scrollSnapAlign: 'start'
                 }}>
-                <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 800, fontSize: '80px', letterSpacing: '-2px', color: '#111827', lineHeight: 1 }}>{dist}</div>
+                <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 800, fontSize: isMobile ? '60px' : '80px', letterSpacing: '-2px', color: '#111827', lineHeight: 1 }}>{dist}</div>
                 <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', marginTop: '10px' }}>The {dist === '21K' ? 'Half Marathon' : dist === '42K' ? 'Full Marathon' : 'Challenge'}</div>
               </motion.div>
             ))}
@@ -109,17 +120,17 @@ const RunFestPage = () => {
       </section>
 
       {/* ================= THE MEDAL (HARDWARE) ================= */}
-      <section style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF', position: 'relative', overflow: 'hidden' }}>
-        <motion.div initial={{ y: 100, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1.5, ease: 'easeOut' }} viewport={{ once: true }} style={{ position: 'absolute', zIndex: 1 }}>
+      <section style={{ height: isMobile ? '70vh' : '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF', position: 'relative', overflow: 'hidden' }}>
+        <motion.div initial={{ y: 100, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1.5, ease: 'easeOut' }} viewport={{ once: true }} style={{ position: 'absolute', zIndex: 1, top: isMobile ? '10%' : 'auto' }}>
           <motion.img 
-            animate={{ y: [-20, 20, -20], rotateZ: [-2, 2, -2] }} 
+            animate={!isMobile ? { y: [-20, 20, -20], rotateZ: [-2, 2, -2] } : { y: [-10, 10, -10] }} 
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-            src="/runfest_medal.png" alt="RunFest Medal" style={{ width: 'clamp(300px, 40vw, 600px)', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.15))' }} 
+            src="/runfest_medal.png" alt="RunFest Medal" style={{ width: isMobile ? '80vw' : 'clamp(300px, 40vw, 600px)', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.15))', maxWidth: '400px' }} 
           />
         </motion.div>
         
-        <div style={{ position: 'absolute', bottom: '10%', zIndex: 2, textAlign: 'center', width: '100%' }}>
-          <motion.h3 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '24px', letterSpacing: '2px', textTransform: 'uppercase', color: '#111827' }}>
+        <div style={{ position: 'absolute', bottom: isMobile ? '5%' : '10%', zIndex: 2, textAlign: 'center', width: '100%', padding: '0 20px' }}>
+          <motion.h3 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: isMobile ? '18px' : '24px', letterSpacing: '2px', textTransform: 'uppercase', color: '#111827' }}>
             This isn't plastic.
           </motion.h3>
           <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionDesc, margin: '10px auto 0 auto' }}>
@@ -129,12 +140,12 @@ const RunFestPage = () => {
       </section>
 
       {/* ================= THE TSHIRT (MAGAZINE) ================= */}
-      <section style={{ padding: '150px 5vw', backgroundColor: '#FAFAFA' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '80px', alignItems: 'center' }}>
-          <motion.div initial={{ x: -50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }}>
+      <section style={{ ...styles.sectionPadding, backgroundColor: '#FAFAFA' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '40px' : '80px', alignItems: 'center' }}>
+          <motion.div initial={{ x: isMobile ? 0 : -50, y: isMobile ? 50 : 0, opacity: 0 }} whileInView={{ x: 0, y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%' }}>
             <img src="/runfest_tshirt.png" alt="Premium T-Shirt" style={{ width: '100%', borderRadius: '4px' }} />
           </motion.div>
-          <motion.div initial={{ x: 50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }}>
+          <motion.div initial={{ x: isMobile ? 0 : 50, y: isMobile ? 50 : 0, opacity: 0 }} whileInView={{ x: 0, y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%' }}>
             <h2 style={styles.sectionHeading}>Aero-Dry<br/>Performance.</h2>
             <p style={styles.sectionDesc}>
               Designed for the long run. Moisture-wicking technology combined with an ultra-lightweight weave. It doesn't just look premium; it performs.
@@ -144,27 +155,27 @@ const RunFestPage = () => {
       </section>
 
       {/* ================= CERTIFICATE & BADGE ================= */}
-      <section style={{ padding: '150px 5vw', backgroundColor: '#FFFFFF', position: 'relative' }}>
+      <section style={{ ...styles.sectionPadding, backgroundColor: '#FFFFFF', position: 'relative' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.03), transparent 70%)', pointerEvents: 'none' }}></div>
         
-        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '150px' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: isMobile ? '80px' : '150px' }}>
           
           {/* Certificate */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px', alignItems: 'center' }}>
-             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp}>
+          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '40px' : '60px', alignItems: 'center' }}>
+             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ width: isMobile ? '100%' : '50%', order: isMobile ? 2 : 1 }}>
                 <h2 style={styles.sectionHeading}>Official<br/>Verification.</h2>
                 <p style={styles.sectionDesc}>Your personalized digital certificate, proving your time and dedication to the world.</p>
              </motion.div>
-             <motion.div initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ display: 'flex', justifyContent: 'center' }}>
-               <img src="/runfest_certificate.png" alt="Certificate" style={{ width: '80%', filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.08))', transform: 'rotate(2deg)' }} />
+             <motion.div initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%', display: 'flex', justifyContent: 'center', order: isMobile ? 1 : 2 }}>
+               <img src="/runfest_certificate.png" alt="Certificate" style={{ width: isMobile ? '100%' : '80%', filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.08))', transform: 'rotate(2deg)' }} />
              </motion.div>
           </div>
 
           {/* Digital Badge (Phone Simulation) */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px', alignItems: 'center' }}>
-             <motion.div initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ display: 'flex', justifyContent: 'center', order: -1 }}>
+          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '40px' : '60px', alignItems: 'center' }}>
+             <motion.div initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%', display: 'flex', justifyContent: 'center' }}>
                 {/* CSS Phone Frame */}
-                <div style={{ width: '320px', height: '650px', backgroundColor: '#111827', borderRadius: '50px', padding: '12px', boxShadow: '0 40px 80px rgba(0,0,0,0.15)' }}>
+                <div style={{ width: '320px', height: '650px', backgroundColor: '#111827', borderRadius: '50px', padding: '12px', boxShadow: '0 40px 80px rgba(0,0,0,0.15)', transform: isMobile ? 'scale(0.8)' : 'scale(1)' }}>
                    <div style={{ width: '100%', height: '100%', backgroundColor: '#FFFFFF', borderRadius: '38px', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '60px' }}>
                       <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '18px', color: '#111827', marginBottom: '40px' }}>Trophy Cabinet</div>
                       <img src="/runfest_badge.png" alt="3D Badge" style={{ width: '180px' }} />
@@ -172,7 +183,7 @@ const RunFestPage = () => {
                    </div>
                 </div>
              </motion.div>
-             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp}>
+             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ width: isMobile ? '100%' : '50%' }}>
                 <h2 style={styles.sectionHeading}>The Digital<br/>Flex.</h2>
                 <p style={styles.sectionDesc}>Unlock your 3D digital badge. Show it off on your profile, share it on socials, wear it as a mark of honor.</p>
              </motion.div>
@@ -182,14 +193,14 @@ const RunFestPage = () => {
       </section>
 
       {/* ================= TIMELINE ================= */}
-      <section style={{ padding: '100px 5vw', backgroundColor: '#FAFAFA' }}>
+      <section style={{ ...styles.sectionPadding, backgroundColor: '#FAFAFA' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative', overflowX: 'auto', paddingBottom: '40px' }}>
-            <div style={{ position: 'absolute', top: '15px', left: 0, width: '100%', height: '2px', backgroundColor: '#E5E7EB', zIndex: 0 }}></div>
-            <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 1.5, ease: 'easeInOut' }} viewport={{ once: true }} style={{ position: 'absolute', top: '15px', left: 0, width: '100%', height: '2px', backgroundColor: '#111827', zIndex: 1, originX: 0 }}></motion.div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative', overflowX: 'auto', paddingBottom: '40px', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
+            <div style={{ position: 'absolute', top: '15px', left: 0, width: isMobile ? '200%' : '100%', height: '2px', backgroundColor: '#E5E7EB', zIndex: 0 }}></div>
+            <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 1.5, ease: 'easeInOut' }} viewport={{ once: true }} style={{ position: 'absolute', top: '15px', left: 0, width: isMobile ? '200%' : '100%', height: '2px', backgroundColor: '#111827', zIndex: 1, originX: 0 }}></motion.div>
 
             {['Register', 'Run Anywhere', 'Upload Proof', 'Verification', 'Gear Delivered'].map((step, i) => (
-              <div key={i} style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '20%', minWidth: '150px' }}>
+              <div key={i} style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: isMobile ? '180px' : '20%', flexShrink: 0 }}>
                 <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#111827', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '14px', marginBottom: '20px', border: '4px solid #FAFAFA' }}>{i + 1}</div>
                 <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', color: '#111827', textAlign: 'center' }}>{step}</div>
               </div>
@@ -199,14 +210,14 @@ const RunFestPage = () => {
       </section>
 
       {/* ================= REGISTRATION (APPLE STORE STYLE) ================= */}
-      <section id="register" style={{ padding: '150px 5vw', backgroundColor: '#FFFFFF' }}>
+      <section id="register" style={{ ...styles.sectionPadding, backgroundColor: '#FFFFFF' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, textAlign: 'center', marginBottom: '80px' }}>The Passes</motion.h2>
+          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, textAlign: 'center', marginBottom: isMobile ? '40px' : '80px' }}>The Passes</motion.h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '30px' }}>
             
             {/* Digital Pass */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ backgroundColor: '#F9FAFB', borderRadius: '24px', padding: '50px 40px', display: 'flex', flexDirection: 'column' }}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ backgroundColor: '#F9FAFB', borderRadius: '24px', padding: isMobile ? '30px 20px' : '50px 40px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>Digital Pass</div>
               <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', margin: '10px 0 30px 0' }}>For the pure runner.</div>
               <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', marginBottom: '40px' }}>₹349</div>
@@ -220,8 +231,8 @@ const RunFestPage = () => {
             </motion.div>
 
             {/* Finisher Pass */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: 0.1 }} style={{ backgroundColor: '#F9FAFB', borderRadius: '24px', padding: '50px 40px', display: 'flex', flexDirection: 'column', position: 'relative' }}>
-              <div style={{ position: 'absolute', top: '40px', right: '40px', backgroundColor: '#0EA5E9', color: '#FFF', padding: '6px 12px', borderRadius: '12px', fontFamily: '"Inter", sans-serif', fontSize: '12px', fontWeight: 600 }}>POPULAR</div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: isMobile ? 0 : 0.1 }} style={{ backgroundColor: '#F9FAFB', borderRadius: '24px', padding: isMobile ? '40px 20px' : '50px 40px', display: 'flex', flexDirection: 'column', position: 'relative', border: '2px solid #111827' }}>
+              <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#0EA5E9', color: '#FFF', padding: '6px 16px', borderRadius: '12px', fontFamily: '"Inter", sans-serif', fontSize: '12px', fontWeight: 600, whiteSpace: 'nowrap' }}>POPULAR</div>
               <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>Finisher Pass</div>
               <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', margin: '10px 0 30px 0' }}>The complete experience.</div>
               <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', marginBottom: '40px' }}>₹799</div>
@@ -235,7 +246,7 @@ const RunFestPage = () => {
             </motion.div>
 
             {/* VIP Pass */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: 0.2 }} style={{ backgroundColor: '#F9FAFB', borderRadius: '24px', padding: '50px 40px', display: 'flex', flexDirection: 'column' }}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: isMobile ? 0 : 0.2 }} style={{ backgroundColor: '#F9FAFB', borderRadius: '24px', padding: isMobile ? '30px 20px' : '50px 40px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>VIP Pass</div>
               <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', margin: '10px 0 30px 0' }}>For the elite.</div>
               <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', marginBottom: '40px' }}>₹999</div>
@@ -253,24 +264,24 @@ const RunFestPage = () => {
       </section>
 
       {/* ================= TESTIMONIALS ================= */}
-      <section style={{ padding: '150px 5vw', backgroundColor: '#FAFAFA' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '80px' }}>
+      <section style={{ ...styles.sectionPadding, backgroundColor: '#FAFAFA' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(400px, 1fr))', gap: isMobile ? '60px' : '80px' }}>
           
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp}>
-            <div style={{ width: '100%', height: '500px', overflow: 'hidden', borderRadius: '4px', marginBottom: '30px' }}>
+            <div style={{ width: '100%', height: isMobile ? '350px' : '500px', overflow: 'hidden', borderRadius: '4px', marginBottom: '30px' }}>
                <img src="/runfest_testimonial1.png" alt="Runner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
-            <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: '32px', color: '#111827', lineHeight: 1.2 }}>
+            <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: isMobile ? '28px' : '32px', color: '#111827', lineHeight: 1.2 }}>
               "The most premium virtual event I've ever participated in. The medal quality is insane."
             </div>
             <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', color: '#6B7280', marginTop: '15px' }}>— Rahul K., 10K Finisher</div>
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: 0.2 }}>
-            <div style={{ width: '100%', height: '500px', overflow: 'hidden', borderRadius: '4px', marginBottom: '30px' }}>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: isMobile ? 0 : 0.2 }}>
+            <div style={{ width: '100%', height: isMobile ? '350px' : '500px', overflow: 'hidden', borderRadius: '4px', marginBottom: '30px' }}>
                <img src="/runfest_testimonial2.png" alt="Runner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
-            <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: '32px', color: '#111827', lineHeight: 1.2 }}>
+            <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: isMobile ? '28px' : '32px', color: '#111827', lineHeight: 1.2 }}>
               "I loved that I could run on my own schedule. The gear arrived perfectly packaged."
             </div>
             <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', color: '#6B7280', marginTop: '15px' }}>— Priya S., Half Marathon</div>
@@ -280,9 +291,9 @@ const RunFestPage = () => {
       </section>
 
       {/* ================= CTA ================= */}
-      <section style={{ padding: '200px 5vw', backgroundColor: '#111827', textAlign: 'center' }}>
+      <section style={{ padding: isMobile ? '100px 5vw' : '200px 5vw', backgroundColor: '#111827', textAlign: 'center' }}>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp}>
-           <h2 style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: 'clamp(40px, 8vw, 80px)', color: '#FFFFFF', margin: '0 0 40px 0', letterSpacing: '-1px' }}>
+           <h2 style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: isMobile ? '40px' : 'clamp(40px, 8vw, 80px)', color: '#FFFFFF', margin: '0 0 40px 0', letterSpacing: '-1px' }}>
              Ready To Become<br/>A Finisher?
            </h2>
            <a href="#register" style={{ ...styles.btn, ...styles.btnGlowing, padding: '20px 50px', fontSize: '18px' }}>
@@ -292,7 +303,7 @@ const RunFestPage = () => {
       </section>
 
       {/* ================= FOOTER ================= */}
-      <footer style={{ padding: '60px 5vw', backgroundColor: '#FFFFFF', borderTop: '1px solid #E5E7EB', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+      <footer style={{ padding: '40px 5vw', backgroundColor: '#FFFFFF', borderTop: '1px solid #E5E7EB', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
          <div style={{ display: 'flex', gap: '30px' }}>
             {['Privacy', 'Terms', 'Refunds'].map((link) => (
               <Link key={link} to="#" style={{ fontFamily: '"Inter", sans-serif', fontSize: '15px', color: '#6B7280', textDecoration: 'none' }}>{link}</Link>
