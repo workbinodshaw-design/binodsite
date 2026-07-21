@@ -268,7 +268,7 @@ const RunFestPage = () => {
         <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(400px, 1fr))', gap: isMobile ? '60px' : '80px' }}>
           
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp}>
-            <div style={{ width: '100%', height: isMobile ? '350px' : '500px', overflow: 'hidden', borderRadius: '4px', marginBottom: '30px' }}>
+            <div style={{ width: '100%', height: isMobile ? '350px' : '300px', overflow: 'hidden', borderRadius: '4px', marginBottom: '30px' }}>
                <img src="/runfest_testimonial1.png" alt="Runner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: isMobile ? '28px' : '32px', color: '#111827', lineHeight: 1.2 }}>
@@ -278,7 +278,7 @@ const RunFestPage = () => {
           </motion.div>
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: isMobile ? 0 : 0.2 }}>
-            <div style={{ width: '100%', height: isMobile ? '350px' : '500px', overflow: 'hidden', borderRadius: '4px', marginBottom: '30px' }}>
+            <div style={{ width: '100%', height: isMobile ? '350px' : '300px', overflow: 'hidden', borderRadius: '4px', marginBottom: '30px' }}>
                <img src="/runfest_testimonial2.png" alt="Runner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: isMobile ? '28px' : '32px', color: '#111827', lineHeight: 1.2 }}>
