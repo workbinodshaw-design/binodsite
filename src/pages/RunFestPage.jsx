@@ -62,18 +62,20 @@ const RunFestPage = () => {
         {/* Content */}
         <motion.div style={{ zIndex: 1, textAlign: 'center', opacity: heroOpacity, padding: '0 20px', width: '100%' }} initial="hidden" animate="visible" variants={stagger}>
           <div style={styles.bgNumber}>26</div>
+
+          {/* Coming Soon Pill */}
+          <motion.div variants={revealUp} style={{ display: 'inline-flex', alignItems: 'center', backgroundColor: '#F3F4F6', padding: '8px 16px', borderRadius: '99px', marginBottom: '30px' }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#F59E0B', marginRight: '10px' }}></span>
+            <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '14px', fontWeight: 600, color: '#374151' }}>Coming Soon • Page is under construction</span>
+          </motion.div>
+
           <motion.h1 variants={revealUp} style={styles.heroTitle}>RUNFEST</motion.h1>
           <motion.div variants={revealUp} style={styles.tagline}>Move. Breathe. Conquer.</motion.div>
           <motion.div variants={revealUp} style={styles.subheading}>A race against yourself, on your own terms.</motion.div>
           
-          <motion.a variants={revealUp} href="#register" style={{ ...styles.btn, ...styles.btnPrimary, marginTop: '20px' }}>
-            Commit now
+          <motion.a variants={revealUp} href="#" onClick={(e) => e.preventDefault()} style={{ ...styles.btn, backgroundColor: '#E5E7EB', color: '#9CA3AF', cursor: 'not-allowed', marginTop: '20px' }}>
+            Registrations Opening Soon
           </motion.a>
-          
-          <motion.div variants={revealUp} style={{ marginTop: '40px', fontFamily: '"Inter", sans-serif', fontSize: '14px', color: '#4B5563', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10B981', display: 'inline-block' }}></span>
-            1,200+ on the starting line
-          </motion.div>
         </motion.div>
 
         {/* Scroll Indicator */}
@@ -236,7 +238,7 @@ const RunFestPage = () => {
                   <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', padding: '10px 0', borderBottom: '1px solid #E5E7EB' }}>{f}</li>
                 ))}
               </ul>
-              <button style={{ ...styles.btn, backgroundColor: '#E5E7EB', color: '#111827', border: 'none', width: '100%' }}>Select</button>
+              <button disabled style={{ ...styles.btn, backgroundColor: '#E5E7EB', color: '#9CA3AF', border: 'none', width: '100%', cursor: 'not-allowed' }}>Coming Soon</button>
             </motion.div>
 
             {/* Finisher Pass */}
@@ -251,7 +253,7 @@ const RunFestPage = () => {
                   <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', padding: '10px 0', borderBottom: '1px solid #E5E7EB' }}>{f}</li>
                 ))}
               </ul>
-              <button style={{ ...styles.btn, ...styles.btnPrimary, width: '100%' }}>Select</button>
+              <button disabled style={{ ...styles.btn, backgroundColor: '#E5E7EB', color: '#9CA3AF', border: 'none', width: '100%', cursor: 'not-allowed' }}>Coming Soon</button>
             </motion.div>
 
             {/* VIP Pass */}
@@ -265,7 +267,7 @@ const RunFestPage = () => {
                   <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', padding: '10px 0', borderBottom: '1px solid #E5E7EB' }}>{f}</li>
                 ))}
               </ul>
-              <button style={{ ...styles.btn, backgroundColor: '#E5E7EB', color: '#111827', border: 'none', width: '100%' }}>Select</button>
+              <button disabled style={{ ...styles.btn, backgroundColor: '#E5E7EB', color: '#9CA3AF', border: 'none', width: '100%', cursor: 'not-allowed' }}>Coming Soon</button>
             </motion.div>
 
           </div>
@@ -307,8 +309,8 @@ const RunFestPage = () => {
            <h2 style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: isMobile ? '40px' : 'clamp(40px, 8vw, 80px)', color: '#FFFFFF', margin: '0 0 40px 0', letterSpacing: '-1px' }}>
              The starting line<br/>is waiting.
            </h2>
-           <a href="#register" style={{ ...styles.btn, ...styles.btnGlowing, padding: '20px 50px', fontSize: '18px' }}>
-             Commit now
+           <a href="#" onClick={(e) => e.preventDefault()} style={{ ...styles.btn, backgroundColor: '#374151', color: '#9CA3AF', padding: '20px 50px', fontSize: '18px', cursor: 'not-allowed' }}>
+             Coming Soon
            </a>
         </motion.div>
       </section>
