@@ -55,7 +55,8 @@ const RunFestPage = () => {
       <section style={{ position: 'relative', width: '100vw', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
         {/* Unobstructed Background */}
         <motion.div style={{ position: 'absolute', inset: 0, zIndex: -1, y: heroY }}>
-          <img src="/runfest_hero.png" alt="RunFest Sunrise" style={{ width: '100%', height: '120%', objectFit: 'cover', objectPosition: 'center' }} />
+          {/* OPTIMIZATION: Eager load hero image with high priority */}
+          <img src="/runfest_hero.png" alt="RunFest Sunrise" loading="eager" fetchPriority="high" decoding="async" style={{ width: '100%', height: '120%', objectFit: 'cover', objectPosition: 'center' }} />
         </motion.div>
 
         {/* Content */}
@@ -94,7 +95,8 @@ const RunFestPage = () => {
         
         {/* Full Width Cinematic Image */}
         <motion.div initial={{ scale: 0.95, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }} viewport={{ once: true }} style={{ width: '100%', height: isMobile ? '50vh' : '70vh', borderRadius: '4px', overflow: 'hidden' }}>
-          <img src="/runfest_story.png" alt="Exhausted Runner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          {/* OPTIMIZATION: Lazy load */}
+          <img src="/runfest_story.png" alt="Exhausted Runner" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </motion.div>
       </section>
 
@@ -125,10 +127,11 @@ const RunFestPage = () => {
       {/* ================= THE MEDAL (HARDWARE) ================= */}
       <section style={{ height: isMobile ? '70vh' : '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF', position: 'relative', overflow: 'hidden' }}>
         <motion.div initial={{ y: 100, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1.5, ease: 'easeOut' }} viewport={{ once: true }} style={{ position: 'absolute', zIndex: 1, top: isMobile ? '10%' : 'auto' }}>
+          {/* OPTIMIZATION: Lazy load */}
           <motion.img 
             animate={!isMobile ? { y: [-20, 20, -20], rotateZ: [-2, 2, -2] } : { y: [-10, 10, -10] }} 
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-            src="/runfest_medal.png" alt="RunFest Medal" style={{ width: isMobile ? '80vw' : 'clamp(300px, 40vw, 600px)', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.15))', maxWidth: '400px' }} 
+            src="/runfest_medal.png" alt="RunFest Medal" loading="lazy" decoding="async" style={{ width: isMobile ? '80vw' : 'clamp(300px, 40vw, 600px)', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.15))', maxWidth: '400px' }} 
           />
         </motion.div>
         
@@ -146,7 +149,8 @@ const RunFestPage = () => {
       <section style={{ ...styles.sectionPadding, backgroundColor: '#FAFAFA' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '40px' : '80px', alignItems: 'center' }}>
           <motion.div initial={{ x: isMobile ? 0 : -50, y: isMobile ? 50 : 0, opacity: 0 }} whileInView={{ x: 0, y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%' }}>
-            <img src="/runfest_tshirt.png" alt="Premium T-Shirt" style={{ width: '100%', borderRadius: '4px' }} />
+            {/* OPTIMIZATION: Lazy load */}
+            <img src="/runfest_tshirt.png" alt="Premium T-Shirt" loading="lazy" decoding="async" style={{ width: '100%', borderRadius: '4px' }} />
           </motion.div>
           <motion.div initial={{ x: isMobile ? 0 : 50, y: isMobile ? 50 : 0, opacity: 0 }} whileInView={{ x: 0, y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%' }}>
             <h2 style={styles.sectionHeading}>Built to<br/>breathe.</h2>
@@ -170,7 +174,8 @@ const RunFestPage = () => {
                 <p style={styles.sectionDesc}>Your time, locked in. A permanent mark of what you accomplished when nobody was watching.</p>
              </motion.div>
              <motion.div initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%', display: 'flex', justifyContent: 'center', order: isMobile ? 1 : 2 }}>
-               <img src="/runfest_certificate.png" alt="Certificate" style={{ width: isMobile ? '100%' : '80%', filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.08))', transform: 'rotate(2deg)' }} />
+               {/* OPTIMIZATION: Lazy load */}
+               <img src="/runfest_certificate.png" alt="Certificate" loading="lazy" decoding="async" style={{ width: isMobile ? '100%' : '80%', filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.08))', transform: 'rotate(2deg)' }} />
              </motion.div>
           </div>
 
@@ -181,7 +186,8 @@ const RunFestPage = () => {
                 <div style={{ width: '320px', height: '650px', backgroundColor: '#111827', borderRadius: '50px', padding: '12px', boxShadow: '0 40px 80px rgba(0,0,0,0.15)', transform: isMobile ? 'scale(0.8)' : 'scale(1)' }}>
                    <div style={{ width: '100%', height: '100%', backgroundColor: '#FFFFFF', borderRadius: '38px', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '60px' }}>
                       <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '18px', color: '#111827', marginBottom: '40px' }}>Trophy Cabinet</div>
-                      <img src="/runfest_badge.png" alt="3D Badge" style={{ width: '180px' }} />
+                      {/* OPTIMIZATION: Lazy load */}
+                      <img src="/runfest_badge.png" alt="3D Badge" loading="lazy" decoding="async" style={{ width: '180px' }} />
                       <div style={{ marginTop: '20px', fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '24px' }}>RunFest Finisher</div>
                    </div>
                 </div>
@@ -272,7 +278,8 @@ const RunFestPage = () => {
           
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp}>
             <div style={{ width: '100%', height: isMobile ? '350px' : '300px', overflow: 'hidden', borderRadius: '4px', marginBottom: '30px' }}>
-               <img src="/runfest_testimonial1.png" alt="Runner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+               {/* OPTIMIZATION: Lazy load */}
+               <img src="/runfest_testimonial1.png" alt="Runner" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: isMobile ? '28px' : '32px', color: '#111827', lineHeight: 1.2 }}>
               "I ran my fastest 10K because I wanted that medal. When it arrived, I wasn't disappointed."
@@ -282,7 +289,8 @@ const RunFestPage = () => {
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: isMobile ? 0 : 0.2 }}>
             <div style={{ width: '100%', height: isMobile ? '350px' : '300px', overflow: 'hidden', borderRadius: '4px', marginBottom: '30px' }}>
-               <img src="/runfest_testimonial2.png" alt="Runner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+               {/* OPTIMIZATION: Lazy load */}
+               <img src="/runfest_testimonial2.png" alt="Runner" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: isMobile ? '28px' : '32px', color: '#111827', lineHeight: 1.2 }}>
               "No crowds. No starting gun. Just me, the road, and a goal. The gear is legitimately good."
