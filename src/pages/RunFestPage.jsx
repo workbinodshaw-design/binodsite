@@ -49,7 +49,7 @@ const RunFestPage = () => {
 
   return (
     <div style={styles.bg}>
-      <SEO title="RUNFEST 26 | CastFlow" description="India's most premium virtual running experience." />
+      <SEO title="RUNFEST 26 | CastFlow" description="A race against yourself, on your own terms." />
 
       {/* ================= HERO (100VH) ================= */}
       <section style={{ position: 'relative', width: '100vw', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
@@ -62,16 +62,16 @@ const RunFestPage = () => {
         <motion.div style={{ zIndex: 1, textAlign: 'center', opacity: heroOpacity, padding: '0 20px', width: '100%' }} initial="hidden" animate="visible" variants={stagger}>
           <div style={styles.bgNumber}>26</div>
           <motion.h1 variants={revealUp} style={styles.heroTitle}>RUNFEST</motion.h1>
-          <motion.div variants={revealUp} style={styles.tagline}>Run Beyond Limits.</motion.div>
-          <motion.div variants={revealUp} style={styles.subheading}>India's most premium virtual running experience.</motion.div>
+          <motion.div variants={revealUp} style={styles.tagline}>Move. Breathe. Conquer.</motion.div>
+          <motion.div variants={revealUp} style={styles.subheading}>A race against yourself, on your own terms.</motion.div>
           
           <motion.a variants={revealUp} href="#register" style={{ ...styles.btn, ...styles.btnPrimary, marginTop: '20px' }}>
-            Join RunFest
+            Commit now
           </motion.a>
           
           <motion.div variants={revealUp} style={{ marginTop: '40px', fontFamily: '"Inter", sans-serif', fontSize: '14px', color: '#4B5563', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10B981', display: 'inline-block' }}></span>
-            1,200+ runners already joined
+            1,200+ on the starting line
           </motion.div>
         </motion.div>
 
@@ -88,7 +88,7 @@ const RunFestPage = () => {
       <section style={{ ...styles.sectionPadding, backgroundColor: '#FFFFFF' }}>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={revealUp} style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <h2 style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 500, fontSize: isMobile ? '48px' : 'clamp(40px, 8vw, 100px)', lineHeight: 1, color: '#111827', margin: isMobile ? '0 0 50px 0' : '0 0 100px 0', letterSpacing: '-1px' }}>
-            "Every Finish<br/>Has A Story."
+            "You against<br/>yesterday."
           </h2>
         </motion.div>
         
@@ -101,20 +101,23 @@ const RunFestPage = () => {
       {/* ================= DISTANCE SELECTOR ================= */}
       <section style={{ ...styles.sectionPadding, backgroundColor: '#FAFAFA' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={styles.sectionHeading}>Choose Your Distance</motion.h2>
+          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={styles.sectionHeading}>Pick your battle.</motion.h2>
           
           <div style={{ marginTop: isMobile ? '40px' : '80px', display: 'flex', overflowX: 'auto', gap: isMobile ? '20px' : '40px', paddingBottom: '40px', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', scrollSnapType: 'x mandatory' }}>
-            {['3K', '5K', '10K', '21K', '42K'].map((dist, i) => (
-              <motion.div key={dist} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: i * 0.1 }}
-                whileHover={!isMobile ? { scale: 1.05, x: 10 } : {}}
-                style={{ 
-                  flex: '0 0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                  width: isMobile ? '220px' : '300px', height: isMobile ? '150px' : '200px', borderBottom: '2px solid #E5E7EB', cursor: 'pointer', scrollSnapAlign: 'start'
-                }}>
-                <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 800, fontSize: isMobile ? '60px' : '80px', letterSpacing: '-2px', color: '#111827', lineHeight: 1 }}>{dist}</div>
-                <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', marginTop: '10px' }}>The {dist === '21K' ? 'Half Marathon' : dist === '42K' ? 'Full Marathon' : 'Challenge'}</div>
-              </motion.div>
-            ))}
+            {['3K', '5K', '10K', '21K', '42K'].map((dist, i) => {
+              const subtitles = { '3K': 'The warm-up', '5K': 'The sprint', '10K': 'The milestone', '21K': 'The half', '42K': 'The marathon' };
+              return (
+                <motion.div key={dist} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: i * 0.1 }}
+                  whileHover={!isMobile ? { scale: 1.05, x: 10 } : {}}
+                  style={{ 
+                    flex: '0 0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center',
+                    width: isMobile ? '220px' : '300px', height: isMobile ? '150px' : '200px', borderBottom: '2px solid #E5E7EB', cursor: 'pointer', scrollSnapAlign: 'start'
+                  }}>
+                  <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 800, fontSize: isMobile ? '60px' : '80px', letterSpacing: '-2px', color: '#111827', lineHeight: 1 }}>{dist}</div>
+                  <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', marginTop: '10px' }}>{subtitles[dist]}</div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -131,10 +134,10 @@ const RunFestPage = () => {
         
         <div style={{ position: 'absolute', bottom: isMobile ? '5%' : '10%', zIndex: 2, textAlign: 'center', width: '100%', padding: '0 20px' }}>
           <motion.h3 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: isMobile ? '18px' : '24px', letterSpacing: '2px', textTransform: 'uppercase', color: '#111827' }}>
-            This isn't plastic.
+            Heavy metal.
           </motion.h3>
           <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionDesc, margin: '10px auto 0 auto' }}>
-            This is your achievement. Die-cast heavy metal.
+            Earned, not given. Cast from solid steel to mark the miles.
           </motion.p>
         </div>
       </section>
@@ -146,9 +149,9 @@ const RunFestPage = () => {
             <img src="/runfest_tshirt.png" alt="Premium T-Shirt" style={{ width: '100%', borderRadius: '4px' }} />
           </motion.div>
           <motion.div initial={{ x: isMobile ? 0 : 50, y: isMobile ? 50 : 0, opacity: 0 }} whileInView={{ x: 0, y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%' }}>
-            <h2 style={styles.sectionHeading}>Aero-Dry<br/>Performance.</h2>
+            <h2 style={styles.sectionHeading}>Built to<br/>breathe.</h2>
             <p style={styles.sectionDesc}>
-              Designed for the long run. Moisture-wicking technology combined with an ultra-lightweight weave. It doesn't just look premium; it performs.
+              Woven for the hottest days and the longest routes. It disappears when you move, so you can focus on the road ahead.
             </p>
           </motion.div>
         </div>
@@ -163,8 +166,8 @@ const RunFestPage = () => {
           {/* Certificate */}
           <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '40px' : '60px', alignItems: 'center' }}>
              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ width: isMobile ? '100%' : '50%', order: isMobile ? 2 : 1 }}>
-                <h2 style={styles.sectionHeading}>Official<br/>Verification.</h2>
-                <p style={styles.sectionDesc}>Your personalized digital certificate, proving your time and dedication to the world.</p>
+                <h2 style={styles.sectionHeading}>On the<br/>record.</h2>
+                <p style={styles.sectionDesc}>Your time, locked in. A permanent mark of what you accomplished when nobody was watching.</p>
              </motion.div>
              <motion.div initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%', display: 'flex', justifyContent: 'center', order: isMobile ? 1 : 2 }}>
                <img src="/runfest_certificate.png" alt="Certificate" style={{ width: isMobile ? '100%' : '80%', filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.08))', transform: 'rotate(2deg)' }} />
@@ -184,8 +187,8 @@ const RunFestPage = () => {
                 </div>
              </motion.div>
              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ width: isMobile ? '100%' : '50%' }}>
-                <h2 style={styles.sectionHeading}>The Digital<br/>Flex.</h2>
-                <p style={styles.sectionDesc}>Unlock your 3D digital badge. Show it off on your profile, share it on socials, wear it as a mark of honor.</p>
+                <h2 style={styles.sectionHeading}>Carry the<br/>badge.</h2>
+                <p style={styles.sectionDesc}>Unlock a 3D emblem for your digital life. Visual proof that you crossed the finish line.</p>
              </motion.div>
           </div>
 
@@ -199,7 +202,7 @@ const RunFestPage = () => {
             <div style={{ position: 'absolute', top: '15px', left: 0, width: isMobile ? '200%' : '100%', height: '2px', backgroundColor: '#E5E7EB', zIndex: 0 }}></div>
             <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 1.5, ease: 'easeInOut' }} viewport={{ once: true }} style={{ position: 'absolute', top: '15px', left: 0, width: isMobile ? '200%' : '100%', height: '2px', backgroundColor: '#111827', zIndex: 1, originX: 0 }}></motion.div>
 
-            {['Register', 'Run Anywhere', 'Upload Proof', 'Verification', 'Gear Delivered'].map((step, i) => (
+            {['Sign up', 'Lace up', 'Log it', 'Verified', 'Unbox'].map((step, i) => (
               <div key={i} style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: isMobile ? '180px' : '20%', flexShrink: 0 }}>
                 <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#111827', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '14px', marginBottom: '20px', border: '4px solid #FAFAFA' }}>{i + 1}</div>
                 <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', color: '#111827', textAlign: 'center' }}>{step}</div>
@@ -212,18 +215,18 @@ const RunFestPage = () => {
       {/* ================= REGISTRATION (APPLE STORE STYLE) ================= */}
       <section id="register" style={{ ...styles.sectionPadding, backgroundColor: '#FFFFFF' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, textAlign: 'center', marginBottom: isMobile ? '40px' : '80px' }}>The Passes</motion.h2>
+          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, textAlign: 'center', marginBottom: isMobile ? '40px' : '80px' }}>Choose your tier.</motion.h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '30px' }}>
             
             {/* Digital Pass */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ backgroundColor: '#F9FAFB', borderRadius: '24px', padding: isMobile ? '30px 20px' : '50px 40px', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>Digital Pass</div>
-              <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', margin: '10px 0 30px 0' }}>For the pure runner.</div>
+              <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>Digital</div>
+              <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', margin: '10px 0 30px 0' }}>Just the race.</div>
               <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', marginBottom: '40px' }}>₹349</div>
               
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 50px 0', flex: 1 }}>
-                {['E-Certificate', 'Digital Badge', 'Global Leaderboard'].map((f, i) => (
+                {['Race entry', 'Digital certificate', 'Global ranking'].map((f, i) => (
                   <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', padding: '10px 0', borderBottom: '1px solid #E5E7EB' }}>{f}</li>
                 ))}
               </ul>
@@ -233,12 +236,12 @@ const RunFestPage = () => {
             {/* Finisher Pass */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: isMobile ? 0 : 0.1 }} style={{ backgroundColor: '#F9FAFB', borderRadius: '24px', padding: isMobile ? '40px 20px' : '50px 40px', display: 'flex', flexDirection: 'column', position: 'relative', border: '2px solid #111827' }}>
               <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#0EA5E9', color: '#FFF', padding: '6px 16px', borderRadius: '12px', fontFamily: '"Inter", sans-serif', fontSize: '12px', fontWeight: 600, whiteSpace: 'nowrap' }}>POPULAR</div>
-              <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>Finisher Pass</div>
-              <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', margin: '10px 0 30px 0' }}>The complete experience.</div>
+              <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>The Hardware</div>
+              <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', margin: '10px 0 30px 0' }}>Leave with proof.</div>
               <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', marginBottom: '40px' }}>₹799</div>
               
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 50px 0', flex: 1 }}>
-                {['Heavy-Metal Medal', 'Performance T-Shirt', 'Printed Certificate', 'Free Shipping (India)'].map((f, i) => (
+                {['Solid metal medal', 'Performance tee', 'Printed certificate', 'Delivered to your door'].map((f, i) => (
                   <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', padding: '10px 0', borderBottom: '1px solid #E5E7EB' }}>{f}</li>
                 ))}
               </ul>
@@ -247,12 +250,12 @@ const RunFestPage = () => {
 
             {/* VIP Pass */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: isMobile ? 0 : 0.2 }} style={{ backgroundColor: '#F9FAFB', borderRadius: '24px', padding: isMobile ? '30px 20px' : '50px 40px', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>VIP Pass</div>
-              <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', margin: '10px 0 30px 0' }}>For the elite.</div>
+              <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>VIP</div>
+              <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', margin: '10px 0 30px 0' }}>The full treatment.</div>
               <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', marginBottom: '40px' }}>₹999</div>
               
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 50px 0', flex: 1 }}>
-                {['Everything in Finisher', 'Priority 48hr Dispatch', 'VIP Golden Badge', 'Exclusive Community Access'].map((f, i) => (
+                {['All hardware rewards', 'Skip the shipping queue', 'Gold-tier digital badge', 'Private community invite'].map((f, i) => (
                   <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', padding: '10px 0', borderBottom: '1px solid #E5E7EB' }}>{f}</li>
                 ))}
               </ul>
@@ -272,7 +275,7 @@ const RunFestPage = () => {
                <img src="/runfest_testimonial1.png" alt="Runner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: isMobile ? '28px' : '32px', color: '#111827', lineHeight: 1.2 }}>
-              "The most premium virtual event I've ever participated in. The medal quality is insane."
+              "I ran my fastest 10K because I wanted that medal. When it arrived, I wasn't disappointed."
             </div>
             <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', color: '#6B7280', marginTop: '15px' }}>— Rahul K., 10K Finisher</div>
           </motion.div>
@@ -282,7 +285,7 @@ const RunFestPage = () => {
                <img src="/runfest_testimonial2.png" alt="Runner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: isMobile ? '28px' : '32px', color: '#111827', lineHeight: 1.2 }}>
-              "I loved that I could run on my own schedule. The gear arrived perfectly packaged."
+              "No crowds. No starting gun. Just me, the road, and a goal. The gear is legitimately good."
             </div>
             <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', color: '#6B7280', marginTop: '15px' }}>— Priya S., Half Marathon</div>
           </motion.div>
@@ -294,10 +297,10 @@ const RunFestPage = () => {
       <section style={{ padding: isMobile ? '100px 5vw' : '200px 5vw', backgroundColor: '#111827', textAlign: 'center' }}>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp}>
            <h2 style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: isMobile ? '40px' : 'clamp(40px, 8vw, 80px)', color: '#FFFFFF', margin: '0 0 40px 0', letterSpacing: '-1px' }}>
-             Ready To Become<br/>A Finisher?
+             The starting line<br/>is waiting.
            </h2>
            <a href="#register" style={{ ...styles.btn, ...styles.btnGlowing, padding: '20px 50px', fontSize: '18px' }}>
-             Claim Your Spot
+             Commit now
            </a>
         </motion.div>
       </section>
