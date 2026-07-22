@@ -21,7 +21,7 @@ const RunFestPage = () => {
   const styles = {
     bg: { backgroundColor: '#FFFFFF', color: '#111827', overflowX: 'hidden' },
     heroTitle: { fontFamily: '"Clash Display", sans-serif', fontWeight: 800, fontSize: isMobile ? '52px' : 'clamp(90px, 10vw, 140px)', letterSpacing: '-2px', lineHeight: 0.9, textTransform: 'uppercase', margin: 0 },
-    bgNumber: { position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)', fontFamily: '"Clash Display", sans-serif', fontWeight: 900, fontSize: isMobile ? '180px' : 'clamp(220px, 20vw, 320px)', color: 'transparent', WebkitTextStroke: '2px #F3F4F6', opacity: 1, zIndex: 0, pointerEvents: 'none' },
+    bgNumber: { position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)', fontFamily: '"Clash Display", sans-serif', fontWeight: 900, fontSize: isMobile ? '180px' : 'clamp(220px, 20vw, 320px)', opacity: 0.15, zIndex: 0, pointerEvents: 'none' },
     tagline: { fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400, fontSize: isMobile ? '24px' : '30px', color: '#4B5563', margin: '20px 0' },
     subheading: { fontFamily: '"Inter", sans-serif', fontWeight: 500, fontSize: isMobile ? '18px' : '22px', color: '#6B7280', margin: '0 0 40px 0' },
     sectionHeading: { fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: isMobile ? '40px' : '72px', margin: '0 0 20px 0', letterSpacing: '-1px', lineHeight: 1.1 },
