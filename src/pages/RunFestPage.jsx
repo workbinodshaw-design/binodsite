@@ -1,11 +1,19 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import { Globe, Award, FileText, Truck, Lock, Shield, Users, MapPin, CheckCircle, ChevronDown, Plus, Minus } from 'lucide-react';
 
 const RunFestPage = () => {
   // Mobile detection
   const [isMobile, setIsMobile] = useState(false);
+  const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [countdownState, setCountdownState] = useState('Registration Closes In');
+  const [registeredCount, setRegisteredCount] = useState(1243);
+  const [openFaq, setOpenFaq] = useState(null);
+  
+  // Sticky CTA visibility
+  const [showStickyCTA, setShowStickyCTA] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -14,12 +22,84 @@ const RunFestPage = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Scroll listener for Sticky CTA
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 800) setShowStickyCTA(true);
+      else setShowStickyCTA(false);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Fake live counter effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (Math.random() > 0.7) {
+        setRegisteredCount(prev => prev + 1);
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Countdown Logic
+  useEffect(() => {
+    const updateCountdown = () => {
+      const now = new Date();
+      
+      const targetRegClose = new Date('2026-11-18T23:59:59+05:30');
+      const targetRunStart = new Date('2026-11-29T00:00:00+05:30');
+      const targetRunEnd = new Date('2026-12-05T23:59:59+05:30');
+      const targetProofEnd = new Date('2026-12-06T23:59:59+05:30');
+      
+      let targetDate;
+      let stateText = '';
+
+      if (now < targetRegClose) {
+        targetDate = targetRegClose;
+        stateText = 'Registration Closes In';
+      } else if (now >= targetRegClose && now < targetRunStart) {
+        targetDate = targetRunStart; // We can count down to start, but prompt says "Registration Closed"
+        stateText = 'Registration Closed';
+      } else if (now >= targetRunStart && now <= targetRunEnd) {
+        targetDate = null;
+        stateText = 'RunFest is LIVE';
+      } else if (now > targetRunEnd && now <= targetProofEnd) {
+        targetDate = null;
+        stateText = 'Proof Submission Open';
+      } else if (now > targetProofEnd) {
+        targetDate = null;
+        stateText = 'Verification in Progress';
+      }
+
+      setCountdownState(stateText);
+
+      if (targetDate && stateText === 'Registration Closes In') {
+        const difference = targetDate - now;
+        if (difference > 0) {
+          setCountdown({
+            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+            minutes: Math.floor((difference / 1000 / 60) % 60),
+            seconds: Math.floor((difference / 1000) % 60)
+          });
+        }
+      } else {
+        setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   // Global Scroll for parallax
   const { scrollYProgress } = useScroll();
   
-  // Custom Styles matching the exact typography system
+  // Custom Styles
   const styles = {
-    bg: { backgroundColor: '#FFFFFF', color: '#111827', overflowX: 'hidden' },
+    bg: { backgroundColor: '#FFFFFF', color: '#111827', overflowX: 'hidden', position: 'relative' },
     heroTitle: { fontFamily: '"Clash Display", sans-serif', fontWeight: 800, fontSize: isMobile ? '52px' : 'clamp(90px, 10vw, 140px)', letterSpacing: '-2px', lineHeight: 0.9, textTransform: 'uppercase', margin: 0 },
     bgNumber: { position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)', fontFamily: '"Clash Display", sans-serif', fontWeight: 900, fontSize: isMobile ? '180px' : 'clamp(220px, 20vw, 320px)', opacity: 0.15, zIndex: 0, pointerEvents: 'none' },
     tagline: { fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400, fontSize: isMobile ? '24px' : '30px', color: '#4B5563', margin: '20px 0' },
@@ -28,6 +108,7 @@ const RunFestPage = () => {
     sectionDesc: { fontFamily: '"Inter", sans-serif', fontWeight: 400, fontSize: '18px', lineHeight: 1.8, maxWidth: '700px', color: '#4B5563' },
     btn: { fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', borderRadius: '999px', padding: '16px 32px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', textDecoration: 'none', transition: 'all 0.3s ease', width: isMobile ? '100%' : 'auto' },
     btnPrimary: { backgroundColor: '#111827', color: '#FFFFFF', border: '1px solid #111827' },
+    btnSecondary: { backgroundColor: '#FFFFFF', color: '#111827', border: '1px solid #E5E7EB' },
     btnGlowing: { backgroundColor: '#F97316', color: '#FFFFFF', border: 'none', boxShadow: '0 10px 30px rgba(249, 115, 22, 0.4)' },
     sectionPadding: { padding: isMobile ? '80px 5vw' : '150px 5vw' }
   };
@@ -47,12 +128,30 @@ const RunFestPage = () => {
     visible: { opacity: 1, transition: { staggerChildren: isMobile ? 0.05 : 0.1 } }
   };
 
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const faqs = [
+    { q: "Is this a virtual marathon?", a: "Yes. RUNFEST is a fully virtual experience, meaning you can run your chosen distance on your own schedule during the event window." },
+    { q: "Can I participate from anywhere in India?", a: "Absolutely. Whether you're in a metro city, a small town, or a remote location, as long as you have a GPS tracking app, you can run and submit your proof." },
+    { q: "Can I walk instead of running?", a: "Yes! We encourage all levels of fitness. Walking is completely acceptable and counts towards your distance." },
+    { q: "Which apps are accepted?", a: "We accept activity links or screenshots from Strava, Google Fit, Garmin, Adidas Running, Nike Run Club, or any credible GPS tracking application." },
+    { q: "How do I upload proof?", a: "A unique submission link will be sent to your registered email address on November 29. You simply upload a screenshot of your activity showing date, distance, and time." },
+    { q: "When will certificates be issued?", a: "Your personalized official digital certificate will be emailed to you within 24–48 hours after your proof is verified." },
+    { q: "When will medals and T-shirts be shipped?", a: "Merchandise dispatch begins on 10 December 2026. Standard delivery times across India apply once dispatched." },
+    { q: "Is shipping included?", a: "Yes! Free shipping across India is included in both the Standard and Premium tiers." },
+    { q: "Can I change my T-shirt size?", a: "T-shirt sizes can only be changed before registration closes on 18 November 2026 by contacting our support team." },
+    { q: "Can I transfer my registration?", a: "Registrations are strictly non-transferable." },
+    { q: "What is the refund policy?", a: "Tickets are non-refundable. Please ensure you are available during the running window before committing." }
+  ];
+
   return (
     <div style={styles.bg}>
-      <SEO title="RUNFEST 26 | CastFlow" description="A race against yourself, on your own terms." />
+      <SEO title="RUNFEST 2026 | CastFlow" description="India's Premium Virtual Marathon. Run Anywhere. Run Anytime. One Finish Line." />
 
       {/* ================= HERO (100VH) ================= */}
-      <section style={{ position: 'relative', width: '100vw', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
+      <header style={{ position: 'relative', width: '100vw', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', paddingTop: isMobile ? '80px' : '0' }}>
         {/* Unobstructed Background */}
         <motion.div style={{ position: 'absolute', inset: 0, zIndex: -1, y: heroY }}>
           {/* OPTIMIZATION: Eager load hero image with high priority */}
@@ -60,22 +159,34 @@ const RunFestPage = () => {
         </motion.div>
 
         {/* Content */}
-        <motion.div style={{ zIndex: 1, textAlign: 'center', opacity: heroOpacity, padding: '0 20px', width: '100%' }} initial="hidden" animate="visible" variants={stagger}>
+        <motion.div style={{ zIndex: 1, textAlign: 'center', opacity: heroOpacity, padding: '0 20px', width: '100%', maxWidth: '1000px' }} initial="hidden" animate="visible" variants={stagger}>
           <div style={styles.bgNumber}>26</div>
 
-          {/* Coming Soon Pill */}
-          <motion.div variants={revealUp} style={{ display: 'inline-flex', alignItems: 'center', backgroundColor: '#F3F4F6', padding: '8px 16px', borderRadius: '99px', marginBottom: '30px' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#F59E0B', marginRight: '10px' }}></span>
-            <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '14px', fontWeight: 600, color: '#374151' }}>Coming Soon • Page is under construction</span>
+          <motion.div variants={revealUp} style={{ display: 'inline-flex', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', padding: '8px 16px', borderRadius: '99px', marginBottom: '20px', border: '1px solid #E5E7EB' }}>
+            <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '13px', fontWeight: 600, color: '#111827', textTransform: 'uppercase', letterSpacing: '1px' }}>29 Nov – 5 Dec 2026</span>
           </motion.div>
 
           <motion.h1 variants={revealUp} style={styles.heroTitle}>RUNFEST</motion.h1>
-          <motion.div variants={revealUp} style={styles.tagline}>Move. Breathe. Conquer.</motion.div>
-          <motion.div variants={revealUp} style={styles.subheading}>A race against yourself, on your own terms.</motion.div>
+          <motion.div variants={revealUp} style={styles.tagline}>India's Premium Virtual Marathon</motion.div>
+          <motion.div variants={revealUp} style={styles.subheading}>Run Anywhere. Run Anytime. One Finish Line.</motion.div>
           
-          <motion.a variants={revealUp} href="#" onClick={(e) => e.preventDefault()} style={{ ...styles.btn, backgroundColor: '#E5E7EB', color: '#9CA3AF', cursor: 'not-allowed', marginTop: '20px' }}>
-            Registrations Opening Soon
-          </motion.a>
+          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '15px', justifyContent: 'center', marginTop: '30px' }}>
+            <a href="#register" style={{ ...styles.btn, ...styles.btnPrimary }}>Register Now</a>
+            <a href="#timeline" style={{ ...styles.btn, ...styles.btnSecondary }}>Learn More</a>
+          </motion.div>
+          
+          <motion.div variants={revealUp} style={{ marginTop: '30px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: isMobile ? '15px' : '30px', padding: '0 10px' }}>
+             {[
+               { icon: <MapPin size={16}/>, text: 'PAN India Event' },
+               { icon: <Award size={16}/>, text: 'Premium Finisher Kit' },
+               { icon: <FileText size={16}/>, text: 'Official Certificate' },
+               { icon: <Truck size={16}/>, text: 'Free Shipping' }
+             ].map((badge, i) => (
+               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '12px' : '14px', color: '#374151', fontWeight: 500, backgroundColor: 'rgba(255,255,255,0.7)', padding: '6px 12px', borderRadius: '8px' }}>
+                 {badge.icon} {badge.text}
+               </div>
+             ))}
+          </motion.div>
         </motion.div>
 
         {/* Scroll Indicator */}
@@ -85,6 +196,42 @@ const RunFestPage = () => {
         >
           <div style={{ width: '1px', height: '40px', backgroundColor: '#111827' }}></div>
         </motion.div>
+      </header>
+
+      {/* ================= COUNTDOWN SECTION ================= */}
+      <section style={{ backgroundColor: '#111827', padding: isMobile ? '50px 20px' : '80px 20px', color: '#FFF', textAlign: 'center', borderBottom: '1px solid #1F2937' }}>
+         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp}>
+            <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '14px', textTransform: 'uppercase', letterSpacing: '2px', color: '#9CA3AF', marginBottom: '20px' }}>
+              {countdownState}
+            </div>
+            
+            {countdownState === 'Registration Closes In' ? (
+              <div style={{ display: 'flex', justifyContent: 'center', gap: isMobile ? '15px' : '40px' }}>
+                {[
+                  { label: 'Days', value: countdown.days },
+                  { label: 'Hours', value: countdown.hours },
+                  { label: 'Minutes', value: countdown.minutes },
+                  { label: 'Seconds', value: countdown.seconds }
+                ].map((unit, i) => (
+                  <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: isMobile ? '60px' : '100px' }}>
+                    <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: isMobile ? '40px' : '80px', lineHeight: 1, letterSpacing: '-1px' }}>
+                      {String(unit.value).padStart(2, '0')}
+                    </div>
+                    <div style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '12px' : '14px', color: '#6B7280', marginTop: '10px' }}>{unit.label}</div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: isMobile ? '40px' : '80px', lineHeight: 1, letterSpacing: '-1px', color: '#10B981' }}>
+                {countdownState}
+              </div>
+            )}
+            
+            <div style={{ marginTop: '30px', fontFamily: '"Inter", sans-serif', fontSize: '14px', color: '#9CA3AF', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10B981', display: 'inline-block' }}></span>
+              {registeredCount.toLocaleString()} runners registered so far
+            </div>
+         </motion.div>
       </section>
 
       {/* ================= THE STORY ================= */}
@@ -108,8 +255,8 @@ const RunFestPage = () => {
           <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={styles.sectionHeading}>Pick your battle.</motion.h2>
           
           <div style={{ marginTop: isMobile ? '40px' : '80px', display: 'flex', overflowX: 'auto', gap: isMobile ? '20px' : '40px', paddingBottom: '40px', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', scrollSnapType: 'x mandatory' }}>
-            {['3K', '5K', '10K', '21K', '42K'].map((dist, i) => {
-              const subtitles = { '3K': 'The warm-up', '5K': 'The sprint', '10K': 'The milestone', '21K': 'The half', '42K': 'The marathon' };
+            {['3K', '5K', '10K', '21K'].map((dist, i) => {
+              const subtitles = { '3K': 'Perfect for Beginners', '5K': 'Most Popular', '10K': 'Challenge Yourself', '21K': 'Half Marathon' };
               return (
                 <motion.div key={dist} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: i * 0.1 }}
                   whileHover={!isMobile ? { scale: 1.05, x: 10 } : {}}
@@ -126,6 +273,65 @@ const RunFestPage = () => {
         </div>
       </section>
 
+      {/* ================= HOW IT WORKS ================= */}
+      <section style={{ ...styles.sectionPadding, backgroundColor: '#FFFFFF' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, textAlign: 'center', marginBottom: '80px' }}>How it works.</motion.h2>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)', gap: isMobile ? '40px' : '30px' }}>
+            {[
+              { title: 'Register', desc: 'Choose your preferred distance and package.', icon: '1' },
+              { title: 'Run Anywhere', desc: 'Complete your selected distance anytime between 29 Nov and 5 Dec.', icon: '2' },
+              { title: 'Upload Proof', desc: 'Submit activity from Strava, Google Fit, Garmin, Adidas Running, Nike Run Club or any GPS app.', icon: '3' },
+              { title: 'Become a Finisher', desc: 'Receive your digital certificate and, if applicable, your official medal and T-shirt.', icon: '4' }
+            ].map((step, i) => (
+              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: i * 0.1 }} style={{ position: 'relative' }}>
+                 {!isMobile && i !== 3 && (
+                   <div style={{ position: 'absolute', top: '25px', left: '60px', right: '-40px', height: '1px', backgroundColor: '#E5E7EB', zIndex: 0 }}></div>
+                 )}
+                 <div style={{ width: '50px', height: '50px', borderRadius: '50%', backgroundColor: '#111827', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '20px', marginBottom: '20px', position: 'relative', zIndex: 1 }}>
+                   {step.icon}
+                 </div>
+                 <h3 style={{ fontFamily: '"Inter", sans-serif', fontWeight: 700, fontSize: '20px', color: '#111827', marginBottom: '10px' }}>{step.title}</h3>
+                 <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '15px', color: '#6B7280', lineHeight: 1.6 }}>{step.desc}</p>
+                 
+                 {isMobile && i !== 3 && (
+                   <div style={{ textAlign: 'center', margin: '20px 0', color: '#D1D5DB' }}>↓</div>
+                 )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= EVENT TIMELINE ================= */}
+      <section id="timeline" style={{ padding: isMobile ? '80px 5vw' : '120px 5vw', backgroundColor: '#FAFAFA' }}>
+         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, fontSize: isMobile ? '32px' : '48px', marginBottom: '60px' }}>Event Timeline</motion.h2>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', position: 'relative' }}>
+               <div style={{ position: 'absolute', left: '15px', top: '10px', bottom: '10px', width: '2px', backgroundColor: '#E5E7EB', zIndex: 0 }}></div>
+               
+               {[
+                 { event: 'Registration Opens', date: 'LIVE NOW' },
+                 { event: 'Registration Closes', date: '18 November 2026 (11:59 PM IST)' },
+                 { event: 'Run Window', date: '29 November – 5 December 2026', highlight: true },
+                 { event: 'Proof Submission Deadline', date: 'Until 6 December 2026 (11:59 PM IST)' },
+                 { event: 'Verification Process', date: '7–10 December 2026' },
+                 { event: 'Merchandise Dispatch', date: 'Starting 10 December 2026' }
+               ].map((item, i) => (
+                 <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: i * 0.1 }} style={{ display: 'flex', gap: '30px', position: 'relative', zIndex: 1 }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: item.highlight ? '#F97316' : '#111827', border: '4px solid #FAFAFA', flexShrink: 0, marginTop: '2px' }}></div>
+                    <div>
+                       <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 700, fontSize: '18px', color: '#111827', marginBottom: '4px' }}>{item.event}</div>
+                       <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '15px', color: item.highlight ? '#F97316' : '#6B7280', fontWeight: item.highlight ? 600 : 400 }}>{item.date}</div>
+                    </div>
+                 </motion.div>
+               ))}
+            </div>
+         </div>
+      </section>
+
       {/* ================= THE MEDAL (HARDWARE) ================= */}
       <section style={{ height: isMobile ? '70vh' : '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF', position: 'relative', overflow: 'hidden' }}>
         <motion.div initial={{ y: 100, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1.5, ease: 'easeOut' }} viewport={{ once: true }} style={{ position: 'absolute', zIndex: 1, top: isMobile ? '10%' : 'auto' }}>
@@ -139,10 +345,10 @@ const RunFestPage = () => {
         
         <div style={{ position: 'absolute', bottom: isMobile ? '5%' : '10%', zIndex: 2, textAlign: 'center', width: '100%', padding: '0 20px' }}>
           <motion.h3 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: isMobile ? '18px' : '24px', letterSpacing: '2px', textTransform: 'uppercase', color: '#111827' }}>
-            Heavy metal.
+            Premium Heavy Metal Finisher Medal
           </motion.h3>
           <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionDesc, margin: '10px auto 0 auto' }}>
-            Earned, not given. Cast from solid steel to mark the miles.
+            Crafted using premium zinc alloy with an exclusive RUNFEST 2026 design. Included only in the Premium Plan.
           </motion.p>
         </div>
       </section>
@@ -155,10 +361,29 @@ const RunFestPage = () => {
             <img src="/runfest_tshirt.png" alt="Premium T-Shirt" loading="lazy" decoding="async" style={{ width: '100%', borderRadius: '4px' }} />
           </motion.div>
           <motion.div initial={{ x: isMobile ? 0 : 50, y: isMobile ? 50 : 0, opacity: 0 }} whileInView={{ x: 0, y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%' }}>
-            <h2 style={styles.sectionHeading}>Built to<br/>breathe.</h2>
-            <p style={styles.sectionDesc}>
-              Woven for the hottest days and the longest routes. It disappears when you move, so you can focus on the road ahead.
-            </p>
+            <h2 style={styles.sectionHeading}>Premium Dry-Fit Running T-Shirt</h2>
+            
+            <ul style={{ listStyle: 'none', padding: 0, margin: '20px 0', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+              {['Lightweight', 'Breathable Fabric', 'Athletic Fit', 'Moisture Wicking'].map((feature, i) => (
+                 <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <CheckCircle size={16} color="#111827" /> {feature}
+                 </li>
+              ))}
+            </ul>
+            <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '15px', color: '#6B7280', marginBottom: '20px' }}>* Free Shipping Included. Available in Standard and Premium registrations.</p>
+            
+            <div style={{ backgroundColor: '#FFF', border: '1px solid #E5E7EB', borderRadius: '12px', padding: '20px', marginTop: '30px' }}>
+               <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '14px', textTransform: 'uppercase', marginBottom: '15px' }}>Size Chart (Chest in Inches)</div>
+               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '10px', textAlign: 'center' }}>
+                  {[{s: 'S', v: '36'}, {s: 'M', v: '38'}, {s: 'L', v: '40'}, {s: 'XL', v: '42'}, {s: 'XXL', v: '44'}].map((size, i) => (
+                    <div key={i}>
+                       <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 600, fontSize: '18px', color: '#111827' }}>{size.s}</div>
+                       <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '14px', color: '#6B7280' }}>{size.v}"</div>
+                    </div>
+                  ))}
+               </div>
+            </div>
+
           </motion.div>
         </div>
       </section>
@@ -172,8 +397,8 @@ const RunFestPage = () => {
           {/* Certificate */}
           <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '40px' : '60px', alignItems: 'center' }}>
              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ width: isMobile ? '100%' : '50%', order: isMobile ? 2 : 1 }}>
-                <h2 style={styles.sectionHeading}>On the<br/>record.</h2>
-                <p style={styles.sectionDesc}>Your time, locked in. A permanent mark of what you accomplished when nobody was watching.</p>
+                <h2 style={styles.sectionHeading}>Official Digital<br/>Finisher Certificate</h2>
+                <p style={styles.sectionDesc}>Every finisher receives a personalized certificate including participant name, selected distance, completion date and official event branding.</p>
              </motion.div>
              <motion.div initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%', display: 'flex', justifyContent: 'center', order: isMobile ? 1 : 2 }}>
                {/* OPTIMIZATION: Lazy load */}
@@ -195,111 +420,137 @@ const RunFestPage = () => {
                 </div>
              </motion.div>
              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ width: isMobile ? '100%' : '50%' }}>
-                <h2 style={styles.sectionHeading}>Carry the<br/>badge.</h2>
-                <p style={styles.sectionDesc}>Unlock a 3D emblem for your digital life. Visual proof that you crossed the finish line.</p>
+                <h2 style={styles.sectionHeading}>Digital<br/>Finisher Badge</h2>
+                <p style={styles.sectionDesc}>Instantly share your achievement on Instagram, WhatsApp, Facebook, LinkedIn and X.</p>
              </motion.div>
           </div>
 
         </div>
       </section>
 
-      {/* ================= TIMELINE ================= */}
-      <section style={{ ...styles.sectionPadding, backgroundColor: '#FAFAFA' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative', overflowX: 'auto', paddingBottom: '40px', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
-            <div style={{ position: 'absolute', top: '15px', left: 0, width: isMobile ? '200%' : '100%', height: '2px', backgroundColor: '#E5E7EB', zIndex: 0 }}></div>
-            <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 1.5, ease: 'easeInOut' }} viewport={{ once: true }} style={{ position: 'absolute', top: '15px', left: 0, width: isMobile ? '200%' : '100%', height: '2px', backgroundColor: '#111827', zIndex: 1, originX: 0 }}></motion.div>
-
-            {['Sign up', 'Lace up', 'Log it', 'Verified', 'Unbox'].map((step, i) => (
-              <div key={i} style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: isMobile ? '180px' : '20%', flexShrink: 0 }}>
-                <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#111827', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '14px', marginBottom: '20px', border: '4px solid #FAFAFA' }}>{i + 1}</div>
-                <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', color: '#111827', textAlign: 'center' }}>{step}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================= REGISTRATION (APPLE STORE STYLE) ================= */}
-      <section id="register" style={{ ...styles.sectionPadding, backgroundColor: '#FFFFFF' }}>
+      {/* ================= TRUST & PRICING ================= */}
+      <section id="register" style={{ ...styles.sectionPadding, backgroundColor: '#FAFAFA' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, textAlign: 'center', marginBottom: isMobile ? '40px' : '80px' }}>Choose your tier.</motion.h2>
+          
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ textAlign: 'center', marginBottom: '60px' }}>
+             <h2 style={styles.sectionHeading}>Choose your tier.</h2>
+             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '30px' }}>
+                {[
+                  { icon: <Lock size={16}/>, text: 'Secure Payments' },
+                  { icon: <MapPin size={16}/>, text: 'PAN India Participation' },
+                  { icon: <Award size={16}/>, text: 'Official Event' },
+                  { icon: <CheckCircle size={16}/>, text: 'Verified Finishers' },
+                  { icon: <FileText size={16}/>, text: 'Premium Merchandise' },
+                  { icon: <Truck size={16}/>, text: 'Free Shipping' }
+                ].map((trust, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: '"Inter", sans-serif', fontSize: '14px', color: '#4B5563', backgroundColor: '#FFF', padding: '8px 16px', borderRadius: '99px', border: '1px solid #E5E7EB' }}>
+                    {trust.icon} {trust.text}
+                  </div>
+                ))}
+             </div>
+          </motion.div>
 
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '30px' }}>
             
-            {/* Digital Pass */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ backgroundColor: '#F9FAFB', borderRadius: '24px', padding: isMobile ? '30px 20px' : '50px 40px', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>Digital</div>
-              <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', margin: '10px 0 30px 0' }}>Just the race.</div>
-              <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', marginBottom: '40px' }}>₹349</div>
+            {/* Basic Pass */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: isMobile ? '30px 20px' : '50px 40px', display: 'flex', flexDirection: 'column', border: '1px solid #E5E7EB' }}>
+              <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>BASIC</div>
+              <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', margin: '20px 0 40px 0' }}>₹299</div>
               
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 50px 0', flex: 1 }}>
-                {['Race entry', 'Digital certificate', 'Global ranking'].map((f, i) => (
-                  <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', padding: '10px 0', borderBottom: '1px solid #E5E7EB' }}>{f}</li>
+                {[
+                  { t: 'Official E-Certificate', inc: true },
+                  { t: 'Digital Finisher Badge', inc: true },
+                  { t: 'Finisher Listing', inc: true },
+                  { t: 'T-Shirt', inc: false },
+                  { t: 'Medal', inc: false }
+                ].map((f, i) => (
+                  <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: f.inc ? '#111827' : '#9CA3AF', padding: '12px 0', borderBottom: '1px solid #F3F4F6', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    {f.inc ? <CheckCircle size={18} color="#10B981"/> : <Minus size={18} color="#D1D5DB"/>} {f.t}
+                  </li>
                 ))}
               </ul>
-              <button disabled style={{ ...styles.btn, backgroundColor: '#E5E7EB', color: '#9CA3AF', border: 'none', width: '100%', cursor: 'not-allowed' }}>Coming Soon</button>
+              <button style={{ ...styles.btn, ...styles.btnSecondary, width: '100%' }}>Register Now</button>
             </motion.div>
 
-            {/* Finisher Pass */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: isMobile ? 0 : 0.1 }} style={{ backgroundColor: '#F9FAFB', borderRadius: '24px', padding: isMobile ? '40px 20px' : '50px 40px', display: 'flex', flexDirection: 'column', position: 'relative', border: '2px solid #111827' }}>
-              <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#0EA5E9', color: '#FFF', padding: '6px 16px', borderRadius: '12px', fontFamily: '"Inter", sans-serif', fontSize: '12px', fontWeight: 600, whiteSpace: 'nowrap' }}>POPULAR</div>
-              <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>The Hardware</div>
-              <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', margin: '10px 0 30px 0' }}>Leave with proof.</div>
-              <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', marginBottom: '40px' }}>₹799</div>
+            {/* Standard Pass */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: isMobile ? 0 : 0.1 }} style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: isMobile ? '40px 20px' : '50px 40px', display: 'flex', flexDirection: 'column', position: 'relative', border: '2px solid #111827', boxShadow: '0 20px 40px rgba(0,0,0,0.05)' }}>
+              <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#F97316', color: '#FFF', padding: '6px 16px', borderRadius: '12px', fontFamily: '"Inter", sans-serif', fontSize: '12px', fontWeight: 600, whiteSpace: 'nowrap' }}>MOST POPULAR</div>
+              <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>STANDARD</div>
+              <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', margin: '20px 0 40px 0' }}>₹820</div>
               
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 50px 0', flex: 1 }}>
-                {['Solid metal medal', 'Performance tee', 'Printed certificate', 'Delivered to your door'].map((f, i) => (
-                  <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', padding: '10px 0', borderBottom: '1px solid #E5E7EB' }}>{f}</li>
+                <li style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#111827', padding: '12px 0', borderBottom: '1px solid #F3F4F6', fontWeight: 600 }}>Everything in Basic +</li>
+                {[
+                  { t: 'Premium Dry-Fit T-Shirt', inc: true },
+                  { t: 'Free Shipping', inc: true },
+                  { t: 'Medal', inc: false }
+                ].map((f, i) => (
+                  <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: f.inc ? '#111827' : '#9CA3AF', padding: '12px 0', borderBottom: '1px solid #F3F4F6', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    {f.inc ? <CheckCircle size={18} color="#10B981"/> : <Minus size={18} color="#D1D5DB"/>} {f.t}
+                  </li>
                 ))}
               </ul>
-              <button disabled style={{ ...styles.btn, backgroundColor: '#E5E7EB', color: '#9CA3AF', border: 'none', width: '100%', cursor: 'not-allowed' }}>Coming Soon</button>
+              <button style={{ ...styles.btn, ...styles.btnPrimary, width: '100%' }}>Register Now</button>
             </motion.div>
 
-            {/* VIP Pass */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: isMobile ? 0 : 0.2 }} style={{ backgroundColor: '#F9FAFB', borderRadius: '24px', padding: isMobile ? '30px 20px' : '50px 40px', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>VIP</div>
-              <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', margin: '10px 0 30px 0' }}>The full treatment.</div>
-              <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', marginBottom: '40px' }}>₹999</div>
+            {/* Premium Pass */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: isMobile ? 0 : 0.2 }} style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: isMobile ? '30px 20px' : '50px 40px', display: 'flex', flexDirection: 'column', border: '1px solid #E5E7EB' }}>
+              <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827' }}>PREMIUM</div>
+              <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', margin: '20px 0 40px 0' }}>₹999</div>
               
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 50px 0', flex: 1 }}>
-                {['All hardware rewards', 'Skip the shipping queue', 'Gold-tier digital badge', 'Private community invite'].map((f, i) => (
-                  <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', padding: '10px 0', borderBottom: '1px solid #E5E7EB' }}>{f}</li>
+                <li style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#111827', padding: '12px 0', borderBottom: '1px solid #F3F4F6', fontWeight: 600 }}>Everything in Standard +</li>
+                {[
+                  { t: 'Premium Heavy Metal Medal', inc: true },
+                  { t: 'Priority Dispatch', inc: true }
+                ].map((f, i) => (
+                  <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#111827', padding: '12px 0', borderBottom: '1px solid #F3F4F6', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <CheckCircle size={18} color="#10B981"/> {f.t}
+                  </li>
                 ))}
               </ul>
-              <button disabled style={{ ...styles.btn, backgroundColor: '#E5E7EB', color: '#9CA3AF', border: 'none', width: '100%', cursor: 'not-allowed' }}>Coming Soon</button>
+              <button style={{ ...styles.btn, ...styles.btnSecondary, width: '100%' }}>Register Now</button>
             </motion.div>
 
           </div>
         </div>
       </section>
 
-      {/* ================= TESTIMONIALS ================= */}
-      <section style={{ ...styles.sectionPadding, backgroundColor: '#FAFAFA' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(400px, 1fr))', gap: isMobile ? '60px' : '80px' }}>
-          
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp}>
-            <div style={{ width: '100%', height: isMobile ? '350px' : '300px', overflow: 'hidden', borderRadius: '4px', marginBottom: '30px' }}>
-               {/* OPTIMIZATION: Lazy load */}
-               <img src="/runfest_testimonial1.png" alt="Runner" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            </div>
-            <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: isMobile ? '28px' : '32px', color: '#111827', lineHeight: 1.2 }}>
-              "I ran my fastest 10K because I wanted that medal. When it arrived, I wasn't disappointed."
-            </div>
-            <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', color: '#6B7280', marginTop: '15px' }}>— Rahul K., 10K Finisher</div>
-          </motion.div>
-
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: isMobile ? 0 : 0.2 }}>
-            <div style={{ width: '100%', height: isMobile ? '350px' : '300px', overflow: 'hidden', borderRadius: '4px', marginBottom: '30px' }}>
-               {/* OPTIMIZATION: Lazy load */}
-               <img src="/runfest_testimonial2.png" alt="Runner" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            </div>
-            <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: isMobile ? '28px' : '32px', color: '#111827', lineHeight: 1.2 }}>
-              "No crowds. No starting gun. Just me, the road, and a goal. The gear is legitimately good."
-            </div>
-            <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', color: '#6B7280', marginTop: '15px' }}>— Priya S., Half Marathon</div>
-          </motion.div>
-
+      {/* ================= FAQ SECTION ================= */}
+      <section style={{ ...styles.sectionPadding, backgroundColor: '#FFFFFF' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+           <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, textAlign: 'center', marginBottom: '60px' }}>Frequently Asked Questions</motion.h2>
+           
+           <div style={{ borderTop: '1px solid #E5E7EB' }}>
+             {faqs.map((faq, i) => (
+                <div key={i} style={{ borderBottom: '1px solid #E5E7EB' }}>
+                   <button 
+                     onClick={() => toggleFaq(i)}
+                     style={{ width: '100%', padding: '24px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
+                   >
+                     <span style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 600, fontSize: isMobile ? '20px' : '24px', color: '#111827' }}>{faq.q}</span>
+                     <motion.div animate={{ rotate: openFaq === i ? 180 : 0 }}>
+                        <ChevronDown size={24} color="#6B7280" />
+                     </motion.div>
+                   </button>
+                   <AnimatePresence>
+                     {openFaq === i && (
+                       <motion.div 
+                         initial={{ height: 0, opacity: 0 }} 
+                         animate={{ height: 'auto', opacity: 1 }} 
+                         exit={{ height: 0, opacity: 0 }}
+                         style={{ overflow: 'hidden' }}
+                       >
+                         <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', lineHeight: 1.6, paddingBottom: '24px', margin: 0 }}>
+                           {faq.a}
+                         </p>
+                       </motion.div>
+                     )}
+                   </AnimatePresence>
+                </div>
+             ))}
+           </div>
         </div>
       </section>
 
@@ -309,16 +560,16 @@ const RunFestPage = () => {
            <h2 style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: isMobile ? '40px' : 'clamp(40px, 8vw, 80px)', color: '#FFFFFF', margin: '0 0 40px 0', letterSpacing: '-1px' }}>
              The starting line<br/>is waiting.
            </h2>
-           <a href="#" onClick={(e) => e.preventDefault()} style={{ ...styles.btn, backgroundColor: '#374151', color: '#9CA3AF', padding: '20px 50px', fontSize: '18px', cursor: 'not-allowed' }}>
-             Coming Soon
+           <a href="#register" style={{ ...styles.btn, ...styles.btnGlowing, padding: '20px 50px', fontSize: '18px' }}>
+             Register Now
            </a>
         </motion.div>
       </section>
 
       {/* ================= FOOTER ================= */}
-      <footer style={{ padding: '40px 5vw', backgroundColor: '#FFFFFF', borderTop: '1px solid #E5E7EB', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-         <div style={{ display: 'flex', gap: '30px' }}>
-            {['Privacy', 'Terms', 'Refunds'].map((link) => (
+      <footer style={{ padding: '60px 5vw 40px', backgroundColor: '#FFFFFF', borderTop: '1px solid #E5E7EB', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '30px' }}>
+         <div style={{ display: 'flex', gap: isMobile ? '15px' : '30px', flexWrap: 'wrap', justifyContent: 'center' }}>
+            {['Privacy Policy', 'Refund Policy', 'Shipping Policy', 'Terms & Conditions', 'Contact', 'Instagram'].map((link) => (
               <Link key={link} to="#" style={{ fontFamily: '"Inter", sans-serif', fontSize: '15px', color: '#6B7280', textDecoration: 'none' }}>{link}</Link>
             ))}
          </div>
@@ -326,6 +577,20 @@ const RunFestPage = () => {
             © 2026 RunFest. Handcrafted by CastFlow.
          </div>
       </footer>
+
+      {/* ================= STICKY MOBILE CTA ================= */}
+      <AnimatePresence>
+        {isMobile && showStickyCTA && (
+          <motion.div 
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '15px 20px', backgroundColor: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(10px)', borderTop: '1px solid #E5E7EB', zIndex: 100 }}
+          >
+             <a href="#register" style={{ ...styles.btn, ...styles.btnPrimary, width: '100%', padding: '14px' }}>Register Now</a>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
