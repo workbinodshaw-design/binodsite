@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { Globe, Award, FileText, Truck, Lock, Shield, Users, MapPin, CheckCircle, ChevronDown, Plus, Minus } from 'lucide-react';
+import { Globe, Award, FileText, Truck, Lock, Shield, Users, MapPin, CheckCircle, ChevronDown, Plus, Minus, Download, Share } from 'lucide-react';
 
 const RunFestPage = () => {
   // Mobile detection
@@ -411,11 +411,73 @@ const RunFestPage = () => {
              <motion.div initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%', display: 'flex', justifyContent: 'center' }}>
                 {/* CSS Phone Frame */}
                 <div style={{ width: '320px', height: '650px', backgroundColor: '#111827', borderRadius: '50px', padding: '12px', boxShadow: '0 40px 80px rgba(0,0,0,0.15)', transform: isMobile ? 'scale(0.8)' : 'scale(1)' }}>
-                   <div style={{ width: '100%', height: '100%', backgroundColor: '#FFFFFF', borderRadius: '38px', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '60px' }}>
-                      <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '18px', color: '#111827', marginBottom: '40px' }}>Trophy Cabinet</div>
-                      {/* OPTIMIZATION: Lazy load */}
-                      <img src="/runfest_badge.png" alt="3D Badge" loading="lazy" decoding="async" style={{ width: '180px' }} />
-                      <div style={{ marginTop: '20px', fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '24px' }}>RunFest Finisher</div>
+                   <div style={{ width: '100%', height: '100%', backgroundColor: '#FAFAFA', borderRadius: '38px', overflowY: 'auto', scrollbarWidth: 'none', position: 'relative' }}>
+                      {/* Header */}
+                      <div style={{ position: 'sticky', top: 0, zIndex: 10, padding: '16px 20px', backgroundColor: 'rgba(250, 250, 250, 0.8)', backdropFilter: 'blur(10px)', borderBottom: '1px solid rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '16px', color: '#111827' }}>RUNFEST 2026</div>
+                        <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '11px', color: '#10B981', fontWeight: 600 }}>Official Finisher</div>
+                      </div>
+
+                      <div style={{ padding: '20px' }}>
+                        {/* Badge Section */}
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '25px', position: 'relative' }}>
+                          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(14,165,233,0.3) 0%, rgba(250,250,250,0) 70%)', zIndex: 0 }}></div>
+                          <img src="/runfest_badge.png" alt="3D Badge" loading="lazy" decoding="async" style={{ width: '140px', zIndex: 1, filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.1))' }} />
+                          <div style={{ marginTop: '15px', padding: '4px 12px', backgroundColor: '#FEF3C7', border: '1px solid #FDE68A', borderRadius: '99px', fontFamily: '"Inter", sans-serif', fontSize: '10px', fontWeight: 700, color: '#D97706', letterSpacing: '1px', zIndex: 1 }}>VERIFIED FINISHER</div>
+                        </div>
+
+                        {/* Participant Info Card */}
+                        <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', padding: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.03)', marginBottom: '20px' }}>
+                           <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 600, fontSize: '18px', color: '#111827', marginBottom: '15px' }}>Participant Name</div>
+                           
+                           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                              {[
+                                { l: 'Distance', v: '21K Half Marathon' },
+                                { l: 'Completed', v: '03 Dec 2026' },
+                                { l: 'Status', v: 'Verified', color: '#10B981' },
+                                { l: 'Finisher ID', v: 'RF-2026-8942' }
+                              ].map((item, i) => (
+                                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: i !== 3 ? '1px solid #F3F4F6' : 'none', paddingBottom: i !== 3 ? '12px' : '0' }}>
+                                   <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '12px', color: '#6B7280' }}>{item.l}</div>
+                                   <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '12px', fontWeight: 600, color: item.color || '#111827' }}>{item.v}</div>
+                                </div>
+                              ))}
+                           </div>
+                        </div>
+
+                        {/* Achievement Progress */}
+                        <div style={{ textAlign: 'center', marginBottom: '25px' }}>
+                          <div style={{ color: '#F59E0B', fontSize: '18px', letterSpacing: '2px', marginBottom: '4px' }}>★★★★★</div>
+                          <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '11px', fontWeight: 600, color: '#4B5563' }}>Completed Successfully</div>
+                        </div>
+
+                        {/* Buttons */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '25px' }}>
+                          <button style={{ backgroundColor: '#111827', color: '#FFF', border: 'none', borderRadius: '12px', padding: '12px', fontFamily: '"Inter", sans-serif', fontSize: '13px', fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', cursor: 'pointer', width: '100%' }}>
+                            <Download size={14} /> Download Badge
+                          </button>
+                          <button style={{ backgroundColor: '#F3F4F6', color: '#111827', border: '1px solid #E5E7EB', borderRadius: '12px', padding: '12px', fontFamily: '"Inter", sans-serif', fontSize: '13px', fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', cursor: 'pointer', width: '100%' }}>
+                            <Share size={14} /> Share Achievement
+                          </button>
+                        </div>
+
+                        {/* Share Options */}
+                        <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '30px' }}>
+                           {['Instagram', 'WhatsApp', 'Facebook', 'LinkedIn', 'X'].map((social, i) => (
+                             <div key={i} title={social} style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#FFFFFF', border: '1px solid #E5E7EB', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 6px rgba(0,0,0,0.02)', cursor: 'pointer' }}>
+                                <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '12px', fontWeight: 700, color: '#4B5563' }}>{social.charAt(0)}</span>
+                             </div>
+                           ))}
+                        </div>
+
+                        {/* Bottom Card */}
+                        <div style={{ backgroundColor: '#F3F4F6', border: '1px solid #E5E7EB', borderRadius: '12px', padding: '12px', textAlign: 'center' }}>
+                           <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '10px', fontWeight: 600, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '2px' }}>Powered by CastFlow</div>
+                           <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '10px', color: '#6B7280' }}>Official Digital Achievement</div>
+                        </div>
+                        
+                        <div style={{ height: '20px' }}></div>
+                      </div>
                    </div>
                 </div>
              </motion.div>
