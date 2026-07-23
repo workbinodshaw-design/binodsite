@@ -5,8 +5,56 @@ const groq = new Groq({
   apiKey: process.env.VITE_GROQ_API_KEY || process.env.GROQ_API_KEY,
 });
 
-// Convert the entire knowledge base to a structured string
-const fullKnowledgeContext = JSON.stringify(knowledgeData, null, 2);
+// Build chunks from knowledgeData
+let chunks = [];
+let companyContext = JSON.stringify(knowledgeData.company || {}) + "\\n" + JSON.stringify(knowledgeData.contact || {});
+
+for (const [key, value] of Object.entries(knowledgeData)) {
+  if (key === 'faq' && Array.isArray(value)) {
+    value.forEach(item => chunks.push(JSON.stringify(item)));
+  } else if (key !== 'company' && key !== 'contact') {
+    if (Array.isArray(value)) {
+      value.forEach(item => chunks.push(JSON.stringify(item)));
+    } else {
+      chunks.push(JSON.stringify(value));
+    }
+  }
+}
+
+const stopWords = new Set(["a", "an", "the", "and", "or", "but", "is", "are", "am", "to", "for", "of", "in", "on", "what", "how", "why", "where", "when", "i", "want", "tell", "me", "about", "please", "can", "you", "do", "have", "hi", "hello", "hey"]);
+
+function extractKeywords(query) {
+  return query.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(w => w.length > 1 && !stopWords.has(w));
+}
+
+function retrieveContext(query) {
+  const keywords = extractKeywords(query);
+  
+  if (keywords.length === 0) {
+    return companyContext;
+  }
+
+  const scoredChunks = chunks.map(chunk => {
+    const chunkLower = chunk.toLowerCase();
+    let score = 0;
+    keywords.forEach(kw => {
+      if (chunkLower.includes(kw)) score++;
+    });
+    return { chunk, score };
+  });
+
+  scoredChunks.sort((a, b) => b.score - a.score);
+  
+  // Take top 4 relevant chunks
+  const topChunks = scoredChunks.slice(0, 4).filter(c => c.score > 0).map(c => c.chunk);
+  
+  if (topChunks.length === 0) {
+    return companyContext; // Fallback if no matches
+  }
+
+  // Always include the company context as a baseline
+  return companyContext + "\\n\\n" + topChunks.join('\\n\\n');
+}
 
 const INJECTION_PATTERNS = [
   /ignore previous/i,
@@ -20,20 +68,18 @@ const INJECTION_PATTERNS = [
   /developer/i
 ];
 
-const SYSTEM_PROMPT_TEMPLATE = `You are CastFlow AI, a highly intelligent, comprehensive, and friendly Website Assistant for CastFlow.
-You must act as a premium, incredibly smart assistant (like Gemini) that knows absolutely everything about the company.
+const SYSTEM_PROMPT_TEMPLATE = `You are CastFlow AI, a highly intelligent and friendly Website Assistant for CastFlow.
 
 # Core Instructions
-1. You have been provided with the COMPLETE knowledge base of CastFlow below in JSON format. You MUST use this data to answer ANY question the user asks.
-2. Provide comprehensive, helpful, and highly detailed answers. Do not be overly brief if the user asks for details (you can give small to small details).
-3. If the user asks for pricing, services, RunFest, policies, or contact details, give them the exact information from the knowledge base.
-4. If a user is just saying hello or greeting you, be very warm, friendly, and ask how you can help them today.
-5. NEVER hallucinate or invent features. If the answer is truly not in the knowledge base, politely state that you do not have verified information on that specific topic.
-6. Write in plain text, do NOT use markdown (no asterisks, bolding, or lists).
-7. Speak naturally and conversationally. Do not sound like a robot.
+1. Reply VERY shortly and exactly to the point (1-3 sentences maximum). Do not write long paragraphs.
+2. Use the Context Information provided below to answer. 
+3. If the user is just saying hello, greet them kindly and ask how you can help them.
+4. If you don't know the answer based on the context, politely say you don't have that specific information.
+5. Write in plain text without formatting (no markdown).
+6. Be highly professional and concise like a true human assistant.
 
-# CastFlow Knowledge Base
-${fullKnowledgeContext}
+# Context Information
+{context}
 `;
 
 export default async function handler(req, res) {
@@ -81,8 +127,11 @@ export default async function handler(req, res) {
       }
     }
 
+    const retrievedContext = retrieveContext(latestUserMessage);
+    const finalSystemPrompt = SYSTEM_PROMPT_TEMPLATE.replace('{context}', retrievedContext);
+
     const apiMessages = [
-      { role: 'system', content: SYSTEM_PROMPT_TEMPLATE },
+      { role: 'system', content: finalSystemPrompt },
       ...messages.map(m => ({
         role: m.sender === 'ai' ? 'assistant' : 'user',
         content: String(m.text || '').substring(0, 500)
@@ -92,8 +141,8 @@ export default async function handler(req, res) {
     const completion = await groq.chat.completions.create({
       messages: apiMessages,
       model: 'llama-3.1-8b-instant',
-      temperature: 0.3, // Slightly higher for more conversational tone
-      max_tokens: 300,  // Allow longer answers
+      temperature: 0.2, // Lowered temperature for direct answers
+      max_tokens: 100, // Reduced max tokens so it physically cannot talk too much
     });
 
     const aiResponse = completion.choices[0]?.message?.content || "I'm sorry, I encountered an error. Please contact us on WhatsApp.";
