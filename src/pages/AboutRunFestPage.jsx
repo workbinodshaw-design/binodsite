@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { Mail, AtSign, Clock, ShieldCheck, Activity, Lock, Award, Headphones, Briefcase, Eye, Zap, Users, Globe, Target } from 'lucide-react';
+import { Mail, AtSign, Clock, ShieldCheck, Activity, Lock, Award, Headphones, Briefcase, Eye, Zap, Users, Globe, Target, Phone } from 'lucide-react';
 
 const AboutRunFestPage = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -186,6 +186,9 @@ const AboutRunFestPage = () => {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                <motion.div variants={revealUp} style={{ display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'center', gap: '15px', fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '14px' : '16px', color: '#4B5563', flexDirection: isMobile ? 'column' : 'row' }}>
                  <Mail size={20} color="#111827" /> <div><span style={{ fontWeight: 600, color: '#111827' }}>Official Email:</span> support@castflow.in</div>
+               </motion.div>
+               <motion.div variants={revealUp} style={{ display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'center', gap: '15px', fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '14px' : '16px', color: '#4B5563', flexDirection: isMobile ? 'column' : 'row' }}>
+                 <Phone size={20} color="#111827" /> <div><span style={{ fontWeight: 600, color: '#111827' }}>Support Phone:</span> +91 9394683474</div>
                </motion.div>
                <motion.div variants={revealUp} style={{ display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'center', gap: '15px', fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '14px' : '16px', color: '#4B5563', flexDirection: isMobile ? 'column' : 'row' }}>
                  <AtSign size={20} color="#111827" /> <div><span style={{ fontWeight: 600, color: '#111827' }}>Official Instagram:</span> @runfest.in</div>
