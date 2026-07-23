@@ -166,10 +166,6 @@ const RunFestPage = () => {
           <motion.h1 variants={revealUp} style={styles.heroTitle}>RUNFEST</motion.h1>
           <motion.div variants={revealUp} style={styles.tagline}>Run Anywhere. Compete Nationwide.</motion.div>
           
-          <motion.p variants={revealUp} style={{ ...styles.subheading, maxWidth: '600px', margin: '0 auto 20px auto', lineHeight: 1.6 }}>
-            RunFest is a 7-day virtual running challenge where every verified kilometer counts. Complete as many runs as you can, climb the leaderboard, and compete to become the top runner.
-          </motion.p>
-          
           <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '15px', justifyContent: 'center', marginTop: '30px' }}>
             <a href="#register" style={{ ...styles.btn, ...styles.btnPrimary }}>Register Now</a>
             <a href="#timeline" style={{ ...styles.btn, ...styles.btnSecondary }}>Learn More</a>
@@ -187,6 +183,10 @@ const RunFestPage = () => {
                </div>
              ))}
           </motion.div>
+
+          <motion.p variants={revealUp} style={{ ...styles.subheading, maxWidth: '600px', margin: '30px auto 0 auto', lineHeight: 1.6 }}>
+            RunFest is a 7-day virtual running challenge where every verified kilometer counts. Complete as many runs as you can, climb the leaderboard, and compete to become the top runner.
+          </motion.p>
         </motion.div>
 
         {/* Scroll Indicator */}
