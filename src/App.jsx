@@ -17,6 +17,7 @@ const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = React.lazy(() => import('./pages/TermsOfService'));
 const RefundPolicy = React.lazy(() => import('./pages/RefundPolicy'));
 const RunFestPage = React.lazy(() => import('./pages/RunFestPage'));
+const AboutRunFestPage = React.lazy(() => import('./pages/AboutRunFestPage'));
 
 const AdminLogin = React.lazy(() => import('./pages/AdminLogin'));
 const TeamLogin = React.lazy(() => import('./pages/TeamLogin'));
@@ -53,6 +54,7 @@ function AnimatedMainRoutes() {
         <Route path="/terms" element={<PageTransition><TermsOfService /></PageTransition>} />
         <Route path="/refund-policy" element={<PageTransition><RefundPolicy /></PageTransition>} />
         <Route path="/runfest" element={<PageTransition><RunFestPage /></PageTransition>} />
+        <Route path="/about-runfest" element={<PageTransition><AboutRunFestPage /></PageTransition>} />
         
         {/* Authentication & Role-Based Portals */}
         <Route path="/admin-login" element={<PageTransition><AdminLogin /></PageTransition>} />
