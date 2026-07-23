@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { Globe, Award, FileText, Truck, Lock, Shield, Users, MapPin, CheckCircle, ChevronDown, Plus, Minus, Download, Share } from 'lucide-react';
+import { Globe, Award, FileText, Truck, Lock, Shield, Users, MapPin, CheckCircle, ChevronDown, Plus, Minus, Download, Share, Activity, AlertCircle, Crosshair } from 'lucide-react';
 
 const RunFestPage = () => {
   // Mobile detection
@@ -59,7 +59,7 @@ const RunFestPage = () => {
         targetDate = targetRegClose;
         stateText = 'Registration Closes In';
       } else if (now >= targetRegClose && now < targetRunStart) {
-        targetDate = targetRunStart; // We can count down to start, but prompt says "Registration Closed"
+        targetDate = targetRunStart;
         stateText = 'Registration Closed';
       } else if (now >= targetRunStart && now <= targetRunEnd) {
         targetDate = null;
@@ -103,7 +103,7 @@ const RunFestPage = () => {
     heroTitle: { fontFamily: '"Clash Display", sans-serif', fontWeight: 800, fontSize: isMobile ? '52px' : 'clamp(90px, 10vw, 140px)', letterSpacing: '-2px', lineHeight: 0.9, textTransform: 'uppercase', margin: 0 },
     bgNumber: { position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)', fontFamily: '"Clash Display", sans-serif', fontWeight: 900, fontSize: isMobile ? '180px' : 'clamp(220px, 20vw, 320px)', opacity: 0.15, zIndex: 0, pointerEvents: 'none' },
     tagline: { fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400, fontSize: isMobile ? '24px' : '30px', color: '#4B5563', margin: '20px 0' },
-    subheading: { fontFamily: '"Inter", sans-serif', fontWeight: 500, fontSize: isMobile ? '18px' : '22px', color: '#6B7280', margin: '0 0 40px 0' },
+    subheading: { fontFamily: '"Inter", sans-serif', fontWeight: 500, fontSize: isMobile ? '18px' : '22px', color: '#6B7280', margin: '0 0 10px 0' },
     sectionHeading: { fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: isMobile ? '40px' : '72px', margin: '0 0 20px 0', letterSpacing: '-1px', lineHeight: 1.1 },
     sectionDesc: { fontFamily: '"Inter", sans-serif', fontWeight: 400, fontSize: '18px', lineHeight: 1.8, maxWidth: '700px', color: '#4B5563' },
     btn: { fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', borderRadius: '999px', padding: '16px 32px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', textDecoration: 'none', transition: 'all 0.3s ease', width: isMobile ? '100%' : 'auto' },
@@ -133,22 +133,19 @@ const RunFestPage = () => {
   };
 
   const faqs = [
-    { q: "Is this a virtual marathon?", a: "Yes. RUNFEST is a fully virtual experience, meaning you can run your chosen distance on your own schedule during the event window." },
-    { q: "Can I participate from anywhere in India?", a: "Absolutely. Whether you're in a metro city, a small town, or a remote location, as long as you have a GPS tracking app, you can run and submit your proof." },
-    { q: "Can I walk instead of running?", a: "Yes! We encourage all levels of fitness. Walking is completely acceptable and counts towards your distance." },
-    { q: "Which apps are accepted?", a: "We accept activity links or screenshots from Strava, Google Fit, Garmin, Adidas Running, Nike Run Club, or any credible GPS tracking application." },
-    { q: "How do I upload proof?", a: "A unique submission link will be sent to your registered email address on November 29. You simply upload a screenshot of your activity showing date, distance, and time." },
-    { q: "When will certificates be issued?", a: "Your personalized official digital certificate will be emailed to you within 24–48 hours after your proof is verified." },
-    { q: "When will medals and T-shirts be shipped?", a: "Merchandise dispatch begins on 10 December 2026. Standard delivery times across India apply once dispatched." },
-    { q: "Is shipping included?", a: "Yes! Free shipping across India is included in both the Standard and Premium tiers." },
-    { q: "Can I change my T-shirt size?", a: "T-shirt sizes can only be changed before registration closes on 18 November 2026 by contacting our support team." },
-    { q: "Can I transfer my registration?", a: "Registrations are strictly non-transferable." },
-    { q: "What is the refund policy?", a: "Tickets are non-refundable. Please ensure you are available during the running window before committing." }
+    { q: "Can I run multiple times?", a: "Yes. In fact, it is highly encouraged! RUNFEST is a 7-day cumulative challenge. You can run as many times as you want during the 7 days, and every verified run will be added to your total distance." },
+    { q: "How is my distance verified?", a: "You must track your runs using a GPS-enabled fitness app (like Strava, Garmin, Google Fit, Nike Run Club). You'll upload a screenshot of your activity showing the route, date, distance, and duration for verification." },
+    { q: "Which apps are accepted?", a: "We accept screenshots and links from Strava, Google Fit, Garmin, Adidas Running, Nike Run Club, or any credible GPS tracking application that clearly shows your route and metrics." },
+    { q: "How is the winner decided?", a: "The participant with the highest cumulative verified distance at the end of the 7-day event window will be crowned the winner and top the national leaderboard." },
+    { q: "Can I participate from any city?", a: "Absolutely. RUNFEST is a 100% virtual challenge. You can participate from any city, town, or remote location in India." },
+    { q: "Can beginners join?", a: "Yes! RUNFEST is designed for everyone. Whether you run 2km a day or 20km a day, the goal is personal consistency and improvement over the 7 days." },
+    { q: "Can I use a treadmill?", a: "Yes. Treadmill runs are accepted as long as you provide a clear photo of the treadmill dashboard showing the total distance and time upon completion of your run." },
+    { q: "What happens if verification fails?", a: "If an uploaded activity is unclear, missing GPS data, or appears falsified, it will be rejected and that distance will not be added to your cumulative total." }
   ];
 
   return (
     <div style={styles.bg}>
-      <SEO title="RUNFEST 2026 | CastFlow" description="India's Premium Virtual Marathon. Run Anywhere. Run Anytime. One Finish Line." />
+      <SEO title="RUNFEST 2026 | CastFlow" description="India's Premium Virtual Marathon Challenge. Run Anywhere. Compete Nationwide." />
 
       {/* ================= HERO (100VH) ================= */}
       <header style={{ position: 'relative', width: '100vw', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', paddingTop: isMobile ? '80px' : '0' }}>
@@ -167,8 +164,11 @@ const RunFestPage = () => {
           </motion.div>
 
           <motion.h1 variants={revealUp} style={styles.heroTitle}>RUNFEST</motion.h1>
-          <motion.div variants={revealUp} style={styles.tagline}>India's Premium Virtual Marathon</motion.div>
-          <motion.div variants={revealUp} style={styles.subheading}>Run Anywhere. Run Anytime. One Finish Line.</motion.div>
+          <motion.div variants={revealUp} style={styles.tagline}>Run Anywhere. Compete Nationwide.</motion.div>
+          
+          <motion.p variants={revealUp} style={{ ...styles.subheading, maxWidth: '600px', margin: '0 auto 20px auto', lineHeight: 1.6 }}>
+            RunFest is a 7-day virtual running challenge where every verified kilometer counts. Complete as many runs as you can, climb the leaderboard, and compete to become the top runner.
+          </motion.p>
           
           <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '15px', justifyContent: 'center', marginTop: '30px' }}>
             <a href="#register" style={{ ...styles.btn, ...styles.btnPrimary }}>Register Now</a>
@@ -234,12 +234,25 @@ const RunFestPage = () => {
          </motion.div>
       </section>
 
-      {/* ================= THE STORY ================= */}
+      {/* ================= ABOUT RUNFEST ================= */}
       <section style={{ ...styles.sectionPadding, backgroundColor: '#FFFFFF' }}>
+         <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
+            <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading }}>About RunFest</motion.h2>
+            <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: 0.1 }} style={{ ...styles.sectionDesc, margin: '0 auto', fontSize: isMobile ? '18px' : '22px', color: '#111827' }}>
+              RunFest is designed for runners of every level who want to challenge themselves over seven days. Participants can run from any location using a GPS-enabled running app. Every verified run adds to their total distance. The runner with the greatest cumulative verified distance at the end of the event wins.
+            </motion.p>
+         </div>
+      </section>
+
+      {/* ================= THE STORY ================= */}
+      <section style={{ paddingBottom: isMobile ? '80px' : '150px', paddingLeft: '5vw', paddingRight: '5vw', backgroundColor: '#FFFFFF' }}>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={revealUp} style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <h2 style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 500, fontSize: isMobile ? '48px' : 'clamp(40px, 8vw, 100px)', lineHeight: 1, color: '#111827', margin: isMobile ? '0 0 50px 0' : '0 0 100px 0', letterSpacing: '-1px' }}>
+          <h2 style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 500, fontSize: isMobile ? '48px' : 'clamp(40px, 8vw, 100px)', lineHeight: 1, color: '#111827', margin: '0 0 30px 0', letterSpacing: '-1px' }}>
             "You against<br/>yesterday."
           </h2>
+          <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '18px', color: '#4B5563', maxWidth: '600px', lineHeight: 1.6, margin: isMobile ? '0 0 50px 0' : '0 0 100px 0' }}>
+            Running isn't about defeating others. It's about becoming stronger, healthier and more consistent every single day. Every kilometer brings you closer to your personal best.
+          </p>
         </motion.div>
         
         {/* Full Width Cinematic Image */}
@@ -249,26 +262,29 @@ const RunFestPage = () => {
         </motion.div>
       </section>
 
-      {/* ================= DISTANCE SELECTOR ================= */}
+      {/* ================= WHY JOIN RUNFEST (REPLACES DISTANCES) ================= */}
       <section style={{ ...styles.sectionPadding, backgroundColor: '#FAFAFA' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={styles.sectionHeading}>Pick your battle.</motion.h2>
+          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={styles.sectionHeading}>Why Join RunFest</motion.h2>
           
           <div style={{ marginTop: isMobile ? '40px' : '80px', display: 'flex', overflowX: 'auto', gap: isMobile ? '20px' : '40px', paddingBottom: '40px', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', scrollSnapType: 'x mandatory' }}>
-            {['3K', '5K', '10K', '21K'].map((dist, i) => {
-              const subtitles = { '3K': 'Perfect for Beginners', '5K': 'Most Popular', '10K': 'Challenge Yourself', '21K': 'Half Marathon' };
-              return (
-                <motion.div key={dist} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: i * 0.1 }}
-                  whileHover={!isMobile ? { scale: 1.05, x: 10 } : {}}
-                  style={{ 
-                    flex: '0 0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                    width: isMobile ? '220px' : '300px', height: isMobile ? '150px' : '200px', borderBottom: '2px solid #E5E7EB', cursor: 'pointer', scrollSnapAlign: 'start'
-                  }}>
-                  <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 800, fontSize: isMobile ? '60px' : '80px', letterSpacing: '-2px', color: '#111827', lineHeight: 1 }}>{dist}</div>
-                  <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', marginTop: '10px' }}>{subtitles[dist]}</div>
-                </motion.div>
-              );
-            })}
+            {[
+              { emoji: '🏃', title: 'Run Anywhere', desc: 'Participate from your city, park, treadmill or favorite running route.' },
+              { emoji: '🏆', title: 'Compete Nationwide', desc: 'Every verified kilometer moves you higher on the leaderboard.' },
+              { emoji: '🎖', title: 'Earn Premium Rewards', desc: 'Finish the challenge and unlock exclusive rewards.' },
+              { emoji: '❤️', title: 'Build Consistency', desc: 'Seven days of running designed to motivate healthier habits.' }
+            ].map((item, i) => (
+              <motion.div key={item.title} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: i * 0.1 }}
+                whileHover={!isMobile ? { scale: 1.02, x: 10 } : {}}
+                style={{ 
+                  flex: '0 0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center',
+                  width: isMobile ? '280px' : '350px', height: isMobile ? '180px' : '200px', borderBottom: '2px solid #E5E7EB', cursor: 'pointer', scrollSnapAlign: 'start'
+                }}>
+                <div style={{ fontSize: '32px', marginBottom: '10px' }}>{item.emoji}</div>
+                <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 800, fontSize: isMobile ? '32px' : '40px', letterSpacing: '-1px', color: '#111827', lineHeight: 1 }}>{item.title}</div>
+                <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '15px', color: '#6B7280', marginTop: '10px', lineHeight: 1.5 }}>{item.desc}</div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -278,24 +294,23 @@ const RunFestPage = () => {
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, textAlign: 'center', marginBottom: '80px' }}>How it works.</motion.h2>
           
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)', gap: isMobile ? '40px' : '30px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? '40px' : '60px' }}>
             {[
-              { title: 'Register', desc: 'Choose your preferred distance and package.', icon: '1' },
-              { title: 'Run Anywhere', desc: 'Complete your selected distance anytime between 29 Nov and 5 Dec.', icon: '2' },
-              { title: 'Upload Proof', desc: 'Submit activity from Strava, Google Fit, Garmin, Adidas Running, Nike Run Club or any GPS app.', icon: '3' },
-              { title: 'Become a Finisher', desc: 'Receive your digital certificate and, if applicable, your official medal and T-shirt.', icon: '4' }
+              { title: 'Register', desc: 'Create your participant profile.', icon: '1' },
+              { title: 'Run', desc: 'Complete one or multiple runs during the event.', icon: '2' },
+              { title: 'Track', desc: 'Use a GPS-enabled fitness app to record your activity.', icon: '3' },
+              { title: 'Submit', desc: 'Upload your activity for verification.', icon: '4' },
+              { title: 'Leaderboard', desc: 'Verified distance is added to your cumulative score.', icon: '5' },
+              { title: 'Winner', desc: 'Highest verified total distance after seven days wins.', icon: '6' }
             ].map((step, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: i * 0.1 }} style={{ position: 'relative' }}>
-                 {!isMobile && i !== 3 && (
-                   <div style={{ position: 'absolute', top: '25px', left: '60px', right: '-40px', height: '1px', backgroundColor: '#E5E7EB', zIndex: 0 }}></div>
-                 )}
                  <div style={{ width: '50px', height: '50px', borderRadius: '50%', backgroundColor: '#111827', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '20px', marginBottom: '20px', position: 'relative', zIndex: 1 }}>
                    {step.icon}
                  </div>
                  <h3 style={{ fontFamily: '"Inter", sans-serif', fontWeight: 700, fontSize: '20px', color: '#111827', marginBottom: '10px' }}>{step.title}</h3>
                  <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '15px', color: '#6B7280', lineHeight: 1.6 }}>{step.desc}</p>
                  
-                 {isMobile && i !== 3 && (
+                 {isMobile && i !== 5 && (
                    <div style={{ textAlign: 'center', margin: '20px 0', color: '#D1D5DB' }}>↓</div>
                  )}
               </motion.div>
@@ -307,7 +322,10 @@ const RunFestPage = () => {
       {/* ================= EVENT TIMELINE ================= */}
       <section id="timeline" style={{ padding: isMobile ? '80px 5vw' : '120px 5vw', backgroundColor: '#FAFAFA' }}>
          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-            <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, fontSize: isMobile ? '32px' : '48px', marginBottom: '60px' }}>Event Timeline</motion.h2>
+            <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, fontSize: isMobile ? '32px' : '48px', marginBottom: '20px' }}>Event Timeline</motion.h2>
+            <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ fontFamily: '"Inter", sans-serif', fontSize: '18px', color: '#4B5563', marginBottom: '60px', lineHeight: 1.6 }}>
+               Everything happens within seven days. Stay on schedule to maximize your total distance.
+            </motion.p>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', position: 'relative' }}>
                <div style={{ position: 'absolute', left: '15px', top: '10px', bottom: '10px', width: '2px', backgroundColor: '#E5E7EB', zIndex: 0 }}></div>
@@ -348,7 +366,7 @@ const RunFestPage = () => {
             Premium Heavy Metal Finisher Medal
           </motion.h3>
           <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionDesc, margin: '10px auto 0 auto' }}>
-            Crafted using premium zinc alloy with an exclusive RUNFEST 2026 design. Included only in the Premium Plan.
+            Every finisher receives a premium medal crafted to celebrate dedication, discipline and achievement.
           </motion.p>
         </div>
       </section>
@@ -363,6 +381,10 @@ const RunFestPage = () => {
           <motion.div initial={{ x: isMobile ? 0 : 50, y: isMobile ? 50 : 0, opacity: 0 }} whileInView={{ x: 0, y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%' }}>
             <h2 style={styles.sectionHeading}>Premium Dry-Fit Running T-Shirt</h2>
             
+            <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '18px', color: '#4B5563', lineHeight: 1.6, marginBottom: '20px' }}>
+               Premium dry-fit performance t-shirt designed for comfort during every run.
+            </p>
+
             <ul style={{ listStyle: 'none', padding: 0, margin: '20px 0', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
               {['Lightweight', 'Breathable Fabric', 'Athletic Fit', 'Moisture Wicking'].map((feature, i) => (
                  <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -398,7 +420,7 @@ const RunFestPage = () => {
           <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '40px' : '60px', alignItems: 'center' }}>
              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ width: isMobile ? '100%' : '50%', order: isMobile ? 2 : 1 }}>
                 <h2 style={styles.sectionHeading}>Official Digital<br/>Finisher Certificate</h2>
-                <p style={styles.sectionDesc}>Every finisher receives a personalized certificate including participant name, selected distance, completion date and official event branding.</p>
+                <p style={styles.sectionDesc}>Receive an official personalized digital finisher certificate after successful verification.</p>
              </motion.div>
              <motion.div initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%', display: 'flex', justifyContent: 'center', order: isMobile ? 1 : 2 }}>
                {/* OPTIMIZATION: Lazy load */}
@@ -432,8 +454,8 @@ const RunFestPage = () => {
                            
                            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                               {[
-                                { l: 'Distance', v: '21K Half Marathon' },
-                                { l: 'Completed', v: '03 Dec 2026' },
+                                { l: 'Total Distance', v: '145 km' },
+                                { l: 'Completed', v: '05 Dec 2026' },
                                 { l: 'Status', v: 'Verified', color: '#10B981' },
                                 { l: 'Finisher ID', v: 'RF-2026-8942' }
                               ].map((item, i) => (
@@ -483,7 +505,7 @@ const RunFestPage = () => {
              </motion.div>
              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ width: isMobile ? '100%' : '50%' }}>
                 <h2 style={styles.sectionHeading}>Digital<br/>Finisher Badge</h2>
-                <p style={styles.sectionDesc}>Instantly share your achievement on Instagram, WhatsApp, Facebook, LinkedIn and X.</p>
+                <p style={styles.sectionDesc}>Download your digital finisher badge and proudly share your achievement.</p>
              </motion.div>
           </div>
 
@@ -496,6 +518,9 @@ const RunFestPage = () => {
           
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ textAlign: 'center', marginBottom: '60px' }}>
              <h2 style={styles.sectionHeading}>Choose your tier.</h2>
+             <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '18px', color: '#4B5563', lineHeight: 1.6, maxWidth: '600px', margin: '0 auto' }}>
+               Choose the package that fits your journey. Whether you're participating for the challenge or collecting every reward, there's an option for everyone.
+             </p>
              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '30px' }}>
                 {[
                   { icon: <Lock size={16}/>, text: 'Secure Payments' },
@@ -579,8 +604,33 @@ const RunFestPage = () => {
         </div>
       </section>
 
-      {/* ================= FAQ SECTION ================= */}
+      {/* ================= CHALLENGE RULES ================= */}
       <section style={{ ...styles.sectionPadding, backgroundColor: '#FFFFFF' }}>
+         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, textAlign: 'center', marginBottom: '60px' }}>Challenge Rules</motion.h2>
+            
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '20px' }}>
+               {[
+                 { icon: <Activity size={24} color="#10B981"/>, title: 'GPS tracking required' },
+                 { icon: <Plus size={24} color="#10B981"/>, title: 'Multiple runs allowed' },
+                 { icon: <CheckCircle size={24} color="#10B981"/>, title: 'Only verified activities accepted' },
+                 { icon: <AlertCircle size={24} color="#EF4444"/>, title: 'No fake GPS' },
+                 { icon: <AlertCircle size={24} color="#EF4444"/>, title: 'No cycling or driving' },
+                 { icon: <Crosshair size={24} color="#F59E0B"/>, title: 'Highest cumulative verified distance wins' }
+               ].map((rule, i) => (
+                 <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} transition={{ delay: i * 0.1 }} style={{ display: 'flex', alignItems: 'center', gap: '15px', backgroundColor: '#FAFAFA', border: '1px solid #E5E7EB', borderRadius: '16px', padding: '20px' }}>
+                    <div style={{ width: '48px', height: '48px', borderRadius: '12px', backgroundColor: '#FFFFFF', border: '1px solid #F3F4F6', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 6px rgba(0,0,0,0.02)' }}>
+                      {rule.icon}
+                    </div>
+                    <div style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', color: '#111827' }}>{rule.title}</div>
+                 </motion.div>
+               ))}
+            </div>
+         </div>
+      </section>
+
+      {/* ================= FAQ SECTION ================= */}
+      <section style={{ ...styles.sectionPadding, backgroundColor: '#FAFAFA' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
            <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, textAlign: 'center', marginBottom: '60px' }}>Frequently Asked Questions</motion.h2>
            
@@ -619,9 +669,12 @@ const RunFestPage = () => {
       {/* ================= CTA ================= */}
       <section style={{ padding: isMobile ? '100px 5vw' : '200px 5vw', backgroundColor: '#111827', textAlign: 'center' }}>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp}>
-           <h2 style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: isMobile ? '40px' : 'clamp(40px, 8vw, 80px)', color: '#FFFFFF', margin: '0 0 40px 0', letterSpacing: '-1px' }}>
-             The starting line<br/>is waiting.
+           <h2 style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: isMobile ? '40px' : 'clamp(40px, 8vw, 80px)', color: '#FFFFFF', margin: '0 0 20px 0', letterSpacing: '-1px' }}>
+             Ready to Take the Challenge?
            </h2>
+           <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '18px', color: '#9CA3AF', maxWidth: '600px', margin: '0 auto 40px auto', lineHeight: 1.6 }}>
+             Join runners from across India, push your limits for seven days, and compete for the top spot on the leaderboard.
+           </p>
            <a href="#register" style={{ ...styles.btn, ...styles.btnGlowing, padding: '20px 50px', fontSize: '18px' }}>
              Register Now
            </a>
