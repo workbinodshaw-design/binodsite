@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, ArrowUpRight, BarChart, Globe, Zap, Cpu, Shield, TrendingUp } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, BarChart, Globe, Zap, Cpu, Shield, TrendingUp, Calendar, MapPin, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import HolographicAsset from '../components/HolographicAsset';
 import SEO from '../components/SEO';
 
@@ -183,18 +184,107 @@ const HomePage = () => {
 
       {/* HERO SECTION (SKY) */}
       <section className="sky-hero">
-        <h1 className="hero-title">
-          Building the future with<br />AI and strategy
-        </h1>
-        <p className="hero-subtitle">
-          We help organizations unlock growth and efficiency through data-driven consulting and intelligent automation.
-        </p>
         
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <button className="btn-hollow" onClick={() => navigate('/services')}>EXPLORE SERVICES</button>
-          <button className="btn-solid" onClick={() => navigate('/contact')}>
-            BOOK CONSULTATION <div style={{ background: '#1A1A1A', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#C4F042' }}><ArrowUpRight size={14} /></div>
-          </button>
+        <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%', maxWidth: '1200px', padding: '0 20px', gap: isMobile ? '4rem' : '2rem' }}>
+          
+          {/* LEFT SIDE: Original Hero Text */}
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: isMobile ? 'center' : 'flex-start', textAlign: isMobile ? 'center' : 'left' }}>
+            <h1 className="hero-title" style={{ textAlign: isMobile ? 'center' : 'left', marginLeft: isMobile ? 'auto' : '0', marginRight: isMobile ? 'auto' : '0' }}>
+              Building the future with<br />AI and strategy
+            </h1>
+            <p className="hero-subtitle" style={{ textAlign: isMobile ? 'center' : 'left', marginLeft: isMobile ? 'auto' : '0', marginRight: isMobile ? 'auto' : '0' }}>
+              We help organizations unlock growth and efficiency through data-driven consulting and intelligent automation.
+            </p>
+            
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: isMobile ? 'center' : 'flex-start' }}>
+              <button className="btn-hollow" onClick={() => navigate('/services')}>EXPLORE SERVICES</button>
+              <button className="btn-solid" onClick={() => navigate('/contact')}>
+                BOOK CONSULTATION <div style={{ background: '#1A1A1A', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#C4F042' }}><ArrowUpRight size={14} /></div>
+              </button>
+            </div>
+          </div>
+
+          {/* RIGHT SIDE: RunFest Card */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
+            style={{ 
+              flex: 1, display: 'flex', justifyContent: isMobile ? 'center' : 'flex-end', width: '100%', position: 'relative' 
+            }}
+          >
+            <motion.div 
+              whileHover={{ y: -5 }}
+              style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255, 255, 255, 0.4)',
+                borderRadius: '32px',
+                padding: isMobile ? '24px' : '32px',
+                width: '100%',
+                maxWidth: '540px',
+                boxShadow: '0 30px 60px rgba(0,0,0,0.15)',
+                position: 'relative',
+                overflow: 'visible',
+                color: '#FFF'
+              }}
+            >
+              {/* Header Badges */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+                <div style={{ background: 'rgba(59, 130, 246, 0.3)', border: '1px solid rgba(59, 130, 246, 0.5)', padding: '6px 14px', borderRadius: '99px', fontSize: '11px', fontWeight: 700, letterSpacing: '1px', color: '#E0F2FE' }}>
+                  FEATURED EVENT
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 700, letterSpacing: '1px', color: '#FFF' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10B981', boxShadow: '0 0 10px rgba(16,185,129,0.8)' }}></span> LIVE EVENT
+                </div>
+              </div>
+
+              {/* Title & Content */}
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <h2 style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '36px' : '48px', fontWeight: 800, margin: '0 0 5px 0', lineHeight: 1, letterSpacing: '-1px' }}>RUNFEST</h2>
+                <div style={{ fontSize: isMobile ? '15px' : '18px', fontWeight: 500, color: '#F3F4F6', marginBottom: '20px' }}>7-Day Virtual Running Challenge</div>
+                
+                <p style={{ fontSize: isMobile ? '13px' : '15px', color: '#E5E7EB', lineHeight: 1.6, maxWidth: isMobile ? '60%' : '260px', marginBottom: '30px' }}>
+                  Run anywhere. Track every verified kilometer. Compete with runners across India.
+                </p>
+
+                <div style={{ display: 'flex', gap: '15px', marginBottom: '30px', flexWrap: 'wrap' }}>
+                  <button className="btn-solid" onClick={() => navigate('/runfest')} style={{ padding: '10px 20px', fontSize: '13px', width: 'auto', background: '#C4F042', color: '#1A1A1A', border: 'none', borderRadius: '30px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '8px', cursor: 'pointer', transition: 'transform 0.2s' }}>
+                    EXPLORE RUNFEST <div style={{ background: '#1A1A1A', borderRadius: '50%', width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#C4F042' }}><ArrowRight size={12} /></div>
+                  </button>
+                  <button className="btn-hollow" onClick={() => navigate('/about-runfest')} style={{ padding: '10px 20px', fontSize: '13px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.3)', color: '#FFF', borderRadius: '30px', fontWeight: 600, cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'all 0.2s' }}>
+                    LEARN MORE
+                  </button>
+                </div>
+
+                <div style={{ display: 'flex', gap: isMobile ? '12px' : '20px', borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '20px', flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#E5E7EB', fontWeight: 500 }}><Calendar size={14}/> 7 Days Challenge</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#E5E7EB', fontWeight: 500 }}><MapPin size={14}/> GPS Verified</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#E5E7EB', fontWeight: 500 }}><User size={14}/> Open Registration</div>
+                </div>
+                <div style={{ fontSize: '11px', color: '#D1D5DB', marginTop: '20px', textAlign: 'center' }}>Organized by <span style={{ fontWeight: 600, color: '#FFF' }}>CastFlow</span></div>
+              </div>
+
+              {/* 3D Medal Floating Image */}
+              <motion.img 
+                animate={{ y: [-15, 15, -15], rotateZ: [-2, 2, -2] }} 
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                src="/runfest_medal.png" 
+                alt="RunFest Medal" 
+                style={{ 
+                  position: 'absolute', 
+                  right: isMobile ? '-10px' : '-45px', 
+                  top: isMobile ? '25%' : '15%', 
+                  width: isMobile ? '150px' : '260px', 
+                  filter: 'drop-shadow(0 30px 40px rgba(0,0,0,0.3))',
+                  zIndex: 1,
+                  pointerEvents: 'none'
+                }} 
+              />
+            </motion.div>
+          </motion.div>
+
         </div>
 
         {/* 3D Curved Cards (Desktop) vs Swipeable Row (Mobile) */}
