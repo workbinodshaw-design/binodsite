@@ -36,7 +36,8 @@ const ClientLogin = () => {
           } else {
             navigate('/client');
           }
-        } catch (e) {
+        } catch (error) {
+          console.error("Error fetching client user role:", error);
           navigate('/client');
         }
       }

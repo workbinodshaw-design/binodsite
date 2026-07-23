@@ -10,7 +10,7 @@ export class ErrorBoundary extends React.Component {
     return { hasError: true, error };
   }
   
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error, _errorInfo) {
     // If it's a chunk load error (Vite dynamic import failure due to new deployment), force reload the page
     if (error.name === 'ChunkLoadError' || error.message.includes('Failed to fetch dynamically imported module')) {
       window.location.reload(true);

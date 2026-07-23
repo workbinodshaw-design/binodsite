@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, ShieldCheck, Mail, MapPin } from 'lucide-react';
+import { Search, ShieldCheck } from 'lucide-react';
 import { getActiveEmployees } from '../services/employeeService';
 import { Link } from 'react-router-dom';
 

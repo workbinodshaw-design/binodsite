@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Plus, Check, X, ShieldAlert, Upload, Download, RefreshCw, Briefcase, FileBadge, Trash2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Plus, Check, X, RefreshCw, Briefcase, FileBadge, Trash2 } from 'lucide-react';
 import { getAllEmployees, createEmployee, updateEmployee, deleteEmployee } from '../../services/employeeService';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -23,7 +23,7 @@ const EmployeeAdminPanel = () => {
     skills: ''
   });
   
-  const idCardRef = useRef(null);
+
   const [generatingPdf, setGeneratingPdf] = useState(false);
 
   useEffect(() => {

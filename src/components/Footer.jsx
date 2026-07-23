@@ -17,7 +17,7 @@ const Footer = () => {
   };
   
   const [user, setUser] = useState(null);
-  const [userRole, setUserRole] = useState(null);
+  const [_userRole, _setUserRole] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { ArrowRight, ArrowUpRight, BarChart, Globe, Zap, Cpu, Shield, TrendingUp, Calendar, MapPin, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import HolographicAsset from '../components/HolographicAsset';
 import SEO from '../components/SEO';
 
 const HomePage = () => {

@@ -1,8 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { Globe, Award, FileText, Truck, Lock, Shield, Users, MapPin, CheckCircle, ChevronDown, Plus, Minus, Download, Share, Activity, AlertCircle, Crosshair } from 'lucide-react';
+import { Award, FileText, Truck, Lock, MapPin, CheckCircle, ChevronDown, Plus, Minus, Download, Share, Activity, AlertCircle, Crosshair } from 'lucide-react';
 
 const RunFestPage = () => {
   // Mobile detection

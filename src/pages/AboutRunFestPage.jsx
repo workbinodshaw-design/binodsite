@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { Mail, AtSign, Clock, ShieldCheck, Activity, Lock, Award, Headphones, Briefcase, Eye, Zap, Users, Globe, Target, Phone } from 'lucide-react';
+import { Mail, AtSign, Clock, ShieldCheck, Activity, Lock, Award, Headphones, Briefcase, Eye, Zap, Users, Target, Phone } from 'lucide-react';
 
 const AboutRunFestPage = () => {
   const [isMobile, setIsMobile] = useState(false);

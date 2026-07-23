@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { ExternalLink, Terminal, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ExternalLink } from 'lucide-react';
 import SEO from '../components/SEO';
 import ContactSection from '../components/ContactSection';
 

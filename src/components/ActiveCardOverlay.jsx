@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity, Code, Database, Zap, Layout, Server, Bot, X } from 'lucide-react';
+import { X } from 'lucide-react';
 
 const ActiveCardOverlay = ({ activeCard, onClose }) => {
   if (!activeCard) return null;

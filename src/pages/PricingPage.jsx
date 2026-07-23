@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, CheckCircle2, Zap, Shield, Target, Rocket, BarChart, ChevronDown, ChevronUp, HeartHandshake, X } from 'lucide-react';
+import { CheckCircle2, Zap, Shield, Target, ChevronDown, ChevronUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 

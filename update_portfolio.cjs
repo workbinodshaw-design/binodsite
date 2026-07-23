@@ -38,7 +38,7 @@ code = code.replace(
 
 // Scale down the card width on mobile
 code = code.replace(
-    /transform: \`translateY\(\$\{translateY\}vh\) rotateY\(\$\{angle\}deg\) translateZ\(\$\{radius\}px\)\`,/g,
+    /transform: `translateY\(\$\{translateY\}vh\) rotateY\(\$\{angle\}deg\) translateZ\(\$\{radius\}px\)`,/g,
     `transform: \`translateY(\${translateY}vh) rotateY(\${angle}deg) translateZ(\${radius}px) \${isMobile ? 'scale(0.8)' : 'scale(1)'}\`,`
 );
 

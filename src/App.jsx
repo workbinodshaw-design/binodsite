@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Loader2 } from 'lucide-react';
 import Navbar from './components/Navbar';
 const HomePage = React.lazy(() => import('./pages/HomePage'));
 const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
@@ -29,15 +30,22 @@ import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 import ScrollReveal from './components/ScrollReveal';
 import AnalyticsTracker from './components/AnalyticsTracker';
+import ScrollToTop from './components/ScrollToTop';
 
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import PageTransition from './components/PageTransition';
 
+const LoadingFallback = () => (
+  <div className="page-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', background: 'var(--bg-color)' }}>
+    <Loader2 className="spin" size={48} color="#a388ff" />
+  </div>
+);
+
 function AnimatedMainRoutes() {
   const location = useLocation();
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
         <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
@@ -96,9 +104,10 @@ function App() {
   if (hostname.startsWith('privacypolicy.')) {
     return (
       <Router basename={import.meta.env.BASE_URL}>
+        <ScrollToTop />
         <AnalyticsTracker />
         <Navbar />
-        <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
+        <React.Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="*" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
           </Routes>
@@ -113,9 +122,10 @@ function App() {
   if (hostname.startsWith('portfolio.')) {
     return (
       <Router basename={import.meta.env.BASE_URL}>
+        <ScrollToTop />
         <AnalyticsTracker />
         <Navbar />
-        <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
+        <React.Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="*" element={<PageTransition><PortfolioPage /></PageTransition>} />
           </Routes>
@@ -130,8 +140,9 @@ function App() {
   if (hostname.startsWith('admin.')) {
     return (
       <Router basename={import.meta.env.BASE_URL}>
+        <ScrollToTop />
         <AnalyticsTracker />
-        <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
+        <React.Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="/" element={<PageTransition><AdminLogin /></PageTransition>} />
             <Route path="/admin-login" element={<Navigate to="/" replace />} />
@@ -155,8 +166,9 @@ function App() {
   if (hostname.startsWith('team.')) {
     return (
       <Router basename={import.meta.env.BASE_URL}>
+        <ScrollToTop />
         <AnalyticsTracker />
-        <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
+        <React.Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="/" element={<PageTransition><TeamLogin /></PageTransition>} />
             <Route path="/team-login" element={<Navigate to="/" replace />} />
@@ -179,11 +191,12 @@ function App() {
   // Default Main Domain (castflow.in, www.castflow.in, localhost)
   return (
     <Router basename={import.meta.env.BASE_URL}>
+      <ScrollToTop />
       <AnalyticsTracker />
       <ScrollReveal />
       <Navbar />
       
-      <React.Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-color)' }}></div>}>
+      <React.Suspense fallback={<LoadingFallback />}>
         <AnimatedMainRoutes />
       </React.Suspense>
 

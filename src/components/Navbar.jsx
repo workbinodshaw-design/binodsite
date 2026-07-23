@@ -51,7 +51,8 @@ const Navbar = () => {
             } else {
               setUserRole('client');
             }
-          } catch (e) {
+          } catch (error) {
+            console.error("Error fetching user role for Navbar:", error);
             setUserRole('client');
           }
         }

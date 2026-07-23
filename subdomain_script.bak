@@ -1,3 +1,4 @@
+/* eslint-disable */
 const fs = require('fs');
 let appJsx = fs.readFileSync('src/App.jsx', 'utf8');
 

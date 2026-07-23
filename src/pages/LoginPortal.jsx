@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import { Lock, User } from 'lucide-react';
@@ -28,7 +28,8 @@ const LoginPortal = () => {
           } else {
             navigate('/client');
           }
-        } catch (e) {
+        } catch (error) {
+          console.error("Error fetching login portal role:", error);
           navigate('/client');
         }
       }

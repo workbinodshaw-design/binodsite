@@ -27,7 +27,8 @@ const AdminLogin = () => {
               auth.signOut();
               setError("UNAUTHORIZED: This terminal is restricted to Admins only.");
             }
-          } catch (e) {
+          } catch (error) {
+            console.error("Error fetching admin role:", error);
             auth.signOut();
             setError("Authentication error.");
           }

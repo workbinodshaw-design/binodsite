@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MessageSquare, Workflow, Database, LineChart, ArrowRight, Bot, Zap } from 'lucide-react';
+import { MessageSquare, Workflow, Database, LineChart, ArrowRight } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
 import LeadFormModal from '../components/LeadFormModal';
 import InteractiveDemo from '../components/InteractiveDemo';

@@ -25,10 +25,19 @@ Your ONLY job is to answer questions using EXACTLY the information provided belo
 - If they ask something completely unrelated to our services, politely refuse to answer and guide them back to web dev or AI.`;
 
 export default async function handler(req, res) {
-  // CORS Headers for API
+  // Hardened CORS Headers
+  const origin = req.headers.origin || '';
+  const isLocalhost = origin.includes('localhost') || origin.includes('127.0.0.1');
+  const isCastflow = origin === 'https://castflow.in' || origin.endsWith('.castflow.in');
+  
+  if (isLocalhost || isCastflow) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', 'https://castflow.in');
+  }
+  
   res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
 
   if (req.method === 'OPTIONS') {
@@ -43,16 +52,21 @@ export default async function handler(req, res) {
   try {
     const { messages } = req.body;
 
-    if (!messages || !Array.isArray(messages)) {
-      return res.status(400).json({ error: 'Invalid message format' });
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+      return res.status(400).json({ error: 'Invalid or empty message format' });
     }
 
-    // Format history for Groq
+    // Harden: Limit message history length to prevent token exhaustion
+    if (messages.length > 15) {
+      return res.status(400).json({ error: 'Message history too long' });
+    }
+
+    // Format history for Groq with strict length validation on user input
     const apiMessages = [
       { role: 'system', content: SYSTEM_PROMPT },
       ...messages.map(m => ({
         role: m.sender === 'ai' ? 'assistant' : 'user',
-        content: m.text
+        content: String(m.text || '').substring(0, 500) // Truncate to 500 chars to prevent DoS
       }))
     ];
 

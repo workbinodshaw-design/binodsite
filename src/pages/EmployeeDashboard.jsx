@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, where, doc, updateDoc } from 'firebase/firestore';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { db, auth } from '../firebase';
-import { RefreshCw, LogOut, CheckCircle2, Clock, AlertCircle, Briefcase, Activity } from 'lucide-react';
+import { RefreshCw, LogOut, CheckCircle2, Briefcase, Activity } from 'lucide-react';
 
 const EmployeeDashboard = () => {
   const [tasks, setTasks] = useState([]);

@@ -320,7 +320,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Modern Tabs */}
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '3rem', background: 'rgba(0,0,0,0.2)', padding: '0.5rem', borderRadius: '16px', display: 'inline-flex' }}>
+      <div style={{ gap: '1rem', marginBottom: '3rem', background: 'rgba(0,0,0,0.2)', padding: '0.5rem', borderRadius: '16px', display: 'inline-flex' }}>
         <button 
           onClick={() => setActiveTab('leads')}
           style={{ 
@@ -974,7 +974,7 @@ const AdminDashboard = () => {
                       acc[view.path] = (acc[view.path] || 0) + 1;
                       return acc;
                     }, {})
-                  ).sort((a, b) => b[1] - a[1]).map(([path, views], index) => (
+                  ).sort((a, b) => b[1] - a[1]).map(([path, views], _index) => (
                     <tr key={path} style={{ borderBottom: '1px solid var(--glass-border, rgba(0,0,0,0.05))' }}>
                       <td style={{ padding: '1rem 0', color: 'var(--text-primary)' }}>{path}</td>
                       <td style={{ padding: '1rem 0', color: '#38bdf8', fontWeight: 'bold' }}>{views}</td>
