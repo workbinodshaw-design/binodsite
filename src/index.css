@@ -2028,8 +2028,8 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 }
 
 .ai-chat-window {
-  width: 330px;
-  height: 650px;
+  width: 290px;
+  height: 590px;
   background: rgba(20, 20, 25, 0.98);
   backdrop-filter: blur(20px);
   border: 10px solid #111;
@@ -2046,8 +2046,8 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 
 @media (max-width: 400px) {
   .ai-chat-window {
-    width: 310px;
-    height: 600px;
+    width: 270px;
+    height: 540px;
   }
 }
 
