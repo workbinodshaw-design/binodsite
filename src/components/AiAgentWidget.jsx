@@ -66,6 +66,10 @@ const AiAgentWidget = () => {
     <div className="ai-widget-container">
       {isOpen && (
         <div className="ai-chat-window glass">
+          <div className="dynamic-island">
+            <div className="sensor"></div>
+            <div className="camera"></div>
+          </div>
           <div className="ai-chat-header">
             <div className="ai-header-info">
               <div className="ai-avatar">
@@ -111,6 +115,7 @@ const AiAgentWidget = () => {
               <MessageCircle size={18} /> WhatsApp Support
             </ProtectedWhatsAppLink>
           </div>
+          <div className="home-indicator"></div>
         </div>
       )}
 

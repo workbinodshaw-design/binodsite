@@ -2028,16 +2028,17 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 }
 
 .ai-chat-window {
-  width: 350px;
-  height: 500px;
-  background: rgba(20, 20, 25, 0.85);
+  width: 330px;
+  height: 650px;
+  background: rgba(20, 20, 25, 0.98);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(163, 136, 255, 0.3);
-  border-radius: 24px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(93, 63, 211, 0.2);
+  border: 10px solid #111;
+  border-radius: 45px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 0 1px #333;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
   animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform-origin: bottom right;
   margin-bottom: 20px;
@@ -2045,18 +2046,61 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 
 @media (max-width: 400px) {
   .ai-chat-window {
-    width: 300px;
-    height: 450px;
+    width: 310px;
+    height: 600px;
   }
 }
 
 .ai-chat-header {
-  padding: 15px 20px;
+  padding: 45px 20px 15px 20px;
   background: rgba(93, 63, 211, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+/* iPhone 15 Details */
+.dynamic-island {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 25px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 100;
+  box-shadow: inset 0 0 2px rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+.dynamic-island .sensor {
+  width: 10px;
+  height: 10px;
+  background: #080808;
+  border-radius: 50%;
+  box-shadow: inset 0 0 2px rgba(255,255,255,0.1);
+}
+
+.dynamic-island .camera {
+  width: 10px;
+  height: 10px;
+  background: #050505;
+  border-radius: 50%;
+  border: 1px solid #1a1a1a;
+  box-shadow: inset 0 0 3px rgba(40, 40, 255, 0.4);
+}
+
+.home-indicator {
+  width: 120px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  margin: 10px auto 10px auto;
 }
 
 .ai-header-info {
@@ -2068,7 +2112,7 @@ h1, h2, h3, h4, h5, h6, .headline, .section-title, .logo-text {
 .ai-avatar {
   width: 36px;
   height: 36px;
-  border-radius: 4px;
+  border-radius: 50%;
   background: linear-gradient(135deg, #a388ff, #5D3FD3);
   display: flex;
   align-items: center;
