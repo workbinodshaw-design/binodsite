@@ -1,44 +1,109 @@
 import Groq from 'groq-sdk';
+import fs from 'fs';
+import path from 'path';
 
-// Initialize Groq client on the BACKEND where the API key is hidden.
-// Process.env accesses the secure environment variables configured in Vercel.
 const groq = new Groq({
   apiKey: process.env.VITE_GROQ_API_KEY || process.env.GROQ_API_KEY,
 });
 
-// The System Prompt is completely hidden from the browser
-const SYSTEM_PROMPT = `You are CastFlow AI, the friendly and highly professional assistant for CastFlow (an AI Automation and Web Development Agency).
+// Cache for frequent queries to avoid re-scoring
+const queryCache = new Map();
 
-# Core Instructions & Personality
-1. Be exceptionally friendly and welcoming.
-2. Reply VERY shortly and concisely. No unnecessary speaking. Keep answers to 1-2 short sentences maximum.
-3. Your ONLY job is to answer questions using EXACTLY the information provided below. NEVER hallucinate, guess, or invent features, prices, or services.
-4. If a user asks something unrelated to CastFlow or our services, politely decline and guide them back to Web Development or AI Automation.
-5. Do NOT use markdown formatting (no asterisks, bolding, or lists). Write in plain text.
+// Global variable to hold knowledge chunks (loads once on cold start)
+let knowledgeChunks = [];
 
-# CastFlow Business Information
-- We build high-performance Web Applications (SaaS, E-Commerce, Landing Pages, 3D WebGL) and advanced AI Automation systems (Customer Support Chatbots, CRM Workflows, Lead Generation, Data Analysis).
-- Pricing: Web Development starts at $2,000. AI Automation starts at $3,000.
-- Contact: Users can book us via the Lead Form on the /contact page or via WhatsApp.
+function loadKnowledge() {
+  if (knowledgeChunks.length > 0) return;
+  try {
+    const knowledgeDir = path.join(process.cwd(), 'knowledge');
+    if (!fs.existsSync(knowledgeDir)) return;
+    
+    const files = fs.readdirSync(knowledgeDir);
+    for (const file of files) {
+      if (file.endsWith('.json')) {
+        const content = fs.readFileSync(path.join(knowledgeDir, file), 'utf-8');
+        const parsed = JSON.parse(content);
+        
+        // Flatten JSON into text chunks
+        if (Array.isArray(parsed)) {
+          parsed.forEach(item => knowledgeChunks.push(JSON.stringify(item)));
+        } else {
+          knowledgeChunks.push(JSON.stringify(parsed));
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Error loading knowledge:", error);
+  }
+}
 
-# Website Navigation & Features
-- Homepage (/): Features a 3D Spiderman interactive experience, client marquee, and service overviews.
-- Web Development (/services/web-development): Showcases our high-performance tech stack and features a live Performance Visualizer.
-- AI Automation (/services/ai-automation): Features a live "Interactive CRM Demo" where users can test automation. Tell users to go here if they want to "experience AI on the site".
-- Portfolio & Projects (/portfolio, /projects): Showcases our past work and client success stories.
-- Team & Careers (/team, /join-team): Information about our employees and hiring.
+const stopWords = new Set(["a", "an", "the", "and", "or", "but", "is", "are", "am", "to", "for", "of", "in", "on", "what", "how", "why", "where", "when", "i", "want", "tell", "me", "about"]);
 
-# RunFest (Virtual Running Challenge)
-- We organize "RunFest", a 7-Day Virtual Running Challenge (/runfest).
-- Users can run anywhere, track kilometers via GPS, and compete across India to earn a physical finisher medal.
+function extractKeywords(query) {
+  return query.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(w => w.length > 2 && !stopWords.has(w));
+}
 
-# Portals & Subdomains
-- Admin Portal (admin.castflow.in): For founders to manage leads, analytics, and employees.
-- Team Portal (team.castflow.in): For employees to manage tasks and projects.
-- Client Portal (/client): For active clients to track project progress.
+function retrieveContext(query) {
+  loadKnowledge();
+  
+  if (queryCache.has(query)) {
+    return queryCache.get(query);
+  }
 
-# Final Strict Reminder
-Only answer based on the above. Keep it extremely friendly, short, and to the point.`;
+  const keywords = extractKeywords(query);
+  if (keywords.length === 0) return "";
+
+  const scoredChunks = knowledgeChunks.map(chunk => {
+    const chunkLower = chunk.toLowerCase();
+    let score = 0;
+    keywords.forEach(kw => {
+      if (chunkLower.includes(kw)) score++;
+    });
+    return { chunk, score };
+  });
+
+  scoredChunks.sort((a, b) => b.score - a.score);
+  
+  // Take top 3 relevant chunks
+  const topChunks = scoredChunks.slice(0, 3).filter(c => c.score > 0).map(c => c.chunk);
+  const contextText = topChunks.join('\n\n');
+  
+  // Cache the result (limit cache size to 100 to avoid memory leaks)
+  if (queryCache.size > 100) {
+    const firstKey = queryCache.keys().next().value;
+    queryCache.delete(firstKey);
+  }
+  queryCache.set(query, contextText);
+  
+  return contextText;
+}
+
+const INJECTION_PATTERNS = [
+  /ignore previous/i,
+  /system prompt/i,
+  /api key/i,
+  /backend/i,
+  /database/i,
+  /hidden route/i,
+  /firebase/i,
+  /show code/i,
+  /developer/i
+];
+
+const SYSTEM_PROMPT_TEMPLATE = `You are the CastFlow AI Website Assistant. You are friendly, highly professional, and natural.
+Your ONLY job is to answer questions using EXACTLY the Context Information provided below. 
+
+# Conversation Rules
+1. Reply VERY shortly. Keep answers to a maximum of 4-6 lines unless more detail is explicitly requested.
+2. If the user asks about Pricing, RunFest, Services, Contact, or About, guide them to the correct page based on the context.
+3. NEVER hallucinate, guess, or invent information.
+4. If the context does not contain the answer, you MUST say EXACTLY: "I couldn't find verified information about that."
+5. Do NOT use markdown. Write in plain text.
+6. Avoid robotic wording. Avoid unnecessary greetings on every message.
+
+# Context Information
+{context}
+`;
 
 export default async function handler(req, res) {
   // Hardened CORS Headers
@@ -72,24 +137,35 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid or empty message format' });
     }
 
-    // Harden: Limit message history length to prevent token exhaustion
     if (messages.length > 15) {
       return res.status(400).json({ error: 'Message history too long' });
     }
 
-    // Format history for Groq with strict length validation on user input
+    const latestUserMessage = messages[messages.length - 1].text || '';
+    
+    // Injection Protection
+    for (const pattern of INJECTION_PATTERNS) {
+      if (pattern.test(latestUserMessage)) {
+        return res.status(200).json({ response: "I'm sorry, but I cannot assist with that request." });
+      }
+    }
+
+    // RAG Retrieval
+    const retrievedContext = retrieveContext(latestUserMessage);
+    const finalSystemPrompt = SYSTEM_PROMPT_TEMPLATE.replace('{context}', retrievedContext || "No specific context found. Stick to general polite refusal.");
+
     const apiMessages = [
-      { role: 'system', content: SYSTEM_PROMPT },
+      { role: 'system', content: finalSystemPrompt },
       ...messages.map(m => ({
         role: m.sender === 'ai' ? 'assistant' : 'user',
-        content: String(m.text || '').substring(0, 500) // Truncate to 500 chars to prevent DoS
+        content: String(m.text || '').substring(0, 500)
       }))
     ];
 
     const completion = await groq.chat.completions.create({
       messages: apiMessages,
       model: 'llama-3.1-8b-instant',
-      temperature: 0.7,
+      temperature: 0.2, // Low temperature for factual accuracy
       max_tokens: 150,
     });
 
