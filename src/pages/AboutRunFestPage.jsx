@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { Mail, Instagram, Clock, ShieldCheck, Activity, Lock, Award, Headphones, Briefcase, Eye, Zap, Users, Globe, Target } from 'lucide-react';
+import { Mail, AtSign, Clock, ShieldCheck, Activity, Lock, Award, Headphones, Briefcase, Eye, Zap, Users, Globe, Target } from 'lucide-react';
 
 const AboutRunFestPage = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -188,7 +188,7 @@ const AboutRunFestPage = () => {
                  <Mail size={20} color="#111827" /> <span style={{ fontWeight: 600, color: '#111827' }}>Official Email:</span> support@castflow.in
                </motion.div>
                <motion.div variants={revealUp} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563' }}>
-                 <Instagram size={20} color="#111827" /> <span style={{ fontWeight: 600, color: '#111827' }}>Official Instagram:</span> @runfest.in
+                 <AtSign size={20} color="#111827" /> <span style={{ fontWeight: 600, color: '#111827' }}>Official Instagram:</span> @runfest.in
                </motion.div>
                <motion.div variants={revealUp} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563' }}>
                  <Clock size={20} color="#111827" /> <span style={{ fontWeight: 600, color: '#111827' }}>Support Hours:</span> 10:00 AM – 6:00 PM (Mon - Sat)
