@@ -5,20 +5,15 @@ const groq = new Groq({
   apiKey: process.env.VITE_GROQ_API_KEY || process.env.GROQ_API_KEY,
 });
 
-// Build chunks from knowledgeData
-let chunks = [];
-let companyContext = JSON.stringify(knowledgeData.company || {}) + "\\n" + JSON.stringify(knowledgeData.contact || {});
+// 1. Core context that ALWAYS gets injected (pricing, services, about, etc.)
+const coreKnowledge = { ...knowledgeData };
+delete coreKnowledge.faq; // Remove the massive FAQ array
+const coreContextText = JSON.stringify(coreKnowledge, null, 2);
 
-for (const [key, value] of Object.entries(knowledgeData)) {
-  if (key === 'faq' && Array.isArray(value)) {
-    value.forEach(item => chunks.push(JSON.stringify(item)));
-  } else if (key !== 'company' && key !== 'contact') {
-    if (Array.isArray(value)) {
-      value.forEach(item => chunks.push(JSON.stringify(item)));
-    } else {
-      chunks.push(JSON.stringify(value));
-    }
-  }
+// 2. FAQ chunks for dynamic retrieval
+const faqChunks = [];
+if (Array.isArray(knowledgeData.faq)) {
+  knowledgeData.faq.forEach(item => faqChunks.push(JSON.stringify(item)));
 }
 
 const stopWords = new Set(["a", "an", "the", "and", "or", "but", "is", "are", "am", "to", "for", "of", "in", "on", "what", "how", "why", "where", "when", "i", "want", "tell", "me", "about", "please", "can", "you", "do", "have", "hi", "hello", "hey"]);
@@ -27,14 +22,14 @@ function extractKeywords(query) {
   return query.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(w => w.length > 1 && !stopWords.has(w));
 }
 
-function retrieveContext(query) {
+function retrieveFaqContext(query) {
   const keywords = extractKeywords(query);
   
   if (keywords.length === 0) {
-    return companyContext;
+    return ""; // No specific keywords, don't inject extra FAQs
   }
 
-  const scoredChunks = chunks.map(chunk => {
+  const scoredChunks = faqChunks.map(chunk => {
     const chunkLower = chunk.toLowerCase();
     let score = 0;
     keywords.forEach(kw => {
@@ -45,15 +40,9 @@ function retrieveContext(query) {
 
   scoredChunks.sort((a, b) => b.score - a.score);
   
-  // Take top 4 relevant chunks
-  const topChunks = scoredChunks.slice(0, 4).filter(c => c.score > 0).map(c => c.chunk);
-  
-  if (topChunks.length === 0) {
-    return companyContext; // Fallback if no matches
-  }
-
-  // Always include the company context as a baseline
-  return companyContext + "\\n\\n" + topChunks.join('\\n\\n');
+  // Take top 2 most relevant FAQs
+  const topChunks = scoredChunks.slice(0, 2).filter(c => c.score > 0).map(c => c.chunk);
+  return topChunks.length > 0 ? "\\n\\n# Relevant FAQs:\\n" + topChunks.join('\\n\\n') : "";
 }
 
 const INJECTION_PATTERNS = [
@@ -72,14 +61,15 @@ const SYSTEM_PROMPT_TEMPLATE = `You are CastFlow AI, a highly intelligent and fr
 
 # Core Instructions
 1. Reply VERY shortly and exactly to the point (1-3 sentences maximum). Do not write long paragraphs.
-2. Use the Context Information provided below to answer. 
+2. Use the Context Information provided below to answer. It contains all pricing, services, and company details.
 3. If the user is just saying hello, greet them kindly and ask how you can help them.
 4. If you don't know the answer based on the context, politely say you don't have that specific information.
 5. Write in plain text without formatting (no markdown).
 6. Be highly professional and concise like a true human assistant.
 
 # Context Information
-{context}
+${coreContextText}
+{dynamic_faqs}
 `;
 
 export default async function handler(req, res) {
@@ -127,8 +117,8 @@ export default async function handler(req, res) {
       }
     }
 
-    const retrievedContext = retrieveContext(latestUserMessage);
-    const finalSystemPrompt = SYSTEM_PROMPT_TEMPLATE.replace('{context}', retrievedContext);
+    const dynamicFaqs = retrieveFaqContext(latestUserMessage);
+    const finalSystemPrompt = SYSTEM_PROMPT_TEMPLATE.replace('{dynamic_faqs}', dynamicFaqs);
 
     const apiMessages = [
       { role: 'system', content: finalSystemPrompt },
@@ -141,8 +131,8 @@ export default async function handler(req, res) {
     const completion = await groq.chat.completions.create({
       messages: apiMessages,
       model: 'llama-3.1-8b-instant',
-      temperature: 0.2, // Lowered temperature for direct answers
-      max_tokens: 100, // Reduced max tokens so it physically cannot talk too much
+      temperature: 0.2, 
+      max_tokens: 100, 
     });
 
     const aiResponse = completion.choices[0]?.message?.content || "I'm sorry, I encountered an error. Please contact us on WhatsApp.";
