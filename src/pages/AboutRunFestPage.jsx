@@ -138,8 +138,8 @@ const AboutRunFestPage = () => {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '30px' }}>
             {['Every registration.', 'Every submitted activity.', 'Every verified kilometer.', 'Every leaderboard update.', 'Every reward.'].map((line, i) => (
               <motion.div key={i} variants={revealUp} style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10B981' }}></div>
-                 <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '20px', fontWeight: 500, color: '#111827' }}>{line}</span>
+                 <div style={{ minWidth: '8px', minHeight: '8px', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10B981' }}></div>
+                 <span style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '16px' : '20px', fontWeight: 500, color: '#111827', textAlign: 'left' }}>{line}</span>
               </motion.div>
             ))}
             
@@ -184,17 +184,17 @@ const AboutRunFestPage = () => {
             <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, fontSize: isMobile ? '28px' : '40px', marginBottom: '40px' }}>Get in Touch</motion.h2>
             
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-               <motion.div variants={revealUp} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563' }}>
-                 <Mail size={20} color="#111827" /> <span style={{ fontWeight: 600, color: '#111827' }}>Official Email:</span> support@castflow.in
+               <motion.div variants={revealUp} style={{ display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'center', gap: '15px', fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '14px' : '16px', color: '#4B5563', flexDirection: isMobile ? 'column' : 'row' }}>
+                 <Mail size={20} color="#111827" /> <div><span style={{ fontWeight: 600, color: '#111827' }}>Official Email:</span> support@castflow.in</div>
                </motion.div>
-               <motion.div variants={revealUp} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563' }}>
-                 <AtSign size={20} color="#111827" /> <span style={{ fontWeight: 600, color: '#111827' }}>Official Instagram:</span> @runfest.in
+               <motion.div variants={revealUp} style={{ display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'center', gap: '15px', fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '14px' : '16px', color: '#4B5563', flexDirection: isMobile ? 'column' : 'row' }}>
+                 <AtSign size={20} color="#111827" /> <div><span style={{ fontWeight: 600, color: '#111827' }}>Official Instagram:</span> @runfest.in</div>
                </motion.div>
-               <motion.div variants={revealUp} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563' }}>
-                 <Clock size={20} color="#111827" /> <span style={{ fontWeight: 600, color: '#111827' }}>Support Hours:</span> 10:00 AM – 6:00 PM (Mon - Sat)
+               <motion.div variants={revealUp} style={{ display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'center', gap: '15px', fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '14px' : '16px', color: '#4B5563', flexDirection: isMobile ? 'column' : 'row' }}>
+                 <Clock size={20} color="#111827" /> <div><span style={{ fontWeight: 600, color: '#111827' }}>Support Hours:</span> 10:00 AM – 6:00 PM (Mon - Sat)</div>
                </motion.div>
-               <motion.div variants={revealUp} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563' }}>
-                 <ShieldCheck size={20} color="#10B981" /> <span style={{ fontWeight: 600, color: '#111827' }}>Expected Response Time:</span> 24–48 Hours
+               <motion.div variants={revealUp} style={{ display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'center', gap: '15px', fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '14px' : '16px', color: '#4B5563', flexDirection: isMobile ? 'column' : 'row' }}>
+                 <ShieldCheck size={20} color="#10B981" /> <div><span style={{ fontWeight: 600, color: '#111827' }}>Expected Response Time:</span> 24–48 Hours</div>
                </motion.div>
             </motion.div>
          </div>
