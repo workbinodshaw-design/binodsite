@@ -257,8 +257,8 @@ const RunFestPage = () => {
         
         {/* Full Width Cinematic Image */}
         <motion.div initial={{ scale: 0.95, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }} viewport={{ once: true }} style={{ width: '100%', height: isMobile ? '50vh' : '70vh', borderRadius: '4px', overflow: 'hidden' }}>
-          {/* OPTIMIZATION: Lazy load */}
-          <img src="/runfest_story.png" alt="Exhausted Runner" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          {/* OPTIMIZATION: High priority load */}
+          <img src="/runfest_story.webp" alt="Exhausted Runner" fetchpriority="high" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </motion.div>
       </section>
 
@@ -357,7 +357,7 @@ const RunFestPage = () => {
           <motion.img 
             animate={!isMobile ? { y: [-20, 20, -20], rotateZ: [-2, 2, -2] } : { y: [-10, 10, -10] }} 
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-            src="/runfest_medal.png" alt="RunFest Medal" loading="lazy" decoding="async" style={{ width: isMobile ? '80vw' : 'clamp(300px, 40vw, 600px)', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.15))', maxWidth: '400px' }} 
+            src="/runfest_medal.webp" alt="RunFest Medal" loading="lazy" decoding="async" style={{ width: isMobile ? '80vw' : 'clamp(300px, 40vw, 600px)', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.15))', maxWidth: '400px' }} 
           />
         </motion.div>
         

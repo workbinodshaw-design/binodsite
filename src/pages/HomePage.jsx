@@ -270,8 +270,9 @@ const HomePage = () => {
               <motion.img 
                 animate={{ y: [-15, 15, -15], rotateZ: [-2, 2, -2] }} 
                 transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                src="/runfest_medal.png" 
+                src="/runfest_medal.webp" 
                 alt="RunFest Medal" 
+                fetchpriority="high"
                 style={{ 
                   position: 'absolute', 
                   right: isMobile ? '-10px' : '-45px', 
