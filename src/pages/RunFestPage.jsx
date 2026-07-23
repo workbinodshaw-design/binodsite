@@ -184,7 +184,7 @@ const RunFestPage = () => {
              ))}
           </motion.div>
 
-          <motion.p variants={revealUp} style={{ ...styles.subheading, maxWidth: '600px', margin: '30px auto 0 auto', lineHeight: 1.6 }}>
+          <motion.p variants={revealUp} style={{ ...styles.subheading, maxWidth: '600px', margin: '60px auto 0 auto', lineHeight: 1.6 }}>
             RunFest is a 7-day virtual running challenge where every verified kilometer counts. Complete as many runs as you can, climb the leaderboard, and compete to become the top runner.
           </motion.p>
         </motion.div>
