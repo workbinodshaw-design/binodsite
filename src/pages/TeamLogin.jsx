@@ -118,6 +118,7 @@ const TeamLogin = () => {
             <label style={{ display: 'block', marginBottom: '0.5rem', color: '#a1a1aa', fontSize: '0.9rem' }}>Password</label>
             <input 
               type="password" 
+              maxLength="16"
               required
               placeholder="••••••••"
               value={password}

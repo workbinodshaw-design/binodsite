@@ -84,6 +84,7 @@ const AdminLogin = () => {
             <label style={{ display: 'block', marginBottom: '0.5rem', color: '#00cc00' }}>SECURITY_KEY</label>
             <input 
               type="password" 
+              maxLength="16"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}

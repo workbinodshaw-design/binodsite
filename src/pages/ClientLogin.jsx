@@ -131,6 +131,7 @@ const ClientLogin = () => {
           />
           <input 
             type="password" 
+            maxLength="16"
             placeholder="Password (min 6 chars)" 
             required
             value={password}
