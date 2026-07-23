@@ -168,7 +168,7 @@ const RunFestPage = () => {
           
           <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '15px', justifyContent: 'center', marginTop: '30px' }}>
             <a href="#register" style={{ ...styles.btn, ...styles.btnPrimary }}>Register Now</a>
-            <a href="#timeline" style={{ ...styles.btn, ...styles.btnSecondary }}>Learn More</a>
+            <Link to="/about-runfest" style={{ ...styles.btn, ...styles.btnSecondary }}>About RunFest</Link>
           </motion.div>
           
           <motion.div variants={revealUp} style={{ marginTop: '30px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: isMobile ? '15px' : '30px', padding: '0 10px' }}>
@@ -684,8 +684,8 @@ const RunFestPage = () => {
       {/* ================= FOOTER ================= */}
       <footer style={{ padding: '60px 5vw 40px', backgroundColor: '#FFFFFF', borderTop: '1px solid #E5E7EB', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '30px' }}>
          <div style={{ display: 'flex', gap: isMobile ? '15px' : '30px', flexWrap: 'wrap', justifyContent: 'center' }}>
-            {['Privacy Policy', 'Refund Policy', 'Shipping Policy', 'Terms & Conditions', 'Contact', 'Instagram'].map((link) => (
-              <Link key={link} to="#" style={{ fontFamily: '"Inter", sans-serif', fontSize: '15px', color: '#6B7280', textDecoration: 'none' }}>{link}</Link>
+            {['About RunFest', 'Privacy Policy', 'Refund Policy', 'Shipping Policy', 'Terms & Conditions', 'Contact', 'Instagram'].map((link) => (
+              <Link key={link} to={link === 'About RunFest' ? '/about-runfest' : '#'} style={{ fontFamily: '"Inter", sans-serif', fontSize: '15px', color: '#6B7280', textDecoration: 'none' }}>{link}</Link>
             ))}
          </div>
          <div style={{ fontFamily: '"Inter", sans-serif', fontSize: '14px', color: '#9CA3AF' }}>
