@@ -1,88 +1,12 @@
 import Groq from 'groq-sdk';
-import fs from 'fs';
-import path from 'path';
+import { knowledgeData } from '../knowledge/data.js';
 
 const groq = new Groq({
   apiKey: process.env.VITE_GROQ_API_KEY || process.env.GROQ_API_KEY,
 });
 
-const queryCache = new Map();
-let knowledgeChunks = [];
-let fallbackContext = "";
-
-function loadKnowledge() {
-  if (knowledgeChunks.length > 0) return;
-  try {
-    const knowledgeDir = path.join(process.cwd(), 'knowledge');
-    
-    // Explicitly listing files helps Vercel's bundler include them
-    const files = [
-      'company.json', 'services.json', 'pricing.json', 'portfolio.json', 
-      'runfest.json', 'about.json', 'team.json', 'contact.json', 
-      'policies.json', 'website_navigation.json', 'faq.json'
-    ];
-    
-    for (const file of files) {
-      const filePath = path.join(knowledgeDir, file);
-      if (fs.existsSync(filePath)) {
-        const content = fs.readFileSync(filePath, 'utf-8');
-        const parsed = JSON.parse(content);
-        
-        if (file === 'company.json') {
-          fallbackContext = JSON.stringify(parsed);
-        }
-        
-        if (Array.isArray(parsed)) {
-          parsed.forEach(item => knowledgeChunks.push(JSON.stringify(item)));
-        } else {
-          knowledgeChunks.push(JSON.stringify(parsed));
-        }
-      }
-    }
-  } catch (error) {
-    console.error("Error loading knowledge:", error);
-  }
-}
-
-const stopWords = new Set(["a", "an", "the", "and", "or", "but", "is", "are", "am", "to", "for", "of", "in", "on", "what", "how", "why", "where", "when", "i", "want", "tell", "me", "about", "please", "can", "you", "do", "have"]);
-
-function extractKeywords(query) {
-  return query.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(w => w.length > 1 && !stopWords.has(w));
-}
-
-function retrieveContext(query) {
-  loadKnowledge();
-  
-  if (queryCache.has(query)) {
-    return queryCache.get(query);
-  }
-
-  const keywords = extractKeywords(query);
-  
-  if (keywords.length === 0) return fallbackContext;
-
-  const scoredChunks = knowledgeChunks.map(chunk => {
-    const chunkLower = chunk.toLowerCase();
-    let score = 0;
-    keywords.forEach(kw => {
-      if (chunkLower.includes(kw)) score++;
-    });
-    return { chunk, score };
-  });
-
-  scoredChunks.sort((a, b) => b.score - a.score);
-  
-  const topChunks = scoredChunks.slice(0, 5).filter(c => c.score > 0).map(c => c.chunk);
-  const contextText = topChunks.length > 0 ? topChunks.join('\n\n') : fallbackContext;
-  
-  if (queryCache.size > 100) {
-    const firstKey = queryCache.keys().next().value;
-    queryCache.delete(firstKey);
-  }
-  queryCache.set(query, contextText);
-  
-  return contextText;
-}
+// Convert the entire knowledge base to a structured string
+const fullKnowledgeContext = JSON.stringify(knowledgeData, null, 2);
 
 const INJECTION_PATTERNS = [
   /ignore previous/i,
@@ -96,20 +20,20 @@ const INJECTION_PATTERNS = [
   /developer/i
 ];
 
-const SYSTEM_PROMPT_TEMPLATE = `You are the CastFlow AI Website Assistant. You are friendly, highly professional, and natural.
-Your ONLY job is to answer questions using EXACTLY the Context Information provided below. 
+const SYSTEM_PROMPT_TEMPLATE = `You are CastFlow AI, a highly intelligent, comprehensive, and friendly Website Assistant for CastFlow.
+You must act as a premium, incredibly smart assistant (like Gemini) that knows absolutely everything about the company.
 
-# Conversation Rules
-1. Reply VERY shortly. Keep answers to a maximum of 4-6 lines unless more detail is explicitly requested.
-2. If the user is just saying hello or greeting you, greet them kindly and ask how you can help. Do NOT say you can't find information just for a greeting.
-3. If the user asks about Pricing, RunFest, Services, Contact, or About, guide them to the correct page based on the context.
-4. NEVER hallucinate, guess, or invent information.
-5. If they ask a specific question and the context does not contain the answer, you MUST say EXACTLY: "I couldn't find verified information about that."
-6. Do NOT use markdown. Write in plain text.
-7. Avoid robotic wording. Avoid unnecessary greetings on every message.
+# Core Instructions
+1. You have been provided with the COMPLETE knowledge base of CastFlow below in JSON format. You MUST use this data to answer ANY question the user asks.
+2. Provide comprehensive, helpful, and highly detailed answers. Do not be overly brief if the user asks for details (you can give small to small details).
+3. If the user asks for pricing, services, RunFest, policies, or contact details, give them the exact information from the knowledge base.
+4. If a user is just saying hello or greeting you, be very warm, friendly, and ask how you can help them today.
+5. NEVER hallucinate or invent features. If the answer is truly not in the knowledge base, politely state that you do not have verified information on that specific topic.
+6. Write in plain text, do NOT use markdown (no asterisks, bolding, or lists).
+7. Speak naturally and conversationally. Do not sound like a robot.
 
-# Context Information
-{context}
+# CastFlow Knowledge Base
+${fullKnowledgeContext}
 `;
 
 export default async function handler(req, res) {
@@ -157,12 +81,8 @@ export default async function handler(req, res) {
       }
     }
 
-    // RAG Retrieval
-    const retrievedContext = retrieveContext(latestUserMessage);
-    const finalSystemPrompt = SYSTEM_PROMPT_TEMPLATE.replace('{context}', retrievedContext || "No specific context found. Please politely state you cannot find verified information.");
-
     const apiMessages = [
-      { role: 'system', content: finalSystemPrompt },
+      { role: 'system', content: SYSTEM_PROMPT_TEMPLATE },
       ...messages.map(m => ({
         role: m.sender === 'ai' ? 'assistant' : 'user',
         content: String(m.text || '').substring(0, 500)
@@ -172,8 +92,8 @@ export default async function handler(req, res) {
     const completion = await groq.chat.completions.create({
       messages: apiMessages,
       model: 'llama-3.1-8b-instant',
-      temperature: 0.2, 
-      max_tokens: 150,
+      temperature: 0.3, // Slightly higher for more conversational tone
+      max_tokens: 300,  // Allow longer answers
     });
 
     const aiResponse = completion.choices[0]?.message?.content || "I'm sorry, I encountered an error. Please contact us on WhatsApp.";
