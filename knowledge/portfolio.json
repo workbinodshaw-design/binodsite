@@ -1,0 +1,17 @@
+[
+  {
+    "client": "TechCorp",
+    "project": "AI Customer Support Bot",
+    "result": "Reduced support tickets by 40%."
+  },
+  {
+    "client": "RunFest",
+    "project": "Virtual Running Platform",
+    "result": "Scaled to 10,000+ users with zero downtime."
+  },
+  {
+    "client": "BoutiqueStore",
+    "project": "E-Commerce Storefront",
+    "result": "Increased conversion rate by 25% through 3D product previews."
+  }
+]

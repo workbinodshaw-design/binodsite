@@ -1,0 +1,16 @@
+{
+  "name": "RunFest",
+  "description": "A 7-Day Virtual Running Challenge where users run anywhere and track progress via GPS.",
+  "pricing": {
+    "standard_entry": "$15",
+    "premium_entry": "$25 (includes physical medal and t-shirt)"
+  },
+  "rewards": [
+    "Finisher Medal",
+    "Digital Certificate",
+    "Digital Badge",
+    "T-Shirt (Premium only)"
+  ],
+  "rules": "Participants must track runs using standard GPS apps and submit screenshots before the deadline.",
+  "timeline": "The event lasts exactly 7 days from the chosen start date."
+}

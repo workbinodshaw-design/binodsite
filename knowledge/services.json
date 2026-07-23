@@ -1,0 +1,44 @@
+[
+  {
+    "category": "Web Development",
+    "services": [
+      {
+        "name": "SaaS Platform Development",
+        "description": "Custom, scalable SaaS applications with high performance."
+      },
+      {
+        "name": "E-Commerce Solutions",
+        "description": "Fast and secure online stores."
+      },
+      {
+        "name": "Landing Pages",
+        "description": "High-converting, visually stunning landing pages."
+      },
+      {
+        "name": "3D & Immersive WebGL",
+        "description": "Interactive 3D experiences integrated directly into web browsers."
+      }
+    ]
+  },
+  {
+    "category": "AI Automation",
+    "services": [
+      {
+        "name": "Customer Support Chatbots",
+        "description": "Intelligent bots that resolve customer queries 24/7."
+      },
+      {
+        "name": "CRM & Workflow Automation",
+        "description": "Streamlining business operations by connecting apps and automating data entry."
+      },
+      {
+        "name": "Automated Lead Generation",
+        "description": "AI-driven systems to identify, qualify, and capture leads automatically."
+      },
+      {
+        "name": "AI Data Analysis",
+        "description": "Transforming raw business data into actionable AI insights."
+      }
+    ]
+  }
+]

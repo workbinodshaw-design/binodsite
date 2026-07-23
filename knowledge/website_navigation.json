@@ -1,0 +1,32 @@
+{
+  "intent_mapping": [
+    {
+      "intent": "I want pricing",
+      "url": "/services/web-development (for Web) or /services/ai-automation (for AI)"
+    },
+    {
+      "intent": "I want automation services",
+      "url": "/services/ai-automation"
+    },
+    {
+      "intent": "I want web development",
+      "url": "/services/web-development"
+    },
+    {
+      "intent": "I want marathon",
+      "url": "/runfest"
+    },
+    {
+      "intent": "I want company details",
+      "url": "/about-us"
+    },
+    {
+      "intent": "I want to contact you",
+      "url": "/contact"
+    },
+    {
+      "intent": "I want to see projects",
+      "url": "/portfolio"
+    }
+  ]
+}

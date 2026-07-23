@@ -1,0 +1,10 @@
+{
+  "web_development": {
+    "starts_at": "$2,000",
+    "description": "Custom web apps and high-performance landing pages."
+  },
+  "ai_automation": {
+    "starts_at": "$3,000",
+    "description": "Custom AI chatbots and workflow automations."
+  }
+}
