@@ -1,0 +1,8 @@
+{
+  "rules": [
+    "Track runs using a GPS-enabled fitness app (Strava, Garmin, Google Fit, Nike Run Club).",
+    "Treadmill runs accepted with a photo of the treadmill dashboard.",
+    "Participants can run multiple times over 7 days. Total distance is cumulative.",
+    "If verification fails (missing GPS data, unclear), the activity is rejected."
+  ]
+}

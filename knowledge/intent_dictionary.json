@@ -1,0 +1,46 @@
+{
+  "intents": {
+    "pricing": [
+      "cost",
+      "price",
+      "fee",
+      "how much",
+      "charges",
+      "expensive",
+      "cheap"
+    ],
+    "services": [
+      "what do you do",
+      "offer",
+      "services",
+      "web development",
+      "automation"
+    ],
+    "runfest": [
+      "marathon",
+      "running",
+      "challenge",
+      "runfest",
+      "virtual run",
+      "leaderboard",
+      "certificate",
+      "medal"
+    ],
+    "contact": [
+      "contact",
+      "support",
+      "help",
+      "whatsapp",
+      "email",
+      "reach out",
+      "phone"
+    ],
+    "policies": [
+      "refund",
+      "privacy",
+      "terms",
+      "policy",
+      "conditions"
+    ]
+  }
+}

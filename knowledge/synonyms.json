@@ -1,0 +1,27 @@
+{
+  "synonyms": {
+    "web development": [
+      "website development",
+      "website",
+      "site",
+      "landing page",
+      "web app",
+      "frontend"
+    ],
+    "ai automation": [
+      "automation",
+      "chatbot",
+      "whatsapp automation",
+      "workflow",
+      "ai agent",
+      "ai bot"
+    ],
+    "runfest": [
+      "marathon",
+      "running challenge",
+      "virtual run",
+      "competition",
+      "race"
+    ]
+  }
+}

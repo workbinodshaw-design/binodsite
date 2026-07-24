@@ -5,12 +5,25 @@ const groq = new Groq({
   apiKey: process.env.VITE_GROQ_API_KEY || process.env.GROQ_API_KEY,
 });
 
-// 1. Core context that ALWAYS gets injected (pricing, services, about, etc.)
+// 1. Separate Semantic Data from Core Context
+const synonymsMap = knowledgeData.synonyms?.synonyms || {};
+const intentsMap = knowledgeData.intent_dictionary?.intents || {};
+const conversationRules = knowledgeData.conversation_rules?.rules || [];
+const securityRules = knowledgeData.security_rules?.rules || [];
+
+// 2. Core context that ALWAYS gets injected (pricing, services, etc.)
 const coreKnowledge = { ...knowledgeData };
-delete coreKnowledge.faq; // Remove the massive FAQ array
+// Remove massive sets or metadata from core context sent to LLM
+delete coreKnowledge.faq;
+delete coreKnowledge.synonyms;
+delete coreKnowledge.intent_dictionary;
+delete coreKnowledge.conversation_rules;
+delete coreKnowledge.security_rules;
+delete coreKnowledge.knowledge_index;
+
 const coreContextText = JSON.stringify(coreKnowledge, null, 2);
 
-// 2. FAQ chunks for dynamic retrieval
+// 3. FAQ chunks for dynamic retrieval
 const faqChunks = [];
 if (Array.isArray(knowledgeData.faq)) {
   knowledgeData.faq.forEach(item => faqChunks.push(JSON.stringify(item)));
@@ -19,14 +32,35 @@ if (Array.isArray(knowledgeData.faq)) {
 const stopWords = new Set(["a", "an", "the", "and", "or", "but", "is", "are", "am", "to", "for", "of", "in", "on", "what", "how", "why", "where", "when", "i", "want", "tell", "me", "about", "please", "can", "you", "do", "have", "hi", "hello", "hey"]);
 
 function extractKeywords(query) {
-  return query.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(w => w.length > 1 && !stopWords.has(w));
+  const baseWords = query.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(w => w.length > 1 && !stopWords.has(w));
+  const expandedSet = new Set(baseWords);
+
+  // Intent Expansion
+  Object.keys(intentsMap).forEach(intent => {
+    intentsMap[intent].forEach(keyword => {
+      if (query.toLowerCase().includes(keyword)) {
+        expandedSet.add(intent);
+      }
+    });
+  });
+
+  // Synonym Expansion
+  Object.keys(synonymsMap).forEach(key => {
+    synonymsMap[key].forEach(syn => {
+      if (query.toLowerCase().includes(syn)) {
+        expandedSet.add(key);
+      }
+    });
+  });
+
+  return Array.from(expandedSet);
 }
 
 function retrieveFaqContext(query) {
   const keywords = extractKeywords(query);
   
   if (keywords.length === 0) {
-    return ""; // No specific keywords, don't inject extra FAQs
+    return ""; // No specific keywords
   }
 
   const scoredChunks = faqChunks.map(chunk => {
@@ -40,11 +74,12 @@ function retrieveFaqContext(query) {
 
   scoredChunks.sort((a, b) => b.score - a.score);
   
-  // Take top 2 most relevant FAQs
-  const topChunks = scoredChunks.slice(0, 2).filter(c => c.score > 0).map(c => c.chunk);
-  return topChunks.length > 0 ? "\\n\\n# Relevant FAQs:\\n" + topChunks.join('\\n\\n') : "";
+  // Take top 3 most relevant FAQs as requested
+  const topChunks = scoredChunks.slice(0, 3).filter(c => c.score > 0).map(c => c.chunk);
+  return topChunks.length > 0 ? "\n\n# Relevant FAQs:\n" + topChunks.join('\n\n') : "";
 }
 
+// 4. Injection Protection (Hardcoded + Dynamic)
 const INJECTION_PATTERNS = [
   /ignore previous/i,
   /system prompt/i,
@@ -54,26 +89,25 @@ const INJECTION_PATTERNS = [
   /hidden route/i,
   /firebase/i,
   /show code/i,
-  /developer/i
+  /developer/i,
+  /admin/i,
+  /secrets/i
 ];
 
 const SYSTEM_PROMPT_TEMPLATE = `You are CastFlow AI, a highly intelligent and friendly Website Assistant for CastFlow.
 
-# Core Instructions
-1. Reply VERY shortly and exactly to the point (1-3 sentences maximum). Do not write long paragraphs.
-2. Use the Context Information provided below to answer. It contains all pricing, services, and company details.
-3. If the user is just saying hello, greet them kindly and ask how you can help them.
-4. If you don't know the answer based on the context, politely say you don't have that specific information.
-5. Write in plain text without formatting (no markdown).
-6. Be highly professional and concise like a true human assistant.
+# Conversation Rules
+${conversationRules.map((rule, i) => `${i + 1}. ${rule}`).join('\n')}
 
-# Context Information
+# Security Rules
+${securityRules.map((rule, i) => `${i + 1}. ${rule}`).join('\n')}
+
+# Core Context Information
 ${coreContextText}
 {dynamic_faqs}
 `;
 
 export default async function handler(req, res) {
-  // Hardened CORS Headers
   const origin = req.headers.origin || '';
   const isLocalhost = origin.includes('localhost') || origin.includes('127.0.0.1');
   const isCastflow = origin === 'https://castflow.in' || origin.endsWith('.castflow.in');
@@ -108,21 +142,25 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Message history too long' });
     }
 
-    const latestUserMessage = messages[messages.length - 1].text || '';
+    // Keep last 10 messages for memory as requested
+    const recentMessages = messages.slice(-10);
+    const latestUserMessage = recentMessages[recentMessages.length - 1].text || '';
     
-    // Injection Protection
+    // Combine recent user messages to extract better context for retrieval (Conversation Memory)
+    const recentUserContext = recentMessages.filter(m => m.sender !== 'ai').map(m => m.text).join(' ');
+
     for (const pattern of INJECTION_PATTERNS) {
       if (pattern.test(latestUserMessage)) {
         return res.status(200).json({ response: "I'm sorry, but I cannot assist with that request." });
       }
     }
 
-    const dynamicFaqs = retrieveFaqContext(latestUserMessage);
+    const dynamicFaqs = retrieveFaqContext(recentUserContext);
     const finalSystemPrompt = SYSTEM_PROMPT_TEMPLATE.replace('{dynamic_faqs}', dynamicFaqs);
 
     const apiMessages = [
       { role: 'system', content: finalSystemPrompt },
-      ...messages.map(m => ({
+      ...recentMessages.map(m => ({
         role: m.sender === 'ai' ? 'assistant' : 'user',
         content: String(m.text || '').substring(0, 500)
       }))
@@ -131,8 +169,8 @@ export default async function handler(req, res) {
     const completion = await groq.chat.completions.create({
       messages: apiMessages,
       model: 'llama-3.1-8b-instant',
-      temperature: 0.2, 
-      max_tokens: 100, 
+      temperature: 0.1, // Even stricter for avoiding hallucinations
+      max_tokens: 150, 
     });
 
     const aiResponse = completion.choices[0]?.message?.content || "I'm sorry, I encountered an error. Please contact us on WhatsApp.";
