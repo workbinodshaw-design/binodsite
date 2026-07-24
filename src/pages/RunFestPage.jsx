@@ -350,6 +350,39 @@ const RunFestPage = () => {
          </div>
       </section>
 
+      {/* ================= CHAMPIONSHIP AWARDS ================= */}
+      <section style={{ ...styles.sectionPadding, backgroundColor: '#FFFFFF' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, fontSize: isMobile ? '32px' : '48px', marginBottom: '20px' }}>Championship Awards</motion.h2>
+          <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionDesc, marginBottom: '60px' }}>
+            The top three participants with the highest verified cumulative distance at the end of the challenge will receive official championship awards.
+          </motion.p>
+          
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            {[
+              { place: "🥇 First Place", items: ["Champion Trophy", "Physical Winner Certificate", "Featured on the Official RunFest Hall of Champions"] },
+              { place: "🥈 Second Place", items: ["Premium Trophy", "Physical Winner Certificate", "Featured on the Official RunFest Hall of Champions"] },
+              { place: "🥉 Third Place", items: ["Premium Trophy", "Physical Winner Certificate", "Featured on the Official RunFest Hall of Champions"] }
+            ].map((award, index) => (
+              <motion.div key={index} variants={revealUp} style={{ borderBottom: '1px solid #E5E7EB', paddingBottom: '30px', marginBottom: '30px' }}>
+                <h4 style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827', margin: '0 0 16px 0' }}>{award.place}</h4>
+                <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
+                  {award.items.map((item, i) => (
+                    <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', padding: '6px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <span style={{ color: '#D1D5DB' }}>—</span> {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ fontFamily: '"Inter", sans-serif', fontSize: '14px', color: '#9CA3AF', marginTop: '10px' }}>
+            The Top 10 participants will be permanently featured on the official RunFest Leaderboard after final verification.
+          </motion.p>
+        </div>
+      </section>
+
       {/* ================= THE MEDAL (HARDWARE) ================= */}
       <section style={{ height: isMobile ? '70vh' : '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF', position: 'relative', overflow: 'hidden' }}>
         <motion.div initial={{ y: 100, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1.5, ease: 'easeOut' }} viewport={{ once: true }} style={{ position: 'absolute', zIndex: 1, top: isMobile ? '10%' : 'auto' }}>
