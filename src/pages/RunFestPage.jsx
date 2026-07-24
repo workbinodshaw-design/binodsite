@@ -424,7 +424,7 @@ const RunFestPage = () => {
              </motion.div>
              <motion.div initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ width: isMobile ? '100%' : '50%', display: 'flex', justifyContent: 'center', order: isMobile ? 1 : 2 }}>
                {/* OPTIMIZATION: Lazy load */}
-               <img src="/runfest_certificate.png" alt="Certificate" loading="lazy" decoding="async" style={{ width: isMobile ? '100%' : '80%', filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.08))', transform: 'rotate(2deg)' }} />
+               <img src="/runfest_certificate.jpg" alt="Certificate" loading="lazy" decoding="async" style={{ width: isMobile ? '100%' : '80%', filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.08))', transform: 'rotate(2deg)' }} />
              </motion.div>
           </div>
 
