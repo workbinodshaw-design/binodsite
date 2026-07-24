@@ -351,25 +351,30 @@ const RunFestPage = () => {
       </section>
 
       {/* ================= CHAMPIONSHIP AWARDS ================= */}
-      <section style={{ ...styles.sectionPadding, backgroundColor: '#FFFFFF' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionHeading, fontSize: isMobile ? '32px' : '48px', marginBottom: '20px' }}>Championship Awards</motion.h2>
-          <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ ...styles.sectionDesc, marginBottom: '60px' }}>
-            The top three participants with the highest verified cumulative distance at the end of the challenge will receive official championship awards.
-          </motion.p>
+      <section style={{ padding: isMobile ? '40px 5vw' : '60px 5vw', backgroundColor: '#FFFFFF' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <h2 style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: isMobile ? '28px' : '36px', margin: '0 0 10px 0', letterSpacing: '-1px', color: '#111827' }}>
+              🏆 Championship Awards
+            </h2>
+            <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#6B7280', margin: '0 auto', maxWidth: '600px', lineHeight: 1.5 }}>
+              The top three participants with the highest verified cumulative distance<br/>will receive official championship awards.
+            </p>
+          </motion.div>
+          
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px', marginBottom: '40px' }}>
             {[
-              { place: "🥇 First Place", items: ["Champion Trophy", "Physical Winner Certificate", "Featured on the Official RunFest Hall of Champions"] },
-              { place: "🥈 Second Place", items: ["Premium Trophy", "Physical Winner Certificate", "Featured on the Official RunFest Hall of Champions"] },
-              { place: "🥉 Third Place", items: ["Premium Trophy", "Physical Winner Certificate", "Featured on the Official RunFest Hall of Champions"] }
+              { place: "🥇 Champion", items: ["Champion Trophy", "Physical Winner Certificate", "Hall of Champions"] },
+              { place: "🥈 Runner-Up", items: ["Premium Trophy", "Physical Winner Certificate", "Hall of Champions"] },
+              { place: "🥉 Third Place", items: ["Premium Trophy", "Physical Winner Certificate", "Hall of Champions"] }
             ].map((award, index) => (
-              <motion.div key={index} variants={revealUp} style={{ borderBottom: '1px solid #E5E7EB', paddingBottom: '30px', marginBottom: '30px' }}>
-                <h4 style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '20px', color: '#111827', margin: '0 0 16px 0' }}>{award.place}</h4>
+              <motion.div key={index} variants={revealUp} style={{ padding: '0 10px' }}>
+                <h4 style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '18px', color: '#111827', margin: '0 0 12px 0', paddingBottom: '12px', borderBottom: '1px solid #E5E7EB' }}>{award.place}</h4>
                 <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
                   {award.items.map((item, i) => (
-                    <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#4B5563', padding: '6px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <span style={{ color: '#D1D5DB' }}>—</span> {item}
+                    <li key={i} style={{ fontFamily: '"Inter", sans-serif', fontSize: '14px', color: '#4B5563', padding: '6px 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ color: '#D1D5DB', fontSize: '12px' }}>—</span> {item}
                     </li>
                   ))}
                 </ul>
@@ -377,9 +382,19 @@ const RunFestPage = () => {
             ))}
           </motion.div>
 
-          <motion.p initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ fontFamily: '"Inter", sans-serif', fontSize: '14px', color: '#9CA3AF', marginTop: '10px' }}>
-            The Top 10 participants will be permanently featured on the official RunFest Leaderboard after final verification.
-          </motion.p>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp} style={{ borderTop: '1px solid #E5E7EB', borderBottom: '1px solid #E5E7EB', padding: '20px 0', display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: 'center', justifyContent: 'space-between', gap: '15px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', textAlign: isMobile ? 'center' : 'left', flexDirection: isMobile ? 'column' : 'row' }}>
+              <span style={{ fontSize: '24px' }}>🏅</span>
+              <div>
+                <h5 style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '14px', color: '#111827', margin: '0 0 4px 0', letterSpacing: '1px' }}>TOP 10 PARTICIPANTS</h5>
+                <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '14px', color: '#6B7280', margin: 0 }}>Permanently featured on the official RunFest Hall of Champions.</p>
+              </div>
+            </div>
+            <Link to="#" style={{ fontFamily: '"Inter", sans-serif', fontSize: '14px', fontWeight: 600, color: '#111827', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '5px', transition: 'opacity 0.3s' }} onMouseEnter={(e) => e.currentTarget.style.opacity = 0.7} onMouseLeave={(e) => e.currentTarget.style.opacity = 1}>
+              View Hall of Champions <span style={{ fontSize: '16px' }}>→</span>
+            </Link>
+          </motion.div>
+          
         </div>
       </section>
 
