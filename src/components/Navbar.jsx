@@ -91,7 +91,7 @@ const Navbar = () => {
       <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
         <CustomLink to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</CustomLink>
         <CustomLink to="/services" className={`nav-link ${location.pathname === '/services' ? 'active' : ''}`}>Services</CustomLink>
-        <a href="https://portfolio.castflow.in" className="nav-link">Portfolio</a>
+        {/* <a href="https://portfolio.castflow.in" className="nav-link">Portfolio</a> */}
         <CustomLink to="/projects" className={`nav-link ${location.pathname === '/projects' ? 'active' : ''}`}>Projects</CustomLink>
         <CustomLink to="/pricing" className={`nav-link ${location.pathname === '/pricing' ? 'active' : ''}`}>Pricing</CustomLink>
         <CustomLink to="/join-team" className={`nav-link ${location.pathname === '/join-team' ? 'active' : ''}`}>Careers</CustomLink>
