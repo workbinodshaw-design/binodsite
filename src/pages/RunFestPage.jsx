@@ -145,7 +145,12 @@ const RunFestPage = () => {
 
   return (
     <div style={styles.bg}>
-      <SEO title="RUNFEST 2026 | CastFlow" description="India's Premium Virtual Marathon Challenge. Run Anywhere. Compete Nationwide." />
+      <SEO 
+        title="RUNFEST 2026 | CastFlow | Virtual Marathon Challenge" 
+        description="Join RunFest by CastFlow. India's Premium Virtual Marathon Challenge. Run Anywhere. Compete Nationwide." 
+        keywords="RunFest CastFlow, RunFest by CastFlow, CastFlow Marathon, Virtual Run India, Fitness Challenge"
+        url="/runfest"
+      />
 
       {/* ================= HERO (100VH) ================= */}
       <header style={{ position: 'relative', width: '100vw', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', paddingTop: isMobile ? '80px' : '0' }}>

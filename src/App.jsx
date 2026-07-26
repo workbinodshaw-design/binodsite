@@ -136,6 +136,24 @@ function App() {
     );
   }
 
+  // Subdomain: runfest.castflow.in
+  if (hostname.startsWith('runfest.')) {
+    return (
+      <Router basename={import.meta.env.BASE_URL}>
+        <ScrollToTop />
+        <AnalyticsTracker />
+        <Navbar />
+        <React.Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            <Route path="*" element={<PageTransition><RunFestPage /></PageTransition>} />
+          </Routes>
+        </React.Suspense>
+        <Footer />
+        <AiAgentWidget />
+      </Router>
+    );
+  }
+
   // Subdomain: admin.castflow.in
   if (hostname.startsWith('admin.')) {
     return (
