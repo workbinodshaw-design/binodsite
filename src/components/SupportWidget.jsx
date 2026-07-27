@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, ChevronRight, CheckCircle2, ArrowRight } from 'lucide-react';
+import { MessageCircle, X, ChevronRight, CheckCircle2, ArrowRight, HelpCircle } from 'lucide-react';
 import { saveSupportTicket } from '../firebase';
 
 const CATEGORIES = [
@@ -94,21 +94,24 @@ const SupportWidget = () => {
           position: 'fixed',
           bottom: '30px',
           right: '30px',
-          width: '60px',
-          height: '60px',
-          borderRadius: '50%',
-          backgroundColor: '#111827',
+          padding: '12px 24px',
+          borderRadius: '9999px',
+          backgroundColor: '#374151',
           color: '#FFF',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
-          border: '2px solid #C4F042',
+          gap: '8px',
+          boxShadow: '0 8px 25px rgba(0,0,0,0.15)',
+          border: '1px solid rgba(255,255,255,0.1)',
           zIndex: 9998,
-          cursor: 'pointer'
+          cursor: 'pointer',
+          fontFamily: '"Inter", sans-serif',
+          fontSize: '16px',
+          fontWeight: 600,
         }}
       >
-        <MessageCircle size={28} />
+        Help <HelpCircle size={20} />
       </motion.button>
 
       {/* Modal Overlay & Dialog */}
