@@ -15,6 +15,20 @@ const RunFestPage = () => {
   // Sticky CTA visibility
   const [showStickyCTA, setShowStickyCTA] = useState(false);
 
+  // Townscript Widget Integration
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://www.townscript.com/static/Bookingflow/js/townscript-widget.nocache.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -172,7 +186,7 @@ const RunFestPage = () => {
           <motion.div variants={revealUp} style={styles.tagline}>Run Anywhere. Compete Nationwide.</motion.div>
           
           <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '15px', justifyContent: 'center', marginTop: '30px' }}>
-            <a href="#register" style={{ ...styles.btn, ...styles.btnPrimary }}>Register Now</a>
+            <button onClick={() => window.popup && window.popup('runfest-102240')} style={{ ...styles.btn, ...styles.btnPrimary }}>Register Now</button>
             <Link to="/about-runfest" style={{ ...styles.btn, ...styles.btnSecondary }}>About RunFest</Link>
           </motion.div>
           
@@ -610,7 +624,7 @@ const RunFestPage = () => {
                   </li>
                 ))}
               </ul>
-              <button style={{ ...styles.btn, ...styles.btnSecondary, width: '100%' }}>Register Now</button>
+              <button onClick={() => window.popup && window.popup('runfest-102240')} style={{ ...styles.btn, ...styles.btnSecondary, width: '100%' }}>Register Now</button>
             </motion.div>
 
             {/* Standard Pass */}
@@ -631,7 +645,7 @@ const RunFestPage = () => {
                   </li>
                 ))}
               </ul>
-              <button style={{ ...styles.btn, ...styles.btnPrimary, width: '100%' }}>Register Now</button>
+              <button onClick={() => window.popup && window.popup('runfest-102240')} style={{ ...styles.btn, ...styles.btnPrimary, width: '100%' }}>Register Now</button>
             </motion.div>
 
             {/* Premium Pass */}
@@ -650,7 +664,7 @@ const RunFestPage = () => {
                   </li>
                 ))}
               </ul>
-              <button style={{ ...styles.btn, ...styles.btnSecondary, width: '100%' }}>Register Now</button>
+              <button onClick={() => window.popup && window.popup('runfest-102240')} style={{ ...styles.btn, ...styles.btnSecondary, width: '100%' }}>Register Now</button>
             </motion.div>
 
           </div>
@@ -728,9 +742,9 @@ const RunFestPage = () => {
            <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '18px', color: '#9CA3AF', maxWidth: '600px', margin: '0 auto 40px auto', lineHeight: 1.6 }}>
              Join runners from across India, push your limits for seven days, and compete for the top spot on the leaderboard.
            </p>
-           <a href="#register" style={{ ...styles.btn, ...styles.btnGlowing, padding: '20px 50px', fontSize: '18px' }}>
+           <button onClick={() => window.popup && window.popup('runfest-102240')} style={{ ...styles.btn, ...styles.btnGlowing, padding: '20px 50px', fontSize: '18px' }}>
              Register Now
-           </a>
+           </button>
         </motion.div>
       </section>
 
@@ -755,7 +769,7 @@ const RunFestPage = () => {
             exit={{ y: 100, opacity: 0 }}
             style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '15px 20px', backgroundColor: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(10px)', borderTop: '1px solid #E5E7EB', zIndex: 100 }}
           >
-             <a href="#register" style={{ ...styles.btn, ...styles.btnPrimary, width: '100%', padding: '14px' }}>Register Now</a>
+             <button onClick={() => window.popup && window.popup('runfest-102240')} style={{ ...styles.btn, ...styles.btnPrimary, width: '100%', padding: '14px' }}>Register Now</button>
           </motion.div>
         )}
       </AnimatePresence>
