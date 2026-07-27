@@ -1107,6 +1107,8 @@ const AdminDashboard = () => {
             )}
           </div>
         </div>
+      )}
+
       {activeTab === 'support' && (
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
