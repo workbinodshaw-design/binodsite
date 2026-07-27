@@ -660,7 +660,7 @@ const RunFestPage = () => {
                   </li>
                 ))}
               </ul>
-              <button onClick={() => window.popup && window.popup('runfest-102240')} style={{ ...styles.btn, ...styles.btnSecondary, width: '100%' }}>Register Now</button>
+              <button onClick={handleRegisterClick} style={{ ...styles.btn, ...styles.btnSecondary, width: '100%' }}>Register Now</button>
             </motion.div>
 
           </div>
