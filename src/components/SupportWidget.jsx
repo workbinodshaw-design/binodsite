@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, ChevronRight, CheckCircle2, ArrowRight, HelpCircle } from 'lucide-react';
 import { saveSupportTicket } from '../firebase';
 import { auth } from '../firebase';
-import { onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const CATEGORIES = [
   { id: 'payment', label: 'Payment / Refund Issue' },
@@ -57,16 +57,6 @@ const SupportWidget = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleGoogleLogin = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-    } catch (err) {
-      console.error(err);
-      alert("Failed to sign in with Google.");
-    }
-  };
-
   const resetWidget = () => {
     setStep(1);
     setCategory(null);
@@ -115,7 +105,7 @@ const SupportWidget = () => {
   return (
     <>
       {/* Floating Action Button */}
-      {!authLoading && (
+      {user && !authLoading && (
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -277,24 +267,6 @@ const SupportWidget = () => {
                       <button onClick={() => setStep(FAQS[category]?.length > 0 ? 2 : 1)} style={{ background: 'transparent', border: 'none', color: '#3B82F6', cursor: 'pointer', fontSize: '14px', padding: 0 }}>&larr; Back</button>
                     </div>
                     
-                    {!user ? (
-                      <div style={{ textAlign: 'center', padding: '20px 0' }}>
-                        <p style={{ color: '#4B5563', fontSize: '15px', marginBottom: '20px' }}>
-                          You need to be logged in to raise a support ticket.
-                        </p>
-                        <button
-                          type="button"
-                          onClick={handleGoogleLogin}
-                          style={{
-                            padding: '12px 24px', backgroundColor: '#4285F4', color: '#FFF',
-                            border: 'none', borderRadius: '8px', fontSize: '15px', fontWeight: 600,
-                            cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px'
-                          }}
-                        >
-                          Sign in with Google
-                        </button>
-                      </div>
-                    ) : (
                     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                       <div>
                         <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 600, color: '#374151' }}>Full Name *</label>
@@ -342,7 +314,6 @@ const SupportWidget = () => {
                         {isSubmitting ? 'Submitting...' : 'Submit Request'}
                       </button>
                     </form>
-                    )}
                   </motion.div>
                 )}
 
