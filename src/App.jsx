@@ -145,7 +145,9 @@ function App() {
         <Navbar />
         <React.Suspense fallback={<LoadingFallback />}>
           <Routes>
-            <Route path="*" element={<PageTransition><RunFestPage /></PageTransition>} />
+            <Route path="/" element={<PageTransition><RunFestPage /></PageTransition>} />
+            <Route path="/about-runfest" element={<PageTransition><AboutRunFestPage /></PageTransition>} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </React.Suspense>
         <Footer />
