@@ -1,0 +1,147 @@
+.sky-hero {
+  background-image: url(/blue_sky.png);
+  background-size: cover;
+  background-position: center bottom;
+  min-height: 100vh;
+  position: relative;
+  padding-top: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 500;
+  letter-spacing: -1.5px;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  max-width: 900px;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.5;
+  margin-bottom: 2.5rem;
+}
+
+.btn-hollow {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #FFFFFF;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-hollow:hover { background: rgba(255,255,255,0.2); }
+
+.btn-solid {
+  background: #C4F042;
+  border: none;
+  color: #1A1A1A;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s;
+}
+.btn-solid:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(196, 240, 66, 0.4); }
+
+/* Floating 3D Carousel (Desktop) */
+.carousel-container {
+  perspective: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+  position: relative;
+  height: 300px;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  width: 260px;
+  height: 200px;
+  position: absolute;
+  transition: transform 0.5s ease;
+  border: 1px solid rgba(255,255,255,0.5);
+  
+  /* GPU Acceleration */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform, backdrop-filter;
+  backface-visibility: hidden;
+}
+
+.card-center { transform: translateZ(50px) scale(1.1); z-index: 3; background: #1A1A1A; color: white; }
+.card-left { transform: translateX(-280px) translateZ(-50px) rotateY(15deg); z-index: 2; opacity: 0.9; }
+.card-right { transform: translateX(280px) translateZ(-50px) rotateY(-15deg); z-index: 2; opacity: 0.9; }
+.card-far-left { transform: translateX(-520px) translateZ(-150px) rotateY(25deg); z-index: 1; opacity: 0.7; }
+.card-far-right { transform: translateX(520px) translateZ(-150px) rotateY(-25deg); z-index: 1; opacity: 0.7; }
+
+/* Mobile swipeable carousel */
+.mobile-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 2rem 1.5rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  width: 100%;
+  margin-top: 2rem;
+}
+.mobile-carousel::-webkit-scrollbar { display: none; }
+.mobile-glass-card {
+  flex: 0 0 80%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 1.5rem;
+  scroll-snap-align: center;
+  min-height: 180px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  
+  /* GPU Acceleration */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Colorful Bento */
+.bento-blue { background: #1A73E8; color: white; border-radius: 24px; padding: 2rem; }
+.bento-white { background: #F8F9FA; color: #1A1A1A; border-radius: 24px; padding: 2rem; }
+.bento-green { background: #C4F042; color: #1A1A1A; border-radius: 24px; padding: 2rem; }
+.bento-black { background: #1A1A1A; color: white; border-radius: 24px; padding: 2rem; }
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+
+@media (max-width: 900px) {
+  .bento-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 3rem; }
+}
