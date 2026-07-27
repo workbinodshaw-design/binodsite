@@ -113,7 +113,7 @@ for (const file of allFiles) {
   let parsed;
   try {
     parsed = JSON.parse(rawContent);
-  } catch(e) {
+  } catch {
     parsed = {};
   }
   dataJsContent += `  "${keyName}": ${JSON.stringify(parsed, null, 2)},\n`;

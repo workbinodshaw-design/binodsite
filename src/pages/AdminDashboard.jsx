@@ -39,6 +39,7 @@ const AdminDashboard = () => {
         window.leadsUnsubscribe();
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   const handleLogout = async () => {
@@ -144,6 +145,7 @@ const AdminDashboard = () => {
     if (activeTab === 'analytics') {
       fetchAnalytics();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [analyticsFilter]);
 
   const handleUpdateAppStatus = async (appId, newStatus) => {
