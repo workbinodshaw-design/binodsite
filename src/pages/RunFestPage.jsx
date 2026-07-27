@@ -15,19 +15,7 @@ const RunFestPage = () => {
   // Sticky CTA visibility
   const [showStickyCTA, setShowStickyCTA] = useState(false);
 
-  // Townscript Widget Integration
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://www.townscript.com/static/Bookingflow/js/townscript-widget.nocache.js";
-    script.async = true;
-    document.body.appendChild(script);
 
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
