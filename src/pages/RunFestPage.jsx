@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { Award, FileText, Truck, Lock, MapPin, CheckCircle, ChevronDown, Plus, Minus, Download, Share, Activity, AlertCircle, Crosshair } from 'lucide-react';
+import { 
+  ArrowRight, CheckCircle, Activity, Award, Target, Users, MapPin, 
+  Calendar, Clock, ShieldCheck, Mail, AlertCircle, Plus, Minus, FileText, Truck, Lock, ChevronDown, Download, Share, Crosshair
+} from 'lucide-react';
+import SupportWidget from '../components/SupportWidget';
 
 const RunFestPage = () => {
   // Mobile detection
@@ -769,7 +773,7 @@ const RunFestPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
+      <SupportWidget />
     </div>
   );
 };

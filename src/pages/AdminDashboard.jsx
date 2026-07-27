@@ -2,8 +2,58 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, onSnapshot, orderBy, query, doc, updateDoc, setDoc, deleteDoc, where } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { db, auth } from '../firebase';
-import { RefreshCw, LogOut, Shield, Users, Lock, Trash2, Plus, Briefcase, Activity, CheckCircle2, Inbox, Zap, Archive, BarChart2, BadgeCheck } from 'lucide-react';
+import { RefreshCw, LogOut, Shield, Users, Lock, Trash2, Plus, Briefcase, Activity, CheckCircle2, Inbox, Zap, Archive, BarChart2, BadgeCheck, LifeBuoy, Mail, MessageSquare } from 'lucide-react';
 import EmployeeAdminPanel from '../components/admin/EmployeeAdminPanel';
+
+const TicketCard = ({ ticket, onStatusChange, onNoteChange }) => {
+  const [note, setNote] = useState(ticket.adminNotes || '');
+  
+  return (
+    <div style={{ background: '#FFF', borderRadius: '12px', padding: '1rem', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)', border: '1px solid #E5E7EB', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ fontWeight: 'bold', color: '#111827', fontSize: '1.1rem' }}>{ticket.ticketId || '#RF-XXXX'}</span>
+        <select 
+          value={ticket.status} 
+          onChange={(e) => onStatusChange(ticket.id, e.target.value)}
+          style={{ padding: '4px 8px', borderRadius: '6px', border: '1px solid #D1D5DB', fontSize: '0.85rem' }}
+        >
+          <option value="new">New</option>
+          <option value="in_progress">In Progress</option>
+          <option value="resolved">Resolved</option>
+        </select>
+      </div>
+      
+      <div>
+        <div style={{ fontWeight: 600, color: '#374151' }}>{ticket.name}</div>
+        <div style={{ fontSize: '0.85rem', color: '#6B7280' }}>{ticket.category?.toUpperCase()}</div>
+      </div>
+      
+      <p style={{ fontSize: '0.9rem', color: '#4B5563', margin: 0, background: '#F3F4F6', padding: '8px', borderRadius: '6px' }}>
+        {ticket.description}
+      </p>
+      
+      <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+        <a href={`https://wa.me/${ticket.phone?.replace(/\D/g,'')}?text=Hi ${ticket.name}, reaching out regarding your RunFest request ${ticket.ticketId}.`} target="_blank" rel="noreferrer" style={{ flex: 1, textAlign: 'center', background: '#25D366', color: '#FFF', textDecoration: 'none', padding: '8px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '4px' }}>
+          <MessageSquare size={14} /> WhatsApp
+        </a>
+        <a href={`mailto:${ticket.email}?subject=RunFest Support: ${ticket.ticketId}`} style={{ flex: 1, textAlign: 'center', background: '#3B82F6', color: '#FFF', textDecoration: 'none', padding: '8px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '4px' }}>
+          <Mail size={14} /> Email
+        </a>
+      </div>
+      
+      <div style={{ marginTop: '4px' }}>
+        <textarea 
+          placeholder="Private admin notes..."
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+          onBlur={() => { if(note !== ticket.adminNotes) onNoteChange(ticket.id, note); }}
+          style={{ width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #D1D5DB', fontSize: '0.85rem', resize: 'vertical', minHeight: '60px' }}
+        />
+      </div>
+    </div>
+  );
+};
+
 const AdminDashboard = () => {
   const [leads, setLeads] = useState([]);
   const [systemUsers, setSystemUsers] = useState([]);
@@ -17,6 +67,7 @@ const AdminDashboard = () => {
   const [appSubTab, setAppSubTab] = useState('New');
   const [analyticsData, setAnalyticsData] = useState([]);
   const [analyticsFilter, setAnalyticsFilter] = useState('24h');
+  const [supportTickets, setSupportTickets] = useState([]);
 
   useEffect(() => {
     if (activeTab === 'leads') {
@@ -33,11 +84,13 @@ const AdminDashboard = () => {
     if (activeTab === 'analytics') {
       fetchAnalytics();
     }
+    if (activeTab === 'support') {
+      fetchSupportTickets();
+    }
     
     return () => {
-      if (window.leadsUnsubscribe) {
-        window.leadsUnsubscribe();
-      }
+      if (window.leadsUnsubscribe) window.leadsUnsubscribe();
+      if (window.supportUnsubscribe) window.supportUnsubscribe();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
@@ -106,6 +159,34 @@ const AdminDashboard = () => {
     }
   };
 
+  const fetchSupportTickets = () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const ticketsRef = collection(db, "support_tickets");
+      const q = query(ticketsRef, orderBy("createdAt", "desc"));
+      
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const fetchedTickets = [];
+        querySnapshot.forEach((doc) => {
+          fetchedTickets.push({ id: doc.id, ...doc.data() });
+        });
+        setSupportTickets(fetchedTickets);
+        setLoading(false);
+      }, (err) => {
+        console.error("Error in onSnapshot support_tickets:", err);
+        setError("Failed to load support tickets.");
+        setLoading(false);
+      });
+      
+      if(window.supportUnsubscribe) window.supportUnsubscribe();
+      window.supportUnsubscribe = unsubscribe;
+    } catch (err) {
+      console.error("Error setting up tickets listener:", err);
+      setLoading(false);
+    }
+  };
+
   const fetchAnalytics = () => {
     setLoading(true);
     setError(null);
@@ -155,6 +236,26 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error("Error updating status:", error);
       alert("Failed to update status.");
+    }
+  };
+
+  const handleUpdateTicketStatus = async (ticketId, newStatus) => {
+    try {
+      const ticketRef = doc(db, 'support_tickets', ticketId);
+      await updateDoc(ticketRef, { status: newStatus });
+    } catch (error) {
+      console.error("Error updating ticket status:", error);
+      alert("Failed to update ticket status.");
+    }
+  };
+
+  const handleUpdateTicketNotes = async (ticketId, newNotes) => {
+    try {
+      const ticketRef = doc(db, 'support_tickets', ticketId);
+      await updateDoc(ticketRef, { adminNotes: newNotes });
+    } catch (error) {
+      console.error("Error updating ticket notes:", error);
+      alert("Failed to update notes.");
     }
   };
 
@@ -417,6 +518,25 @@ const AdminDashboard = () => {
           }}
         >
           <BarChart2 size={20} /> Site Analytics
+        </button>
+        <button 
+          onClick={() => setActiveTab('support')}
+          style={{ 
+            background: activeTab === 'support' ? '#a388ff' : 'transparent', 
+            color: activeTab === 'support' ? '#1a1a1a' : '#888', 
+            border: 'none', 
+            padding: '1rem 2rem', 
+            borderRadius: '12px', 
+            cursor: 'pointer', 
+            fontWeight: 'bold', 
+            display: 'flex', 
+            gap: '8px', 
+            alignItems: 'center',
+            transition: 'all 0.3s ease',
+            fontSize: '1rem'
+          }}
+        >
+          <LifeBuoy size={20} /> Help Desk
         </button>
       </div>
 
@@ -985,6 +1105,44 @@ const AdminDashboard = () => {
                 </tbody>
               </table>
             )}
+          </div>
+        </div>
+      {activeTab === 'support' && (
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+            <h2 style={{ fontSize: '1.8rem', color: 'var(--text-primary)', margin: 0 }}>Help Desk</h2>
+            <div style={{ background: '#38bdf8', color: '#1a1a1a', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: 'bold' }}>
+              {supportTickets.length} Total Tickets
+            </div>
+          </div>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', alignItems: 'start' }}>
+            {/* New Column */}
+            <div style={{ background: 'var(--glass-bg, rgba(0,0,0,0.02))', border: '1px solid var(--glass-border, rgba(0,0,0,0.05))', borderRadius: '16px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <h3 style={{ color: '#ef4444', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}><div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444' }}></div> New</h3>
+              {supportTickets.filter(t => t.status === 'new').map(ticket => (
+                <TicketCard key={ticket.id} ticket={ticket} onStatusChange={handleUpdateTicketStatus} onNoteChange={handleUpdateTicketNotes} />
+              ))}
+              {supportTickets.filter(t => t.status === 'new').length === 0 && <p style={{ color: '#888', fontStyle: 'italic' }}>No new tickets</p>}
+            </div>
+
+            {/* In Progress Column */}
+            <div style={{ background: 'var(--glass-bg, rgba(0,0,0,0.02))', border: '1px solid var(--glass-border, rgba(0,0,0,0.05))', borderRadius: '16px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <h3 style={{ color: '#f59e0b', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}><div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f59e0b' }}></div> In Progress</h3>
+              {supportTickets.filter(t => t.status === 'in_progress').map(ticket => (
+                <TicketCard key={ticket.id} ticket={ticket} onStatusChange={handleUpdateTicketStatus} onNoteChange={handleUpdateTicketNotes} />
+              ))}
+              {supportTickets.filter(t => t.status === 'in_progress').length === 0 && <p style={{ color: '#888', fontStyle: 'italic' }}>No active tickets</p>}
+            </div>
+
+            {/* Resolved Column */}
+            <div style={{ background: 'var(--glass-bg, rgba(0,0,0,0.02))', border: '1px solid var(--glass-border, rgba(0,0,0,0.05))', borderRadius: '16px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <h3 style={{ color: '#10b981', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}><div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10b981' }}></div> Resolved</h3>
+              {supportTickets.filter(t => t.status === 'resolved').map(ticket => (
+                <TicketCard key={ticket.id} ticket={ticket} onStatusChange={handleUpdateTicketStatus} onNoteChange={handleUpdateTicketNotes} />
+              ))}
+              {supportTickets.filter(t => t.status === 'resolved').length === 0 && <p style={{ color: '#888', fontStyle: 'italic' }}>No resolved tickets</p>}
+            </div>
           </div>
         </div>
       )}
