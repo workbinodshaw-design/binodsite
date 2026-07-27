@@ -39,11 +39,13 @@ const SupportWidget = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [ticketId, setTicketId] = useState(null);
   const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setAuthLoading(false);
       if (currentUser) {
         setFormData(prev => ({ 
           ...prev, 
@@ -54,17 +56,6 @@ const SupportWidget = () => {
     });
     return () => unsubscribe();
   }, []);
-
-  const handleGoogleLogin = async () => {
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-    } catch (err) {
-      console.error(err);
-      alert("Failed to sign in with Google.");
-    }
-  };
 
   const resetWidget = () => {
     setStep(1);
@@ -114,33 +105,35 @@ const SupportWidget = () => {
   return (
     <>
       {/* Floating Action Button */}
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={handleOpen}
-        style={{
-          position: 'fixed',
-          bottom: '30px',
-          right: '30px',
-          padding: '12px 24px',
-          borderRadius: '9999px',
-          backgroundColor: '#374151',
-          color: '#FFF',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '8px',
-          boxShadow: '0 8px 25px rgba(0,0,0,0.15)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          zIndex: 9998,
-          cursor: 'pointer',
-          fontFamily: '"Inter", sans-serif',
-          fontSize: '16px',
-          fontWeight: 600,
-        }}
-      >
-        Help <HelpCircle size={20} />
-      </motion.button>
+      {user && !authLoading && (
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleOpen}
+          style={{
+            position: 'fixed',
+            bottom: '30px',
+            right: '30px',
+            padding: '12px 24px',
+            borderRadius: '9999px',
+            backgroundColor: '#374151',
+            color: '#FFF',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '8px',
+            boxShadow: '0 8px 25px rgba(0,0,0,0.15)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            zIndex: 9998,
+            cursor: 'pointer',
+            fontFamily: '"Inter", sans-serif',
+            fontSize: '16px',
+            fontWeight: 600,
+          }}
+        >
+          Help <HelpCircle size={20} />
+        </motion.button>
+      )}
 
       {/* Modal Overlay & Dialog */}
       <AnimatePresence>
@@ -274,24 +267,6 @@ const SupportWidget = () => {
                       <button onClick={() => setStep(FAQS[category]?.length > 0 ? 2 : 1)} style={{ background: 'transparent', border: 'none', color: '#3B82F6', cursor: 'pointer', fontSize: '14px', padding: 0 }}>&larr; Back</button>
                     </div>
                     
-                    {!user ? (
-                      <div style={{ textAlign: 'center', padding: '20px 0' }}>
-                        <p style={{ color: '#4B5563', fontSize: '15px', marginBottom: '20px' }}>
-                          You need to be logged in to raise a support ticket.
-                        </p>
-                        <button
-                          type="button"
-                          onClick={handleGoogleLogin}
-                          style={{
-                            padding: '12px 24px', backgroundColor: '#4285F4', color: '#FFF',
-                            border: 'none', borderRadius: '8px', fontSize: '15px', fontWeight: 600,
-                            cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px'
-                          }}
-                        >
-                          Sign in with Google
-                        </button>
-                      </div>
-                    ) : (
                     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                       <div>
                         <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 600, color: '#374151' }}>Full Name *</label>
@@ -339,7 +314,6 @@ const SupportWidget = () => {
                         {isSubmitting ? 'Submitting...' : 'Submit Request'}
                       </button>
                     </form>
-                    )}
                   </motion.div>
                 )}
 
