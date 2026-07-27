@@ -18,6 +18,15 @@ const RunFestPage = () => {
   // Custom Popup Modal State
   const [showPopup, setShowPopup] = useState(false);
 
+  const handleRegisterClick = (e) => {
+    e.preventDefault();
+    if (typeof window.popup === 'function') {
+      window.popup('runfest-102240');
+    } else {
+      window.open('https://www.townscript.com/e/runfest-102240', '_blank');
+    }
+  };
+
 
 
   useEffect(() => {
@@ -177,7 +186,7 @@ const RunFestPage = () => {
           <motion.div variants={revealUp} style={styles.tagline}>Run Anywhere. Compete Nationwide.</motion.div>
           
           <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '15px', justifyContent: 'center', marginTop: '30px' }}>
-            <button onClick={() => setShowPopup(true)} style={{ ...styles.btn, ...styles.btnPrimary }}>Register Now</button>
+            <button onClick={handleRegisterClick} style={{ ...styles.btn, ...styles.btnPrimary }}>Register Now</button>
             <Link to="/about-runfest" style={{ ...styles.btn, ...styles.btnSecondary }}>About RunFest</Link>
           </motion.div>
           
@@ -615,7 +624,7 @@ const RunFestPage = () => {
                   </li>
                 ))}
               </ul>
-              <button onClick={() => setShowPopup(true)} style={{ ...styles.btn, ...styles.btnSecondary, width: '100%' }}>Register Now</button>
+              <button onClick={handleRegisterClick} style={{ ...styles.btn, ...styles.btnSecondary, width: '100%' }}>Register Now</button>
             </motion.div>
 
             {/* Standard Pass */}
@@ -636,7 +645,7 @@ const RunFestPage = () => {
                   </li>
                 ))}
               </ul>
-              <button onClick={() => setShowPopup(true)} style={{ ...styles.btn, ...styles.btnPrimary, width: '100%' }}>Register Now</button>
+              <button onClick={handleRegisterClick} style={{ ...styles.btn, ...styles.btnPrimary, width: '100%' }}>Register Now</button>
             </motion.div>
 
             {/* Premium Pass */}
@@ -733,7 +742,7 @@ const RunFestPage = () => {
            <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '18px', color: '#9CA3AF', maxWidth: '600px', margin: '0 auto 40px auto', lineHeight: 1.6 }}>
              Join runners from across India, push your limits for seven days, and compete for the top spot on the leaderboard.
            </p>
-           <button onClick={() => setShowPopup(true)} style={{ ...styles.btn, ...styles.btnGlowing, padding: '20px 50px', fontSize: '18px' }}>
+           <button onClick={handleRegisterClick} style={{ ...styles.btn, ...styles.btnGlowing, padding: '20px 50px', fontSize: '18px' }}>
              Register Now
            </button>
         </motion.div>
@@ -760,40 +769,7 @@ const RunFestPage = () => {
             exit={{ y: 100, opacity: 0 }}
             style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '15px 20px', backgroundColor: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(10px)', borderTop: '1px solid #E5E7EB', zIndex: 100 }}
           >
-             <button onClick={() => setShowPopup(true)} style={{ ...styles.btn, ...styles.btnPrimary, width: '100%', padding: '14px' }}>Register Now</button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* ================= NATIVE TOWNSCRIPT MODAL ================= */}
-      <AnimatePresence>
-        {showPopup && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            style={{ position: 'fixed', inset: 0, zIndex: 99999, backgroundColor: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: isMobile ? '10px' : '40px' }}
-            onClick={() => setShowPopup(false)}
-          >
-            <motion.div 
-              initial={{ scale: 0.95, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              style={{ backgroundColor: '#fff', borderRadius: '16px', width: '100%', maxWidth: '800px', height: isMobile ? '95vh' : '85vh', overflow: 'hidden', position: 'relative', display: 'flex', flexDirection: 'column' }}
-            >
-              <div style={{ padding: '15px 20px', borderBottom: '1px solid #E5E7EB', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F9FAFB' }}>
-                <span style={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', color: '#111827' }}>Register for RunFest 2026</span>
-                <button onClick={() => setShowPopup(false)} style={{ background: '#E5E7EB', border: 'none', cursor: 'pointer', padding: '6px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                </button>
-              </div>
-              <iframe 
-                src="https://www.townscript.com/v2/widget/runfest-102240/booking" 
-                frameBorder="0" 
-                style={{ width: '100%', flex: 1, border: 'none' }}
-              ></iframe>
-            </motion.div>
+             <button onClick={handleRegisterClick} style={{ ...styles.btn, ...styles.btnPrimary, width: '100%', padding: '14px' }}>Register Now</button>
           </motion.div>
         )}
       </AnimatePresence>
