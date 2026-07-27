@@ -25,6 +25,7 @@ const TicketCard = ({ ticket, onStatusChange, onNoteChange }) => {
       
       <div>
         <div style={{ fontWeight: 600, color: '#374151' }}>{ticket.name}</div>
+        <div style={{ fontSize: '0.85rem', color: '#3B82F6', fontWeight: 500, marginBottom: '2px' }}>{ticket.email}</div>
         <div style={{ fontSize: '0.85rem', color: '#6B7280' }}>{ticket.category?.toUpperCase()}</div>
       </div>
       
