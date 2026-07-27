@@ -4,21 +4,6 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { Award, FileText, Truck, Lock, MapPin, CheckCircle, ChevronDown, Plus, Minus, Download, Share, Activity, AlertCircle, Crosshair } from 'lucide-react';
 
-const TownscriptBtn = ({ text, styleObj }) => {
-  const styleStr = Object.entries(styleObj || {})
-    .map(([k, v]) => `${k.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`)}:${v}`)
-    .join(';');
-
-  return (
-    <div 
-      style={{ display: 'flex', width: styleObj?.width || 'auto', justifyContent: 'center' }}
-      dangerouslySetInnerHTML={{
-        __html: `<button onclick="popup('runfest-102240');" class="tsbutton" style="${styleStr}; outline: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-family: inherit;">${text}</button>`
-      }}
-    />
-  );
-};
-
 const RunFestPage = () => {
   // Mobile detection
   const [isMobile, setIsMobile] = useState(false);
@@ -29,6 +14,15 @@ const RunFestPage = () => {
   
   // Sticky CTA visibility
   const [showStickyCTA, setShowStickyCTA] = useState(false);
+
+  const handleRegisterClick = (e) => {
+    e.preventDefault();
+    const width = Math.min(800, window.innerWidth - 40);
+    const height = Math.min(700, window.innerHeight - 40);
+    const left = window.innerWidth / 2 - width / 2;
+    const top = window.innerHeight / 2 - height / 2;
+    window.open('https://www.townscript.com/e/runfest-102240', 'TownscriptRegistration', `width=${width},height=${height},top=${top},left=${left},scrollbars=yes,resizable=yes,status=no,toolbar=no,menubar=no,location=no`);
+  };
 
 
   useEffect(() => {
@@ -188,7 +182,7 @@ const RunFestPage = () => {
           <motion.div variants={revealUp} style={styles.tagline}>Run Anywhere. Compete Nationwide.</motion.div>
           
           <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '15px', justifyContent: 'center', marginTop: '30px' }}>
-            <TownscriptBtn text="Register Now" styleObj={{ ...styles.btn, ...styles.btnPrimary }} />
+            <button onClick={handleRegisterClick} style={{ ...styles.btn, ...styles.btnPrimary }}>Register Now</button>
             <Link to="/about-runfest" style={{ ...styles.btn, ...styles.btnSecondary }}>About RunFest</Link>
           </motion.div>
           
@@ -626,7 +620,7 @@ const RunFestPage = () => {
                   </li>
                 ))}
               </ul>
-              <TownscriptBtn text="Register Now" styleObj={{ ...styles.btn, ...styles.btnSecondary, width: '100%' }} />
+              <button onClick={handleRegisterClick} style={{ ...styles.btn, ...styles.btnSecondary, width: '100%' }}>Register Now</button>
             </motion.div>
 
             {/* Standard Pass */}
@@ -647,7 +641,7 @@ const RunFestPage = () => {
                   </li>
                 ))}
               </ul>
-              <TownscriptBtn text="Register Now" styleObj={{ ...styles.btn, ...styles.btnPrimary, width: '100%' }} />
+              <button onClick={handleRegisterClick} style={{ ...styles.btn, ...styles.btnPrimary, width: '100%' }}>Register Now</button>
             </motion.div>
 
             {/* Premium Pass */}
@@ -744,7 +738,9 @@ const RunFestPage = () => {
            <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '18px', color: '#9CA3AF', maxWidth: '600px', margin: '0 auto 40px auto', lineHeight: 1.6 }}>
              Join runners from across India, push your limits for seven days, and compete for the top spot on the leaderboard.
            </p>
-           <TownscriptBtn text="Register Now" styleObj={{ ...styles.btn, ...styles.btnGlowing, padding: '20px 50px', fontSize: '18px' }} />
+           <button onClick={handleRegisterClick} style={{ ...styles.btn, ...styles.btnGlowing, padding: '20px 50px', fontSize: '18px' }}>
+             Register Now
+           </button>
         </motion.div>
       </section>
 
@@ -769,7 +765,7 @@ const RunFestPage = () => {
             exit={{ y: 100, opacity: 0 }}
             style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '15px 20px', backgroundColor: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(10px)', borderTop: '1px solid #E5E7EB', zIndex: 100 }}
           >
-             <TownscriptBtn text="Register Now" styleObj={{ ...styles.btn, ...styles.btnPrimary, width: '100%', padding: '14px' }} />
+             <button onClick={handleRegisterClick} style={{ ...styles.btn, ...styles.btnPrimary, width: '100%', padding: '14px' }}>Register Now</button>
           </motion.div>
         )}
       </AnimatePresence>
