@@ -112,7 +112,7 @@ const SupportWidget = () => {
           onClick={handleOpen}
           style={{
             position: 'fixed',
-            bottom: '30px',
+            bottom: '100px',
             right: '30px',
             padding: '12px 24px',
             borderRadius: '9999px',
