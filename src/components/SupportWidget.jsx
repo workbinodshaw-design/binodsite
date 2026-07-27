@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, ChevronRight, CheckCircle2, ArrowRight, HelpCircle } from 'lucide-react';
 import { saveSupportTicket } from '../firebase';
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const CATEGORIES = [
   { id: 'payment', label: 'Payment / Refund Issue' },
@@ -42,7 +43,6 @@ const SupportWidget = () => {
   const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
-    const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setAuthLoading(false);
