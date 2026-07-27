@@ -98,7 +98,7 @@ const HomePage = () => {
                 </p>
 
                 <div style={{ display: 'flex', gap: '15px', marginBottom: '30px', flexWrap: 'wrap' }}>
-                  <button className="btn-solid" onClick={() => window.location.href = 'https://runfest.castflow.in'} style={{ padding: '10px 20px', fontSize: '13px', width: 'auto', background: '#C4F042', color: '#1A1A1A', border: 'none', borderRadius: '30px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '8px', cursor: 'pointer', transition: 'transform 0.2s' }}>
+                  <button className="btn-solid" onClick={() => navigate('/runfest')} style={{ padding: '10px 20px', fontSize: '13px', width: 'auto', background: '#C4F042', color: '#1A1A1A', border: 'none', borderRadius: '30px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '8px', cursor: 'pointer', transition: 'transform 0.2s' }}>
                     EXPLORE RUNFEST <div style={{ background: '#1A1A1A', borderRadius: '50%', width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#C4F042' }}><ArrowRight size={12} /></div>
                   </button>
                   <button className="btn-hollow" onClick={() => navigate('/about-runfest')} style={{ padding: '10px 20px', fontSize: '13px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.3)', color: '#FFF', borderRadius: '30px', fontWeight: 600, cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'all 0.2s' }}>
