@@ -99,4 +99,29 @@ export const recordPageView = async (path) => {
   }
 };
 
+/**
+ * Utility to save a support ticket from the website
+ * @param {Object} ticketData - The data from the support form
+ */
+export const saveSupportTicket = async (ticketData) => {
+  if (!db) {
+    console.warn("Database not connected. Ticket was not saved.");
+    return false;
+  }
+  
+  try {
+    const docRef = await addDoc(collection(db, "support_tickets"), {
+      ...ticketData,
+      createdAt: serverTimestamp(),
+      status: 'new', // new, in_progress, resolved
+      adminNotes: ''
+    });
+    console.log("Support ticket successfully saved with ID: ", docRef.id);
+    return docRef.id;
+  } catch (e) {
+    console.error("Error adding support ticket: ", e);
+    return false;
+  }
+};
+
 export { db, auth, storage };
