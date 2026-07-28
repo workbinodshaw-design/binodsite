@@ -217,6 +217,18 @@ const RunFestPage = () => {
         </motion.div>
       </header>
 
+      {/* ================= OFFICIAL MEDIA PARTNER ================= */}
+      <section style={{ padding: isMobile ? '40px 20px' : '60px 20px', backgroundColor: '#FFFFFF', borderBottom: '1px solid #F3F4F6', textAlign: 'center' }}>
+         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp}>
+               <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: '13px', fontWeight: 700, color: '#9CA3AF', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '30px' }}>Official Media Partner</h3>
+               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                 <img src="/news_partner.png" alt="News The Desi Andaz" style={{ width: '100%', maxWidth: '450px', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.05))' }} />
+               </div>
+            </motion.div>
+         </div>
+      </section>
+
       {/* ================= COUNTDOWN SECTION ================= */}
       <section style={{ backgroundColor: '#111827', padding: isMobile ? '50px 20px' : '80px 20px', color: '#FFF', textAlign: 'center', borderBottom: '1px solid #1F2937' }}>
          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={revealUp}>
