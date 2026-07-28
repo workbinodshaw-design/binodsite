@@ -184,7 +184,8 @@ const RunFestPage = () => {
       }}>
         {/* Content */}
         <motion.div style={{ zIndex: 1, textAlign: 'center', padding: '0 20px', width: '100%', maxWidth: '1000px', color: '#FFFFFF' }} initial="hidden" animate="visible" variants={stagger}>
-          <div style={{ ...styles.bgNumber, color: '#FFFFFF', opacity: 0.05 }}>26</div>
+          {/* Make 26 visible in background */}
+          <div style={{ ...styles.bgNumber, color: 'rgba(255, 255, 255, 0.2)', opacity: 1, zIndex: -1 }}>26</div>
 
           <motion.div variants={revealUp} style={{ display: 'inline-flex', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', padding: '8px 16px', borderRadius: '99px', marginBottom: '20px', border: '1px solid rgba(255,255,255,0.2)' }}>
             <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '13px', fontWeight: 600, color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: '1px' }}>29 Nov – 5 Dec 2026</span>
@@ -205,8 +206,9 @@ const RunFestPage = () => {
           {/* ================= OFFICIAL MEDIA PARTNER IN HERO ================= */}
           <motion.div variants={revealUp} style={{ marginTop: '60px', padding: '30px', backgroundColor: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.1)', display: 'inline-block' }}>
              <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: '12px', fontWeight: 700, color: '#9CA3AF', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px' }}>Official Media Partner</h3>
-             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-               <img src="/news_partner.png" alt="News The Desi Andaz" style={{ width: '100%', maxWidth: '350px', objectFit: 'contain', filter: 'brightness(0) invert(1) drop-shadow(0 10px 20px rgba(0,0,0,0.5))' }} />
+             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFFFFF', padding: '15px 30px', borderRadius: '12px' }}>
+               {/* Removed filter so original logo colors show naturally on a white background plate */}
+               <img src="/news_partner.png" alt="News The Desi Andaz" style={{ width: '100%', maxWidth: '250px', objectFit: 'contain' }} />
              </div>
           </motion.div>
         </motion.div>
