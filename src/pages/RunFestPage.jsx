@@ -206,9 +206,19 @@ const RunFestPage = () => {
           {/* ================= SLEEK MEDIA PARTNER ================= */}
           <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', opacity: 0.9 }}>
              <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: '11px', fontWeight: 700, color: '#9CA3AF', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '15px' }}>Official Media Partner</h3>
-             <div style={{ backgroundColor: '#FFFFFF', padding: '10px 20px', borderRadius: '8px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }}>
-               <img src="/news_partner.png" alt="News The Desi Andaz" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
-             </div>
+             <motion.a 
+               href="https://www.thedesiandaz.com/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textDecoration: 'none', cursor: 'pointer' }}
+               whileHover={{ scale: 1.05 }}
+               whileTap={{ scale: 0.95 }}
+             >
+               <div style={{ backgroundColor: '#FFFFFF', padding: '10px 20px', borderRadius: '8px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }}>
+                 <img src="/news_partner.png" alt="The Desi Andaaz Logo" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
+               </div>
+               <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '13px', fontWeight: 600, color: '#E5E7EB', marginTop: '10px', letterSpacing: '0.5px' }}>The Desi Andaaz</span>
+             </motion.a>
           </motion.div>
         </motion.div>
       </header>
