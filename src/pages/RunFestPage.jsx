@@ -185,7 +185,7 @@ const RunFestPage = () => {
         {/* Content */}
         <motion.div style={{ zIndex: 1, textAlign: 'center', padding: '0 20px', width: '100%', maxWidth: '900px', color: '#FFFFFF', display: 'flex', flexDirection: 'column', alignItems: 'center' }} initial="hidden" animate="visible" variants={stagger}>
           {/* Make 26 visible in background but positioned better */}
-          <div style={{ ...styles.bgNumber, color: '#FFFFFF', opacity: 0.06, top: '40%', zIndex: -1 }}>26</div>
+          <div style={{ ...styles.bgNumber, color: 'rgba(255, 255, 255, 0.3)', opacity: 1, top: '40%', zIndex: 0 }}>26</div>
 
           <motion.div variants={revealUp} style={{ display: 'inline-flex', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', padding: '8px 16px', borderRadius: '99px', marginBottom: '25px', border: '1px solid rgba(255,255,255,0.2)' }}>
             <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '13px', fontWeight: 600, color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: '2px' }}>29 Nov – 5 Dec 2026</span>
