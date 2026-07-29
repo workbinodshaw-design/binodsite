@@ -166,7 +166,7 @@ const RunFestPage = () => {
         url="/runfest"
       />
 
-      {/* ================= HERO (100VH) - LIGHT THEME ================= */}
+      {/* ================= HERO (100VH) - ULTRA MINIMAL ================= */}
       <header style={{ 
         position: 'relative', 
         width: '100vw', 
@@ -176,59 +176,52 @@ const RunFestPage = () => {
         justifyContent: 'center', 
         alignItems: 'center',
         overflow: 'hidden', 
-        paddingTop: isMobile ? '120px' : '120px', // Clear fixed navbar
+        paddingTop: isMobile ? '100px' : '80px', 
         paddingLeft: '20px',
         paddingRight: '20px',
-        backgroundColor: '#FFFFFF',
-        // Bright white gradient overlay
-        backgroundImage: 'linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, rgba(255,255,255,1) 100%), url(/runfest_hero.png)',
+        backgroundColor: '#0F172A',
+        // Almost solid dark blue with faint texture
+        backgroundImage: 'linear-gradient(to bottom, rgba(15,23,42,0.92), rgba(15,23,42,1)), url(/runfest_hero.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}>
-        {/* BIG 26 in background - Light Theme */}
-        <div style={{ 
-          ...styles.bgNumber, 
-          color: '#111827', 
-          opacity: 0.04, 
-          top: '48%', 
-          left: '50%', 
-          transform: 'translate(-50%, -50%)',
-          zIndex: 0 
-        }}>26</div>
+        {/* Removed the 26 watermark to keep it ultra simple and clean */}
 
         {/* Content */}
-        <motion.div style={{ zIndex: 1, textAlign: 'center', width: '100%', maxWidth: '800px', color: '#111827', display: 'flex', flexDirection: 'column', alignItems: 'center' }} initial="hidden" animate="visible" variants={stagger}>
+        <motion.div style={{ zIndex: 1, textAlign: 'center', width: '100%', maxWidth: '700px', display: 'flex', flexDirection: 'column', alignItems: 'center' }} initial="hidden" animate="visible" variants={stagger}>
 
-          {/* Date Pill - Light Theme */}
-          <motion.div variants={revealUp} style={{ display: 'inline-flex', alignItems: 'center', backgroundColor: '#F3F4F6', padding: '8px 18px', borderRadius: '99px', marginBottom: '25px', border: '1px solid #E5E7EB', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
-            <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '13px', fontWeight: 700, color: '#111827', textTransform: 'uppercase', letterSpacing: '2px' }}>29 Nov – 5 Dec 2026</span>
+          {/* Date Pill */}
+          <motion.div variants={revealUp} style={{ display: 'inline-flex', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.05)', padding: '6px 16px', borderRadius: '99px', marginBottom: '30px', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '12px', fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '3px' }}>29 Nov – 5 Dec 2026</span>
           </motion.div>
 
-          <motion.h1 variants={revealUp} style={{ ...styles.heroTitle, color: '#111827', textShadow: 'none' }}>RUNFEST</motion.h1>
-          <motion.div variants={revealUp} style={{ ...styles.tagline, color: '#4B5563', marginBottom: '30px' }}>Run Anywhere. Compete Nationwide.</motion.div>
+          <motion.h1 variants={revealUp} style={{ ...styles.heroTitle, color: '#F8FAFC', textShadow: 'none', letterSpacing: '-3px' }}>RUNFEST</motion.h1>
+          <motion.div variants={revealUp} style={{ ...styles.tagline, color: '#94A3B8', marginBottom: '25px', fontSize: isMobile ? '20px' : '26px' }}>Run Anywhere. Compete Nationwide.</motion.div>
           
-          <motion.p variants={revealUp} style={{ ...styles.subheading, color: '#6B7280', maxWidth: '650px', margin: '0 auto 40px auto', lineHeight: 1.7, fontSize: isMobile ? '16px' : '18px' }}>
-            RunFest is a 7-day virtual running challenge where every verified kilometer counts. Complete as many runs as you can, climb the leaderboard, and compete to become the top runner.
+          <motion.p variants={revealUp} style={{ ...styles.subheading, color: '#64748B', maxWidth: '550px', margin: '0 auto 40px auto', lineHeight: 1.6, fontSize: isMobile ? '16px' : '18px', fontWeight: 400 }}>
+            A 7-day virtual running challenge where every verified kilometer counts. Climb the leaderboard and compete to become the top runner.
           </motion.p>
           
-          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '20px', marginBottom: '60px', width: isMobile ? '100%' : 'auto', justifyContent: 'center' }}>
-            <button onClick={handleRegisterClick} style={{ ...styles.btn, ...styles.btnGlowing, padding: '18px 45px', fontSize: '18px' }}>Register Now</button>
-            <Link to="/about-runfest" style={{ ...styles.btn, backgroundColor: '#FFFFFF', color: '#111827', border: '1px solid #D1D5DB', padding: '18px 45px', fontSize: '18px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>About RunFest</Link>
+          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '15px', marginBottom: '70px', width: isMobile ? '100%' : 'auto', justifyContent: 'center' }}>
+            <button onClick={handleRegisterClick} style={{ ...styles.btn, backgroundColor: '#F97316', color: '#FFF', border: 'none', padding: '16px 40px', fontSize: '16px', fontWeight: 600, boxShadow: '0 10px 25px -5px rgba(249, 115, 22, 0.4)' }}>Register Now</button>
+            <Link to="/about-runfest" style={{ ...styles.btn, backgroundColor: 'rgba(255,255,255,0.05)', color: '#F8FAFC', border: '1px solid rgba(255,255,255,0.1)', padding: '16px 40px', fontSize: '16px', fontWeight: 600 }}>About RunFest</Link>
           </motion.div>
           
-          {/* ================= SLEEK MEDIA PARTNER (LIGHT THEME) ================= */}
-          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', opacity: 1 }}>
-             <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: '11px', fontWeight: 700, color: '#6B7280', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '12px', margin: 0 }}>Official Media Partner</h3>
+          {/* ================= SLEEK MEDIA PARTNER ================= */}
+          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+             <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: '10px', fontWeight: 600, color: '#475569', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '15px', margin: 0 }}>Official Media Partner</h3>
              <motion.a 
                href="https://www.thedesiandaz.com/" 
                target="_blank" 
                rel="noopener noreferrer" 
-               style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '10px', textDecoration: 'none', cursor: 'pointer', backgroundColor: '#FFFFFF', padding: '12px 25px', borderRadius: '16px', border: '1px solid #F3F4F6', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)', marginTop: '15px' }}
-               whileHover={{ scale: 1.03, y: -2 }}
+               style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', textDecoration: 'none', cursor: 'pointer', marginTop: '12px', backgroundColor: 'rgba(255,255,255,0.03)', padding: '8px 16px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}
+               whileHover={{ backgroundColor: 'rgba(255,255,255,0.08)', scale: 1.02 }}
                whileTap={{ scale: 0.98 }}
              >
-               <img src="/news_partner.png" alt="The Desi Andaaz Logo" style={{ height: '35px', width: 'auto', objectFit: 'contain' }} />
-               <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '12px', fontWeight: 700, color: '#111827', letterSpacing: '0.5px' }}>The Desi Andaaz</span>
+               <div style={{ backgroundColor: '#FFF', padding: '4px', borderRadius: '4px', display: 'flex' }}>
+                 <img src="/news_partner.png" alt="The Desi Andaaz Logo" style={{ height: '18px', width: 'auto', objectFit: 'contain' }} />
+               </div>
+               <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '12px', fontWeight: 500, color: '#94A3B8', letterSpacing: '0.5px' }}>The Desi Andaaz</span>
              </motion.a>
           </motion.div>
         </motion.div>
