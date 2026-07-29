@@ -303,9 +303,9 @@ const RunFestPage = () => {
         <div style={{ 
           position: 'absolute', 
           bottom: 0, 
-          left: isMobile ? 'auto' : '50%', 
+          left: isMobile ? 'auto' : '70%', 
           right: isMobile ? '-5%' : 'auto',
-          transform: isMobile ? 'none' : 'translateX(-35%)', 
+          transform: isMobile ? 'none' : 'translateX(-50%)', 
           height: isMobile ? '65%' : '90%', 
           zIndex: 1, 
           pointerEvents: 'none' 
@@ -317,12 +317,12 @@ const RunFestPage = () => {
                height: '100%', 
                width: 'auto', 
                objectFit: 'contain', 
-               filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.3))', // Add back nice shadow
-               transform: 'translateZ(0)', // Force GPU acceleration for faster render
-               willChange: 'transform' // Optimize painting
+               filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.3))',
+               transform: 'translateZ(0)',
+               willChange: 'transform'
              }} 
-             loading="eager" // Load fast
-             fetchpriority="high" // Highest priority for hero image
+             loading="eager" 
+             fetchpriority="high"
              onError={(e) => { e.target.style.display = 'none'; }} 
            />
         </div>
