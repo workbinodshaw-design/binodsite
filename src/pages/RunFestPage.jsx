@@ -181,10 +181,10 @@ const RunFestPage = () => {
           position: 'absolute',
           top: 0,
           right: 0,
-          width: '60vw',
+          width: isMobile ? '75vw' : '60vw',
           height: '100%',
           backgroundColor: '#0099FF', // Bright Cyan/Blue
-          clipPath: 'polygon(30% 0, 100% 0, 100% 100%, 0% 100%)',
+          clipPath: isMobile ? 'polygon(40% 0, 100% 0, 100% 100%, 0% 100%)' : 'polygon(30% 0, 100% 0, 100% 100%, 0% 100%)',
           zIndex: 0
         }}></div>
 
@@ -192,38 +192,36 @@ const RunFestPage = () => {
         <div style={{ position: 'absolute', top: '15%', left: '35%', width: '150px', height: '1px', backgroundColor: '#FFFFFF', transform: 'rotate(45deg)', zIndex: 0, opacity: 0.7 }}></div>
         <div style={{ position: 'absolute', bottom: '30%', right: '15%', width: '150px', height: '1px', backgroundColor: '#FFFFFF', transform: 'rotate(45deg)', zIndex: 0, opacity: 0.7 }}></div>
         <div style={{ 
-          position: 'absolute', top: '18%', right: '35%', 
+          position: 'absolute', top: '18%', right: isMobile ? '10%' : '35%', 
           width: '150px', height: '50px', 
           backgroundImage: 'radial-gradient(circle, #FFFFFF 2px, transparent 2px)', 
           backgroundSize: '20px 20px', opacity: 0.3, zIndex: 0 
         }}></div>
 
-        {/* Large Decorative Text in the Blue Area (Desktop Only) */}
-        {!isMobile && (
-          <div style={{
-            position: 'absolute',
-            right: '-8%',
-            top: '50%',
-            transform: 'translateY(-50%) rotate(-90deg)',
-            fontSize: '300px',
-            fontFamily: '"Clash Display", sans-serif',
-            fontWeight: 900,
-            color: 'rgba(255, 255, 255, 0.015)',
-            whiteSpace: 'nowrap',
-            zIndex: 0,
-            pointerEvents: 'none',
-            WebkitTextStroke: '2px rgba(255, 255, 255, 0.1)',
-            letterSpacing: '10px'
-          }}>
-            2026
-          </div>
-        )}
+        {/* Large Decorative Text in the Blue Area */}
+        <div style={{
+          position: 'absolute',
+          right: isMobile ? '-10%' : '-8%',
+          top: isMobile ? '75%' : '50%',
+          transform: 'translateY(-50%) rotate(-90deg)',
+          fontSize: isMobile ? '140px' : '300px',
+          fontFamily: '"Clash Display", sans-serif',
+          fontWeight: 900,
+          color: 'rgba(255, 255, 255, 0.015)',
+          whiteSpace: 'nowrap',
+          zIndex: 0,
+          pointerEvents: 'none',
+          WebkitTextStroke: isMobile ? '1px rgba(255, 255, 255, 0.15)' : '2px rgba(255, 255, 255, 0.1)',
+          letterSpacing: '10px'
+        }}>
+          2026
+        </div>
 
         {/* Content Container (Left Side) */}
         <motion.div style={{ 
           zIndex: 2, 
           width: '100%', 
-          maxWidth: '650px', 
+          maxWidth: isMobile ? '55vw' : '650px', 
           paddingLeft: isMobile ? '20px' : '8vw', 
           paddingTop: isMobile ? '100px' : '40px',
           display: 'flex', 
@@ -237,45 +235,50 @@ const RunFestPage = () => {
             padding: '10px 24px', borderRadius: '99px', marginBottom: '20px', 
             boxShadow: '0 4px 10px rgba(0,0,0,0.03)' 
           }}>
-            <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '13px', fontWeight: 800, color: '#0077CC', textTransform: 'uppercase', letterSpacing: '1px' }}>29 NOV – 5 DEC 2026</span>
+            <span style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '11px' : '13px', fontWeight: 800, color: '#0077CC', textTransform: 'uppercase', letterSpacing: '1px' }}>29 NOV – 5 DEC 2026</span>
           </motion.div>
 
           <motion.h1 variants={revealUp} style={{ 
             fontFamily: '"Clash Display", sans-serif', fontWeight: 900, 
-            fontSize: isMobile ? '60px' : 'clamp(80px, 8vw, 120px)', 
-            letterSpacing: '-2px', lineHeight: 1, textTransform: 'uppercase', 
+            fontSize: isMobile ? '65px' : 'clamp(80px, 8vw, 120px)', 
+            letterSpacing: '-2px', lineHeight: 0.9, textTransform: 'uppercase', 
             margin: '0 0 15px 0', color: '#0F172A' 
-          }}>RUNFEST</motion.h1>
+          }}>
+            {isMobile ? <><span style={{display: 'block'}}>RUN</span><span style={{display: 'block'}}>FEST</span></> : 'RUNFEST'}
+          </motion.h1>
+          
           <motion.div variants={revealUp} style={{ 
             fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400, 
-            fontSize: isMobile ? '24px' : '32px', color: '#475569', marginBottom: '20px' 
-          }}>Run Anywhere. Compete Nationwide.</motion.div>
+            fontSize: isMobile ? '22px' : '32px', color: '#475569', marginBottom: '15px' 
+          }}>Run Anywhere.<br/>Compete Nationwide.</motion.div>
           
           <motion.p variants={revealUp} style={{ 
             fontFamily: '"Inter", sans-serif', fontWeight: 500, color: '#475569', 
-            maxWidth: '450px', margin: '0 0 40px 0', lineHeight: 1.6, fontSize: '15px' 
+            maxWidth: '450px', margin: '0 0 30px 0', lineHeight: 1.5, fontSize: isMobile ? '13px' : '15px' 
           }}>
             RunFest is a 7-day virtual running challenge where every verified kilometer counts. Complete as many runs as you can, climb the leaderboard, and compete to become the top runner.
           </motion.p>
           
-          <motion.div variants={revealUp} style={{ display: 'flex', gap: '15px', marginBottom: '50px' }}>
+          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '15px', marginBottom: '40px', width: isMobile ? '100%' : 'auto' }}>
             <button onClick={handleRegisterClick} style={{ 
-              fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', borderRadius: '99px', 
-              padding: '15px 35px', cursor: 'pointer', border: 'none',
+              fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: isMobile ? '14px' : '16px', borderRadius: '99px', 
+              padding: isMobile ? '12px 25px' : '15px 35px', cursor: 'pointer', border: 'none',
               background: 'linear-gradient(to right, #EA580C, #F97316)', color: '#FFF', 
-              boxShadow: '0 10px 20px -5px rgba(234, 88, 12, 0.4)' 
+              boxShadow: '0 10px 20px -5px rgba(234, 88, 12, 0.4)',
+              width: isMobile ? '100%' : 'auto', textAlign: 'center'
             }}>Register Now</button>
             <Link to="/about-runfest" style={{ 
-              fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', borderRadius: '99px', 
-              padding: '15px 35px', cursor: 'pointer', border: '1px solid #CBD5E1',
+              fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: isMobile ? '14px' : '16px', borderRadius: '99px', 
+              padding: isMobile ? '12px 25px' : '15px 35px', cursor: 'pointer', border: '1px solid #CBD5E1',
               backgroundColor: '#F8FAFC', color: '#0F172A', textDecoration: 'none',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
+              width: isMobile ? '100%' : 'auto', textAlign: 'center', display: 'block'
             }}>About RunFest</Link>
           </motion.div>
           
           {/* ================= SLEEK MEDIA PARTNER ================= */}
-          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-             <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: '11px', fontWeight: 700, color: '#475569', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '10px', margin: 0 }}>OFFICIAL MEDIA PARTNER</h3>
+          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: isMobile ? '100%' : 'auto' }}>
+             <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: '10px', fontWeight: 700, color: '#475569', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '8px', margin: 0 }}>OFFICIAL MEDIA PARTNER</h3>
              <motion.a 
                href="https://www.thedesiandaz.com/" 
                target="_blank" 
@@ -283,13 +286,14 @@ const RunFestPage = () => {
                style={{ 
                  display: 'flex', flexDirection: 'column', alignItems: 'center', 
                  textDecoration: 'none', cursor: 'pointer', marginTop: '10px', 
-                 backgroundColor: '#FFFFFF', padding: '15px 30px', 
-                 borderRadius: '12px', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' 
+                 backgroundColor: '#FFFFFF', padding: isMobile ? '10px 20px' : '15px 30px', 
+                 borderRadius: '12px', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)',
+                 width: isMobile ? '100%' : 'auto'
                }}
                whileHover={{ y: -2 }}
              >
-               <img src="/news_partner.png" alt="The Desi Andaaz Logo" style={{ height: '30px', width: 'auto', objectFit: 'contain' }} />
-               <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '13px', fontWeight: 700, color: '#0F172A', marginTop: '8px' }}>The Desi Andaaz</span>
+               <img src="/news_partner.png" alt="The Desi Andaaz Logo" style={{ height: isMobile ? '25px' : '30px', width: 'auto', objectFit: 'contain' }} />
+               <span style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '11px' : '13px', fontWeight: 700, color: '#0F172A', marginTop: '8px' }}>The Desi Andaaz</span>
              </motion.a>
           </motion.div>
         </motion.div>
@@ -298,13 +302,13 @@ const RunFestPage = () => {
         <div style={{ 
           position: 'absolute', 
           bottom: 0, 
-          left: '50%', 
-          transform: isMobile ? 'translateX(-45%)' : 'translateX(-35%)', 
-          height: isMobile ? '55%' : '90%', 
+          left: isMobile ? 'auto' : '50%', 
+          right: isMobile ? '-15%' : 'auto',
+          transform: isMobile ? 'none' : 'translateX(-35%)', 
+          height: isMobile ? '70%' : '90%', 
           zIndex: 1, 
           pointerEvents: 'none' 
         }}>
-           <img 
              src="/runner_girl.png" 
              alt="Runner" 
              style={{ 
