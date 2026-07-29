@@ -275,7 +275,7 @@ const RunFestPage = () => {
         </motion.div>
 
         {/* The Runner Girl Image */}
-        <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-20%)', height: '90%', zIndex: 1, pointerEvents: 'none' }}>
+        <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-35%)', height: '90%', zIndex: 1, pointerEvents: 'none' }}>
            <img 
              src="/runner_girl.png" 
              alt="Runner" 
