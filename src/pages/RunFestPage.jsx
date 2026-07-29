@@ -185,7 +185,7 @@ const RunFestPage = () => {
           width: '100vw',
           height: '100%',
           backgroundColor: '#0099FF', // Bright Cyan/Blue
-          clipPath: isMobile ? 'polygon(75% 0, 100% 0, 100% 100%, 35% 100%)' : 'polygon(55% 0, 100% 0, 100% 100%, 25% 100%)',
+          clipPath: isMobile ? 'polygon(75% 0, 100% 0, 100% 100%, 35% 100%)' : 'polygon(50% 0, 100% 0, 100% 100%, 40% 100%)',
           zIndex: 0
         }}></div>
 
@@ -241,7 +241,7 @@ const RunFestPage = () => {
 
           <motion.h1 variants={revealUp} style={{ 
             fontFamily: '"Clash Display", sans-serif', fontWeight: 900, 
-            fontSize: isMobile ? 'clamp(40px, 11vw, 60px)' : 'clamp(60px, 7vw, 100px)', 
+            fontSize: isMobile ? 'clamp(40px, 11vw, 60px)' : 'clamp(80px, 8vw, 120px)', 
             letterSpacing: '-2px', lineHeight: 0.95, textTransform: 'uppercase', 
             margin: isMobile ? '0 0 1vh 0' : '0 0 15px 0', color: '#0F172A' 
           }}>
@@ -302,7 +302,7 @@ const RunFestPage = () => {
         <div style={{ 
           position: 'absolute', 
           bottom: 0, 
-          left: isMobile ? 'auto' : '70%', 
+          left: isMobile ? 'auto' : '50%', 
           right: isMobile ? '-5%' : 'auto',
           transform: isMobile ? 'none' : 'translateX(-50%)', 
           height: isMobile ? '65%' : '90%', 
