@@ -173,7 +173,7 @@ const RunFestPage = () => {
         height: isMobile ? '100dvh' : 'auto',
         minHeight: '100vh', 
         display: 'flex',
-        alignItems: 'center',
+        alignItems: isMobile ? 'flex-start' : 'center',
         overflow: 'hidden', 
         backgroundColor: '#E6F0F9', // Light blue background
       }}>
@@ -224,7 +224,7 @@ const RunFestPage = () => {
           width: '100%', 
           maxWidth: isMobile ? '55vw' : '650px', 
           paddingLeft: isMobile ? '20px' : '8vw', 
-          paddingTop: isMobile ? '85px' : '40px',
+          paddingTop: isMobile ? '100px' : '40px',
           display: 'flex', 
           flexDirection: 'column', 
           alignItems: 'flex-start' 
