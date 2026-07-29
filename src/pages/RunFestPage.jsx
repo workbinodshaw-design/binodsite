@@ -247,17 +247,32 @@ const RunFestPage = () => {
             margin: '0 0 15px 0', color: '#0F172A' 
           }}>RUNFEST</motion.h1>
           
-          <motion.div variants={revealUp} style={{ 
-            fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400, 
-            fontSize: isMobile ? '24px' : '32px', color: '#475569', marginBottom: '20px' 
-          }}>Run Anywhere. Compete Nationwide.</motion.div>
-          
-          <motion.p variants={revealUp} style={{ 
-            fontFamily: '"Inter", sans-serif', fontWeight: 500, color: '#475569', 
-            maxWidth: '450px', margin: '0 0 40px 0', lineHeight: 1.6, fontSize: '15px' 
+          {/* Text Wrapper for Mobile Readability */}
+          <div style={{
+            background: isMobile ? 'rgba(255, 255, 255, 0.35)' : 'transparent',
+            backdropFilter: isMobile ? 'blur(12px)' : 'none',
+            WebkitBackdropFilter: isMobile ? 'blur(12px)' : 'none',
+            padding: isMobile ? '15px 20px' : '0',
+            borderRadius: isMobile ? '16px' : '0',
+            marginBottom: isMobile ? '25px' : '0',
+            width: isMobile ? 'calc(100vw - 40px)' : 'auto',
+            border: isMobile ? '1px solid rgba(255, 255, 255, 0.6)' : 'none',
+            boxShadow: isMobile ? '0 8px 32px 0 rgba(31, 38, 135, 0.07)' : 'none',
+            position: 'relative',
+            zIndex: 3
           }}>
-            RunFest is a 7-day virtual running challenge where every verified kilometer counts. Complete as many runs as you can, climb the leaderboard, and compete to become the top runner.
-          </motion.p>
+            <motion.div variants={revealUp} style={{ 
+              fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400, 
+              fontSize: isMobile ? '24px' : '32px', color: '#0F172A', marginBottom: '15px' 
+            }}>Run Anywhere. Compete Nationwide.</motion.div>
+            
+            <motion.p variants={revealUp} style={{ 
+              fontFamily: '"Inter", sans-serif', fontWeight: 500, color: '#334155', 
+              maxWidth: '450px', margin: isMobile ? '0' : '0 0 40px 0', lineHeight: 1.6, fontSize: '15px' 
+            }}>
+              RunFest is a 7-day virtual running challenge where every verified kilometer counts. Complete as many runs as you can, climb the leaderboard, and compete to become the top runner.
+            </motion.p>
+          </div>
           
           <motion.div variants={revealUp} style={{ display: 'flex', gap: '15px', marginBottom: '50px' }}>
             <button onClick={handleRegisterClick} style={{ 
