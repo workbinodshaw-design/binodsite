@@ -278,23 +278,23 @@ const RunFestPage = () => {
           </motion.div>
           
           {/* ================= SLEEK MEDIA PARTNER ================= */}
-          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: isMobile ? '45vw' : 'auto' }}>
-             <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '8px' : '10px', fontWeight: 800, color: '#475569', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '8px', margin: 0, whiteSpace: 'nowrap' }}>OFFICIAL MEDIA PARTNER</h3>
+          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: isMobile ? 'auto' : 'auto', minWidth: isMobile ? '200px' : 'auto', zIndex: 10 }}>
+             <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '12px' : '10px', fontWeight: 800, color: '#475569', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '8px', margin: 0, whiteSpace: 'nowrap' }}>OFFICIAL MEDIA PARTNER</h3>
              <motion.a 
                href="https://www.thedesiandaz.com/" 
                target="_blank" 
                rel="noopener noreferrer" 
                style={{ 
                  display: 'flex', flexDirection: 'column', alignItems: 'center', 
-                 textDecoration: 'none', cursor: 'pointer', marginTop: '4px', 
-                 backgroundColor: '#FFFFFF', padding: isMobile ? '8px 12px' : '15px 30px', 
-                 borderRadius: '12px', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)',
+                 textDecoration: 'none', cursor: 'pointer', marginTop: '6px', 
+                 backgroundColor: '#FFFFFF', padding: isMobile ? '12px 25px' : '15px 30px', 
+                 borderRadius: '16px', boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.1)',
                  width: '100%'
                }}
                whileHover={{ y: -2 }}
              >
-               <img src="/news_partner.png" alt="The Desi Andaaz Logo" style={{ height: isMobile ? '18px' : '30px', width: 'auto', objectFit: 'contain' }} />
-               <span style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '9px' : '13px', fontWeight: 700, color: '#0F172A', marginTop: '5px' }}>The Desi Andaaz</span>
+               <img src="/news_partner.png" alt="The Desi Andaaz Logo" style={{ height: isMobile ? '26px' : '30px', width: 'auto', objectFit: 'contain' }} />
+               <span style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '13px' : '13px', fontWeight: 700, color: '#0F172A', marginTop: '6px' }}>The Desi Andaaz</span>
              </motion.a>
           </motion.div>
         </motion.div>
