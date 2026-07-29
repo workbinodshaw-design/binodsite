@@ -185,7 +185,7 @@ const RunFestPage = () => {
           width: '100vw',
           height: '100%',
           backgroundColor: '#0099FF', // Bright Cyan/Blue
-          clipPath: isMobile ? 'polygon(75% 0, 100% 0, 100% 100%, 35% 100%)' : 'polygon(50% 0, 100% 0, 100% 100%, 40% 100%)',
+          clipPath: isMobile ? 'polygon(75% 0, 100% 0, 100% 100%, 35% 100%)' : 'polygon(55% 0, 100% 0, 100% 100%, 45% 100%)',
           zIndex: 0
         }}></div>
 
@@ -304,7 +304,7 @@ const RunFestPage = () => {
           bottom: 0, 
           left: isMobile ? 'auto' : '50%', 
           right: isMobile ? '-5%' : 'auto',
-          transform: isMobile ? 'none' : 'translateX(-50%)', 
+          transform: isMobile ? 'none' : 'translateX(-35%)', 
           height: isMobile ? '65%' : '90%', 
           zIndex: 1, 
           pointerEvents: 'none' 
