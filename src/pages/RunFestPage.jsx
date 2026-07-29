@@ -309,6 +309,7 @@ const RunFestPage = () => {
           zIndex: 1, 
           pointerEvents: 'none' 
         }}>
+           <img 
              src="/runner_girl.png" 
              alt="Runner" 
              style={{ 
