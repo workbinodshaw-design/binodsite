@@ -166,42 +166,37 @@ const RunFestPage = () => {
         url="/runfest"
       />
 
-      {/* ================= HERO SECTION - RESPONSIVE ================= */}
+      {/* ================= HERO (100VH) - EXACT MOCKUP ================= */}
       <header style={{ 
         position: 'relative', 
         width: '100vw', 
-        minHeight: isMobile ? '120vh' : '100vh', 
+        minHeight: '100vh', 
         display: 'flex',
-        alignItems: 'flex-start', // Start from top so mobile scrolls naturally
+        alignItems: 'center',
         overflow: 'hidden', 
         backgroundColor: '#E6F0F9', // Light blue background
       }}>
         {/* Diagonal Blue Shape */}
         <div style={{
           position: 'absolute',
-          top: isMobile ? 'auto' : 0,
-          bottom: isMobile ? 0 : 'auto',
+          top: 0,
           right: 0,
-          width: isMobile ? '100vw' : '60vw',
-          height: isMobile ? '65vh' : '100%',
+          width: '60vw',
+          height: '100%',
           backgroundColor: '#0099FF', // Bright Cyan/Blue
-          clipPath: isMobile ? 'polygon(0 20%, 100% 0, 100% 100%, 0% 100%)' : 'polygon(30% 0, 100% 0, 100% 100%, 0% 100%)',
+          clipPath: 'polygon(30% 0, 100% 0, 100% 100%, 0% 100%)',
           zIndex: 0
         }}></div>
 
         {/* Decorative White Lines & Dots */}
-        {!isMobile && (
-          <>
-            <div style={{ position: 'absolute', top: '15%', left: '35%', width: '150px', height: '1px', backgroundColor: '#FFFFFF', transform: 'rotate(45deg)', zIndex: 0, opacity: 0.7 }}></div>
-            <div style={{ position: 'absolute', bottom: '30%', right: '15%', width: '150px', height: '1px', backgroundColor: '#FFFFFF', transform: 'rotate(45deg)', zIndex: 0, opacity: 0.7 }}></div>
-            <div style={{ 
-              position: 'absolute', top: '18%', right: '35%', 
-              width: '150px', height: '50px', 
-              backgroundImage: 'radial-gradient(circle, #FFFFFF 2px, transparent 2px)', 
-              backgroundSize: '20px 20px', opacity: 0.3, zIndex: 0 
-            }}></div>
-          </>
-        )}
+        <div style={{ position: 'absolute', top: '15%', left: '35%', width: '150px', height: '1px', backgroundColor: '#FFFFFF', transform: 'rotate(45deg)', zIndex: 0, opacity: 0.7 }}></div>
+        <div style={{ position: 'absolute', bottom: '30%', right: '15%', width: '150px', height: '1px', backgroundColor: '#FFFFFF', transform: 'rotate(45deg)', zIndex: 0, opacity: 0.7 }}></div>
+        <div style={{ 
+          position: 'absolute', top: '18%', right: '35%', 
+          width: '150px', height: '50px', 
+          backgroundImage: 'radial-gradient(circle, #FFFFFF 2px, transparent 2px)', 
+          backgroundSize: '20px 20px', opacity: 0.3, zIndex: 0 
+        }}></div>
 
         {/* Large Decorative Text in the Blue Area (Desktop Only) */}
         {!isMobile && (
@@ -224,18 +219,16 @@ const RunFestPage = () => {
           </div>
         )}
 
-        {/* Content Container */}
+        {/* Content Container (Left Side) */}
         <motion.div style={{ 
           zIndex: 2, 
           width: '100%', 
           maxWidth: '650px', 
           paddingLeft: isMobile ? '20px' : '8vw', 
-          paddingRight: isMobile ? '20px' : '0', 
-          paddingTop: isMobile ? '120px' : '20vh',
+          paddingTop: isMobile ? '100px' : '40px',
           display: 'flex', 
           flexDirection: 'column', 
-          alignItems: isMobile ? 'center' : 'flex-start',
-          textAlign: isMobile ? 'center' : 'left'
+          alignItems: 'flex-start' 
         }} initial="hidden" animate="visible" variants={stagger}>
 
           {/* Date Pill */}
@@ -249,7 +242,7 @@ const RunFestPage = () => {
 
           <motion.h1 variants={revealUp} style={{ 
             fontFamily: '"Clash Display", sans-serif', fontWeight: 900, 
-            fontSize: isMobile ? '55px' : 'clamp(80px, 8vw, 120px)', 
+            fontSize: isMobile ? '60px' : 'clamp(80px, 8vw, 120px)', 
             letterSpacing: '-2px', lineHeight: 1, textTransform: 'uppercase', 
             margin: '0 0 15px 0', color: '#0F172A' 
           }}>RUNFEST</motion.h1>
@@ -261,31 +254,28 @@ const RunFestPage = () => {
           
           <motion.p variants={revealUp} style={{ 
             fontFamily: '"Inter", sans-serif', fontWeight: 500, color: '#475569', 
-            maxWidth: '450px', margin: isMobile ? '0 auto 40px auto' : '0 0 40px 0', lineHeight: 1.6, fontSize: '15px' 
+            maxWidth: '450px', margin: '0 0 40px 0', lineHeight: 1.6, fontSize: '15px' 
           }}>
             RunFest is a 7-day virtual running challenge where every verified kilometer counts. Complete as many runs as you can, climb the leaderboard, and compete to become the top runner.
           </motion.p>
           
-          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '15px', marginBottom: '50px', width: isMobile ? '100%' : 'auto', alignItems: 'center' }}>
+          <motion.div variants={revealUp} style={{ display: 'flex', gap: '15px', marginBottom: '50px' }}>
             <button onClick={handleRegisterClick} style={{ 
               fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', borderRadius: '99px', 
               padding: '15px 35px', cursor: 'pointer', border: 'none',
               background: 'linear-gradient(to right, #EA580C, #F97316)', color: '#FFF', 
-              boxShadow: '0 10px 20px -5px rgba(234, 88, 12, 0.4)',
-              width: isMobile ? '100%' : 'auto'
+              boxShadow: '0 10px 20px -5px rgba(234, 88, 12, 0.4)' 
             }}>Register Now</button>
             <Link to="/about-runfest" style={{ 
               fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '16px', borderRadius: '99px', 
               padding: '15px 35px', cursor: 'pointer', border: '1px solid #CBD5E1',
               backgroundColor: '#F8FAFC', color: '#0F172A', textDecoration: 'none',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
-              width: isMobile ? '100%' : 'auto',
-              textAlign: 'center'
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
             }}>About RunFest</Link>
           </motion.div>
           
           {/* ================= SLEEK MEDIA PARTNER ================= */}
-          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: 'column', alignItems: isMobile ? 'center' : 'flex-start', zIndex: 10 }}>
+          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
              <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: '11px', fontWeight: 700, color: '#475569', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '10px', margin: 0 }}>OFFICIAL MEDIA PARTNER</h3>
              <motion.a 
                href="https://www.thedesiandaz.com/" 
@@ -306,15 +296,7 @@ const RunFestPage = () => {
         </motion.div>
 
         {/* The Runner Girl Image */}
-        <div style={{ 
-          position: 'absolute', 
-          bottom: 0, 
-          left: isMobile ? '50%' : '50%', 
-          transform: isMobile ? 'translateX(-50%)' : 'translateX(-35%)', 
-          height: isMobile ? '55vh' : '90%', 
-          zIndex: 1, 
-          pointerEvents: 'none' 
-        }}>
+        <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-35%)', height: '90%', zIndex: 1, pointerEvents: 'none' }}>
            <img 
              src="/runner_girl.png" 
              alt="Runner" 
@@ -322,27 +304,25 @@ const RunFestPage = () => {
                height: '100%', 
                width: 'auto', 
                objectFit: 'contain', 
-               filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.3))',
-               transform: 'translateZ(0)',
-               willChange: 'transform'
+               filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.3))', // Add back nice shadow
+               transform: 'translateZ(0)', // Force GPU acceleration for faster render
+               willChange: 'transform' // Optimize painting
              }} 
-             loading="eager"
-             fetchpriority="high"
+             loading="eager" // Load fast
+             fetchpriority="high" // Highest priority for hero image
              onError={(e) => { e.target.style.display = 'none'; }} 
            />
         </div>
 
-        {/* Scroll Mouse Icon (Hidden on very small mobile to save space) */}
-        {!isMobile && (
-          <div style={{ position: 'absolute', bottom: '30px', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', opacity: 0.6, zIndex: 2 }}>
-             <div style={{ width: '24px', height: '40px', border: '2px solid #0F172A', borderRadius: '20px', display: 'flex', justifyContent: 'center', paddingTop: '6px' }}>
-                <div style={{ width: '4px', height: '8px', backgroundColor: '#0F172A', borderRadius: '2px' }}></div>
-             </div>
-             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0F172A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '5px' }}>
-               <path d="M12 5v14M19 12l-7 7-7-7"/>
-             </svg>
-          </div>
-        )}
+        {/* Scroll Mouse Icon */}
+        <div style={{ position: 'absolute', bottom: '30px', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', opacity: 0.6, zIndex: 2 }}>
+           <div style={{ width: '24px', height: '40px', border: '2px solid #0F172A', borderRadius: '20px', display: 'flex', justifyContent: 'center', paddingTop: '6px' }}>
+              <div style={{ width: '4px', height: '8px', backgroundColor: '#0F172A', borderRadius: '2px' }}></div>
+           </div>
+           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0F172A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '5px' }}>
+             <path d="M12 5v14M19 12l-7 7-7-7"/>
+           </svg>
+        </div>
       </header>
 
       {/* ================= COUNTDOWN SECTION ================= */}
