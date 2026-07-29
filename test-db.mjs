@@ -14,16 +14,18 @@ const db = getFirestore(app);
 
 async function test() {
   try {
-    console.log("Writing to analytics...");
-    await addDoc(collection(db, "analytics"), {
-      path: "/test-script",
-      hostname: "localhost",
-      timestamp: serverTimestamp()
+    console.log("Writing to support_tickets...");
+    await addDoc(collection(db, "support_tickets"), {
+      name: "Test User",
+      email: "test@example.com",
+      description: "Test ticket",
+      status: "new",
+      createdAt: serverTimestamp()
     });
     console.log("Success! Write worked.");
     
-    console.log("Reading from analytics...");
-    const snapshot = await getDocs(collection(db, "analytics"));
+    console.log("Reading from support_tickets...");
+    const snapshot = await getDocs(collection(db, "support_tickets"));
     console.log(`Found ${snapshot.size} documents.`);
     snapshot.forEach(doc => {
       console.log(doc.data().path);

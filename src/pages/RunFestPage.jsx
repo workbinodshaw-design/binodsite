@@ -275,11 +275,23 @@ const RunFestPage = () => {
         </motion.div>
 
         {/* The Runner Girl Image */}
-        {/* User requested EXACT girl. Since we don't have the PNG file, we use an absolute positioned img tag. We'll ask user to upload runner_girl.png */}
-        <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-20%)', height: '90%', zIndex: 1 }}>
-           {/* Fallback styling for the placeholder so it doesn't break layout if missing */}
-           <img src="/runner_girl.png" alt="Runner" style={{ height: '100%', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.3))' }} 
-           onError={(e) => { e.target.style.display = 'none'; }} />
+        <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-20%)', height: '90%', zIndex: 1, pointerEvents: 'none' }}>
+           <img 
+             src="/runner_girl.png" 
+             alt="Runner" 
+             style={{ 
+               height: '100%', 
+               width: 'auto', 
+               objectFit: 'contain', 
+               mixBlendMode: 'darken', // Removes the white background!
+               filter: 'contrast(1.1)', // Enhances the subject slightly
+               transform: 'translateZ(0)', // Force GPU acceleration for faster render
+               willChange: 'transform' // Optimize painting
+             }} 
+             loading="eager" // Load fast
+             fetchpriority="high" // Highest priority for hero image
+             onError={(e) => { e.target.style.display = 'none'; }} 
+           />
         </div>
 
         {/* Scroll Mouse Icon */}
