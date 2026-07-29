@@ -185,7 +185,7 @@ const RunFestPage = () => {
           width: '100vw',
           height: '100%',
           backgroundColor: '#0099FF', // Bright Cyan/Blue
-          clipPath: isMobile ? 'polygon(75% 0, 100% 0, 100% 100%, 35% 100%)' : 'polygon(30% 0, 100% 0, 100% 100%, 0% 100%)',
+          clipPath: isMobile ? 'polygon(75% 0, 100% 0, 100% 100%, 35% 100%)' : 'polygon(55% 0, 100% 0, 100% 100%, 25% 100%)',
           zIndex: 0
         }}></div>
 
@@ -222,9 +222,9 @@ const RunFestPage = () => {
         <motion.div style={{ 
           zIndex: 2, 
           width: '100%', 
-          maxWidth: isMobile ? '55vw' : '650px', 
-          paddingLeft: isMobile ? '20px' : '8vw', 
-          paddingTop: isMobile ? '100px' : '40px',
+          maxWidth: isMobile ? '55vw' : '700px', 
+          paddingLeft: isMobile ? '20px' : '6vw', 
+          paddingTop: isMobile ? '100px' : '0px',
           display: 'flex', 
           flexDirection: 'column', 
           alignItems: 'flex-start' 
@@ -233,44 +233,44 @@ const RunFestPage = () => {
           {/* Date Pill */}
           <motion.div variants={revealUp} style={{ 
             display: 'inline-flex', alignItems: 'center', backgroundColor: '#F0F8FF', 
-            padding: isMobile ? '6px 12px' : '10px 24px', borderRadius: '99px', marginBottom: isMobile ? '2vh' : '20px', 
+            padding: isMobile ? '6px 12px' : '10px 24px', borderRadius: '99px', marginBottom: isMobile ? '2vh' : '25px', 
             boxShadow: '0 4px 10px rgba(0,0,0,0.03)' 
           }}>
-            <span style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '9px' : '13px', fontWeight: 800, color: '#0077CC', textTransform: 'uppercase', letterSpacing: '1px' }}>29 NOV – 5 DEC 2026</span>
+            <span style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '9px' : '14px', fontWeight: 800, color: '#0077CC', textTransform: 'uppercase', letterSpacing: '1px' }}>29 NOV – 5 DEC 2026</span>
           </motion.div>
 
           <motion.h1 variants={revealUp} style={{ 
             fontFamily: '"Clash Display", sans-serif', fontWeight: 900, 
-            fontSize: isMobile ? 'clamp(40px, 11vw, 60px)' : 'clamp(80px, 8vw, 120px)', 
+            fontSize: isMobile ? 'clamp(40px, 11vw, 60px)' : 'clamp(60px, 7vw, 100px)', 
             letterSpacing: '-2px', lineHeight: 0.95, textTransform: 'uppercase', 
-            margin: isMobile ? '0 0 1vh 0' : '0 0 10px 0', color: '#0F172A' 
+            margin: isMobile ? '0 0 1vh 0' : '0 0 15px 0', color: '#0F172A' 
           }}>
             {isMobile ? <><span style={{display: 'block'}}>RUN</span><span style={{display: 'block'}}>FEST</span></> : 'RUNFEST'}
           </motion.h1>
           
           <motion.div variants={revealUp} style={{ 
             fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400, 
-            fontSize: isMobile ? 'clamp(16px, 5vw, 22px)' : '32px', color: '#475569', marginBottom: isMobile ? '1.5vh' : '10px' 
+            fontSize: isMobile ? 'clamp(16px, 5vw, 22px)' : '32px', color: '#475569', marginBottom: isMobile ? '1.5vh' : '20px' 
           }}>Run Anywhere.<br/>Compete Nationwide.</motion.div>
           
           <motion.p variants={revealUp} style={{ 
             fontFamily: '"Inter", sans-serif', fontWeight: 500, color: '#475569', 
-            maxWidth: '450px', margin: isMobile ? '0 0 3vh 0' : '0 0 20px 0', lineHeight: 1.4, fontSize: isMobile ? 'clamp(10px, 3.2vw, 13px)' : '15px'
+            maxWidth: isMobile ? '450px' : '500px', margin: isMobile ? '0 0 3vh 0' : '0 0 30px 0', lineHeight: 1.5, fontSize: isMobile ? 'clamp(10px, 3.2vw, 13px)' : '16px'
           }}>
             RunFest is a 7-day virtual challenge where every verified kilometer counts. Complete runs, climb the leaderboard, and compete to become the top runner.
           </motion.p>
           
-          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '1.5vh' : '15px', marginBottom: isMobile ? '3vh' : '40px', width: isMobile ? '90%' : 'auto' }}>
+          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '1.5vh' : '20px', marginBottom: isMobile ? '3vh' : '50px', width: isMobile ? '90%' : 'auto' }}>
             <button onClick={handleRegisterClick} style={{ 
               fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: isMobile ? '12px' : '16px', borderRadius: '99px', 
-              padding: isMobile ? '10px 15px' : '15px 35px', cursor: 'pointer', border: 'none',
+              padding: isMobile ? '10px 15px' : '16px 40px', cursor: 'pointer', border: 'none',
               background: 'linear-gradient(to right, #EA580C, #F97316)', color: '#FFF', 
               boxShadow: '0 10px 20px -5px rgba(234, 88, 12, 0.4)',
               width: isMobile ? '100%' : 'auto', textAlign: 'center'
             }}>Register Now</button>
             <Link to="/about-runfest" style={{ 
               fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: isMobile ? '12px' : '16px', borderRadius: '99px', 
-              padding: isMobile ? '10px 15px' : '15px 35px', cursor: 'pointer', border: '1px solid #CBD5E1',
+              padding: isMobile ? '10px 15px' : '16px 40px', cursor: 'pointer', border: '1px solid #CBD5E1',
               backgroundColor: '#F8FAFC', color: '#0F172A', textDecoration: 'none',
               boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
               width: isMobile ? '100%' : 'auto', textAlign: 'center', display: 'block'
