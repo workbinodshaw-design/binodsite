@@ -224,7 +224,7 @@ const RunFestPage = () => {
           width: '100%', 
           maxWidth: isMobile ? '55vw' : '650px', 
           paddingLeft: isMobile ? '20px' : '8vw', 
-          paddingTop: isMobile ? '12vh' : '40px',
+          paddingTop: isMobile ? '85px' : '40px',
           display: 'flex', 
           flexDirection: 'column', 
           alignItems: 'flex-start' 
@@ -255,7 +255,7 @@ const RunFestPage = () => {
           
           <motion.p variants={revealUp} style={{ 
             fontFamily: '"Inter", sans-serif', fontWeight: 500, color: '#475569', 
-            maxWidth: '450px', margin: isMobile ? '0 0 2.5vh 0' : '0 0 20px 0', lineHeight: 1.4, fontSize: isMobile ? 'clamp(10px, 3.2vw, 13px)' : '15px'
+            maxWidth: '450px', margin: isMobile ? '0 0 3vh 0' : '0 0 20px 0', lineHeight: 1.4, fontSize: isMobile ? 'clamp(10px, 3.2vw, 13px)' : '15px'
           }}>
             RunFest is a 7-day virtual challenge where every verified kilometer counts. Complete runs, climb the leaderboard, and compete to become the top runner.
           </motion.p>
