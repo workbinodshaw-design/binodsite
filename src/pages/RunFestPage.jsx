@@ -283,8 +283,7 @@ const RunFestPage = () => {
                height: '100%', 
                width: 'auto', 
                objectFit: 'contain', 
-               mixBlendMode: 'darken', // Removes the white background!
-               filter: 'contrast(1.1)', // Enhances the subject slightly
+               filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.3))', // Add back nice shadow
                transform: 'translateZ(0)', // Force GPU acceleration for faster render
                willChange: 'transform' // Optimize painting
              }} 
