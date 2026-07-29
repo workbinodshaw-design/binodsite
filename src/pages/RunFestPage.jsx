@@ -170,6 +170,7 @@ const RunFestPage = () => {
       <header style={{ 
         position: 'relative', 
         width: '100vw', 
+        height: isMobile ? '100dvh' : 'auto',
         minHeight: '100vh', 
         display: 'flex',
         alignItems: 'center',
@@ -184,7 +185,7 @@ const RunFestPage = () => {
           width: '100vw',
           height: '100%',
           backgroundColor: '#0099FF', // Bright Cyan/Blue
-          clipPath: isMobile ? 'polygon(65% 0, 100% 0, 100% 100%, 40% 100%)' : 'polygon(30% 0, 100% 0, 100% 100%, 0% 100%)',
+          clipPath: isMobile ? 'polygon(75% 0, 100% 0, 100% 100%, 35% 100%)' : 'polygon(30% 0, 100% 0, 100% 100%, 0% 100%)',
           zIndex: 0
         }}></div>
 
@@ -221,9 +222,9 @@ const RunFestPage = () => {
         <motion.div style={{ 
           zIndex: 2, 
           width: '100%', 
-          maxWidth: isMobile ? '58vw' : '650px', 
+          maxWidth: isMobile ? '55vw' : '650px', 
           paddingLeft: isMobile ? '20px' : '8vw', 
-          paddingTop: isMobile ? '80px' : '40px',
+          paddingTop: isMobile ? '12vh' : '40px',
           display: 'flex', 
           flexDirection: 'column', 
           alignItems: 'flex-start' 
@@ -232,7 +233,7 @@ const RunFestPage = () => {
           {/* Date Pill */}
           <motion.div variants={revealUp} style={{ 
             display: 'inline-flex', alignItems: 'center', backgroundColor: '#F0F8FF', 
-            padding: isMobile ? '6px 14px' : '10px 24px', borderRadius: '99px', marginBottom: isMobile ? '15px' : '20px', 
+            padding: isMobile ? '6px 12px' : '10px 24px', borderRadius: '99px', marginBottom: isMobile ? '2vh' : '20px', 
             boxShadow: '0 4px 10px rgba(0,0,0,0.03)' 
           }}>
             <span style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '9px' : '13px', fontWeight: 800, color: '#0077CC', textTransform: 'uppercase', letterSpacing: '1px' }}>29 NOV – 5 DEC 2026</span>
@@ -240,36 +241,36 @@ const RunFestPage = () => {
 
           <motion.h1 variants={revealUp} style={{ 
             fontFamily: '"Clash Display", sans-serif', fontWeight: 900, 
-            fontSize: isMobile ? '45px' : 'clamp(80px, 8vw, 120px)', 
+            fontSize: isMobile ? 'clamp(40px, 11vw, 60px)' : 'clamp(80px, 8vw, 120px)', 
             letterSpacing: '-2px', lineHeight: 0.95, textTransform: 'uppercase', 
-            margin: '0 0 10px 0', color: '#0F172A' 
+            margin: isMobile ? '0 0 1vh 0' : '0 0 10px 0', color: '#0F172A' 
           }}>
             {isMobile ? <><span style={{display: 'block'}}>RUN</span><span style={{display: 'block'}}>FEST</span></> : 'RUNFEST'}
           </motion.h1>
           
           <motion.div variants={revealUp} style={{ 
             fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400, 
-            fontSize: isMobile ? '18px' : '32px', color: '#475569', marginBottom: '10px' 
+            fontSize: isMobile ? 'clamp(16px, 5vw, 22px)' : '32px', color: '#475569', marginBottom: isMobile ? '1.5vh' : '10px' 
           }}>Run Anywhere.<br/>Compete Nationwide.</motion.div>
           
           <motion.p variants={revealUp} style={{ 
             fontFamily: '"Inter", sans-serif', fontWeight: 500, color: '#475569', 
-            maxWidth: '450px', margin: '0 0 20px 0', lineHeight: 1.5, fontSize: isMobile ? '11px' : '15px', paddingRight: isMobile ? '5px' : '0'
+            maxWidth: '450px', margin: isMobile ? '0 0 2.5vh 0' : '0 0 20px 0', lineHeight: 1.4, fontSize: isMobile ? 'clamp(10px, 3.2vw, 13px)' : '15px'
           }}>
             RunFest is a 7-day virtual challenge where every verified kilometer counts. Complete runs, climb the leaderboard, and compete to become the top runner.
           </motion.p>
           
-          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '10px' : '15px', marginBottom: isMobile ? '30px' : '40px', width: isMobile ? '90%' : 'auto' }}>
+          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '1.5vh' : '15px', marginBottom: isMobile ? '3vh' : '40px', width: isMobile ? '90%' : 'auto' }}>
             <button onClick={handleRegisterClick} style={{ 
-              fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: isMobile ? '13px' : '16px', borderRadius: '99px', 
-              padding: isMobile ? '10px 20px' : '15px 35px', cursor: 'pointer', border: 'none',
+              fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: isMobile ? '12px' : '16px', borderRadius: '99px', 
+              padding: isMobile ? '10px 15px' : '15px 35px', cursor: 'pointer', border: 'none',
               background: 'linear-gradient(to right, #EA580C, #F97316)', color: '#FFF', 
               boxShadow: '0 10px 20px -5px rgba(234, 88, 12, 0.4)',
               width: isMobile ? '100%' : 'auto', textAlign: 'center'
             }}>Register Now</button>
             <Link to="/about-runfest" style={{ 
-              fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: isMobile ? '13px' : '16px', borderRadius: '99px', 
-              padding: isMobile ? '10px 20px' : '15px 35px', cursor: 'pointer', border: '1px solid #CBD5E1',
+              fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: isMobile ? '12px' : '16px', borderRadius: '99px', 
+              padding: isMobile ? '10px 15px' : '15px 35px', cursor: 'pointer', border: '1px solid #CBD5E1',
               backgroundColor: '#F8FAFC', color: '#0F172A', textDecoration: 'none',
               boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
               width: isMobile ? '100%' : 'auto', textAlign: 'center', display: 'block'
@@ -277,23 +278,23 @@ const RunFestPage = () => {
           </motion.div>
           
           {/* ================= SLEEK MEDIA PARTNER ================= */}
-          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: isMobile ? '90%' : 'auto' }}>
-             <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '9px' : '10px', fontWeight: 800, color: '#475569', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '8px', margin: 0 }}>OFFICIAL MEDIA PARTNER</h3>
+          <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: isMobile ? '45vw' : 'auto' }}>
+             <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '8px' : '10px', fontWeight: 800, color: '#475569', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '8px', margin: 0, whiteSpace: 'nowrap' }}>OFFICIAL MEDIA PARTNER</h3>
              <motion.a 
                href="https://www.thedesiandaz.com/" 
                target="_blank" 
                rel="noopener noreferrer" 
                style={{ 
                  display: 'flex', flexDirection: 'column', alignItems: 'center', 
-                 textDecoration: 'none', cursor: 'pointer', marginTop: '8px', 
-                 backgroundColor: '#FFFFFF', padding: isMobile ? '8px 15px' : '15px 30px', 
+                 textDecoration: 'none', cursor: 'pointer', marginTop: '4px', 
+                 backgroundColor: '#FFFFFF', padding: isMobile ? '8px 12px' : '15px 30px', 
                  borderRadius: '12px', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)',
-                 width: isMobile ? '100%' : 'auto'
+                 width: '100%'
                }}
                whileHover={{ y: -2 }}
              >
-               <img src="/news_partner.png" alt="The Desi Andaaz Logo" style={{ height: isMobile ? '20px' : '30px', width: 'auto', objectFit: 'contain' }} />
-               <span style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '10px' : '13px', fontWeight: 700, color: '#0F172A', marginTop: '5px' }}>The Desi Andaaz</span>
+               <img src="/news_partner.png" alt="The Desi Andaaz Logo" style={{ height: isMobile ? '18px' : '30px', width: 'auto', objectFit: 'contain' }} />
+               <span style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '9px' : '13px', fontWeight: 700, color: '#0F172A', marginTop: '5px' }}>The Desi Andaaz</span>
              </motion.a>
           </motion.div>
         </motion.div>
@@ -305,7 +306,7 @@ const RunFestPage = () => {
           left: isMobile ? 'auto' : '50%', 
           right: isMobile ? '-5%' : 'auto',
           transform: isMobile ? 'none' : 'translateX(-35%)', 
-          height: isMobile ? '60%' : '90%', 
+          height: isMobile ? '65%' : '90%', 
           zIndex: 1, 
           pointerEvents: 'none' 
         }}>
