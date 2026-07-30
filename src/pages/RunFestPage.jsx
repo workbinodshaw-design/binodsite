@@ -279,7 +279,7 @@ const RunFestPage = () => {
           
           {/* ================= SLEEK MEDIA PARTNER ================= */}
           <motion.div variants={revealUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', zIndex: 10 }}>
-             <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '9px' : '10px', fontWeight: 800, color: '#475569', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '6px', margin: 0, whiteSpace: 'nowrap' }}>OFFICIAL MEDIA PARTNER</h3>
+             <div style={{ fontFamily: '"Inter", sans-serif', fontSize: isMobile ? '10px' : '11px', fontWeight: 800, color: '#475569', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '6px', margin: 0, whiteSpace: 'nowrap' }}>OFFICIAL MEDIA PARTNER</div>
              <motion.a 
                href="https://www.thedesiandaz.com/" 
                target="_blank" 
