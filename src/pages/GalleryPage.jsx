@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, ZoomIn, X, ExternalLink, Filter, Sparkles } from 'lucide-react';
+import { ArrowLeft, ZoomIn, X, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
+import ContactSection from '../components/ContactSection';
 
 const albums = [
   {
@@ -13,30 +14,30 @@ const albums = [
     description: 'A comprehensive full-stack ecosystem featuring patient blood test booking, real-time phlebotomist sample tracking, NABL report delivery, and an enterprise cloud dashboard for live ops management.',
     liveUrl: 'https://www.bookhealthians.in',
     images: [
-      { id: 'h1', src: '/gallery/healthians_mobile.png', title: 'Mobile Booking Portal', caption: 'Home blood sample collection interface with 30-second rapid booking flow and automated callback system.' },
-      { id: 'h2', src: '/gallery/healthians_admin.png', title: 'Enterprise Ops Dashboard', caption: 'Real-time patient order tracking, live cloud booking filters, and WhatsApp/Call integration for admin team.' }
+      { id: 'h1', src: '/gallery/healthians_mobile.png', title: 'Mobile Booking Portal', caption: 'Home blood sample collection interface with 30-second rapid booking flow.' },
+      { id: 'h2', src: '/gallery/healthians_admin.png', title: 'Enterprise Ops Dashboard', caption: 'Real-time patient order tracking, live cloud booking filters, and team integration.' }
     ]
   },
   {
     id: 'runfest',
     name: 'RunFest National Challenge',
-    category: 'Virtual Event & Leaderboard Platform',
+    category: 'Virtual Event Platform',
     tag: 'event',
-    description: 'A nationwide 7-day virtual running marathon experience with GPS kilometer verification, dynamic runner profiles, media partner integration, and automated leaderboard tracking.',
+    description: 'A nationwide virtual running marathon experience with GPS kilometer verification, dynamic runner profiles, and official media partner integration.',
     liveUrl: '/runfest',
     images: [
-      { id: 'r1', src: '/gallery/runfest_desktop.png', title: 'Desktop Hero Portal', caption: 'Dynamic hero interface featuring live event countdown, athlete registration triggers, and official media partner showcase.' }
+      { id: 'r1', src: '/gallery/runfest_desktop.png', title: 'Desktop Hero Portal', caption: 'Dynamic hero interface featuring live event countdown and athlete registration.' }
     ]
   },
   {
     id: 'ai-automation',
     name: 'CastFlow AI Ecosystem',
-    category: 'SaaS & Custom AI Workflows',
+    category: 'SaaS & AI Workflows',
     tag: 'ai',
-    description: 'Custom intelligent agents, automated revenue pipelines, WhatsApp conversational agents, and data-driven consulting platforms designed to eliminate manual data entry.',
-    liveUrl: '/',
+    description: 'Custom intelligent agents, automated revenue pipelines, WhatsApp conversational bots, and data-driven automation platforms.',
+    liveUrl: '/services/ai-automation',
     images: [
-      { id: 'c1', src: '/gallery/castflow_hero.jpg', title: 'Automated Revenue Engine', caption: 'Interactive 3D architecture dashboard showcasing live 127% ROI analytics, tech stack integration, and automated workflows.' }
+      { id: 'c1', src: '/gallery/castflow_hero.jpg', title: 'Automated Revenue Engine', caption: 'Interactive dashboard showcasing live ROI analytics and intelligent workflow architecture.' }
     ]
   }
 ];
@@ -48,6 +49,7 @@ const GalleryPage = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -58,22 +60,22 @@ const GalleryPage = () => {
     : albums.filter(album => album.tag === activeTab);
 
   return (
-    <div style={{ backgroundColor: '#0F172A', color: '#FFF', minHeight: '100vh', fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif', paddingBottom: '8rem' }}>
+    <>
       <SEO 
-        title="Visual Gallery & Albums | CastFlow Creations"
-        description="Explore our curated architectural showcases, user interface designs, AI automation workflows, and live client deployments."
-        keywords="Web Design Gallery, UI UX Showcase, CastFlow Portfolio, AI Dashboard Screenshots, React UI"
+        title="Visual Showcase & UI Gallery | CastFlow Agency"
+        description="Explore our minimalist visual showcase of interface designs, healthcare ERP dashboards, AI automation tools, and web deployments."
+        keywords="Web Design Gallery, Minimalist UI UX, CastFlow Portfolio, Clean SaaS Screenshots, React Architecture"
         url="/gallery"
       />
 
-      {/* Lightbox Modal */}
+      {/* Fullscreen Lightbox Modal */}
       {selectedImg && (
         <div 
           onClick={() => setSelectedImg(null)}
           style={{
             position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-            backgroundColor: 'rgba(5, 10, 24, 0.94)',
-            backdropFilter: 'blur(16px)',
+            backgroundColor: 'rgba(0, 0, 0, 0.85)',
+            backdropFilter: 'blur(8px)',
             zIndex: 999999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
             padding: isMobile ? '1rem' : '2.5rem', cursor: 'zoom-out'
           }}
@@ -82,83 +84,83 @@ const GalleryPage = () => {
             onClick={(e) => { e.stopPropagation(); setSelectedImg(null); }}
             style={{
               position: 'absolute', top: isMobile ? '15px' : '25px', right: isMobile ? '15px' : '25px',
-              background: 'rgba(255, 255, 255, 0.15)', border: '1px solid rgba(255,255,255,0.2)',
-              color: '#FFF', borderRadius: '50%', width: isMobile ? '40px' : '48px', height: isMobile ? '40px' : '48px',
+              background: 'rgba(255, 255, 255, 0.2)', border: '1px solid rgba(255,255,255,0.3)',
+              color: '#FFF', borderRadius: '50%', width: '44px', height: '44px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer', transition: 'all 0.2s', zIndex: 1000000
             }}
           >
-            <X size={24} />
+            <X size={22} />
           </button>
 
           <div 
             onClick={(e) => e.stopPropagation()} 
-            style={{ position: 'relative', maxWidth: '1150px', maxHeight: '88vh', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 35px 60px -15px rgba(0, 0, 0, 0.8)', border: '1px solid rgba(255,255,255,0.15)', background: '#1E293B' }}
+            style={{ position: 'relative', maxWidth: '1100px', maxHeight: '88vh', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)', background: '#FFF' }}
           >
             <img 
               src={import.meta.env.BASE_URL + selectedImg.src.replace(/^\//, '')} 
               alt={selectedImg.title}
-              style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '80vh', objectFit: 'contain', display: 'block', margin: '0 auto' }}
+              style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '78vh', objectFit: 'contain', display: 'block', margin: '0 auto', background: '#F8FAFC' }}
             />
-            <div style={{ background: '#0F172A', padding: isMobile ? '1.25rem' : '1.75rem 2rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-              <div style={{ fontSize: '12px', fontWeight: 700, color: '#38BDF8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>{selectedImg.albumName}</div>
-              <div style={{ fontSize: isMobile ? '1.25rem' : '1.5rem', fontWeight: 800, marginBottom: '6px' }}>{selectedImg.title}</div>
-              <p style={{ fontSize: '0.95rem', color: '#94A3B8', margin: 0, lineHeight: 1.5 }}>{selectedImg.caption}</p>
+            <div style={{ background: '#FFF', padding: isMobile ? '1.25rem' : '1.5rem 2rem', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+              <div style={{ fontSize: '12px', fontWeight: 700, color: '#1A73E8', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>{selectedImg.albumName}</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#111', marginBottom: '4px' }}>{selectedImg.title}</div>
+              <p style={{ fontSize: '0.95rem', color: '#666', margin: 0, lineHeight: 1.5 }}>{selectedImg.caption}</p>
             </div>
           </div>
         </div>
       )}
 
-      {/* Hero Header */}
-      <section style={{ position: 'relative', padding: isMobile ? '5rem 1.5rem 3rem' : '7rem 2rem 5rem', background: 'radial-gradient(ellipse at top, rgba(30, 58, 138, 0.4) 0%, rgba(15, 23, 42, 1) 70%)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <button 
-            onClick={() => navigate(-1)} 
-            style={{ 
-              background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', 
-              color: '#FFF', padding: '10px 18px', borderRadius: '30px', fontWeight: 600, fontSize: '0.9rem',
-              display: 'inline-flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '2rem',
-              transition: 'background 0.2s' 
-            }}
-            onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.12)'}
-            onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
-          >
-            <ArrowLeft size={16} /> Back to Overview
-          </button>
+      {/* Main Page Container - Pure Minimalist Light Theme */}
+      <div style={{ padding: isMobile ? '7rem 1.5rem 4rem' : '8rem 2rem 5rem', maxWidth: '1200px', margin: '0 auto', minHeight: '100vh', background: '#FFF', fontFamily: '"Inter", sans-serif' }}>
+        
+        {/* Navigation / Back Button */}
+        <button 
+          onClick={() => navigate(-1)} 
+          style={{ 
+            background: 'transparent', border: '1px solid rgba(0,0,0,0.1)', 
+            color: '#444', padding: '8px 18px', borderRadius: '30px', fontWeight: 600, fontSize: '0.88rem',
+            display: 'inline-flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '3rem',
+            transition: 'all 0.2s' 
+          }}
+          onMouseOver={(e) => { e.currentTarget.style.background = '#F8FAFC'; e.currentTarget.style.color = '#111'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.2)'; }}
+          onMouseOut={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#444'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)'; }}
+        >
+          <ArrowLeft size={16} /> Back to Overview
+        </button>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#38BDF8', fontWeight: 700, letterSpacing: '2px', fontSize: '0.85rem', marginBottom: '1rem', textTransform: 'uppercase' }}>
-            <Sparkles size={16} /> ORGANIZED VISUAL CATALOG
+        {/* Header Section */}
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(26, 115, 232, 0.05)', padding: '6px 16px', borderRadius: '30px', color: '#1A73E8', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.5px', marginBottom: '1.5rem', border: '1px solid rgba(26, 115, 232, 0.1)' }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#1A73E8', display: 'inline-block' }}></span>
+            VISUAL SHOWCASE
           </div>
-          <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.2rem)', fontWeight: 900, letterSpacing: '-2px', margin: '0 0 1.5rem 0', lineHeight: 1.1 }}>
-            Our Creative <span style={{ background: 'linear-gradient(90deg, #38BDF8, #818CF8, #C084FC)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Masterpiece Gallery</span>
+          <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-1.5px', maxWidth: '800px', margin: '0 auto 1.2rem auto', color: '#111' }}>
+            Minimalist UI & <span style={{ color: '#1A73E8' }}>Architecture Gallery.</span>
           </h1>
-          <p style={{ fontSize: isMobile ? '1.05rem' : '1.25rem', color: '#94A3B8', maxWidth: '720px', lineHeight: 1.6, margin: 0 }}>
-            Every product we design undergoes meticulous UX architecture, responsive mobile testing, and high-conversion visual polish. Explore our categorized project albums below.
+          <p style={{ margin: '0 auto', maxWidth: '680px', fontSize: 'clamp(1.05rem, 2.5vw, 1.2rem)', lineHeight: 1.6, color: '#666' }}>
+            A pure, clean exploration of our digital interfaces, healthcare platforms, and intelligent automation dashboards. Click any picture for fullscreen inspection.
           </p>
         </div>
-      </section>
 
-      {/* Filter Tabs & Albums */}
-      <section style={{ maxWidth: '1200px', margin: '3.5rem auto 0', padding: '0 1.5rem' }}>
-        
-        {/* Category Tabs Bar */}
-        <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', paddingBottom: '1rem', marginBottom: '3.5rem', scrollbarWidth: 'none' }}>
+        {/* Filter Pill Tabs */}
+        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '4rem', scrollbarWidth: 'none' }}>
           {[
-            { id: 'all', label: '📁 All Albums' },
-            { id: 'healthcare', label: '🏥 Healthcare Systems' },
-            { id: 'event', label: '🏃‍♂️ Event & Sports' },
-            { id: 'ai', label: '🤖 AI & SaaS Dashboards' }
+            { id: 'all', label: 'All Projects' },
+            { id: 'healthcare', label: 'Healthcare Systems' },
+            { id: 'event', label: 'Event & Sports' },
+            { id: 'ai', label: 'AI & SaaS Workflows' }
           ].map((tab) => (
             <button 
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               style={{
-                padding: '12px 24px', borderRadius: '40px', fontSize: '0.95rem', fontWeight: 700,
-                whiteSpace: 'nowrap', cursor: 'pointer', transition: 'all 0.25s',
-                background: activeTab === tab.id ? '#38BDF8' : 'rgba(255,255,255,0.05)',
-                color: activeTab === tab.id ? '#0F172A' : '#E2E8F0',
-                border: activeTab === tab.id ? 'none' : '1px solid rgba(255,255,255,0.1)',
-                boxShadow: activeTab === tab.id ? '0 8px 20px -4px rgba(56, 189, 248, 0.4)' : 'none'
+                padding: '10px 22px', borderRadius: '30px', fontSize: '0.9rem', fontWeight: 600,
+                whiteSpace: 'nowrap', cursor: 'pointer', transition: 'all 0.2s',
+                background: activeTab === tab.id ? '#1A73E8' : '#F8FAFC',
+                color: activeTab === tab.id ? '#FFF' : '#555',
+                border: activeTab === tab.id ? 'none' : '1px solid rgba(0,0,0,0.08)',
+                boxShadow: activeTab === tab.id ? '0 4px 12px rgba(26, 115, 232, 0.25)' : 'none'
               }}
             >
               {tab.label}
@@ -166,29 +168,38 @@ const GalleryPage = () => {
           ))}
         </div>
 
-        {/* Organized Album Sections */}
+        {/* Albums List */}
         <AnimatePresence mode="wait">
           <motion.div 
             key={activeTab}
-            initial={{ opacity: 0, y: 15 }} 
+            initial={{ opacity: 0, y: 12 }} 
             animate={{ opacity: 1, y: 0 }} 
             exit={{ opacity: 0 }} 
-            transition={{ duration: 0.3 }}
-            style={{ display: 'flex', flexDirection: 'column', gap: '5rem' }}
+            transition={{ duration: 0.25 }}
+            style={{ display: 'flex', flexDirection: 'column', gap: '5rem', marginBottom: '6rem' }}
           >
             {filteredAlbums.map((album) => (
-              <div key={album.id} style={{ background: 'rgba(30, 41, 59, 0.5)', borderRadius: '28px', border: '1px solid rgba(255,255,255,0.08)', padding: isMobile ? '1.75rem' : '2.5rem', boxShadow: '0 20px 40px -15px rgba(0,0,0,0.5)' }}>
-                
-                {/* Album Header */}
-                <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'center', gap: '1.5rem', marginBottom: '2.5rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1.75rem' }}>
+              <div 
+                key={album.id} 
+                style={{ 
+                  background: '#FFF', 
+                  borderRadius: '24px', 
+                  border: '1px solid rgba(0,0,0,0.06)', 
+                  padding: isMobile ? '1.75rem' : '2.5rem', 
+                  boxShadow: '0 10px 40px rgba(0,0,0,0.03)',
+                  transition: 'border-color 0.3s'
+                }}
+              >
+                {/* Album Title Row */}
+                <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'center', gap: '1.5rem', marginBottom: '2rem', paddingBottom: '1.5rem', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
                   <div>
-                    <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#38BDF8', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '6px' }}>
-                      ALBUM • {album.category}
+                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#1A73E8', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '4px' }}>
+                      {album.category}
                     </div>
-                    <h2 style={{ fontSize: isMobile ? '1.8rem' : '2.2rem', fontWeight: 800, margin: '0 0 10px 0', letterSpacing: '-0.5px' }}>
+                    <h2 style={{ fontSize: isMobile ? '1.6rem' : '2rem', fontWeight: 700, margin: '0 0 8px 0', color: '#111', letterSpacing: '-0.5px' }}>
                       {album.name}
                     </h2>
-                    <p style={{ color: '#94A3B8', fontSize: '1rem', lineHeight: 1.6, maxWidth: '780px', margin: 0 }}>
+                    <p style={{ color: '#666', fontSize: '1rem', lineHeight: 1.6, maxWidth: '750px', margin: 0 }}>
                       {album.description}
                     </p>
                   </div>
@@ -199,24 +210,23 @@ const GalleryPage = () => {
                       target={album.liveUrl.startsWith('http') ? '_blank' : '_self'}
                       rel="noopener noreferrer"
                       style={{
-                        padding: '12px 22px', borderRadius: '12px', background: '#38BDF8', color: '#0F172A',
-                        fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none', display: 'inline-flex',
-                        alignItems: 'center', gap: '8px', flexShrink: 0, transition: 'all 0.2s',
-                        boxShadow: '0 10px 20px -5px rgba(56, 189, 248, 0.3)'
+                        padding: '12px 22px', borderRadius: '30px', background: '#F8FAFC', color: '#111',
+                        border: '1px solid rgba(0,0,0,0.1)', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none', 
+                        display: 'inline-flex', alignItems: 'center', gap: '6px', flexShrink: 0, transition: 'all 0.2s'
                       }}
-                      onMouseOver={(e) => e.currentTarget.style.background = '#7DD3FC'}
-                      onMouseOut={(e) => e.currentTarget.style.background = '#38BDF8'}
+                      onMouseOver={(e) => { e.currentTarget.style.background = '#111'; e.currentTarget.style.color = '#FFF'; e.currentTarget.style.borderColor = '#111'; }}
+                      onMouseOut={(e) => { e.currentTarget.style.background = '#F8FAFC'; e.currentTarget.style.color = '#111'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)'; }}
                     >
-                      <span>Visit Live Project</span>
-                      <ExternalLink size={17} />
+                      <span>Visit Project</span>
+                      <ExternalLink size={15} />
                     </a>
                   )}
                 </div>
 
-                {/* Album Photo Grid */}
+                {/* Pure Clean Screenshots Grid - No Fades, No Overlays */}
                 <div style={{ 
                   display: 'grid', 
-                  gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(420px, 1fr))', 
+                  gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(400px, 1fr))', 
                   gap: '2rem' 
                 }}>
                   {album.images.map((img) => (
@@ -224,33 +234,31 @@ const GalleryPage = () => {
                       key={img.id}
                       onClick={() => setSelectedImg({ ...img, albumName: album.name, category: album.category })}
                       style={{
-                        borderRadius: '20px', overflow: 'hidden', background: '#0F172A',
-                        border: '1px solid rgba(255,255,255,0.1)', position: 'relative',
-                        cursor: 'pointer', display: 'flex', flexDirection: 'column', transition: 'all 0.3s'
+                        borderRadius: '16px', overflow: 'hidden', background: '#F8FAFC',
+                        border: '1px solid rgba(0,0,0,0.08)', position: 'relative',
+                        cursor: 'pointer', display: 'flex', flexDirection: 'column', transition: 'all 0.3s ease',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.03)'
                       }}
-                      onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.borderColor = 'rgba(56, 189, 248, 0.4)'; e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0, 0, 0, 0.6)'; }}
-                      onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.boxShadow = 'none'; }}
+                      onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 15px 35px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = '#1A73E8'; }}
+                      onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.03)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.08)'; }}
                     >
-                      <div style={{ position: 'relative', height: isMobile ? '280px' : '340px', overflow: 'hidden', background: '#090E17' }}>
+                      <div style={{ position: 'relative', height: isMobile ? '260px' : '320px', overflow: 'hidden', background: '#F1F5F9' }}>
                         <img 
                           src={import.meta.env.BASE_URL + img.src.replace(/^\//, '')} 
                           alt={img.title} 
-                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.5s ease' }} 
-                          onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.4s ease' }} 
+                          onMouseOver={(e) => e.target.style.transform = 'scale(1.04)'}
                           onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                         />
-                        <div style={{ position: 'absolute', top: '15px', right: '15px', width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(15, 23, 42, 0.6)', backdropFilter: 'blur(6px)', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <ZoomIn size={18} color="#FFF" />
-                        </div>
                       </div>
 
-                      <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <div style={{ padding: '1.5rem', background: '#FFF', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
                         <div>
-                          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '0 0 8px 0', color: '#FFF' }}>{img.title}</h3>
-                          <p style={{ fontSize: '0.9rem', color: '#94A3B8', lineHeight: 1.5, margin: 0 }}>{img.caption}</p>
+                          <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: '0 0 6px 0', color: '#111' }}>{img.title}</h3>
+                          <p style={{ fontSize: '0.92rem', color: '#666', lineHeight: 1.5, margin: 0 }}>{img.caption}</p>
                         </div>
-                        <div style={{ marginTop: '1.25rem', display: 'flex', alignItems: 'center', gap: '6px', color: '#38BDF8', fontSize: '0.85rem', fontWeight: 700 }}>
-                          <span>🔍 Click to launch fullscreen view</span>
+                        <div style={{ marginTop: '1rem', color: '#1A73E8', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                          <span>🔍 Click to zoom preview</span>
                         </div>
                       </div>
                     </div>
@@ -262,23 +270,11 @@ const GalleryPage = () => {
           </motion.div>
         </AnimatePresence>
 
-        <div style={{ textAlign: 'center', marginTop: '6rem', padding: '3rem 2rem', borderRadius: '24px', background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(129, 140, 248, 0.1) 100%)', border: '1px solid rgba(255,255,255,0.1)' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '1rem' }}>Want your product featured in our next showcase?</h2>
-          <p style={{ color: '#94A3B8', marginBottom: '2rem', maxWidth: '500px', margin: '0 auto 2rem' }}>We deliver world-class web design and custom AI automation infrastructures tailored to your growth goals.</p>
-          <button 
-            onClick={() => navigate('/contact')} 
-            style={{ 
-              background: '#38BDF8', color: '#0F172A', padding: '14px 32px', borderRadius: '30px', 
-              fontWeight: 800, fontSize: '1rem', border: 'none', cursor: 'pointer',
-              boxShadow: '0 10px 25px -5px rgba(56, 189, 248, 0.4)' 
-            }}
-          >
-            Start Your Project →
-          </button>
-        </div>
+      </div>
 
-      </section>
-    </div>
+      {/* Consistent Minimalist Contact Section */}
+      <ContactSection />
+    </>
   );
 };
 
