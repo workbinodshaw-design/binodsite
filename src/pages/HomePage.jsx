@@ -402,12 +402,12 @@ const HomePage = () => {
       <section style={{ padding: '5rem 1.5rem', background: '#FAFAFA', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
         <div style={{ maxWidth: '980px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <div style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '2px', color: '#1A73E8', marginBottom: '0.8rem' }}>• CREATIVE SHOWCASE & UI GALLERY</div>
+            <div style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '2px', color: '#1A73E8', marginBottom: '0.8rem' }}>• PRODUCT SHOWCASE</div>
             <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 700, letterSpacing: '-1.2px', marginBottom: '0.8rem', color: '#1A1A1A', fontFamily: '"Inter", sans-serif' }}>
               Designed to Captivate & Convert
             </h2>
             <p style={{ fontSize: '1.05rem', color: '#666', maxWidth: '560px', margin: '0 auto', lineHeight: 1.6 }}>
-              Take a closer look at our recent digital products and interface architecture. Tap or click any preview to launch full zoom.
+              Explore visual snapshots of our deployed client platforms, custom diagnostic ERPs, and automated revenue engines.
             </p>
           </div>
 
@@ -508,7 +508,7 @@ const HomePage = () => {
               onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.background = '#1A73E8'; e.currentTarget.style.boxShadow = '0 18px 35px -5px rgba(26, 115, 232, 0.35)'; }}
               onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.background = '#1A1A1A'; e.currentTarget.style.boxShadow = '0 12px 30px -8px rgba(0, 0, 0, 0.25)'; }}
             >
-              <span>See Full Organized Gallery</span> <ArrowRight size={18} />
+              <span>Explore Complete Gallery</span> <ArrowRight size={18} />
             </button>
           </div>
         </div>

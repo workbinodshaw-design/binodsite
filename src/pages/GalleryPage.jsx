@@ -62,9 +62,9 @@ const GalleryPage = () => {
   return (
     <>
       <SEO 
-        title="Visual Showcase & UI Gallery | CastFlow Agency"
-        description="Explore our minimalist visual showcase of interface designs, healthcare ERP dashboards, AI automation tools, and web deployments."
-        keywords="Web Design Gallery, Minimalist UI UX, CastFlow Portfolio, Clean SaaS Screenshots, React Architecture"
+        title="Product Archives & Visual Gallery | CastFlow Agency"
+        description="Explore our curated gallery of deployed client platforms, diagnostic ERP interfaces, AI automation tools, and custom SaaS software."
+        keywords="Web Development Showcase, Client Software Gallery, CastFlow Portfolio, Custom SaaS Architecture, Enterprise Dashboards"
         url="/gallery"
       />
 
@@ -133,13 +133,13 @@ const GalleryPage = () => {
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(26, 115, 232, 0.05)', padding: '6px 16px', borderRadius: '30px', color: '#1A73E8', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.5px', marginBottom: '1.5rem', border: '1px solid rgba(26, 115, 232, 0.1)' }}>
             <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#1A73E8', display: 'inline-block' }}></span>
-            VISUAL SHOWCASE
+            PRODUCT SHOWCASE
           </div>
           <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-1.5px', maxWidth: '800px', margin: '0 auto 1.2rem auto', color: '#111' }}>
-            Minimalist UI & <span style={{ color: '#1A73E8' }}>Architecture Gallery.</span>
+            Deployed Platforms & <span style={{ color: '#1A73E8' }}>Product Gallery.</span>
           </h1>
           <p style={{ margin: '0 auto', maxWidth: '680px', fontSize: 'clamp(1.05rem, 2.5vw, 1.2rem)', lineHeight: 1.6, color: '#666' }}>
-            A pure, clean exploration of our digital interfaces, healthcare platforms, and intelligent automation dashboards. Click any picture for fullscreen inspection.
+            An archival overview of our custom healthcare diagnostic ecosystems, nationwide event platforms, and intelligent AI automation engines.
           </p>
         </div>
 
@@ -258,7 +258,7 @@ const GalleryPage = () => {
                           <p style={{ fontSize: '0.92rem', color: '#666', lineHeight: 1.5, margin: 0 }}>{img.caption}</p>
                         </div>
                         <div style={{ marginTop: '1rem', color: '#1A73E8', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <span>🔍 Click to zoom preview</span>
+                          <span>View Fullscreen</span>
                         </div>
                       </div>
                     </div>
