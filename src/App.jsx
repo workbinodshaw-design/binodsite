@@ -9,6 +9,7 @@ const AiAutomationService = React.lazy(() => import('./pages/AiAutomationService
 const ContactPage = React.lazy(() => import('./pages/ContactPage'));
 const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage'));
 const ProjectsPage = React.lazy(() => import('./pages/ProjectsPage'));
+const GalleryPage = React.lazy(() => import('./pages/GalleryPage'));
 const JoinTeamPage = React.lazy(() => import('./pages/JoinTeamPage'));
 const TeamPage = React.lazy(() => import('./pages/TeamPage'));
 const EmployeeProfile = React.lazy(() => import('./pages/EmployeeProfile'));
@@ -53,6 +54,7 @@ function AnimatedMainRoutes() {
         <Route path="/services/ai-automation" element={<PageTransition><AiAutomationService /></PageTransition>} />
         <Route path="/portfolio" element={<PageTransition><PortfolioPage /></PageTransition>} />
         <Route path="/projects" element={<PageTransition><ProjectsPage /></PageTransition>} />
+        <Route path="/gallery" element={<PageTransition><GalleryPage /></PageTransition>} />
         <Route path="/team" element={<PageTransition><TeamPage /></PageTransition>} />
         <Route path="/team/:id" element={<PageTransition><EmployeeProfile /></PageTransition>} />
         <Route path="/join-team" element={<PageTransition><JoinTeamPage /></PageTransition>} />

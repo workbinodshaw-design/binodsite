@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, ArrowUpRight, BarChart, Globe, Zap, Cpu, Shield, TrendingUp, Calendar, MapPin, User } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, BarChart, Globe, Zap, Cpu, Shield, TrendingUp, Calendar, MapPin, User, X, ZoomIn } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
 import './HomePage.css';
 
+const galleryImages = [
+  { id: 1, src: '/gallery/healthians_mobile.png', title: 'Healthians App & Mobile UI', category: 'Healthcare • Mobile App', alt: 'Healthians Mobile Booking Interface' },
+  { id: 2, src: '/gallery/runfest_desktop.png', title: 'RunFest Virtual Challenge', category: 'Sports & Event • Web Design', alt: 'RunFest Hero UI' },
+  { id: 3, src: '/gallery/castflow_hero.jpg', title: 'CastFlow AI Automation Portal', category: 'SaaS & AI • Dashboard', alt: 'CastFlow Platform Interface' },
+  { id: 4, src: '/gallery/healthians_admin.png', title: 'Enterprise Ops Admin Cloud', category: 'Internal Tool • Cloud ERP', alt: 'Healthians Admin Dashboard' }
+];
+
 const HomePage = () => {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [selectedImg, setSelectedImg] = useState(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -23,6 +31,47 @@ const HomePage = () => {
       fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
       overflowX: 'hidden'
     }}>
+      {/* Lightbox Modal */}
+      {selectedImg && (
+        <div 
+          onClick={() => setSelectedImg(null)}
+          style={{
+            position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.92)',
+            backdropFilter: 'blur(12px)',
+            zIndex: 999999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            padding: isMobile ? '1rem' : '2.5rem', cursor: 'zoom-out'
+          }}
+        >
+          <button 
+            onClick={(e) => { e.stopPropagation(); setSelectedImg(null); }}
+            style={{
+              position: 'absolute', top: isMobile ? '15px' : '25px', right: isMobile ? '15px' : '25px',
+              background: 'rgba(255, 255, 255, 0.15)', border: '1px solid rgba(255,255,255,0.2)',
+              color: '#FFF', borderRadius: '50%', width: isMobile ? '38px' : '46px', height: isMobile ? '38px' : '46px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', transition: 'all 0.2s', zIndex: 1000000
+            }}
+          >
+            <X size={24} />
+          </button>
+
+          <div 
+            onClick={(e) => e.stopPropagation()} 
+            style={{ position: 'relative', maxWidth: '1150px', maxHeight: '88vh', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 30px 60px -15px rgba(0, 0, 0, 0.6)', border: '1px solid rgba(255,255,255,0.15)', background: '#0F172A' }}
+          >
+            <img 
+              src={import.meta.env.BASE_URL + selectedImg.src.replace(/^\//, '')} 
+              alt={selectedImg.title}
+              style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '85vh', objectFit: 'contain', display: 'block' }}
+            />
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%)', padding: '2.5rem 1.5rem 1.5rem 1.5rem', color: '#FFF' }}>
+              <div style={{ fontSize: '12px', fontWeight: 700, color: '#38BDF8', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '4px' }}>{selectedImg.category}</div>
+              <div style={{ fontSize: isMobile ? '1.25rem' : '1.6rem', fontWeight: 800 }}>{selectedImg.title}</div>
+            </div>
+          </div>
+        </div>
+      )}
       <SEO 
         title="CastFlow | AI Automation & Premium Web Apps"
         description="We help organizations unlock growth and efficiency through data-driven consulting and intelligent automation."
@@ -345,6 +394,157 @@ const HomePage = () => {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED GALLERY SHOWCASE (BENTO GRID ON PC, SWIPEABLE ON MOBILE) */}
+      <section style={{ padding: '6rem 1.5rem', background: '#FAFAFA', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <div style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '2px', color: '#1A73E8', marginBottom: '1rem' }}>• CREATIVE SHOWCASE & UI GALLERY</div>
+            <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', fontWeight: 700, letterSpacing: '-1.5px', marginBottom: '1rem', color: '#1A1A1A', fontFamily: '"Inter", sans-serif' }}>
+              Designed to Captivate & Convert
+            </h2>
+            <p style={{ fontSize: '1.1rem', color: '#666', maxWidth: '600px', margin: '0 auto' }}>
+              Take a closer look at our recent digital products and interface architecture. Tap or click any preview to launch the interactive lightbox.
+            </p>
+          </div>
+
+          {!isMobile ? (
+            /* Desktop Bento Grid Gallery */
+            <div style={{ display: 'grid', gridTemplateColumns: '42% 1fr', gap: '1.5rem', marginBottom: '3.5rem' }}>
+              {/* LEFT TALL CARD (Image 1) */}
+              <div 
+                onClick={() => setSelectedImg(galleryImages[0])}
+                style={{ 
+                  borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.08)', 
+                  background: '#1E293B', position: 'relative', cursor: 'pointer',
+                  boxShadow: '0 15px 35px -5px rgba(0,0,0,0.07)', display: 'flex', minHeight: '520px', transition: 'all 0.3s ease'
+                }}
+                onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0,0,0,0.18)'; }}
+                onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 15px 35px -5px rgba(0,0,0,0.07)'; }}
+              >
+                <img src={import.meta.env.BASE_URL + 'gallery/healthians_mobile.png'} alt="Healthians Mobile" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} onMouseOver={(e) => e.target.style.transform='scale(1.04)'} onMouseOut={(e) => e.target.style.transform='scale(1)'} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.85) 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '2rem', pointerEvents: 'none' }}>
+                  <div style={{ fontSize: '12px', fontWeight: 700, color: '#38BDF8', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '6px' }}>Healthcare • Mobile App</div>
+                  <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span>Healthians App & Mobile UI</span>
+                    <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><ZoomIn size={18} color="#FFF"/></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* RIGHT SIDE (Top row + Bottom wide) */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', justifyContent: 'space-between' }}>
+                
+                {/* Top Row (2 Horizontal Cards Side-by-Side) */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', height: '250px' }}>
+                  {/* Image 2 */}
+                  <div 
+                    onClick={() => setSelectedImg(galleryImages[1])}
+                    style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.08)', background: '#1E293B', position: 'relative', cursor: 'pointer', boxShadow: '0 12px 30px -5px rgba(0,0,0,0.07)', display: 'flex', transition: 'all 0.3s ease' }}
+                    onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.16)'; }}
+                    onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 12px 30px -5px rgba(0,0,0,0.07)'; }}
+                  >
+                    <img src={import.meta.env.BASE_URL + 'gallery/runfest_desktop.png'} alt="RunFest Desktop" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} onMouseOver={(e) => e.target.style.transform='scale(1.05)'} onMouseOut={(e) => e.target.style.transform='scale(1)'} />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.25rem', pointerEvents: 'none' }}>
+                      <div style={{ fontSize: '11px', fontWeight: 700, color: '#38BDF8', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '4px' }}>Sports & Event • Web Design</div>
+                      <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <span>RunFest Challenge</span>
+                        <ZoomIn size={16} color="#FFF"/>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Image 3 */}
+                  <div 
+                    onClick={() => setSelectedImg(galleryImages[2])}
+                    style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.08)', background: '#1E293B', position: 'relative', cursor: 'pointer', boxShadow: '0 12px 30px -5px rgba(0,0,0,0.07)', display: 'flex', transition: 'all 0.3s ease' }}
+                    onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.16)'; }}
+                    onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 12px 30px -5px rgba(0,0,0,0.07)'; }}
+                  >
+                    <img src={import.meta.env.BASE_URL + 'gallery/castflow_hero.jpg'} alt="CastFlow AI" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} onMouseOver={(e) => e.target.style.transform='scale(1.05)'} onMouseOut={(e) => e.target.style.transform='scale(1)'} />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.25rem', pointerEvents: 'none' }}>
+                      <div style={{ fontSize: '11px', fontWeight: 700, color: '#A855F7', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '4px' }}>SaaS & AI • Dashboard</div>
+                      <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <span>AI Automation Hub</span>
+                        <ZoomIn size={16} color="#FFF"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Wide Card (Image 4) */}
+                <div 
+                  onClick={() => setSelectedImg(galleryImages[3])}
+                  style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.08)', background: '#1E293B', position: 'relative', cursor: 'pointer', boxShadow: '0 12px 30px -5px rgba(0,0,0,0.07)', display: 'flex', height: '250px', transition: 'all 0.3s ease' }}
+                  onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.16)'; }}
+                  onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 12px 30px -5px rgba(0,0,0,0.07)'; }}
+                >
+                  <img src={import.meta.env.BASE_URL + 'gallery/healthians_admin.png'} alt="Healthians Admin Ops" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease', objectPosition: 'top' }} onMouseOver={(e) => e.target.style.transform='scale(1.04)'} onMouseOut={(e) => e.target.style.transform='scale(1)'} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem', pointerEvents: 'none' }}>
+                    <div style={{ fontSize: '11px', fontWeight: 700, color: '#10B981', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '4px' }}>Internal Tool • Cloud ERP</div>
+                    <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span>Enterprise Ops Admin Cloud</span>
+                      <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><ZoomIn size={16} color="#FFF"/></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          ) : (
+            /* Mobile Swipeable Gallery */
+            <div style={{ marginBottom: '3rem' }}>
+              <div style={{ 
+                display: 'flex', overflowX: 'auto', gap: '1rem', paddingBottom: '1rem', 
+                scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch',
+                margin: '0 -1.5rem', paddingLeft: '1.5rem', paddingRight: '1.5rem'
+              }}>
+                {galleryImages.map((img) => (
+                  <div 
+                    key={img.id}
+                    onClick={() => setSelectedImg(img)}
+                    style={{
+                      flex: '0 0 84%', height: '350px', borderRadius: '22px', overflow: 'hidden',
+                      position: 'relative', scrollSnapAlign: 'center', border: '1px solid rgba(0,0,0,0.08)',
+                      boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)', background: '#1E293B', cursor: 'pointer'
+                    }}
+                  >
+                    <img src={import.meta.env.BASE_URL + img.src.replace(/^\//, '')} alt={img.alt} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.88) 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.25rem', pointerEvents: 'none' }}>
+                      <div style={{ fontSize: '11px', fontWeight: 700, color: '#38BDF8', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '4px' }}>{img.category}</div>
+                      <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <span>{img.title}</span>
+                        <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><ZoomIn size={16} color="#FFF" /></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ textAlign: 'center', fontSize: '12px', color: '#888', fontWeight: 500, marginTop: '0.5rem' }}>
+                👉 Swipe left & right to view • Tap any image to zoom
+              </div>
+            </div>
+          )}
+
+          {/* See More / Explore Full Gallery Button */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+            <button 
+              onClick={() => navigate('/gallery')} 
+              style={{ 
+                display: 'inline-flex', alignItems: 'center', gap: '12px', 
+                background: '#1A1A1A', color: '#FFF', padding: '16px 36px', 
+                borderRadius: '50px', fontWeight: 700, fontSize: '1.05rem', 
+                border: 'none', cursor: 'pointer', boxShadow: '0 12px 30px -8px rgba(0, 0, 0, 0.25)', 
+                transition: 'all 0.25s' 
+              }}
+              onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.background = '#1A73E8'; e.currentTarget.style.boxShadow = '0 18px 35px -5px rgba(26, 115, 232, 0.35)'; }}
+              onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.background = '#1A1A1A'; e.currentTarget.style.boxShadow = '0 12px 30px -8px rgba(0, 0, 0, 0.25)'; }}
+            >
+              <span>See Full Organized Gallery</span> <ArrowRight size={18} />
+            </button>
           </div>
         </div>
       </section>
