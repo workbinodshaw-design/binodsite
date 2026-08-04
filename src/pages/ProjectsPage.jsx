@@ -217,7 +217,7 @@ const ProjectsPage = () => {
                       onMouseOver={(e) => e.currentTarget.style.background = '#1557b0'}
                       onMouseOut={(e) => e.currentTarget.style.background = '#1A73E8'}
                     >
-                      <ExternalLink size={18} /> Live Demo
+                      <ExternalLink size={18} /> Visit Project
                     </a>
                   </div>
                 )}
