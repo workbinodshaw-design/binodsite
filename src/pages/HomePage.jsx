@@ -399,106 +399,78 @@ const HomePage = () => {
       </section>
 
       {/* FEATURED GALLERY SHOWCASE (BENTO GRID ON PC, SWIPEABLE ON MOBILE) */}
-      <section style={{ padding: '6rem 1.5rem', background: '#FAFAFA', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '2px', color: '#1A73E8', marginBottom: '1rem' }}>• CREATIVE SHOWCASE & UI GALLERY</div>
-            <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', fontWeight: 700, letterSpacing: '-1.5px', marginBottom: '1rem', color: '#1A1A1A', fontFamily: '"Inter", sans-serif' }}>
+      <section style={{ padding: '5rem 1.5rem', background: '#FAFAFA', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+        <div style={{ maxWidth: '980px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <div style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '2px', color: '#1A73E8', marginBottom: '0.8rem' }}>• CREATIVE SHOWCASE & UI GALLERY</div>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 700, letterSpacing: '-1.2px', marginBottom: '0.8rem', color: '#1A1A1A', fontFamily: '"Inter", sans-serif' }}>
               Designed to Captivate & Convert
             </h2>
-            <p style={{ fontSize: '1.1rem', color: '#666', maxWidth: '600px', margin: '0 auto' }}>
-              Take a closer look at our recent digital products and interface architecture. Tap or click any preview to launch the interactive lightbox.
+            <p style={{ fontSize: '1.05rem', color: '#666', maxWidth: '560px', margin: '0 auto', lineHeight: 1.6 }}>
+              Take a closer look at our recent digital products and interface architecture. Tap or click any preview to launch full zoom.
             </p>
           </div>
 
           {!isMobile ? (
-            /* Desktop Bento Grid Gallery */
-            <div style={{ display: 'grid', gridTemplateColumns: '42% 1fr', gap: '1.5rem', marginBottom: '3.5rem' }}>
-              {/* LEFT TALL CARD (Image 1) */}
+            /* Desktop Compact Bento Gallery - Zero Gaps, No Overlays */
+            <div style={{ display: 'grid', gridTemplateColumns: '290px 1fr', gap: '16px', marginBottom: '3rem' }}>
+              {/* LEFT TALL CARD (Phone UI) */}
               <div 
                 onClick={() => setSelectedImg(galleryImages[0])}
                 style={{ 
-                  borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.08)', 
-                  background: '#1E293B', position: 'relative', cursor: 'pointer',
-                  boxShadow: '0 15px 35px -5px rgba(0,0,0,0.07)', display: 'flex', minHeight: '520px', transition: 'all 0.3s ease'
+                  borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)', 
+                  background: '#F8FAFC', position: 'relative', cursor: 'pointer',
+                  boxShadow: '0 6px 18px -4px rgba(0,0,0,0.08)', height: '430px', transition: 'all 0.3s ease'
                 }}
-                onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0,0,0,0.18)'; }}
-                onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 15px 35px -5px rgba(0,0,0,0.07)'; }}
+                onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 16px 30px -8px rgba(0,0,0,0.16)'; e.currentTarget.style.borderColor = '#38BDF8'; }}
+                onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 6px 18px -4px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)'; }}
               >
-                <img src={import.meta.env.BASE_URL + 'gallery/healthians_mobile.png'} alt="Healthians Mobile" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} onMouseOver={(e) => e.target.style.transform='scale(1.04)'} onMouseOut={(e) => e.target.style.transform='scale(1)'} />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.85) 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '2rem', pointerEvents: 'none' }}>
-                  <div style={{ fontSize: '12px', fontWeight: 700, color: '#38BDF8', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '6px' }}>Healthcare • Mobile App</div>
-                  <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span>Healthians App & Mobile UI</span>
-                    <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><ZoomIn size={18} color="#FFF"/></div>
-                  </div>
-                </div>
+                <img src={import.meta.env.BASE_URL + 'gallery/healthians_mobile.png'} alt="Healthians Mobile" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.5s ease' }} onMouseOver={(e) => e.target.style.transform='scale(1.04)'} onMouseOut={(e) => e.target.style.transform='scale(1)'} />
               </div>
 
               {/* RIGHT SIDE (Top row + Bottom wide) */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', height: '430px' }}>
                 
                 {/* Top Row (2 Horizontal Cards Side-by-Side) */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', height: '250px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', height: '207px' }}>
                   {/* Image 2 */}
                   <div 
                     onClick={() => setSelectedImg(galleryImages[1])}
-                    style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.08)', background: '#1E293B', position: 'relative', cursor: 'pointer', boxShadow: '0 12px 30px -5px rgba(0,0,0,0.07)', display: 'flex', transition: 'all 0.3s ease' }}
-                    onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.16)'; }}
-                    onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 12px 30px -5px rgba(0,0,0,0.07)'; }}
+                    style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)', background: '#F8FAFC', position: 'relative', cursor: 'pointer', boxShadow: '0 5px 15px -4px rgba(0,0,0,0.08)', height: '207px', transition: 'all 0.3s ease' }}
+                    onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 14px 28px -6px rgba(0,0,0,0.16)'; e.currentTarget.style.borderColor = '#38BDF8'; }}
+                    onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 5px 15px -4px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)'; }}
                   >
-                    <img src={import.meta.env.BASE_URL + 'gallery/runfest_desktop.png'} alt="RunFest Desktop" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} onMouseOver={(e) => e.target.style.transform='scale(1.05)'} onMouseOut={(e) => e.target.style.transform='scale(1)'} />
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.25rem', pointerEvents: 'none' }}>
-                      <div style={{ fontSize: '11px', fontWeight: 700, color: '#38BDF8', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '4px' }}>Sports & Event • Web Design</div>
-                      <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <span>RunFest Challenge</span>
-                        <ZoomIn size={16} color="#FFF"/>
-                      </div>
-                    </div>
+                    <img src={import.meta.env.BASE_URL + 'gallery/runfest_desktop.png'} alt="RunFest Desktop" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.5s ease' }} onMouseOver={(e) => e.target.style.transform='scale(1.05)'} onMouseOut={(e) => e.target.style.transform='scale(1)'} />
                   </div>
 
                   {/* Image 3 */}
                   <div 
                     onClick={() => setSelectedImg(galleryImages[2])}
-                    style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.08)', background: '#1E293B', position: 'relative', cursor: 'pointer', boxShadow: '0 12px 30px -5px rgba(0,0,0,0.07)', display: 'flex', transition: 'all 0.3s ease' }}
-                    onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.16)'; }}
-                    onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 12px 30px -5px rgba(0,0,0,0.07)'; }}
+                    style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)', background: '#F8FAFC', position: 'relative', cursor: 'pointer', boxShadow: '0 5px 15px -4px rgba(0,0,0,0.08)', height: '207px', transition: 'all 0.3s ease' }}
+                    onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 14px 28px -6px rgba(0,0,0,0.16)'; e.currentTarget.style.borderColor = '#A855F7'; }}
+                    onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 5px 15px -4px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)'; }}
                   >
-                    <img src={import.meta.env.BASE_URL + 'gallery/castflow_hero.jpg'} alt="CastFlow AI" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} onMouseOver={(e) => e.target.style.transform='scale(1.05)'} onMouseOut={(e) => e.target.style.transform='scale(1)'} />
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.25rem', pointerEvents: 'none' }}>
-                      <div style={{ fontSize: '11px', fontWeight: 700, color: '#A855F7', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '4px' }}>SaaS & AI • Dashboard</div>
-                      <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <span>AI Automation Hub</span>
-                        <ZoomIn size={16} color="#FFF"/>
-                      </div>
-                    </div>
+                    <img src={import.meta.env.BASE_URL + 'gallery/castflow_hero.jpg'} alt="CastFlow AI" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.5s ease' }} onMouseOver={(e) => e.target.style.transform='scale(1.05)'} onMouseOut={(e) => e.target.style.transform='scale(1)'} />
                   </div>
                 </div>
 
                 {/* Bottom Wide Card (Image 4) */}
                 <div 
                   onClick={() => setSelectedImg(galleryImages[3])}
-                  style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.08)', background: '#1E293B', position: 'relative', cursor: 'pointer', boxShadow: '0 12px 30px -5px rgba(0,0,0,0.07)', display: 'flex', height: '250px', transition: 'all 0.3s ease' }}
-                  onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.16)'; }}
-                  onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 12px 30px -5px rgba(0,0,0,0.07)'; }}
+                  style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)', background: '#F8FAFC', position: 'relative', cursor: 'pointer', boxShadow: '0 5px 15px -4px rgba(0,0,0,0.08)', height: '207px', transition: 'all 0.3s ease' }}
+                  onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 14px 28px -6px rgba(0,0,0,0.16)'; e.currentTarget.style.borderColor = '#10B981'; }}
+                  onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 5px 15px -4px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)'; }}
                 >
-                  <img src={import.meta.env.BASE_URL + 'gallery/healthians_admin.png'} alt="Healthians Admin Ops" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease', objectPosition: 'top' }} onMouseOver={(e) => e.target.style.transform='scale(1.04)'} onMouseOut={(e) => e.target.style.transform='scale(1)'} />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem', pointerEvents: 'none' }}>
-                    <div style={{ fontSize: '11px', fontWeight: 700, color: '#10B981', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '4px' }}>Internal Tool • Cloud ERP</div>
-                    <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <span>Enterprise Ops Admin Cloud</span>
-                      <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><ZoomIn size={16} color="#FFF"/></div>
-                    </div>
-                  </div>
+                  <img src={import.meta.env.BASE_URL + 'gallery/healthians_admin.png'} alt="Healthians Admin Ops" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.5s ease' }} onMouseOver={(e) => e.target.style.transform='scale(1.04)'} onMouseOut={(e) => e.target.style.transform='scale(1)'} />
                 </div>
 
               </div>
             </div>
           ) : (
-            /* Mobile Swipeable Gallery */
-            <div style={{ marginBottom: '3rem' }}>
+            /* Mobile Swipeable Gallery - Clean, compact, zero fades */
+            <div style={{ marginBottom: '2.5rem' }}>
               <div style={{ 
-                display: 'flex', overflowX: 'auto', gap: '1rem', paddingBottom: '1rem', 
+                display: 'flex', overflowX: 'auto', gap: '12px', paddingBottom: '0.75rem', 
                 scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch',
                 margin: '0 -1.5rem', paddingLeft: '1.5rem', paddingRight: '1.5rem'
               }}>
@@ -507,24 +479,17 @@ const HomePage = () => {
                     key={img.id}
                     onClick={() => setSelectedImg(img)}
                     style={{
-                      flex: '0 0 84%', height: '350px', borderRadius: '22px', overflow: 'hidden',
-                      position: 'relative', scrollSnapAlign: 'center', border: '1px solid rgba(0,0,0,0.08)',
-                      boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)', background: '#1E293B', cursor: 'pointer'
+                      flex: '0 0 78%', height: '240px', borderRadius: '16px', overflow: 'hidden',
+                      position: 'relative', scrollSnapAlign: 'center', border: '1px solid rgba(0,0,0,0.1)',
+                      boxShadow: '0 5px 15px -4px rgba(0,0,0,0.08)', background: '#F8FAFC', cursor: 'pointer'
                     }}
                   >
                     <img src={import.meta.env.BASE_URL + img.src.replace(/^\//, '')} alt={img.alt} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.88) 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.25rem', pointerEvents: 'none' }}>
-                      <div style={{ fontSize: '11px', fontWeight: 700, color: '#38BDF8', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '4px' }}>{img.category}</div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <span>{img.title}</span>
-                        <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><ZoomIn size={16} color="#FFF" /></div>
-                      </div>
-                    </div>
                   </div>
                 ))}
               </div>
-              <div style={{ textAlign: 'center', fontSize: '12px', color: '#888', fontWeight: 500, marginTop: '0.5rem' }}>
-                👉 Swipe left & right to view • Tap any image to zoom
+              <div style={{ textAlign: 'center', fontSize: '12px', color: '#666', fontWeight: 500, marginTop: '0.5rem' }}>
+                👉 Swipe left & right • Tap any image to zoom in
               </div>
             </div>
           )}
