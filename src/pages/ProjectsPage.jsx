@@ -184,7 +184,7 @@ const ProjectsPage = () => {
                 </p>
 
                 {/* Tech Tags */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '2.5rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: project.liveUrl && project.liveUrl !== '#' ? '2.5rem' : '0' }}>
                   {project.tags.map((tag, i) => (
                     <span key={i} style={{ padding: '6px 14px', background: 'rgba(26,115,232,0.05)', color: '#1A73E8', borderRadius: '30px', fontSize: '0.8rem', fontWeight: 600, border: '1px solid rgba(26,115,232,0.1)' }}>
                       {tag}
@@ -193,32 +193,34 @@ const ProjectsPage = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                  <a 
-                    href={project.liveUrl} 
-                    target="_blank" 
-                    rel="noreferrer"
-                    style={{ 
-                      flex: 1, 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center', 
-                      gap: '8px', 
-                      background: '#1A73E8', 
-                      color: '#fff', 
-                      padding: '0.8rem', 
-                      borderRadius: '12px', 
-                      textDecoration: 'none', 
-                      fontWeight: 600, 
-                      fontSize: '0.95rem',
-                      transition: 'background 0.2s'
-                    }}
-                    onMouseOver={(e) => e.currentTarget.style.background = '#1557b0'}
-                    onMouseOut={(e) => e.currentTarget.style.background = '#1A73E8'}
-                  >
-                    <ExternalLink size={18} /> Live Demo
-                  </a>
-                </div>
+                {project.liveUrl && project.liveUrl !== '#' && (
+                  <div style={{ display: 'flex', gap: '1rem' }}>
+                    <a 
+                      href={project.liveUrl} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      style={{ 
+                        flex: 1, 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center', 
+                        gap: '8px', 
+                        background: '#1A73E8', 
+                        color: '#fff', 
+                        padding: '0.8rem', 
+                        borderRadius: '12px', 
+                        textDecoration: 'none', 
+                        fontWeight: 600, 
+                        fontSize: '0.95rem',
+                        transition: 'background 0.2s'
+                      }}
+                      onMouseOver={(e) => e.currentTarget.style.background = '#1557b0'}
+                      onMouseOut={(e) => e.currentTarget.style.background = '#1A73E8'}
+                    >
+                      <ExternalLink size={18} /> Live Demo
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           ))}
