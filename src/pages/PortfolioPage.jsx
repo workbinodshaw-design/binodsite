@@ -23,6 +23,15 @@ const PortfolioPage = () => {
 
   const projects = [
     {
+      id: 12,
+      title: 'BookHealthians Platform',
+      description: 'A comprehensive healthcare and diagnostic test booking platform designed for effortless patient scheduling, lab package browsing, and seamless online booking.',
+      icon: <ExternalLink size={40} color="#00B4DB" />,
+      tags: ['Healthcare App', 'UI/UX', 'Online Booking'],
+      color: 'rgba(0, 180, 219, 0.1)',
+      url: 'https://www.bookhealthians.in'
+    },
+    {
       id: 11,
       title: 'Water Park Experience',
       description: 'A vibrant and engaging web experience for a water park. Features dynamic layouts, refreshing design elements, and interactive sections.',

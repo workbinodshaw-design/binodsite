@@ -10,6 +10,17 @@ const ProjectsPage = () => {
 
   const projects = [
     {
+      id: 9,
+      title: 'BookHealthians Platform',
+      shortName: 'BookHealthians',
+      description: 'A comprehensive healthcare and diagnostic test booking platform. Designed for intuitive patient scheduling, lab package browsing, and an enhanced online medical experience.',
+      tags: ['Healthcare App', 'UI/UX', 'Online Booking'],
+      liveUrl: 'https://www.bookhealthians.in',
+      githubUrl: '#',
+      bgColor: 'linear-gradient(135deg, #005C97 0%, #00B4DB 100%)',
+      image: 'project-healthians.jpg'
+    },
+    {
       id: 7,
       title: 'Premium Resort Experience',
       shortName: 'Resort Demo',
