@@ -754,8 +754,10 @@ const RunFestPage = () => {
               <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', margin: '20px 0 40px 0' }}>₹820</div>
               
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 50px 0', flex: 1 }}>
-                <li style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#111827', padding: '12px 0', borderBottom: '1px solid #F3F4F6', fontWeight: 600 }}>Everything in Basic +</li>
                 {[
+                  { t: 'Official E-Certificate', inc: true },
+                  { t: 'Digital Finisher Badge', inc: true },
+                  { t: 'Finisher Listing', inc: true },
                   { t: 'Premium Dry-Fit T-Shirt', inc: true },
                   { t: 'Free Shipping', inc: true },
                   { t: 'Medal', inc: false }
@@ -774,8 +776,12 @@ const RunFestPage = () => {
               <div style={{ fontFamily: '"Clash Display", sans-serif', fontWeight: 700, fontSize: '60px', color: '#111827', margin: '20px 0 40px 0' }}>₹999</div>
               
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 50px 0', flex: 1 }}>
-                <li style={{ fontFamily: '"Inter", sans-serif', fontSize: '16px', color: '#111827', padding: '12px 0', borderBottom: '1px solid #F3F4F6', fontWeight: 600 }}>Everything in Standard +</li>
                 {[
+                  { t: 'Official E-Certificate', inc: true },
+                  { t: 'Digital Finisher Badge', inc: true },
+                  { t: 'Finisher Listing', inc: true },
+                  { t: 'Premium Dry-Fit T-Shirt', inc: true },
+                  { t: 'Free Shipping', inc: true },
                   { t: 'Premium Heavy Metal Medal', inc: true },
                   { t: 'Priority Dispatch', inc: true }
                 ].map((f, i) => (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, ZoomIn, X, ExternalLink } from 'lucide-react';
+import { ArrowLeft, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
@@ -8,36 +8,83 @@ import ContactSection from '../components/ContactSection';
 const albums = [
   {
     id: 'healthians',
-    name: 'BookHealthians Platform',
-    category: 'Healthcare & Diagnostic ERP',
+    name: 'BookHealthians',
     tag: 'healthcare',
-    description: 'A comprehensive full-stack ecosystem featuring patient blood test booking, real-time phlebotomist sample tracking, NABL report delivery, and an enterprise cloud dashboard for live ops management.',
-    liveUrl: 'https://www.bookhealthians.in',
     images: [
-      { id: 'h1', src: '/gallery/healthians_mobile.png', title: 'Mobile Booking Portal', caption: 'Home blood sample collection interface with 30-second rapid booking flow.' },
-      { id: 'h2', src: '/gallery/healthians_admin.png', title: 'Enterprise Ops Dashboard', caption: 'Real-time patient order tracking, live cloud booking filters, and team integration.' }
+      { id: 'h1', src: '/gallery/healthians_mobile.png', alt: 'BookHealthians 1' },
+      { id: 'h2', src: '/gallery/healthians_admin.png', alt: 'BookHealthians 2' },
+      { id: 'h3', src: '/gallery/Screenshot 2026-08-04 220322.png', alt: 'BookHealthians 3' },
+      { id: 'h4', src: '/gallery/Screenshot 2026-08-04 220255.png', alt: 'BookHealthians 4' },
+      { id: 'h5', src: '/gallery/Screenshot 2026-08-04 220236.png', alt: 'BookHealthians 5' },
+      { id: 'h6', src: '/gallery/www.bookhealthians.in_(Samsung Galax.png', alt: 'BookHealthians 6' },
+      { id: 'h7', src: '/gallery/Screenshot 2026-08-04 224343.png', alt: 'BookHealthians 7' }
+    ]
+  },
+  {
+    id: 'ai-verse',
+    name: 'AIVerse Hub 2.0',
+    tag: 'ai',
+    images: [
+      { id: 'ai1', src: '/gallery/WhatsApp Image 2026-08-04 at 10.40.55 PM.jpeg', alt: 'AIVerse 1' },
+      { id: 'ai2', src: '/gallery/Screenshot 2026-08-04 223331.png', alt: 'AIVerse 2' },
+      { id: 'ai3', src: '/gallery/Screenshot 2026-08-04 223349.png', alt: 'AIVerse 3' },
+      { id: 'ai4', src: '/gallery/Screenshot 2026-08-04 223321.png', alt: 'AIVerse 4' },
+      { id: 'ai5', src: '/gallery/Screenshot 2026-08-04 223358.png', alt: 'AIVerse 5' },
+      { id: 'ai6', src: '/gallery/Screenshot 2026-08-04 223047.png', alt: 'AIVerse 6' }
+    ]
+  },
+  {
+    id: 'portify',
+    name: 'Portify AI',
+    tag: 'ai',
+    images: [
+      { id: 'p1', src: '/gallery/localhost_3000_.png', alt: 'Portify 1' }
+    ]
+  },
+  {
+    id: 'pinjillyn',
+    name: 'Pinjillyn Resort & Spa',
+    tag: 'hospitality',
+    images: [
+      { id: 'pj1', src: '/gallery/localhost_2500_ (2).png', alt: 'Pinjillyn 1' },
+      { id: 'pj2', src: '/gallery/Screenshot 2026-08-04 223614.png', alt: 'Pinjillyn 2' },
+      { id: 'pj3', src: '/gallery/Screenshot 2026-08-04 223624.png', alt: 'Pinjillyn 3' },
+      { id: 'pj4', src: '/gallery/Screenshot 2026-08-04 223634.png', alt: 'Pinjillyn 4' },
+      { id: 'pj5', src: '/gallery/Screenshot 2026-08-04 223642.png', alt: 'Pinjillyn 5' },
+      { id: 'pj6', src: '/gallery/localhost_2500_ (1).png', alt: 'Pinjillyn 6' },
+      { id: 'pj7', src: '/gallery/Screenshot 2026-08-04 223654.png', alt: 'Pinjillyn 7' }
+    ]
+  },
+  {
+    id: 'raimona-rish',
+    name: 'Raimona Rish Aqua Park',
+    tag: 'hospitality',
+    images: [
+      { id: 'rr1', src: '/gallery/localhost_3000_ (1).png', alt: 'Raimona Rish 1' },
+      { id: 'rr2', src: '/gallery/localhost_3000_ (3).png', alt: 'Raimona Rish 2' },
+      { id: 'rr3', src: '/gallery/Screenshot 2026-08-04 223445.png', alt: 'Raimona Rish 3' },
+      { id: 'rr4', src: '/gallery/Screenshot 2026-08-04 223512.png', alt: 'Raimona Rish 4' },
+      { id: 'rr5', src: '/gallery/Screenshot 2026-08-04 223522.png', alt: 'Raimona Rish 5' },
+      { id: 'rr6', src: '/gallery/Screenshot 2026-08-04 223529.png', alt: 'Raimona Rish 6' },
+      { id: 'rr7', src: '/gallery/Screenshot 2026-08-04 223547.png', alt: 'Raimona Rish 7' }
     ]
   },
   {
     id: 'runfest',
     name: 'RunFest National Challenge',
-    category: 'Virtual Event Platform',
     tag: 'event',
-    description: 'A nationwide virtual running marathon experience with GPS kilometer verification, dynamic runner profiles, and official media partner integration.',
-    liveUrl: '/runfest',
     images: [
-      { id: 'r1', src: '/gallery/runfest_desktop.png', title: 'Desktop Hero Portal', caption: 'Dynamic hero interface featuring live event countdown and athlete registration.' }
+      { id: 'r1', src: '/gallery/runfest_desktop.png', alt: 'RunFest 1' },
+      { id: 'r2', src: '/gallery/ChatGPT Image Jul 29, 2026, 10_18.png', alt: 'RunFest 2' }
     ]
   },
   {
     id: 'ai-automation',
-    name: 'CastFlow AI Ecosystem',
-    category: 'SaaS & AI Workflows',
+    name: 'CastFlow AI & Systems',
     tag: 'ai',
-    description: 'Custom intelligent agents, automated revenue pipelines, WhatsApp conversational bots, and data-driven automation platforms.',
-    liveUrl: '/services/ai-automation',
     images: [
-      { id: 'c1', src: '/gallery/castflow_hero.jpg', title: 'Automated Revenue Engine', caption: 'Interactive dashboard showcasing live ROI analytics and intelligent workflow architecture.' }
+      { id: 'c1', src: '/gallery/castflow_hero.jpg', alt: 'CastFlow 1' },
+      { id: 'c2', src: '/gallery/WhatsApp Image 2026-08-04 at 10.40.53 PM.jpeg', alt: 'CastFlow 2' }
     ]
   }
 ];
@@ -62,21 +109,21 @@ const GalleryPage = () => {
   return (
     <>
       <SEO 
-        title="Product Archives & Visual Gallery | CastFlow Agency"
-        description="Explore our curated gallery of deployed client platforms, diagnostic ERP interfaces, AI automation tools, and custom SaaS software."
-        keywords="Web Development Showcase, Client Software Gallery, CastFlow Portfolio, Custom SaaS Architecture, Enterprise Dashboards"
+        title="Project Gallery | CastFlow"
+        description="Browse our complete portfolio visual archive and deployed product screenshots."
+        keywords="Project Gallery, Web Development Portfolio, CastFlow Screenshots, Custom Software UI"
         url="/gallery"
       />
 
-      {/* Fullscreen Lightbox Modal */}
+      {/* Pure Visual Fullscreen Lightbox Modal (Zero Text) */}
       {selectedImg && (
         <div 
           onClick={() => setSelectedImg(null)}
           style={{
             position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.85)',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
             backdropFilter: 'blur(8px)',
-            zIndex: 999999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            zIndex: 999999, display: 'flex', alignItems: 'center', justifyContent: 'center',
             padding: isMobile ? '1rem' : '2.5rem', cursor: 'zoom-out'
           }}
         >
@@ -84,10 +131,10 @@ const GalleryPage = () => {
             onClick={(e) => { e.stopPropagation(); setSelectedImg(null); }}
             style={{
               position: 'absolute', top: isMobile ? '15px' : '25px', right: isMobile ? '15px' : '25px',
-              background: 'rgba(255, 255, 255, 0.2)', border: '1px solid rgba(255,255,255,0.3)',
+              background: 'rgba(255, 255, 255, 0.2)', border: '1px solid rgba(255,255,255,0.4)',
               color: '#FFF', borderRadius: '50%', width: '44px', height: '44px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', transition: 'all 0.2s', zIndex: 1000000
+              cursor: 'pointer', zIndex: 1000000, transition: 'all 0.2s'
             }}
           >
             <X size={22} />
@@ -95,72 +142,61 @@ const GalleryPage = () => {
 
           <div 
             onClick={(e) => e.stopPropagation()} 
-            style={{ position: 'relative', maxWidth: '1100px', maxHeight: '88vh', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)', background: '#FFF' }}
+            style={{ position: 'relative', maxWidth: '1200px', maxHeight: '90vh', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.6)' }}
           >
             <img 
-              src={import.meta.env.BASE_URL + selectedImg.src.replace(/^\//, '')} 
-              alt={selectedImg.title}
-              style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '78vh', objectFit: 'contain', display: 'block', margin: '0 auto', background: '#F8FAFC' }}
+              src={encodeURI(import.meta.env.BASE_URL + selectedImg.src.replace(/^\//, ''))} 
+              alt={selectedImg.alt}
+              style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '90vh', objectFit: 'contain', display: 'block', margin: '0 auto' }}
             />
-            <div style={{ background: '#FFF', padding: isMobile ? '1.25rem' : '1.5rem 2rem', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
-              <div style={{ fontSize: '12px', fontWeight: 700, color: '#1A73E8', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>{selectedImg.albumName}</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#111', marginBottom: '4px' }}>{selectedImg.title}</div>
-              <p style={{ fontSize: '0.95rem', color: '#666', margin: 0, lineHeight: 1.5 }}>{selectedImg.caption}</p>
-            </div>
           </div>
         </div>
       )}
 
-      {/* Main Page Container - Pure Minimalist Light Theme */}
-      <div style={{ padding: isMobile ? '7rem 1.5rem 4rem' : '8rem 2rem 5rem', maxWidth: '1200px', margin: '0 auto', minHeight: '100vh', background: '#FFF', fontFamily: '"Inter", sans-serif' }}>
+      {/* Main Page Container */}
+      <div style={{ padding: isMobile ? '6rem 1.25rem 4rem' : '7rem 2rem 5rem', maxWidth: '1240px', margin: '0 auto', minHeight: '100vh', background: '#FFF', fontFamily: '"Inter", sans-serif' }}>
         
         {/* Navigation / Back Button */}
         <button 
           onClick={() => navigate(-1)} 
           style={{ 
             background: 'transparent', border: '1px solid rgba(0,0,0,0.1)', 
-            color: '#444', padding: '8px 18px', borderRadius: '30px', fontWeight: 600, fontSize: '0.88rem',
-            display: 'inline-flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '3rem',
+            color: '#444', padding: '8px 18px', borderRadius: '30px', fontWeight: 600, fontSize: '0.85rem',
+            display: 'inline-flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '2.5rem',
             transition: 'all 0.2s' 
           }}
           onMouseOver={(e) => { e.currentTarget.style.background = '#F8FAFC'; e.currentTarget.style.color = '#111'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.2)'; }}
           onMouseOut={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#444'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)'; }}
         >
-          <ArrowLeft size={16} /> Back to Overview
+          <ArrowLeft size={15} /> Back
         </button>
 
-        {/* Header Section */}
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(26, 115, 232, 0.05)', padding: '6px 16px', borderRadius: '30px', color: '#1A73E8', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.5px', marginBottom: '1.5rem', border: '1px solid rgba(26, 115, 232, 0.1)' }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#1A73E8', display: 'inline-block' }}></span>
-            PRODUCT SHOWCASE
-          </div>
-          <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-1.5px', maxWidth: '800px', margin: '0 auto 1.2rem auto', color: '#111' }}>
-            Deployed Platforms & <span style={{ color: '#1A73E8' }}>Product Gallery.</span>
+        {/* Clean Header */}
+        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+          <h1 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 700, margin: 0, color: '#111', letterSpacing: '-1px' }}>
+            Gallery
           </h1>
-          <p style={{ margin: '0 auto', maxWidth: '680px', fontSize: 'clamp(1.05rem, 2.5vw, 1.2rem)', lineHeight: 1.6, color: '#666' }}>
-            An archival overview of our custom healthcare diagnostic ecosystems, nationwide event platforms, and intelligent AI automation engines.
-          </p>
         </div>
 
         {/* Filter Pill Tabs */}
-        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '4rem', scrollbarWidth: 'none' }}>
+        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '3.5rem', scrollbarWidth: 'none' }}>
           {[
-            { id: 'all', label: 'All Projects' },
-            { id: 'healthcare', label: 'Healthcare Systems' },
-            { id: 'event', label: 'Event & Sports' },
-            { id: 'ai', label: 'AI & SaaS Workflows' }
+            { id: 'all', label: 'All' },
+            { id: 'healthcare', label: 'Healthcare' },
+            { id: 'ai', label: 'AI & SaaS' },
+            { id: 'hospitality', label: 'Hospitality' },
+            { id: 'event', label: 'Sports' }
           ].map((tab) => (
             <button 
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               style={{
-                padding: '10px 22px', borderRadius: '30px', fontSize: '0.9rem', fontWeight: 600,
+                padding: '8px 20px', borderRadius: '30px', fontSize: '0.9rem', fontWeight: 600,
                 whiteSpace: 'nowrap', cursor: 'pointer', transition: 'all 0.2s',
-                background: activeTab === tab.id ? '#1A73E8' : '#F8FAFC',
+                background: activeTab === tab.id ? '#111' : '#F8FAFC',
                 color: activeTab === tab.id ? '#FFF' : '#555',
-                border: activeTab === tab.id ? 'none' : '1px solid rgba(0,0,0,0.08)',
-                boxShadow: activeTab === tab.id ? '0 4px 12px rgba(26, 115, 232, 0.25)' : 'none'
+                border: activeTab === tab.id ? '1px solid #111' : '1px solid rgba(0,0,0,0.08)',
+                boxShadow: activeTab === tab.id ? '0 4px 10px rgba(0,0,0,0.15)' : 'none'
               }}
             >
               {tab.label}
@@ -168,103 +204,52 @@ const GalleryPage = () => {
           ))}
         </div>
 
-        {/* Albums List */}
+        {/* Organized Photo Gallery (Zero Card Text) */}
         <AnimatePresence mode="wait">
           <motion.div 
             key={activeTab}
-            initial={{ opacity: 0, y: 12 }} 
+            initial={{ opacity: 0, y: 10 }} 
             animate={{ opacity: 1, y: 0 }} 
             exit={{ opacity: 0 }} 
-            transition={{ duration: 0.25 }}
-            style={{ display: 'flex', flexDirection: 'column', gap: '5rem', marginBottom: '6rem' }}
+            transition={{ duration: 0.2 }}
+            style={{ display: 'flex', flexDirection: 'column', gap: '3.5rem', marginBottom: '5rem' }}
           >
             {filteredAlbums.map((album) => (
-              <div 
-                key={album.id} 
-                style={{ 
-                  background: '#FFF', 
-                  borderRadius: '24px', 
-                  border: '1px solid rgba(0,0,0,0.06)', 
-                  padding: isMobile ? '1.75rem' : '2.5rem', 
-                  boxShadow: '0 10px 40px rgba(0,0,0,0.03)',
-                  transition: 'border-color 0.3s'
-                }}
-              >
-                {/* Album Title Row */}
-                <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'center', gap: '1.5rem', marginBottom: '2rem', paddingBottom: '1.5rem', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
-                  <div>
-                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#1A73E8', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '4px' }}>
-                      {album.category}
-                    </div>
-                    <h2 style={{ fontSize: isMobile ? '1.6rem' : '2rem', fontWeight: 700, margin: '0 0 8px 0', color: '#111', letterSpacing: '-0.5px' }}>
-                      {album.name}
-                    </h2>
-                    <p style={{ color: '#666', fontSize: '1rem', lineHeight: 1.6, maxWidth: '750px', margin: 0 }}>
-                      {album.description}
-                    </p>
-                  </div>
+              <div key={album.id}>
+                {/* Minimalist Section Title */}
+                <h2 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '0 0 1.25rem 0', color: '#111', borderBottom: '1px solid rgba(0,0,0,0.08)', paddingBottom: '0.75rem' }}>
+                  {album.name}
+                </h2>
 
-                  {album.liveUrl && (
-                    <a 
-                      href={album.liveUrl}
-                      target={album.liveUrl.startsWith('http') ? '_blank' : '_self'}
-                      rel="noopener noreferrer"
-                      style={{
-                        padding: '12px 22px', borderRadius: '30px', background: '#F8FAFC', color: '#111',
-                        border: '1px solid rgba(0,0,0,0.1)', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none', 
-                        display: 'inline-flex', alignItems: 'center', gap: '6px', flexShrink: 0, transition: 'all 0.2s'
-                      }}
-                      onMouseOver={(e) => { e.currentTarget.style.background = '#111'; e.currentTarget.style.color = '#FFF'; e.currentTarget.style.borderColor = '#111'; }}
-                      onMouseOut={(e) => { e.currentTarget.style.background = '#F8FAFC'; e.currentTarget.style.color = '#111'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)'; }}
-                    >
-                      <span>Visit Project</span>
-                      <ExternalLink size={15} />
-                    </a>
-                  )}
-                </div>
-
-                {/* Pure Clean Screenshots Grid - No Fades, No Overlays */}
+                {/* Pure Photo Grid */}
                 <div style={{ 
                   display: 'grid', 
-                  gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(400px, 1fr))', 
-                  gap: '2rem' 
+                  gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fill, minmax(260px, 1fr))', 
+                  gap: isMobile ? '0.75rem' : '1.5rem' 
                 }}>
                   {album.images.map((img) => (
                     <div 
                       key={img.id}
-                      onClick={() => setSelectedImg({ ...img, albumName: album.name, category: album.category })}
+                      onClick={() => setSelectedImg(img)}
                       style={{
-                        borderRadius: '16px', overflow: 'hidden', background: '#F8FAFC',
+                        borderRadius: '12px', overflow: 'hidden', background: '#F8FAFC',
                         border: '1px solid rgba(0,0,0,0.08)', position: 'relative',
-                        cursor: 'pointer', display: 'flex', flexDirection: 'column', transition: 'all 0.3s ease',
-                        boxShadow: '0 4px 15px rgba(0,0,0,0.03)'
+                        cursor: 'zoom-in', height: isMobile ? '150px' : '200px',
+                        boxShadow: '0 2px 6px rgba(0,0,0,0.03)', transition: 'all 0.25s ease'
                       }}
-                      onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 15px 35px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = '#1A73E8'; }}
-                      onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.03)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.08)'; }}
+                      onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 25px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = '#111'; }}
+                      onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 6px rgba(0,0,0,0.03)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.08)'; }}
                     >
-                      <div style={{ position: 'relative', height: isMobile ? '260px' : '320px', overflow: 'hidden', background: '#F1F5F9' }}>
-                        <img 
-                          src={import.meta.env.BASE_URL + img.src.replace(/^\//, '')} 
-                          alt={img.title} 
-                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.4s ease' }} 
-                          onMouseOver={(e) => e.target.style.transform = 'scale(1.04)'}
-                          onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                        />
-                      </div>
-
-                      <div style={{ padding: '1.5rem', background: '#FFF', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
-                        <div>
-                          <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: '0 0 6px 0', color: '#111' }}>{img.title}</h3>
-                          <p style={{ fontSize: '0.92rem', color: '#666', lineHeight: 1.5, margin: 0 }}>{img.caption}</p>
-                        </div>
-                        <div style={{ marginTop: '1rem', color: '#1A73E8', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <span>View Fullscreen</span>
-                        </div>
-                      </div>
+                      <img 
+                        src={encodeURI(import.meta.env.BASE_URL + img.src.replace(/^\//, ''))} 
+                        alt={img.alt} 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.4s ease' }} 
+                        onMouseOver={(e) => e.target.style.transform = 'scale(1.04)'}
+                        onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                      />
                     </div>
                   ))}
                 </div>
-
               </div>
             ))}
           </motion.div>
@@ -272,7 +257,6 @@ const GalleryPage = () => {
 
       </div>
 
-      {/* Consistent Minimalist Contact Section */}
       <ContactSection />
     </>
   );
