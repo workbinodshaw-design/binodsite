@@ -94,6 +94,8 @@ function AnimatedMainRoutes() {
             </ProtectedRoute>
           } 
         />
+        {/* Catch-all route for any 404/unknown links from Google Search */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AnimatePresence>
   );
