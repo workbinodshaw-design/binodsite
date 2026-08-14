@@ -10,6 +10,17 @@ const ProjectsPage = () => {
 
   const projects = [
     {
+      id: 10,
+      title: 'Uttam Raj Astrology',
+      shortName: 'Astrology Portal',
+      description: 'A premium astrology and numerology consulting platform. Built for seamless user experience, secure bookings, and an elegant online presence.',
+      tags: ['Web Design', 'UI/UX', 'Consulting'],
+      liveUrl: 'https://uttamrajastrology.in/#/',
+      githubUrl: '#',
+      bgColor: 'linear-gradient(135deg, #FF9933 0%, #660000 100%)',
+      image: 'project-astrology.jpg'
+    },
+    {
       id: 9,
       title: 'BookHealthians Platform',
       shortName: 'BookHealthians',
