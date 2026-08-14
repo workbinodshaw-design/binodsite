@@ -15,7 +15,9 @@ const albums = [
       { id: 'as2', src: '/gallery/astrology_2.png', alt: 'Astrology Store' },
       { id: 'as3', src: '/gallery/astrology_3.png', alt: 'Astrology Services' },
       { id: 'as4', src: '/gallery/astrology_4.png', alt: 'Astrology Home 1' },
-      { id: 'as5', src: '/gallery/astrology_5.png', alt: 'Astrology Home 2' }
+      { id: 'as5', src: '/gallery/astrology_5.png', alt: 'Astrology Home 2' },
+      { id: 'as6', src: '/gallery/astrology_6.png', alt: 'Astrology Booking' },
+      { id: 'as7', src: '/gallery/astrology_7.png', alt: 'Astrology Admin Store' }
     ]
   },
   {
