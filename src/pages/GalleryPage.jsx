@@ -7,6 +7,18 @@ import ContactSection from '../components/ContactSection';
 
 const albums = [
   {
+    id: 'astrology',
+    name: 'Uttam Raj Astrology',
+    tag: 'consulting',
+    images: [
+      { id: 'as1', src: '/gallery/astrology_1.png', alt: 'Astrology Backend' },
+      { id: 'as2', src: '/gallery/astrology_2.png', alt: 'Astrology Store' },
+      { id: 'as3', src: '/gallery/astrology_3.png', alt: 'Astrology Services' },
+      { id: 'as4', src: '/gallery/astrology_4.png', alt: 'Astrology Home 1' },
+      { id: 'as5', src: '/gallery/astrology_5.png', alt: 'Astrology Home 2' }
+    ]
+  },
+  {
     id: 'healthians',
     name: 'BookHealthians',
     tag: 'healthcare',
@@ -183,6 +195,7 @@ const GalleryPage = () => {
           {[
             { id: 'all', label: 'All' },
             { id: 'healthcare', label: 'Healthcare' },
+            { id: 'consulting', label: 'Consulting' },
             { id: 'ai', label: 'AI & SaaS' },
             { id: 'hospitality', label: 'Hospitality' },
             { id: 'event', label: 'Sports' }
