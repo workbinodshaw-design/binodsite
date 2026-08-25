@@ -108,7 +108,7 @@ const OurTeamPage = () => {
                 justifyContent: 'center',
                 overflow: 'hidden'
               }}>
-                <img src="/binod-shaw.jpg" alt="Binod Shaw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                <img src="/binod-profile.png" alt="Binod Shaw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
                      onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
                 <span style={{ fontSize: '3rem', fontWeight: 'bold', color: '#ccc', display: 'none' }}>BS</span>
               </div>

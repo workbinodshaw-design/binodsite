@@ -30,6 +30,28 @@ const SEO = ({ title, description, keywords, url }) => {
     ]
   };
 
+  // Person Schema for Binod Shaw (Founder Knowledge Graph)
+  const schemaPersonJSONLD = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Binod Shaw",
+    "jobTitle": "Founder & CEO",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "CastFlow"
+    },
+    "url": "https://www.castflow.in",
+    "image": "https://www.castflow.in/binod-profile.png",
+    "sameAs": [
+      "https://github.com/workbinodshaw-design",
+      "https://www.linkedin.com/in/binodshaw"
+    ],
+    "description": "Binod Shaw is the Founder and CEO of CastFlow, a Digital Marketing and AI Automation Agency. He is a full-stack developer, AI automation expert, and tech entrepreneur."
+  };
+
+  // Combine schemas
+  const schemas = [schemaOrgJSONLD, schemaPersonJSONLD];
+
   return (
     <Helmet>
       {/* Standard metadata tags */}
@@ -53,7 +75,7 @@ const SEO = ({ title, description, keywords, url }) => {
 
       {/* Inject JSON-LD Schema explicitly on every page load */}
       <script type="application/ld+json">
-        {JSON.stringify(schemaOrgJSONLD)}
+        {JSON.stringify(schemas)}
       </script>
     </Helmet>
   );
