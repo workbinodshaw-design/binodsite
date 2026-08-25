@@ -49,8 +49,50 @@ const SEO = ({ title, description, keywords, url }) => {
     "description": "Binod Shaw is the Founder and CEO of CastFlow, a Digital Marketing and AI Automation Agency. He is a full-stack developer, AI automation expert, and tech entrepreneur."
   };
 
+  // Professional Service / Agency Schema for SEO
+  const schemaServiceJSONLD = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "CastFlow",
+    "image": "https://www.castflow.in/logo.png",
+    "url": "https://www.castflow.in",
+    "priceRange": "$$",
+    "description": "Top Web Development, Digital Marketing, and AI Automation Agency. We build premium websites and run scalable marketing campaigns.",
+    "areaServed": ["India", "United States", "United Kingdom", "Global"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Agency Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Web Development Services",
+            "description": "Custom website development, React/Next.js web apps, and eCommerce solutions."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Digital Marketing Services",
+            "description": "SEO, Social Media Marketing, Performance Marketing, and Growth Hacking."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "AI Automation Agency Services",
+            "description": "Business process automation, intelligent chatbots, and AI integration."
+          }
+        }
+      ]
+    }
+  };
+
   // Combine schemas
-  const schemas = [schemaOrgJSONLD, schemaPersonJSONLD];
+  const schemas = [schemaOrgJSONLD, schemaPersonJSONLD, schemaServiceJSONLD];
 
   return (
     <Helmet>

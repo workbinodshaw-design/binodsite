@@ -73,9 +73,9 @@ const HomePage = () => {
         </div>
       )}
       <SEO 
-        title="CastFlow | AI Automation & Premium Web Apps"
-        description="We help organizations unlock growth and efficiency through data-driven consulting and intelligent automation."
-        keywords="AI Agency, Web Development, Automation, n8n, Next.js, React, MVP Development"
+        title="Best Web Development & Digital Marketing Agency | CastFlow"
+        description="CastFlow is a top-rated Digital Marketing, Web Development, and AI Automation Agency. We build premium websites, run ROI-driven marketing campaigns, and automate businesses to scale 10x faster."
+        keywords="Web Development Company, Best Digital Marketing Agency, AI Automation Services, Custom Website Builder, Top IT Company, E-commerce Development, SEO Services, Business Automation, CastFlow"
         url="/"
       />
 
