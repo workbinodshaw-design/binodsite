@@ -9,7 +9,7 @@ const SEO = ({ title, description, keywords, url }) => {
   const seoTitle = title ? `${title} | ${siteName}` : siteName;
   const seoDescription = description || defaultDescription;
   const seoKeywords = keywords || defaultKeywords;
-  const canonicalUrl = `https://castflow.in${url || ''}`;
+  const canonicalUrl = `https://www.castflow.in${url || ''}`;
 
   // Organization Schema for Google Knowledge Graph
   const schemaOrgJSONLD = {
