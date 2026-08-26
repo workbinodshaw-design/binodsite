@@ -92,17 +92,16 @@ const HomePage = () => {
               We help organizations unlock growth and efficiency through data-driven consulting and intelligent automation.
             </p>
             
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'center' }}>
+            <div className={isMobile ? "hero-buttons-mobile" : ""} style={{ display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'center' }}>
               <button className="btn-hollow" onClick={() => navigate('/services')}>EXPLORE SERVICES</button>
               <button className="btn-solid" onClick={() => navigate('/contact')}>
                 BOOK CONSULTATION <div style={{ background: '#1A1A1A', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#C4F042' }}><ArrowUpRight size={14} /></div>
               </button>
             </div>
           </div>
-
         </div>
 
-        {/* 3D Curved Cards (Desktop) vs Swipeable Row (Mobile) */}
+        {/* 3D Curved Cards (Desktop) vs Custom 3D Mobile */}
         {!isMobile ? (
           <div className="carousel-container">
             {/* Card 1: Web Dev */}
@@ -173,36 +172,49 @@ const HomePage = () => {
             </div>
           </div>
         ) : (
-          <div className="mobile-carousel">
-            <div className="mobile-glass-card" onClick={() => navigate('/services/ai-automation')} style={{ background: '#1A1A1A', cursor: 'pointer', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-               <div style={{ width: '70px', height: '70px', borderRadius: '20px', background: 'linear-gradient(135deg, #FF6B6B 0%, #845EC2 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', boxShadow: '0 10px 25px rgba(132, 94, 194, 0.4)' }}>
-                 <Cpu size={32} color="#FFF" />
-               </div>
-               <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#FFF' }}>TRY AI AUTOMATION</div>
-            </div>
-            <div className="mobile-glass-card" onClick={() => navigate('/services/web-development')} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', padding: '1.2rem', alignItems: 'center', justifyContent: 'center' }}>
-               <div style={{ background: '#f5f5f5', borderRadius: '8px', padding: '0.8rem', height: '90px', width: '100%', maxWidth: '200px', marginBottom: '1rem', border: '1px solid #e0e0e0' }}>
-                 <div style={{ display: 'flex', gap: '4px', marginBottom: '8px' }}>
-                   <div style={{width: '8px', height: '8px', borderRadius: '50%', background: '#ff5f56'}}/>
-                   <div style={{width: '8px', height: '8px', borderRadius: '50%', background: '#ffbd2e'}}/>
-                   <div style={{width: '8px', height: '8px', borderRadius: '50%', background: '#27c93f'}}/>
+          <div>
+            <div className="mobile-3d-carousel">
+              <div className="mobile-3d-card mobile-card-left" onClick={() => navigate('/services/web-development')} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', padding: '1.2rem', alignItems: 'center', justifyContent: 'center' }}>
+                 <div style={{ background: '#f5f5f5', borderRadius: '8px', padding: '0.8rem', height: '90px', width: '100%', maxWidth: '160px', marginBottom: '1rem', border: '1px solid #e0e0e0' }}>
+                   <div style={{ display: 'flex', gap: '4px', marginBottom: '8px' }}>
+                     <div style={{width: '8px', height: '8px', borderRadius: '50%', background: '#ff5f56'}}/>
+                     <div style={{width: '8px', height: '8px', borderRadius: '50%', background: '#ffbd2e'}}/>
+                     <div style={{width: '8px', height: '8px', borderRadius: '50%', background: '#27c93f'}}/>
+                   </div>
+                   <div style={{ width: '60%', height: '4px', background: '#e0e0e0', marginBottom: '6px', borderRadius: '2px' }}/>
+                   <div style={{ width: '80%', height: '4px', background: '#e0e0e0', marginBottom: '6px', borderRadius: '2px' }}/>
+                   <div style={{ width: '40%', height: '4px', background: '#1A73E8', borderRadius: '2px' }}/>
                  </div>
-                 <div style={{ width: '60%', height: '4px', background: '#e0e0e0', marginBottom: '6px', borderRadius: '2px' }}/>
-                 <div style={{ width: '80%', height: '4px', background: '#e0e0e0', marginBottom: '6px', borderRadius: '2px' }}/>
-                 <div style={{ width: '40%', height: '4px', background: '#1A73E8', borderRadius: '2px' }}/>
-               </div>
-               <div style={{ fontSize: '1.4rem', fontWeight: 700, color: '#1A1A1A' }}>Web Development</div>
+                 <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#1A1A1A', textAlign: 'center' }}>Web Dev</div>
+              </div>
+              
+              <div className="mobile-3d-card mobile-card-right" onClick={() => navigate('/services')} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', padding: '1.2rem', alignItems: 'center', justifyContent: 'center' }}>
+                 <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', boxShadow: '0 10px 25px rgba(245, 158, 11, 0.4)' }}>
+                   <TrendingUp size={28} color="#FFF" />
+                 </div>
+                 <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#1A1A1A', textAlign: 'center' }}>Ads & Marketing</div>
+              </div>
+              
+              <div className="mobile-3d-card mobile-card-center" onClick={() => navigate('/services/ai-automation')} style={{ cursor: 'pointer', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                 <div style={{ width: '70px', height: '70px', borderRadius: '20px', background: 'linear-gradient(135deg, #FF6B6B 0%, #845EC2 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.2rem', boxShadow: '0 10px 25px rgba(132, 94, 194, 0.4)' }}>
+                   <Cpu size={32} color="#FFF" />
+                 </div>
+                 <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#FFF' }}>TRY AI AUTOMATION</div>
+                 <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#C4F042', fontSize: '0.85rem', marginTop: '0.5rem', fontWeight: 600 }}>
+                   Explore <ArrowRight size={14} />
+                 </div>
+              </div>
             </div>
-            <div className="mobile-glass-card" onClick={() => navigate('/services')} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', padding: '1.2rem', alignItems: 'center', justifyContent: 'center' }}>
-               <div style={{ width: '70px', height: '70px', borderRadius: '20px', background: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', boxShadow: '0 10px 25px rgba(245, 158, 11, 0.4)' }}>
-                 <TrendingUp size={32} color="#FFF" />
-               </div>
-               <div style={{ fontSize: '1.4rem', fontWeight: 700, color: '#1A1A1A' }}>Ads & Marketing</div>
+            
+            <div className="pagination-dots">
+              <div className="dot"></div>
+              <div className="dot active"></div>
+              <div className="dot"></div>
             </div>
           </div>
         )}
 
-        <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem', paddingBottom: '2rem', marginTop: isMobile ? '0' : '2rem' }}>
+        <div style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.95rem', paddingBottom: '2rem', marginTop: '1rem', textAlign: 'center' }}>
           Rated 4.9/5 by 20+ clients ★★★★★
         </div>
       </section>
