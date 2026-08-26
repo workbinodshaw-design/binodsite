@@ -174,6 +174,20 @@ const HomePage = () => {
         ) : (
           <div>
             <div className="mobile-3d-carousel">
+              <div className="mobile-3d-card mobile-card-far-left" onClick={() => navigate('/services')} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', padding: '1rem' }}>
+                 <div style={{ height: '70px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '6px', marginBottom: '1rem' }}>
+                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                     <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: '#1A73E8', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '9px', fontWeight: 'bold' }}>1</div>
+                     <div style={{ height: '2px', flex: 1, background: '#1A73E8' }}/>
+                   </div>
+                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                     <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: '#1A73E8', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '9px', fontWeight: 'bold' }}>2</div>
+                     <div style={{ height: '2px', flex: 1, background: '#e0e0e0' }}/>
+                   </div>
+                 </div>
+                 <div style={{ fontSize: '0.9rem', fontWeight: 700, textAlign: 'center', color: '#1A1A1A' }}>MVP Build</div>
+              </div>
+
               <div className="mobile-3d-card mobile-card-left" onClick={() => navigate('/services/web-development')} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', padding: '1rem', alignItems: 'center', justifyContent: 'center' }}>
                  <div style={{ background: '#f5f5f5', borderRadius: '8px', padding: '0.6rem', height: '70px', width: '100%', maxWidth: '140px', marginBottom: '1rem', border: '1px solid #e0e0e0' }}>
                    <div style={{ display: 'flex', gap: '3px', marginBottom: '8px' }}>
@@ -188,13 +202,6 @@ const HomePage = () => {
                  <div style={{ fontSize: '1rem', fontWeight: 700, color: '#1A1A1A', textAlign: 'center' }}>Web Dev</div>
               </div>
               
-              <div className="mobile-3d-card mobile-card-right" onClick={() => navigate('/services')} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', padding: '1rem', alignItems: 'center', justifyContent: 'center' }}>
-                 <div style={{ width: '50px', height: '50px', borderRadius: '16px', background: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', boxShadow: '0 10px 25px rgba(245, 158, 11, 0.4)' }}>
-                   <TrendingUp size={24} color="#FFF" />
-                 </div>
-                 <div style={{ fontSize: '1rem', fontWeight: 700, color: '#1A1A1A', textAlign: 'center' }}>Ads & Marketing</div>
-              </div>
-              
               <div className="mobile-3d-card mobile-card-center" onClick={() => navigate('/services/ai-automation')} style={{ cursor: 'pointer', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                  <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: 'linear-gradient(135deg, #FF6B6B 0%, #845EC2 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', boxShadow: '0 10px 25px rgba(132, 94, 194, 0.4)' }}>
                    <Cpu size={28} color="#FFF" />
@@ -203,6 +210,26 @@ const HomePage = () => {
                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#C4F042', fontSize: '0.8rem', marginTop: '0.6rem', fontWeight: 600 }}>
                    Explore <ArrowRight size={14} />
                  </div>
+              </div>
+
+              <div className="mobile-3d-card mobile-card-right" onClick={() => navigate('/services')} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', padding: '1rem', alignItems: 'center', justifyContent: 'center' }}>
+                 <div style={{ width: '50px', height: '50px', borderRadius: '16px', background: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', boxShadow: '0 10px 25px rgba(245, 158, 11, 0.4)' }}>
+                   <TrendingUp size={24} color="#FFF" />
+                 </div>
+                 <div style={{ fontSize: '1rem', fontWeight: 700, color: '#1A1A1A', textAlign: 'center' }}>Ads & Marketing</div>
+              </div>
+              
+              <div className="mobile-3d-card mobile-card-far-right" onClick={() => navigate('/services')} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', padding: '1rem', alignItems: 'center', justifyContent: 'center' }}>
+                 <div style={{ height: '70px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', position: 'relative' }}>
+                   <div style={{ position: 'absolute', width: '100%', height: '1px', background: '#e0e0e0', zIndex: 0 }} />
+                   <div style={{ width: '24px', height: '24px', background: '#1A73E8', borderRadius: '6px', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', marginRight: '1.5rem' }}>
+                     <Globe size={12} />
+                   </div>
+                   <div style={{ width: '24px', height: '24px', background: '#1A1A1A', borderRadius: '6px', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
+                     <Zap size={12} />
+                   </div>
+                 </div>
+                 <div style={{ fontSize: '0.9rem', fontWeight: 700, textAlign: 'center', color: '#1A1A1A' }}>Cloud Solutions</div>
               </div>
             </div>
             
