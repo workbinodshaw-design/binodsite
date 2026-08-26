@@ -165,6 +165,7 @@
     position: relative;
     height: 280px;
     margin-top: 1rem;
+    overflow-x: hidden; /* prevent horizontal scroll if they slightly peek */
   }
   .mobile-3d-card {
     background: rgba(255, 255, 255, 0.95);
@@ -183,12 +184,12 @@
     color: white;
   }
   .mobile-card-left {
-    transform: translateX(-110px) translateZ(-50px) rotateY(15deg) scale(0.9);
+    transform: translateX(-75px) translateZ(-50px) rotateY(15deg) scale(0.9);
     z-index: 2;
     opacity: 0.95;
   }
   .mobile-card-right {
-    transform: translateX(110px) translateZ(-50px) rotateY(-15deg) scale(0.9);
+    transform: translateX(75px) translateZ(-50px) rotateY(-15deg) scale(0.9);
     z-index: 2;
     opacity: 0.95;
   }
