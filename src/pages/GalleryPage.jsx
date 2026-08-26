@@ -7,6 +7,29 @@ import ContactSection from '../components/ContactSection';
 
 const albums = [
   {
+    id: 'healthtrack',
+    name: 'HEATHtrack AI App',
+    tag: 'health',
+    images: [
+      { id: 'ht1', src: '/healthtrack/healthtrack-1.png', alt: 'HealthTrack Screen 1' },
+      { id: 'ht2', src: '/healthtrack/healthtrack-2.png', alt: 'HealthTrack Screen 2' },
+      { id: 'ht3', src: '/healthtrack/healthtrack-3.png', alt: 'HealthTrack Screen 3' },
+      { id: 'ht4', src: '/healthtrack/healthtrack-4.png', alt: 'HealthTrack Screen 4' },
+      { id: 'ht5', src: '/healthtrack/healthtrack-5.png', alt: 'HealthTrack Screen 5' },
+      { id: 'ht6', src: '/healthtrack/healthtrack-6.png', alt: 'HealthTrack Screen 6' },
+      { id: 'ht7', src: '/healthtrack/healthtrack-7.png', alt: 'HealthTrack Screen 7' },
+      { id: 'ht8', src: '/healthtrack/healthtrack-8.png', alt: 'HealthTrack Screen 8' },
+      { id: 'ht9', src: '/healthtrack/healthtrack-9.png', alt: 'HealthTrack Screen 9' },
+      { id: 'ht10', src: '/healthtrack/healthtrack-10.png', alt: 'HealthTrack Screen 10' },
+      { id: 'ht11', src: '/healthtrack/healthtrack-11.png', alt: 'HealthTrack Screen 11' },
+      { id: 'ht12', src: '/healthtrack/healthtrack-12.png', alt: 'HealthTrack Screen 12' },
+      { id: 'ht13', src: '/healthtrack/healthtrack-13.png', alt: 'HealthTrack Screen 13' },
+      { id: 'ht14', src: '/healthtrack/healthtrack-14.png', alt: 'HealthTrack Screen 14' },
+      { id: 'ht15', src: '/healthtrack/healthtrack-15.png', alt: 'HealthTrack Screen 15' },
+      { id: 'ht16', src: '/healthtrack/healthtrack-16.png', alt: 'HealthTrack Screen 16' }
+    ]
+  },
+  {
     id: 'astrology',
     name: 'Uttam Raj Astrology',
     tag: 'consulting',
