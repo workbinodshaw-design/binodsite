@@ -261,7 +261,7 @@ const GalleryPage = () => {
       )}
 
       {/* Main Page Container */}
-      <div style={{ padding: isMobile ? '6rem 1.25rem 4rem' : '7rem 2rem 5rem', maxWidth: '1240px', margin: '0 auto', minHeight: '100vh', background: '#FFF', fontFamily: '"Inter", sans-serif' }}>
+      <div style={{ padding: isMobile ? '6rem 1.25rem 4rem' : '7rem 2rem 5rem', maxWidth: '1240px', margin: '0 auto', minHeight: '100vh', background: '#FFF', fontFamily: '"Inter", sans-serif', overflowX: 'hidden' }}>
         
         {/* Navigation / Back Button */}
         <button 
@@ -344,7 +344,7 @@ const GalleryPage = () => {
                         borderRadius: '12px', overflow: 'hidden', background: '#F8FAFC',
                         border: '1px solid rgba(0,0,0,0.08)', position: 'relative',
                         cursor: 'zoom-in', marginBottom: isMobile ? '0.75rem' : '1.5rem',
-                        breakInside: 'avoid', display: 'inline-block', width: '100%',
+                        breakInside: 'avoid', display: 'block', width: '100%',
                         boxShadow: '0 2px 6px rgba(0,0,0,0.03)', transition: 'all 0.25s ease'
                       }}
                       onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 25px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = '#111'; }}
