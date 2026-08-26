@@ -330,11 +330,11 @@ const GalleryPage = () => {
                   {album.name}
                 </h2>
 
-                {/* Pure Photo Grid */}
+                {/* Pure Photo Masonry Layout */}
                 <div style={{ 
-                  display: 'grid', 
-                  gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fill, minmax(260px, 1fr))', 
-                  gap: isMobile ? '0.75rem' : '1.5rem' 
+                  columnCount: isMobile ? 2 : 4,
+                  columnGap: isMobile ? '0.75rem' : '1.5rem',
+                  paddingBottom: '1rem'
                 }}>
                   {album.images.map((img) => (
                     <div 
@@ -343,7 +343,8 @@ const GalleryPage = () => {
                       style={{
                         borderRadius: '12px', overflow: 'hidden', background: '#F8FAFC',
                         border: '1px solid rgba(0,0,0,0.08)', position: 'relative',
-                        cursor: 'zoom-in', height: isMobile ? '150px' : '200px',
+                        cursor: 'zoom-in', marginBottom: isMobile ? '0.75rem' : '1.5rem',
+                        breakInside: 'avoid', display: 'inline-block', width: '100%',
                         boxShadow: '0 2px 6px rgba(0,0,0,0.03)', transition: 'all 0.25s ease'
                       }}
                       onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 25px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = '#111'; }}
@@ -352,7 +353,7 @@ const GalleryPage = () => {
                       <img 
                         src={encodeURI(import.meta.env.BASE_URL + img.src.replace(/^\//, ''))} 
                         alt={img.alt} 
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.4s ease' }} 
+                        style={{ width: '100%', height: 'auto', display: 'block', transition: 'transform 0.4s ease' }} 
                         onMouseOver={(e) => e.target.style.transform = 'scale(1.04)'}
                         onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                       />
