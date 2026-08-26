@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, X } from 'lucide-react';
+import { ArrowLeft, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
@@ -133,6 +133,13 @@ const GalleryPage = () => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
+  const filteredAlbums = activeTab === 'all' 
+    ? albums 
+    : albums.filter(album => album.tag === activeTab);
+
+  const flatImages = filteredAlbums.flatMap(album => album.images);
+  const selectedIndex = selectedImg ? flatImages.findIndex(img => img.id === selectedImg.id) : -1;
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -140,9 +147,30 @@ const GalleryPage = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const filteredAlbums = activeTab === 'all' 
-    ? albums 
-    : albums.filter(album => album.tag === activeTab);
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!selectedImg) return;
+      if (e.key === 'ArrowRight' && selectedIndex < flatImages.length - 1) {
+        setSelectedImg(flatImages[selectedIndex + 1]);
+      } else if (e.key === 'ArrowLeft' && selectedIndex > 0) {
+        setSelectedImg(flatImages[selectedIndex - 1]);
+      } else if (e.key === 'Escape') {
+        setSelectedImg(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImg, selectedIndex, flatImages]);
+
+  const handleNext = (e) => {
+    e.stopPropagation();
+    if (selectedIndex < flatImages.length - 1) setSelectedImg(flatImages[selectedIndex + 1]);
+  };
+
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    if (selectedIndex > 0) setSelectedImg(flatImages[selectedIndex - 1]);
+  };
 
   return (
     <>
@@ -178,15 +206,56 @@ const GalleryPage = () => {
             <X size={22} />
           </button>
 
+          {selectedIndex > 0 && (
+            <button 
+              onClick={handlePrev}
+              style={{
+                position: 'absolute', left: isMobile ? '10px' : '30px', top: '50%', transform: 'translateY(-50%)',
+                background: 'rgba(255, 255, 255, 0.15)', border: '1px solid rgba(255,255,255,0.3)',
+                color: '#FFF', borderRadius: '50%', width: isMobile ? '40px' : '50px', height: isMobile ? '40px' : '50px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', zIndex: 1000000, transition: 'all 0.2s'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)'}
+              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'}
+            >
+              <ChevronLeft size={30} />
+            </button>
+          )}
+
+          {selectedIndex < flatImages.length - 1 && (
+            <button 
+              onClick={handleNext}
+              style={{
+                position: 'absolute', right: isMobile ? '10px' : '30px', top: '50%', transform: 'translateY(-50%)',
+                background: 'rgba(255, 255, 255, 0.15)', border: '1px solid rgba(255,255,255,0.3)',
+                color: '#FFF', borderRadius: '50%', width: isMobile ? '40px' : '50px', height: isMobile ? '40px' : '50px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', zIndex: 1000000, transition: 'all 0.2s'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)'}
+              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'}
+            >
+              <ChevronRight size={30} />
+            </button>
+          )}
+
           <div 
             onClick={(e) => e.stopPropagation()} 
             style={{ position: 'relative', maxWidth: '1200px', maxHeight: '90vh', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.6)' }}
           >
-            <img 
-              src={encodeURI(import.meta.env.BASE_URL + selectedImg.src.replace(/^\//, ''))} 
-              alt={selectedImg.alt}
-              style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '90vh', objectFit: 'contain', display: 'block', margin: '0 auto' }}
-            />
+            <AnimatePresence mode="wait">
+              <motion.img 
+                key={selectedImg.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                src={encodeURI(import.meta.env.BASE_URL + selectedImg.src.replace(/^\//, ''))} 
+                alt={selectedImg.alt}
+                style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '90vh', objectFit: 'contain', display: 'block', margin: '0 auto' }}
+              />
+            </AnimatePresence>
           </div>
         </div>
       )}
@@ -220,6 +289,7 @@ const GalleryPage = () => {
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '3.5rem', scrollbarWidth: 'none' }}>
           {[
             { id: 'all', label: 'All' },
+            { id: 'health', label: 'Health Tech' },
             { id: 'healthcare', label: 'Healthcare' },
             { id: 'consulting', label: 'Consulting' },
             { id: 'ai', label: 'AI & SaaS' },
