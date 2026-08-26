@@ -23,6 +23,15 @@ const PortfolioPage = () => {
 
   const projects = [
     {
+      id: 13,
+      title: 'HEATHtrack AI Health App',
+      description: 'A personal health tracking app running locally in the browser. Features Gemini AI analysis, calorie auto-fill, daily habits tracking, and a full gamification system with XP & Levels.',
+      icon: <Cpu size={40} color="#10B981" />,
+      tags: ['React', 'Gemini AI', 'Health Tech'],
+      color: 'rgba(16, 185, 129, 0.1)',
+      url: 'https://workbinodshaw-design.github.io/HEATHtrack/'
+    },
+    {
       id: 12,
       title: 'BookHealthians Platform',
       description: 'A comprehensive healthcare and diagnostic test booking platform designed for effortless patient scheduling, lab package browsing, and seamless online booking.',

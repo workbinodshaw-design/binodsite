@@ -10,6 +10,17 @@ const ProjectsPage = () => {
 
   const projects = [
     {
+      id: 11,
+      title: 'HEATHtrack - Personal AI Health App',
+      shortName: 'HealthTrack',
+      description: 'A full-featured personal health tracking app running entirely in the browser. Features Gemini AI analysis, smart calorie auto-fill, water tracking, medication reminders, and a gamification system with XP & levels.',
+      tags: ['React', 'Gemini AI', 'Local Storage'],
+      liveUrl: 'https://workbinodshaw-design.github.io/HEATHtrack/',
+      githubUrl: '#',
+      bgColor: 'linear-gradient(135deg, #10B981 0%, #047857 100%)',
+      image: 'project-healthtrack.jpg'
+    },
+    {
       id: 10,
       title: 'Uttam Raj Astrology',
       shortName: 'Astrology Portal',
