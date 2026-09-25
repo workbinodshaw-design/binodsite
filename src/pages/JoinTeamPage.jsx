@@ -57,34 +57,6 @@ const JoinTeamPage = () => {
       icon: <MessageCircle size={24} color="#1A73E8" />,
       description: 'Excellent communication skills, confident with client meetings, professional attitude, and ability to manage client relationships.',
       color: '#e6f0fd'
-    },
-    {
-      id: 'fullstack',
-      title: 'Full Stack Web Developer',
-      icon: <Code size={24} color="#9C27B0" />,
-      description: 'Strong frontend and backend knowledge. Comfortable building modern responsive applications. Experience with React, Next.js, Node.js, APIs, databases, GitHub, and AI-assisted development is a plus.',
-      color: '#f3e5f5'
-    },
-    {
-      id: 'aiautomation',
-      title: 'AI Automation & AI Agent Developer',
-      icon: <Settings size={24} color="#E91E63" />,
-      description: 'Experience with n8n, Make.com, AI Agents, APIs, Webhooks, OpenAI/Claude integrations, workflow automation, and business automation.',
-      color: '#fce4ec'
-    },
-    {
-      id: 'marketing',
-      title: 'Marketing & Client Acquisition',
-      icon: <TrendingUp size={24} color="#FF9800" />,
-      description: 'Lead generation, client outreach, sales, networking, business development, LinkedIn and email outreach.',
-      color: '#fff3e0'
-    },
-    {
-      id: 'expertvibe',
-      title: 'Expert Vibe Coder',
-      icon: <Code size={24} color="#4CAF50" />,
-      description: 'Someone with exceptional coding skills and a great vibe. You write clean code, solve complex problems effortlessly, and bring positive energy to the team.',
-      color: '#e8f5e9'
     }
   ];
 
