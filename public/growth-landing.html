@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appointment Generation System</title>
+<meta name="description" content="Research-driven Appointment Generation & Automation Systems for Indian businesses, by Sonu Kumar Saha.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,650;12..96,750&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: single narrow reading column, editorial left-aligned sections, one dark "system" band; booking = focused 4-step form */
+:root{
+  --bg:#F5F6F2; --surface:#FFFFFF; --sunk:#ECEEE8; --ink:#101A19; --muted:#55615E; --line:#D9DDD5;
+  --accent:#0C6B5C; --accent-ink:#FFFFFF; --accent-soft:#DCEDE8;
+  --gold:#B97A12; --gold-soft:#F7E9CC;
+  --band:#0E1B1A; --band-ink:#EEF3F0; --band-muted:#9FB1AC; --band-line:#22312F;
+  --warn:#9A3B1E;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r:14px; --wrap:1120px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1211; --surface:#121C1B; --sunk:#0F1817; --ink:#E9EFEC; --muted:#9AABA6; --line:#243331;
+  --accent:#3FBFA6; --accent-ink:#04211C; --accent-soft:#143A33;
+  --gold:#E9B04E; --gold-soft:#3A2C12;
+  --band:#060B0A; --band-ink:#EEF3F0; --band-muted:#94A8A2; --band-line:#1C2A28;
+  --warn:#F08A6A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1211; --surface:#121C1B; --sunk:#0F1817; --ink:#E9EFEC; --muted:#9AABA6; --line:#243331;
+  --accent:#3FBFA6; --accent-ink:#04211C; --accent-soft:#143A33;
+  --gold:#E9B04E; --gold-soft:#3A2C12;
+  --band:#060B0A; --band-ink:#EEF3F0; --band-muted:#94A8A2; --band-line:#1C2A28;
+  --warn:#F08A6A; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.02em}
+h1{font-size:clamp(2.3rem,6.4vw,4.4rem);font-weight:750}
+h2{font-size:clamp(1.75rem,4vw,2.75rem);font-weight:650}
+h3{font-size:1.15rem;font-weight:650;letter-spacing:-.01em}
+p{margin:0}
+.lede{font-size:clamp(1.05rem,1.6vw,1.2rem);color:var(--muted);max-width:62ch}
+.eyebrow{font:500 .74rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.num{font-variant-numeric:tabular-nums}
+section{padding-block:clamp(64px,9vw,112px)}
+.sec-head{display:grid;gap:14px;margin-bottom:40px;max-width:760px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:600 1rem/1 var(--f-body);text-decoration:none;
+  padding:18px 26px;border-radius:999px;border:0;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease, background .15s}
+.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 8px 24px -10px var(--accent)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 28px -10px var(--accent)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn .arrow{transition:transform .15s}
+.btn:hover .arrow{transform:translateX(3px)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* Top bar */
+.topbar{border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px}
+.brand{display:flex;align-items:center;gap:10px;font:650 1rem/1.15 var(--f-display);text-decoration:none}
+.brand-mark{width:34px;height:34px;border-radius:10px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font:750 .95rem var(--f-display)}
+.brand small{display:block;font:500 .72rem/1.3 var(--f-body);color:var(--muted)}
+.topbar .btn{padding:12px 18px;font-size:.9rem}
+
+/* Hero */
+.hero{padding-block:clamp(48px,7vw,88px) clamp(56px,8vw,96px)}
+.hero-grid{display:grid;gap:44px;grid-template-columns:1fr}
+@media (min-width:940px){.hero-grid{grid-template-columns:1.35fr .9fr;align-items:end}}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lede{margin-top:22px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:32px}
+.hero-note{font-size:.88rem;color:var(--muted)}
+.trust-row{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;font-size:.88rem;color:var(--muted)}
+.trust-row span{display:inline-flex;align-items:center;gap:8px}
+.tick{width:18px;height:18px;flex:none;color:var(--accent)}
+
+.price-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:26px;display:grid;gap:16px;position:relative}
+.price-card .tag{justify-self:start;background:var(--gold-soft);color:var(--gold);font:500 .72rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 10px;border-radius:6px}
+.price-card h3{font-size:1.25rem}
+.price-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 10px}
+.price-big{font:750 clamp(2.4rem,5vw,3rem)/1 var(--f-display);letter-spacing:-.03em}
+.price-gst{font-weight:600;color:var(--muted)}
+.price-reg{font-size:.92rem;color:var(--muted)}
+.price-reg s{text-decoration-thickness:1.5px}
+.save{display:inline-block;font:500 .78rem/1 var(--f-mono);color:var(--accent);background:var(--accent-soft);padding:6px 8px;border-radius:6px}
+.mini-list{list-style:none;margin:0;padding:16px 0 0;border-top:1px dashed var(--line);display:grid;gap:8px;font-size:.92rem}
+.mini-list li{display:flex;gap:10px;align-items:flex-start}
+
+/* Problem */
+.problem-grid{display:grid;gap:44px}
+@media (min-width:900px){.problem-grid{grid-template-columns:1fr 1.1fr}}
+.leak-list{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--line)}
+.leak-list li{display:grid;grid-template-columns:28px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.leak-x{width:22px;height:22px;border-radius:50%;background:var(--sunk);color:var(--warn);display:grid;place-items:center;font:600 .8rem var(--f-mono);margin-top:2px}
+.transition{margin-top:44px;padding:28px;border-radius:var(--r);background:var(--accent-soft);font:650 clamp(1.2rem,2.4vw,1.6rem)/1.3 var(--f-display);letter-spacing:-.01em;max-width:900px}
+
+/* Audience */
+.aud-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))}
+.aud{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:8px;align-content:start}
+.aud .ic{width:40px;height:40px;border-radius:10px;background:var(--sunk);display:grid;place-items:center;color:var(--accent)}
+.aud p{font-size:.92rem;color:var(--muted)}
+
+/* Deliverables band */
+.band{background:var(--band);color:var(--band-ink)}
+.band .lede{color:var(--band-muted)}
+.band .eyebrow{color:var(--gold)}
+.deliv-grid{display:grid;gap:1px;background:var(--band-line);border:1px solid var(--band-line);border-radius:var(--r);overflow:hidden;
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr))}
+.deliv{background:var(--band);padding:22px;display:grid;gap:6px;align-content:start}
+.deliv .k{font:500 .72rem/1 var(--f-mono);color:var(--band-muted);letter-spacing:.08em}
+.deliv h3{color:var(--band-ink)}
+.deliv p{font-size:.9rem;color:var(--band-muted)}
+.deliv.free{background:linear-gradient(0deg,rgba(233,176,78,.10),rgba(233,176,78,.10)),var(--band)}
+.deliv.free .k{color:var(--gold)}
+
+/* How it works */
+.steps{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));counter-reset:s}
+.step{border-top:3px solid var(--ink);padding-top:18px;display:grid;gap:8px}
+.step .n{font:500 .8rem var(--f-mono);color:var(--accent)}
+.step p{color:var(--muted);font-size:.95rem}
+.chain{margin-top:44px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;font:650 clamp(1.05rem,2.2vw,1.4rem)/1.2 var(--f-display)}
+.chain span.pill{background:var(--surface);border:1px solid var(--line);padding:12px 16px;border-radius:999px}
+.chain .to{color:var(--accent);font-family:var(--f-mono)}
+
+/* Research */
+.research-grid{display:grid;gap:40px}
+@media (min-width:900px){.research-grid{grid-template-columns:.9fr 1.1fr;align-items:start}}
+.big-quote{font:750 clamp(1.9rem,4.2vw,3rem)/1.05 var(--f-display);letter-spacing:-.025em}
+.big-quote span{color:var(--accent)}
+.r-list{display:grid;gap:10px}
+.r-item{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.r-item .k{grid-row:span 2;font:500 .78rem/1.6 var(--f-mono);color:var(--accent)}
+.r-item p{font-size:.92rem;color:var(--muted)}
+.callout{margin-top:28px;border-left:3px solid var(--gold);padding:4px 0 4px 18px;font-size:1.05rem;max-width:60ch}
+
+/* Founder */
+.founder{display:grid;gap:36px;align-items:center}
+@media (min-width:860px){.founder{grid-template-columns:340px 1fr}}
+.photo-ph{aspect-ratio:4/5;max-width:100%;border-radius:20px;background:
+  repeating-linear-gradient(135deg,var(--sunk) 0 10px,var(--bg) 10px 20px);border:1.5px dashed var(--line);
+  display:grid;place-items:center;text-align:center;color:var(--muted);font-size:.85rem;padding:20px}
+.photo-ph b{display:block;font:750 3rem var(--f-display);color:var(--ink);margin-bottom:6px}
+.creds{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:10px}
+.creds li{display:flex;gap:12px;align-items:baseline;font-weight:500}
+.creds .k{font:500 .72rem var(--f-mono);color:var(--muted);min-width:64px;letter-spacing:.06em;text-transform:uppercase}
+.founder .bio{color:var(--muted);margin-top:20px;max-width:62ch;display:grid;gap:12px}
+.stat{display:inline-flex;align-items:baseline;gap:8px;margin-top:24px;padding:14px 18px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.stat b{font:750 2.2rem/1 var(--f-display)}
+
+/* Testimonials */
+.t-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.t-card{background:var(--surface);border:1.5px dashed var(--line);border-radius:var(--r);padding:22px;display:grid;gap:16px;align-content:start}
+.t-video{aspect-ratio:16/9;max-width:100%;border-radius:10px;background:var(--sunk);display:grid;place-items:center;color:var(--muted);font-size:.85rem;text-align:center}
+.t-play{width:52px;height:52px;border-radius:50%;background:var(--surface);display:grid;place-items:center;margin:0 auto 8px;border:1px solid var(--line)}
+.t-quote{color:var(--muted);font-style:italic}
+.t-person{display:flex;gap:12px;align-items:center}
+.t-avatar{width:44px;height:44px;border-radius:50%;background:var(--sunk);border:1px dashed var(--line);flex:none}
+.t-person b{display:block;font-size:.95rem}
+.t-person small{color:var(--muted)}
+.ph-label{font:500 .7rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+
+/* Pricing */
+.pricing{display:grid;gap:0;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--surface)}
+@media (min-width:880px){.pricing{grid-template-columns:.95fr 1.05fr}}
+.p-left{padding:clamp(24px,4vw,40px);display:grid;gap:18px;align-content:start;background:var(--sunk)}
+.p-right{padding:clamp(24px,4vw,40px)}
+.p-compare{display:grid;gap:10px}
+.p-line{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface)}
+.p-line.offer{border:2px solid var(--accent)}
+.p-line .lbl{font-weight:600}
+.p-line .val{font:650 1.15rem var(--f-display)}
+.p-line.offer .val{font-size:1.9rem;font-weight:750;color:var(--accent)}
+.p-line.reg .val{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1.5px}
+.p-fine{font-size:.85rem;color:var(--muted)}
+.check-list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr))}
+.check-list li{display:flex;gap:10px;align-items:flex-start;font-size:.95rem}
+.check-list li.free b{color:var(--gold)}
+
+/* ₹99 section */
+.fee{display:grid;gap:36px;align-items:center;border-radius:22px;background:var(--accent-soft);padding:clamp(24px,5vw,56px)}
+@media (min-width:880px){.fee{grid-template-columns:1.2fr .8fr}}
+.fee-ticket{background:var(--surface);border-radius:16px;padding:24px;border:1px solid var(--line);display:grid;gap:12px;position:relative}
+.fee-ticket::before,.fee-ticket::after{content:"";position:absolute;top:50%;width:22px;height:22px;border-radius:50%;background:var(--accent-soft);transform:translateY(-50%)}
+.fee-ticket::before{left:-11px}.fee-ticket::after{right:-11px}
+.fee-amt{font:750 3.2rem/1 var(--f-display);letter-spacing:-.03em}
+.fee-ticket hr{border:0;border-top:1px dashed var(--line);margin:4px 0;width:100%}
+.policy{font-size:.92rem;color:var(--muted);margin-top:16px;max-width:62ch}
+
+/* FAQ */
+.faq{display:grid;border-top:1px solid var(--line);max-width:860px}
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;padding:20px 0;font:600 1.05rem/1.4 var(--f-body)}
+summary::-webkit-details-marker{display:none}
+summary .pm{font:500 1.2rem var(--f-mono);color:var(--accent);transition:transform .2s;flex:none}
+details[open] summary .pm{transform:rotate(45deg)}
+details .ans{padding:0 0 22px;color:var(--muted);max-width:68ch;display:grid;gap:10px}
+details .ans ul{margin:0;padding-left:20px}
+
+/* Final CTA */
+.final{background:var(--band);color:var(--band-ink);text-align:left}
+.final .lede{color:var(--band-muted);margin-top:18px}
+.final .btn-primary{background:var(--gold);color:#1A1204;box-shadow:none}
+.final h2{font-size:clamp(2rem,5vw,3.4rem);max-width:18ch}
+footer{padding-block:28px;font-size:.84rem;color:var(--muted);border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+/* Sticky mobile CTA */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--surface);border-top:1px solid var(--line);
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:12px;align-items:center;justify-content:space-between;
+  box-shadow:0 -8px 24px -12px rgba(0,0,0,.25);transform:translateY(110%);transition:transform .25s ease}
+.sticky.show{transform:none}
+.sticky .sp{font-size:.78rem;color:var(--muted);line-height:1.3}
+.sticky .sp b{display:block;color:var(--ink);font:650 1rem var(--f-display)}
+.sticky .btn{padding:14px 18px;font-size:.92rem;white-space:nowrap}
+@media (min-width:820px){.sticky{display:none}}
+@media (max-width:819px){#landing{padding-bottom:80px}}
+
+/* Reveal (visible at rest) */
+@media (prefers-reduced-motion:no-preference){
+  .rise{animation:rise .6s ease both}
+  .rise.d1{animation-delay:.08s}.rise.d2{animation-delay:.16s}.rise.d3{animation-delay:.24s}
+  @keyframes rise{from{transform:translateY(10px);opacity:.01}to{transform:none;opacity:1}}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ===================== BOOKING PAGE ===================== */
+.bk{padding-block:28px 72px}
+.bk-head{display:grid;gap:12px;margin:28px 0 28px;max-width:720px}
+.bk-head h1{font-size:clamp(2rem,5vw,3.1rem)}
+.bk-layout{display:grid;gap:24px;align-items:start}
+@media (min-width:960px){.bk-layout{grid-template-columns:1fr 320px}}
+.stepper{list-style:none;margin:0 0 20px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stepper li{display:grid;gap:8px;font-size:.78rem;color:var(--muted);min-width:0}
+.stepper li .bar{height:4px;border-radius:4px;background:var(--line)}
+.stepper li.done .bar,.stepper li.cur .bar{background:var(--accent)}
+.stepper li.cur{color:var(--ink);font-weight:600}
+.stepper li span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,4vw,36px)}
+.panel-title{display:grid;gap:6px;margin-bottom:24px}
+.panel-title h2{font-size:clamp(1.4rem,3vw,1.8rem)}
+.panel-title p{color:var(--muted);font-size:.95rem}
+.fgrid{display:grid;gap:16px 18px;grid-template-columns:1fr}
+@media (min-width:640px){.fgrid.two{grid-template-columns:1fr 1fr}}
+.field{display:grid;gap:7px;min-width:0}
+.field.full{grid-column:1/-1}
+label,.lbl{font-weight:600;font-size:.92rem}
+.req{color:var(--warn)}
+.hint{font-size:.8rem;color:var(--muted);font-weight:400}
+input[type=text],input[type=tel],input[type=email],select,textarea{
+  width:100%;font:16px/1.4 var(--f-body);color:var(--ink);background:var(--bg);border:1.5px solid var(--line);
+  border-radius:10px;padding:13px 14px;transition:border-color .15s, box-shadow .15s}
+textarea{min-height:92px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--warn)}
+.err{font-size:.8rem;color:var(--warn);min-height:0}
+.err:empty{display:none}
+.inline-check{display:flex;gap:8px;align-items:center;font-size:.85rem;font-weight:500;color:var(--muted);cursor:pointer}
+.qnum{font:500 .75rem var(--f-mono);color:var(--accent);margin-right:6px}
+.qual{margin-top:8px;padding:20px;border-radius:14px;border:2px solid var(--accent);background:var(--accent-soft);display:grid;gap:12px}
+.qual .lbl{font-size:1rem}
+.radio-row{display:flex;flex-wrap:wrap;gap:10px}
+.radio{position:relative}
+.radio input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.radio span{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-weight:600;cursor:pointer}
+.radio input:checked + span{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
+.radio input:focus-visible + span{outline:3px solid var(--accent);outline-offset:3px}
+.qual-note{font-size:.85rem;color:var(--muted)}
+.qual-no{font-size:.88rem;color:var(--ink);background:var(--surface);border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
+.nav-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:28px;padding-top:22px;border-top:1px solid var(--line)}
+.nav-row .btn{padding:16px 22px}
+.cal-ph{min-height:440px;border-radius:16px;border:2px dashed var(--accent);background:
+  linear-gradient(var(--line) 1px,transparent 1px) 0 0/100% 56px, var(--bg);display:grid;place-items:center;text-align:center;padding:24px}
+.cal-ph .inner{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 24px;max-width:420px;display:grid;gap:10px}
+.cal-ph code{font:500 .85rem var(--f-mono);color:var(--accent);background:var(--accent-soft);padding:8px 10px;border-radius:8px}
+.cal-confirm{margin-top:16px}
+.pay-box{display:grid;gap:18px}
+.pay-amt{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:20px;border-radius:14px;background:var(--sunk)}
+.pay-amt b{font:750 2.4rem/1 var(--f-display)}
+.summary-list{list-style:none;margin:0;padding:0;display:grid;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.summary-list li{display:flex;justify-content:space-between;gap:16px;padding:12px 14px;border-bottom:1px solid var(--line);font-size:.9rem}
+.summary-list li:last-child{border-bottom:0}
+.summary-list li span:first-child{color:var(--muted)}
+.summary-list li span:last-child{font-weight:600;text-align:right;min-width:0;overflow-wrap:anywhere}
+.notice{font-size:.85rem;padding:12px 14px;border-radius:10px;background:var(--gold-soft);color:var(--ink);border:1px solid var(--line)}
+.notice code{font-family:var(--f-mono);font-size:.8rem}
+.btn-pay{width:100%;padding:20px;font-size:1.05rem}
+.secure{display:flex;align-items:center;justify-content:center;gap:8px;font-size:.82rem;color:var(--muted)}
+.aside{display:grid;gap:14px}
+@media (min-width:960px){.aside{position:sticky;top:calc(20px + env(safe-area-inset-top,0px))}}
+.aside-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:12px}
+.aside-card h3{font-size:1rem}
+.aside-card ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:.9rem;color:var(--muted)}
+.aside-card li{display:flex;gap:10px}
+.mini-founder{display:flex;gap:12px;align-items:center}
+.mini-founder .av{width:44px;height:44px;border-radius:12px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font:750 .9rem var(--f-display);flex:none}
+.mini-founder small{display:block;color:var(--muted);font-size:.8rem;line-height:1.35}
+.back{font-size:.9rem;color:var(--muted);text-decoration:none;display:inline-flex;gap:6px;align-items:center}
+.back:hover{color:var(--ink)}
+.done-box{text-align:left;display:grid;gap:14px}
+</style>
+</head>
+<body>
+<!-- ============================================================
+     INTEGRATION SETTINGS — edit these when you are ready.
+     calendarEmbedHtml : paste the full embed code from your calendar tool
+     razorpayPaymentLink : a Razorpay Payment Link / Payment Page URL (₹99)
+     razorpayKeyId : (optional) use Razorpay Checkout instead of a link
+     thankYouUrl : where to send people after successful payment
+     leadWebhookUrl : (optional) CRM / GoHighLevel / Zapier webhook for form data
+     ============================================================ -->
+<script>
+window.SITE_CONFIG = {
+  calendarEmbedHtml: "",      // [CALENDAR EMBED WILL BE ADDED HERE]
+  razorpayPaymentLink: "",    // [RAZORPAY PAYMENT LINK WILL BE ADDED LATER]
+  razorpayKeyId: "",          // optional: rzp_live_xxx for Razorpay Checkout
+  thankYouUrl: "",            // [THANK YOU PAGE URL WILL BE ADDED LATER]
+  leadWebhookUrl: ""          // optional: send booking form data to your CRM
+};
+</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 20 20"><path d="M4 10.5l3.5 3.5L16 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 20 20"><path d="M4 10h11m-4-4.5L15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 20 20"><rect x="4" y="9" width="12" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M7 9V6.5a3 3 0 016 0V9" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+  <symbol id="i-steth" viewBox="0 0 24 24"><path d="M6 3v6a5 5 0 0010 0V3M11 14v2a5 5 0 0010 0v-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="21" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-coach" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-brief" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 7V5h6v2M3 12h18" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-agency" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-edu" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 11v5c2 2 10 2 12 0v-5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-service" viewBox="0 0 24 24"><path d="M14 6a4 4 0 00-5 5l-6 6 3 3 6-6a4 4 0 005-5l-2.5 2.5-2.5-.5-.5-2.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ======================================================== LANDING ======================================================== -->
+<div id="landing">
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="Sonu Kumar Saha — Appointment Generation Systems">
+        <span class="brand-mark">SK</span>
+        <span>Sonu Kumar Saha<small>Appointment Generation Systems</small></span>
+      </a>
+      <a class="btn btn-primary" href="#booking">Book Strategy Call — ₹99</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. HERO -->
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow rise">Appointment Generation &amp; Automation Systems</p>
+          <h1 class="rise d1" style="margin-top:18px">Stop Chasing Leads. <em>Start Generating Appointments.</em></h1>
+          <p class="lede rise d2">We build research-driven Appointment Generation &amp; Automation Systems that help businesses attract the right prospects, automate follow-ups and turn interest into booked appointments.</p>
+          <div class="hero-ctas rise d3">
+            <a class="btn btn-primary" href="#booking">Book Your Strategy Call — ₹99 <svg class="arrow" width="18" height="18"><use href="#i-arrow"/></svg></a>
+            <span class="hero-note">₹99 confirms your slot. Refundable as per policy.</span>
+          </div>
+          <div class="trust-row">
+            <span><svg class="tick"><use href="#i-check"/></svg>7 years in funnel design</span>
+            <span><svg class="tick"><use href="#i-check"/></svg>Built from research, not templates</span>
+            <span><svg class="tick"><use href="#i-check"/></svg>Email + WhatsApp follow-ups</span>
+          </div>
+        </div>
+
+        <aside class="price-card rise d2" aria-label="Offer pricing">
+          <span class="tag">Current offer</span>
+          <h3>Complete Appointment Generation System</h3>
+          <div>
+            <div class="price-row"><span class="price-big num">₹24,999</span><span class="price-gst">+ GST</span></div>
+            <p class="price-reg" style="margin-top:6px">Regular Price: <s class="num">₹35,000</s> + GST &nbsp;<span class="save num">Save ₹10,001</span></p>
+          </div>
+          <ul class="mini-list">
+            <li><svg class="tick"><use href="#i-check"/></svg>Landing, Booking &amp; Thank You pages</li>
+            <li><svg class="tick"><use href="#i-check"/></svg>CRM pipeline, workflows &amp; automations</li>
+            <li><svg class="tick"><use href="#i-check"/></svg>1 Year Domain + Hosting FREE</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 2. PROBLEM -->
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="problem-grid">
+          <div class="sec-head" style="margin:0">
+            <p class="eyebrow">The real problem</p>
+            <h2>Are You Getting Leads But Not Enough Appointments?</h2>
+            <p class="lede">Most businesses don't lose prospects at the ad or the enquiry. They lose them in the gap between "interested" and "booked".</p>
+          </div>
+          <ul class="leak-list">
+            <li><span class="leak-x">×</span><span>Leads come in, but nobody follows up on time</span></li>
+            <li><span class="leak-x">×</span><span>Enquiries get lost across WhatsApp, calls and spreadsheets</span></li>
+            <li><span class="leak-x">×</span><span>Every follow-up is manual and depends on someone remembering</span></li>
+            <li><span class="leak-x">×</span><span>There is no structured CRM pipeline to see who is where</span></li>
+            <li><span class="leak-x">×</span><span>No automated nurturing for people who aren't ready yet</span></li>
+            <li><span class="leak-x">×</span><span>Prospects don't know what to do next, so they do nothing</span></li>
+            <li><span class="leak-x">×</span><span>Growth depends on how much manual chasing your team can handle</span></li>
+          </ul>
+        </div>
+        <p class="transition">Your business doesn't just need more leads. It needs a system that moves the right prospects toward appointments.</p>
+      </div>
+    </section>
+
+    <!-- 3. AUDIENCE -->
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">Who it's for</p>
+          <h2>Built For Appointment-Driven Businesses</h2>
+          <p class="lede">If your revenue starts with a consultation, a site visit, a demo or a discovery call, this system is built for you.</p>
+        </div>
+        <div class="aud-grid">
+          <div class="aud"><span class="ic"><svg width="22" height="22"><use href="#i-steth"/></svg></span><h3>Doctors &amp; Clinics</h3><p>Consultation bookings, patient enquiries and reminder follow-ups.</p></div>
+          <div class="aud"><span class="ic"><svg width="22" height="22"><use href="#i-coach"/></svg></span><h3>Coaches</h3><p>Discovery calls that start with the right, pre-qualified people.</p></div>
+          <div class="aud"><span class="ic"><svg width="22" height="22"><use href="#i-brief"/></svg></span><h3>Consultants</h3><p>A steady flow of strategy and requirement meetings.</p></div>
+          <div class="aud"><span class="ic"><svg width="22" height="22"><use href="#i-agency"/></svg></span><h3>Agencies</h3><p>Sales calls with prospects who understand your offer.</p></div>
+          <div class="aud"><span class="ic"><svg width="22" height="22"><use href="#i-home"/></svg></span><h3>Real Estate Professionals</h3><p>Site visits and property consultations from serious buyers.</p></div>
+          <div class="aud"><span class="ic"><svg width="22" height="22"><use href="#i-edu"/></svg></span><h3>Trainers / Education</h3><p>Counselling sessions, demo classes and admission calls.</p></div>
+          <div class="aud"><span class="ic"><svg width="22" height="22"><use href="#i-service"/></svg></span><h3>Service-Based Businesses</h3><p>Any business where a booked appointment comes before the sale.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. WHAT WE BUILD -->
+    <section class="band">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">What we build</p>
+          <h2>Your Complete Appointment Generation System</h2>
+          <p class="lede">Not Just a Beautiful Page. A Strategic System Built to Convert. Every piece is connected, so a visitor becomes a lead, a lead gets followed up, and a follow-up becomes a booking.</p>
+        </div>
+        <div class="deliv-grid">
+          <div class="deliv"><span class="k">PAGE</span><h3>Landing Page</h3><p>Research-led copy and layout built around one action.</p></div>
+          <div class="deliv"><span class="k">PAGE</span><h3>Booking Page</h3><p>A focused page where prospects pick a slot and confirm.</p></div>
+          <div class="deliv"><span class="k">PAGE</span><h3>Thank You Page</h3><p>Confirms the booking and tells them exactly what happens next.</p></div>
+          <div class="deliv"><span class="k">CAPTURE</span><h3>Lead Capture</h3><p>Forms that collect contact details and buying intent.</p></div>
+          <div class="deliv"><span class="k">CRM</span><h3>CRM &amp; Pipeline</h3><p>Every lead in one pipeline, with clear stages from enquiry to booked.</p></div>
+          <div class="deliv"><span class="k">AUTOMATION</span><h3>Workflow Automation</h3><p>Triggers and actions that run without manual effort.</p></div>
+          <div class="deliv"><span class="k">AUTOMATION</span><h3>Email Automation</h3><p>Sequences that inform, build trust and invite a booking.</p></div>
+          <div class="deliv"><span class="k">AUTOMATION</span><h3>WhatsApp Automation</h3><p>Timely messages on the channel your prospects actually read.</p></div>
+          <div class="deliv"><span class="k">NURTURE</span><h3>Newsletter Setup</h3><p>Stay in touch with leads who aren't ready to book today.</p></div>
+          <div class="deliv"><span class="k">NURTURE</span><h3>Follow-Up Workflows</h3><p>Structured follow-ups so no enquiry goes cold.</p></div>
+          <div class="deliv"><span class="k">BOOKING</span><h3>Appointment Workflow</h3><p>Confirmations and reminders around every booked slot.</p></div>
+          <div class="deliv"><span class="k">SYSTEM</span><h3>Complete Funnel Setup</h3><p>All of it connected, tested and handed over working.</p></div>
+          <div class="deliv free"><span class="k">FREE · 1 YEAR</span><h3>Domain</h3><p>Your domain included free for the first year.</p></div>
+          <div class="deliv free"><span class="k">FREE · 1 YEAR</span><h3>Hosting</h3><p>Hosting included free for the first year.</p></div>
+        </div>
+        <div style="margin-top:36px"><a class="btn btn-primary" href="#booking">Book Your Strategy Call — ₹99 <svg class="arrow" width="18" height="18"><use href="#i-arrow"/></svg></a></div>
+      </div>
+    </section>
+
+    <!-- 5. HOW IT WORKS -->
+    <section>
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">How it works</p>
+          <h2>Four stages. One connected journey.</h2>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="n">01</span><h3>Attract</h3><p>Bring the right audience into your funnel with messaging built for them.</p></div>
+          <div class="step"><span class="n">02</span><h3>Capture</h3><p>Capture visitor information and intent, straight into your CRM.</p></div>
+          <div class="step"><span class="n">03</span><h3>Nurture</h3><p>Use structured follow-ups, email and WhatsApp workflows.</p></div>
+          <div class="step"><span class="n">04</span><h3>Book</h3><p>Move qualified prospects toward a confirmed appointment.</p></div>
+        </div>
+        <p class="chain" aria-label="More Qualified Appointments, then More Revenue Opportunities, then More Business Growth">
+          <span class="pill">More Qualified Appointments</span><span class="to">→</span>
+          <span class="pill">More Revenue Opportunities</span><span class="to">→</span>
+          <span class="pill">More Business Growth</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 6. RESEARCH -->
+    <section style="padding-top:0">
+      <div class="wrap research-grid">
+        <div>
+          <p class="eyebrow">Research-driven</p>
+          <h2 style="margin-top:14px">Your Funnel Starts With Research — Not Design</h2>
+          <p class="big-quote" style="margin-top:28px">We Don't Build From Templates. <span>We Build From Research.</span></p>
+          <p class="lede" style="margin-top:20px">Before a single page is designed, we study your business and your market. Every headline, offer angle and follow-up message comes from what we learn.</p>
+        </div>
+        <div>
+          <div class="r-list">
+            <div class="r-item"><span class="k">R1</span><h3>Business Research</h3><p>Your services, strengths, pricing and how you deliver results.</p></div>
+            <div class="r-item"><span class="k">R2</span><h3>Audience Research</h3><p>Who your ideal prospects are, what they want and what stops them.</p></div>
+            <div class="r-item"><span class="k">R3</span><h3>Competitor Research</h3><p>Who else your prospects are considering, and why.</p></div>
+            <div class="r-item"><span class="k">R4</span><h3>Offer &amp; Messaging Research</h3><p>How competitors frame their offers, and where the gaps are.</p></div>
+            <div class="r-item"><span class="k">R5</span><h3>Landing Page Research</h3><p>What competitor pages do well, and what they leave out.</p></div>
+            <div class="r-item"><span class="k">R6</span><h3>Customer Journey Research</h3><p>Each step from first visit to booked call, and where people drop off.</p></div>
+            <div class="r-item"><span class="k">R7</span><h3>Market Positioning</h3><p>Where your business should stand so you're the obvious choice.</p></div>
+          </div>
+          <p class="callout">We don't copy competitors. We study the market and use those insights to build a stronger, customized funnel for your business.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FOUNDER -->
+    <section style="padding-top:0">
+      <div class="wrap founder">
+        <div class="photo-ph" role="img" aria-label="Founder photo placeholder">
+          <div><b>SKS</b>Founder photo<br>Replace with a professional portrait (4:5)</div>
+        </div>
+        <div>
+          <p class="eyebrow">Meet the founder</p>
+          <h2 style="margin-top:14px">Sonu Kumar Saha</h2>
+          <ul class="creds">
+            <li><span class="k">Role</span>Co-Founder of Castflow</li>
+            <li><span class="k">Role</span>Founder of The Desi Andaaz Media Network</li>
+            <li><span class="k">Focus</span>Funnel Designing &amp; Appointment Systems</li>
+          </ul>
+          <div class="bio">
+            <p>Sonu has spent seven years designing funnels for service businesses. His work starts with one question: what does the right prospect need to see, hear and receive before they book a call?</p>
+            <p>That thinking shapes every system he builds. Research comes first, then the pages, the CRM, the automations and the follow-ups, all working toward one outcome: more qualified appointments for your business.</p>
+          </div>
+          <div class="stat"><b class="num">7</b><span>years of experience in funnel designing</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. TESTIMONIALS -->
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">Client stories</p>
+          <h2>What Our Clients Say</h2>
+          <p class="lede">Real feedback from businesses we've worked with.</p>
+        </div>
+        <div class="t-grid">
+          <article class="t-card">
+            <span class="ph-label">Video testimonial placeholder</span>
+            <div class="t-video"><div><div class="t-play">▶</div>Add client video here</div></div>
+            <div class="t-person"><span class="t-avatar"></span><div><b>[Client Name]</b><small>[Business / Profession]</small></div></div>
+          </article>
+          <article class="t-card">
+            <span class="ph-label">Text testimonial placeholder</span>
+            <p class="t-quote">[Add the client's genuine testimonial here, in their own words.]</p>
+            <div class="t-person"><span class="t-avatar"></span><div><b>[Client Name]</b><small>[Business / Profession]</small></div></div>
+          </article>
+          <article class="t-card">
+            <span class="ph-label">Text testimonial placeholder</span>
+            <p class="t-quote">[Add the client's genuine testimonial here, in their own words.]</p>
+            <div class="t-person"><span class="t-avatar"></span><div><b>[Client Name]</b><small>[Business / Profession]</small></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. PRICING -->
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">Pricing</p>
+          <h2>One Complete System. One Fixed Offer.</h2>
+        </div>
+        <div class="pricing">
+          <div class="p-left">
+            <h3>Complete Appointment Generation System</h3>
+            <div class="p-compare">
+              <div class="p-line reg"><span class="lbl">Regular Price</span><span class="val num">₹35,000 + GST</span></div>
+              <div class="p-line offer"><span class="lbl">Offer Price</span><span class="val num">₹24,999 <small style="font-size:1rem">+ GST</small></span></div>
+            </div>
+            <p class="p-fine">GST at 18% is added at checkout. Final payment is collected only if you choose to proceed after the strategy call.</p>
+            <a class="btn btn-primary" href="#booking">Book Your Strategy Call — ₹99 <svg class="arrow" width="18" height="18"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="p-right">
+            <p class="eyebrow" style="margin-bottom:18px">Everything included</p>
+            <ul class="check-list">
+              <li><svg class="tick"><use href="#i-check"/></svg>Landing Page</li>
+              <li><svg class="tick"><use href="#i-check"/></svg>Booking Page</li>
+              <li><svg class="tick"><use href="#i-check"/></svg>Thank You Page</li>
+              <li><svg class="tick"><use href="#i-check"/></svg>Lead Capture System</li>
+              <li><svg class="tick"><use href="#i-check"/></svg>CRM / Sales Pipeline Setup</li>
+              <li><svg class="tick"><use href="#i-check"/></svg>Workflow Setup</li>
+              <li><svg class="tick"><use href="#i-check"/></svg>Email Automation</li>
+              <li><svg class="tick"><use href="#i-check"/></svg>WhatsApp Automation</li>
+              <li><svg class="tick"><use href="#i-check"/></svg>Newsletter Setup</li>
+              <li><svg class="tick"><use href="#i-check"/></svg>Follow-up Workflows</li>
+              <li><svg class="tick"><use href="#i-check"/></svg>Appointment Generation Workflow</li>
+              <li><svg class="tick"><use href="#i-check"/></svg>Complete Funnel Setup</li>
+              <li class="free"><svg class="tick"><use href="#i-check"/></svg><span><b>FREE</b> 1 Year Domain</span></li>
+              <li class="free"><svg class="tick"><use href="#i-check"/></svg><span><b>FREE</b> 1 Year Hosting</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. ₹99 APPOINTMENT -->
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="fee">
+          <div>
+            <p class="eyebrow">Next step</p>
+            <h2 style="margin-top:14px">Ready to Build Your Appointment Generation System?</h2>
+            <p class="lede" style="margin-top:16px">Book your strategy and requirement call for just ₹99. The ₹99 is an appointment confirmation fee that reserves your slot.</p>
+            <p class="policy"><b style="color:var(--ink)">Refund policy:</b> If you attend your scheduled appointment and, after the consultation, decide that our services are not the right fit for your business, your ₹99 appointment fee will be refunded 100% according to our refund policy.</p>
+            <div style="margin-top:26px"><a class="btn btn-primary" href="#booking">Book My Strategy Call — ₹99 <svg class="arrow" width="18" height="18"><use href="#i-arrow"/></svg></a></div>
+          </div>
+          <div class="fee-ticket" aria-label="Appointment fee">
+            <span class="eyebrow">Strategy &amp; Requirement Call</span>
+            <span class="fee-amt num">₹99</span>
+            <hr>
+            <ul class="mini-list" style="border:0;padding:0">
+              <li><svg class="tick"><use href="#i-check"/></svg>Review of your current lead flow</li>
+              <li><svg class="tick"><use href="#i-check"/></svg>Your goals and requirements</li>
+              <li><svg class="tick"><use href="#i-check"/></svg>Whether this system fits your business</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. FAQ -->
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">FAQ</p>
+          <h2>Questions, answered</h2>
+        </div>
+        <div class="faq">
+          <details><summary>What is included in the ₹24,999 + GST offer?<span class="pm">+</span></summary>
+            <div class="ans"><p>The complete system: Landing Page, Booking Page, Thank You Page, Lead Capture System, CRM / Sales Pipeline Setup, Workflow Setup, Email Automation, WhatsApp Automation, Newsletter Setup, Follow-up Workflows, Appointment Generation Workflow and Complete Funnel Setup. You also get 1 year of domain and 1 year of hosting free.</p></div></details>
+          <details><summary>Who is this system for?<span class="pm">+</span></summary>
+            <div class="ans"><p>Appointment-driven and service-based businesses in India: doctors and clinics, coaches, consultants, agencies, real estate professionals, trainers and education businesses, and any business where a booked call or visit comes before the sale.</p></div></details>
+          <details><summary>Do you take projects below ₹24,999?<span class="pm">+</span></summary>
+            <div class="ans"><p>No. ₹24,999 + GST is the minimum project investment under the current offer. The system works because every part is connected, so we don't split it into smaller packages.</p></div></details>
+          <details><summary>What happens after I book the ₹99 appointment?<span class="pm">+</span></summary>
+            <div class="ans"><p>You'll receive a confirmation for your selected date and time. We review the details you shared in the booking form before the call, so the conversation is focused on your business from the first minute.</p></div></details>
+          <details><summary>Is the ₹99 appointment fee refundable?<span class="pm">+</span></summary>
+            <div class="ans"><p>Yes, under one condition. If you attend your scheduled appointment and, after the consultation, decide that our services are not the right fit for your business, your ₹99 appointment fee will be refunded 100% according to our refund policy. The refund applies only when you attend the scheduled call.</p></div></details>
+          <details><summary>Do I need an existing website?<span class="pm">+</span></summary>
+            <div class="ans"><p>No. The system includes the pages you need, plus 1 year of domain and hosting free. If you already have a website, we can connect the funnel to it.</p></div></details>
+          <details><summary>How long does the setup take?<span class="pm">+</span></summary>
+            <div class="ans"><p>Timelines depend on your business, the research involved and how quickly content and approvals come in. We'll give you a clear timeline during the strategy call once we understand your requirements.</p></div></details>
+          <details><summary>What happens during the strategy call?<span class="pm">+</span></summary>
+            <div class="ans"><p>We discuss your business, target audience, current lead flow and how you follow up today. We identify where prospects are dropping off and whether this system is the right fit. No pressure to proceed.</p></div></details>
+          <details><summary>What payment methods are available for the final project?<span class="pm">+</span></summary>
+            <div class="ans"><p>If you decide to proceed after the consultation, we share a Razorpay payment link or checkout. The final checkout shows the applicable GST and the payment methods available to you.</p></div></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. FINAL CTA -->
+    <section class="final">
+      <div class="wrap">
+        <p class="eyebrow">Your next appointment starts here</p>
+        <h2 style="margin-top:16px">Build a System That Turns Interest Into Appointments.</h2>
+        <p class="lede">Stop relying on manual follow-ups. Build a structured appointment generation system for your business.</p>
+        <div style="margin-top:30px;display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+          <a class="btn btn-primary" href="#booking">Book Your Strategy Call — ₹99 <svg class="arrow" width="18" height="18"><use href="#i-arrow"/></svg></a>
+          <span style="color:var(--band-muted);font-size:.9rem">Offer Price: ₹24,999 + GST · Regular ₹35,000 + GST</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap"><span>© 2026 Sonu Kumar Saha · Co-Founder, Castflow · Founder, The Desi Andaaz Media Network</span><span>Prices in INR. GST extra.</span></div></footer>
+
+  <div class="sticky" id="sticky" aria-hidden="true">
+    <div class="sp"><b class="num">₹24,999 + GST</b>Strategy call: ₹99</div>
+    <a class="btn btn-primary" href="#booking" tabindex="-1">Book Call — ₹99</a>
+  </div>
+</div>
+
+<!-- ======================================================== BOOKING ======================================================== -->
+<div id="booking-page" hidden>
+  <div class="wrap bk">
+    <a class="back" href="#top">← Back</a>
+    <div class="bk-head">
+      <p class="eyebrow">Strategy call · ₹99</p>
+      <h1>Book Your Strategy &amp; Requirement Call</h1>
+      <p class="lede">Let's understand your business, target audience, current lead flow and appointment-generation process.</p>
+    </div>
+
+    <div class="bk-layout">
+      <div>
+        <ol class="stepper" id="stepper" aria-label="Booking progress">
+          <li class="cur"><div class="bar"></div><span>1 · Contact</span></li>
+          <li><div class="bar"></div><span>2 · Business</span></li>
+          <li><div class="bar"></div><span>3 · Date &amp; Time</span></li>
+          <li><div class="bar"></div><span>4 · Confirm</span></li>
+        </ol>
+
+        <form id="bk-form" class="panel" novalidate>
+          <!-- STEP 1 -->
+          <div class="bk-step" data-step="1">
+            <div class="panel-title"><span class="eyebrow">Step 1 of 4</span><h2>Contact Details</h2><p>We'll use these to confirm your appointment.</p></div>
+            <div class="fgrid two">
+              <div class="field"><label for="f-name">Full Name <span class="req">*</span></label><input id="f-name" name="fullName" type="text" autocomplete="name" required><span class="err"></span></div>
+              <div class="field"><label for="f-biz">Business Name <span class="req">*</span></label><input id="f-biz" name="businessName" type="text" autocomplete="organization" required><span class="err"></span></div>
+              <div class="field"><label for="f-phone">Phone Number <span class="req">*</span></label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98XXX XXXXX" required data-type="phone"><span class="err"></span></div>
+              <div class="field"><label for="f-wa">WhatsApp Number <span class="req">*</span></label><input id="f-wa" name="whatsapp" type="tel" inputmode="tel" placeholder="+91 98XXX XXXXX" required data-type="phone">
+                <label class="inline-check"><input type="checkbox" id="f-same"> Same as phone number</label><span class="err"></span></div>
+              <div class="field"><label for="f-email">Email <span class="req">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" required data-type="email"><span class="err"></span></div>
+              <div class="field"><label for="f-city">City <span class="req">*</span></label><input id="f-city" name="city" type="text" autocomplete="address-level2" required><span class="err"></span></div>
+              <div class="field full"><label for="f-type">Business Type <span class="req">*</span></label>
+                <select id="f-type" name="businessType" required>
+                  <option value="">Select your business type</option>
+                  <option>Doctor / Clinic</option><option>Coach</option><option>Consultant</option><option>Agency</option>
+                  <option>Real Estate Professional</option><option>Trainer / Education Business</option><option>Other Service-Based Business</option>
+                </select><span class="err"></span></div>
+            </div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="bk-step" data-step="2" hidden>
+            <div class="panel-title"><span class="eyebrow">Step 2 of 4</span><h2>About Your Business</h2><p>Short answers are fine. This helps us prepare for your call.</p></div>
+            <div class="fgrid">
+              <div class="field"><label for="q1"><span class="qnum">01</span>What does your business offer? <span class="req">*</span></label><textarea id="q1" name="offer" required></textarea><span class="err"></span></div>
+              <div class="field"><label for="q2"><span class="qnum">02</span>Who is your target audience? <span class="req">*</span></label><textarea id="q2" name="audience" required></textarea><span class="err"></span></div>
+              <div class="field"><label for="q3"><span class="qnum">03</span>How do you currently generate leads? <span class="req">*</span></label><textarea id="q3" name="leadSource" required></textarea><span class="err"></span></div>
+              <div class="field"><label for="q4"><span class="qnum">04</span>Approximately how many leads do you receive per month? <span class="req">*</span></label>
+                <select id="q4" name="leadsPerMonth" required><option value="">Select a range</option><option>0–25</option><option>26–100</option><option>101–300</option><option>301–1,000</option><option>1,000+</option><option>Not sure</option></select><span class="err"></span></div>
+              <div class="field"><label for="q5"><span class="qnum">05</span>How do you currently follow up with leads? <span class="req">*</span></label><textarea id="q5" name="followUp" required></textarea><span class="err"></span></div>
+              <div class="field"><label for="q6"><span class="qnum">06</span>What is your biggest challenge with generating appointments? <span class="req">*</span></label><textarea id="q6" name="challenge" required></textarea><span class="err"></span></div>
+              <div class="field"><label for="q7"><span class="qnum">07</span>Do you currently use a CRM or automation system? <span class="req">*</span></label>
+                <select id="q7" name="crm" required><option value="">Select one</option><option>Yes, a CRM and automations</option><option>Yes, a CRM only</option><option>Spreadsheets / WhatsApp only</option><option>No system yet</option></select><span class="err"></span></div>
+              <div class="field"><label for="q8"><span class="qnum">08</span>What result are you hoping to achieve from this system? <span class="req">*</span></label><textarea id="q8" name="goal" required></textarea><span class="err"></span></div>
+
+              <fieldset class="qual field" id="qual" style="border-color:var(--accent)">
+                <legend class="lbl" style="padding:0 6px;float:left;width:100%;margin-bottom:4px">Are you comfortable with a minimum project investment of ₹24,999 + GST? <span class="req">*</span></legend>
+                <div class="radio-row">
+                  <label class="radio"><input type="radio" name="budget" value="Yes" id="b-yes"><span>Yes</span></label>
+                  <label class="radio"><input type="radio" name="budget" value="No" id="b-no"><span>No</span></label>
+                </div>
+                <p class="qual-note">Our current offer is ₹24,999 + GST. Regular pricing is ₹35,000 + GST.</p>
+                <p class="qual-no" id="qual-no" hidden>Thanks for being upfront. Our minimum project investment is ₹24,999 + GST, so the call may not be the right fit right now. You can still continue if your budget may change.</p>
+                <span class="err"></span>
+              </fieldset>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="bk-step" data-step="3" hidden>
+            <div class="panel-title"><span class="eyebrow">Step 3 of 4</span><h2>Select Your Preferred Date &amp; Time</h2><p>All times are in IST (Asia/Kolkata).</p></div>
+            <div id="cal-slot">
+              <div class="cal-ph">
+                <div class="inner">
+                  <strong>Calendar coming soon</strong>
+                  <code>[CALENDAR EMBED WILL BE ADDED HERE]</code>
+                  <span class="hint">Paste your calendar embed code into <b>calendarEmbedHtml</b> in the settings block at the top of this page.</span>
+                </div>
+              </div>
+            </div>
+            <label class="inline-check cal-confirm"><input type="checkbox" id="cal-ok"> I've selected my preferred date and time in the calendar above</label>
+            <span class="err" id="cal-err"></span>
+          </div>
+
+          <!-- STEP 4 -->
+          <div class="bk-step" data-step="4" hidden>
+            <div class="panel-title"><span class="eyebrow">Step 4 of 4</span><h2>Appointment Confirmation Fee — ₹99</h2><p>Pay ₹99 to confirm your strategy call.</p></div>
+            <div class="pay-box">
+              <div class="pay-amt"><div><div class="lbl">Strategy &amp; Requirement Call</div><span class="hint">One-time confirmation fee</span></div><b class="num">₹99</b></div>
+              <ul class="summary-list" id="summary"></ul>
+              <p class="hint" style="font-size:.85rem">If you attend your scheduled appointment and, after the consultation, decide that our services are not the right fit for your business, your ₹99 appointment fee will be refunded 100% according to our refund policy.</p>
+              <button type="button" class="btn btn-primary btn-pay" id="pay-btn" data-razorpay-link="" data-thankyou-url="">
+                <svg width="18" height="18"><use href="#i-lock"/></svg> Pay ₹99 &amp; Confirm Appointment
+              </button>
+              <p class="notice" id="pay-notice" hidden>Payment isn't connected yet. Add your Razorpay link to <code>razorpayPaymentLink</code> in the settings block. After payment, visitors go to <code>[THANK YOU PAGE URL WILL BE ADDED LATER]</code>.</p>
+              <p class="secure"><svg width="14" height="14"><use href="#i-lock"/></svg>Secure payment via Razorpay · UPI, cards, net banking</p>
+            </div>
+          </div>
+
+          <div class="nav-row" id="nav-row">
+            <button type="button" class="btn btn-ghost" id="prev" hidden>← Back</button>
+            <span></span>
+            <button type="button" class="btn btn-primary" id="next">Continue <svg class="arrow" width="18" height="18"><use href="#i-arrow"/></svg></button>
+          </div>
+        </form>
+      </div>
+
+      <aside class="aside">
+        <div class="aside-card">
+          <div class="mini-founder"><span class="av">SKS</span><div><b>Sonu Kumar Saha</b><small>Co-Founder, Castflow · Founder, The Desi Andaaz Media Network · 7 years in funnel design</small></div></div>
+        </div>
+        <div class="aside-card">
+          <h3>On this call we'll cover</h3>
+          <ul>
+            <li><svg class="tick"><use href="#i-check"/></svg>Your business and target audience</li>
+            <li><svg class="tick"><use href="#i-check"/></svg>Your current lead flow and follow-ups</li>
+            <li><svg class="tick"><use href="#i-check"/></svg>Where appointments are being lost</li>
+            <li><svg class="tick"><use href="#i-check"/></svg>Whether this system fits your business</li>
+          </ul>
+        </div>
+        <div class="aside-card">
+          <h3>The system</h3>
+          <div class="price-row"><span style="font:750 1.6rem var(--f-display)" class="num">₹24,999</span><span class="price-gst">+ GST</span></div>
+          <p class="price-reg">Regular Price: <s class="num">₹35,000</s> + GST</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const C = window.SITE_CONFIG || {};
+  const landing = document.getElementById('landing');
+  const booking = document.getElementById('booking-page');
+  const sticky = document.getElementById('sticky');
+
+  /* ---------- Routing: #booking shows the booking page ---------- */
+  function route(){
+    const isBooking = location.hash === '#booking';
+    landing.hidden = isBooking;
+    booking.hidden = !isBooking;
+    document.title = isBooking ? 'Book Your Strategy Call' : 'Appointment Generation System';
+    if (isBooking || location.hash === '#top' || !location.hash) window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange', route);
+  route();
+
+  /* ---------- Sticky mobile CTA after hero ---------- */
+  const hero = document.querySelector('.hero');
+  if ('IntersectionObserver' in window && hero){
+    new IntersectionObserver(([e])=>{
+      const show = !e.isIntersecting;
+      sticky.classList.toggle('show', show);
+      sticky.setAttribute('aria-hidden', String(!show));
+      sticky.querySelector('a').tabIndex = show ? 0 : -1;
+    }).observe(hero);
+  }
+
+  /* ---------- Calendar embed ---------- */
+  if (C.calendarEmbedHtml){
+    const slot = document.getElementById('cal-slot');
+    slot.innerHTML = C.calendarEmbedHtml;
+    slot.querySelectorAll('script').forEach(old=>{
+      const s = document.createElement('script');
+      [...old.attributes].forEach(a=>s.setAttribute(a.name,a.value));
+      s.textContent = old.textContent; old.replaceWith(s);
+    });
+  }
+
+  /* ---------- Multi-step form ---------- */
+  const form = document.getElementById('bk-form');
+  const steps = [...form.querySelectorAll('.bk-step')];
+  const dots = [...document.querySelectorAll('#stepper li')];
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  let cur = 1;
+
+  const phoneOk = v => v.replace(/[^\d]/g,'').replace(/^(91|0)/,'').length === 10;
+  const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+
+  function setErr(field, msg){
+    field.classList.toggle('invalid', !!msg);
+    const e = field.querySelector('.err'); if (e) e.textContent = msg || '';
+  }
+  function validate(n){
+    let ok = true, first = null;
+    const stepEl = steps[n-1];
+    stepEl.querySelectorAll('[required]').forEach(inp=>{
+      const f = inp.closest('.field'); const v = inp.value.trim(); let m = '';
+      if (!v) m = 'This field is required.';
+      else if (inp.dataset.type==='phone' && !phoneOk(v)) m = 'Enter a valid 10-digit Indian mobile number.';
+      else if (inp.dataset.type==='email' && !emailOk(v)) m = 'Enter a valid email address, like name@business.com.';
+      setErr(f, m); if (m){ ok=false; first = first || inp; }
+    });
+    if (n===2){
+      const q = document.getElementById('qual');
+      const picked = form.querySelector('input[name=budget]:checked');
+      setErr(q, picked ? '' : 'Please choose Yes or No.');
+      if (!picked){ ok=false; first = first || document.getElementById('b-yes'); }
+    }
+    if (n===3){
+      const cb = document.getElementById('cal-ok');
+      const err = document.getElementById('cal-err');
+      err.textContent = cb.checked ? '' : 'Please select a date and time, then tick this box.';
+      if (!cb.checked){ ok=false; first = first || cb; }
+    }
+    if (first) first.focus();
+    return ok;
+  }
+  function show(n){
+    cur = n;
+    steps.forEach((s,i)=> s.hidden = (i !== n-1));
+    dots.forEach((d,i)=>{ d.classList.toggle('done', i < n-1); d.classList.toggle('cur', i === n-1); });
+    prev.hidden = n === 1;
+    next.hidden = n === 4;
+    if (n===4) buildSummary();
+    document.getElementById('stepper').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  next.addEventListener('click', ()=>{ if (validate(cur)){ if (cur===2) sendLead(); show(cur+1); } });
+  prev.addEventListener('click', ()=> show(cur-1));
+  form.addEventListener('submit', e=> e.preventDefault());
+  form.addEventListener('input', e=>{ const f = e.target.closest('.field'); if (f && f.classList.contains('invalid')) setErr(f,''); });
+
+  const same = document.getElementById('f-same');
+  const phone = document.getElementById('f-phone'), wa = document.getElementById('f-wa');
+  same.addEventListener('change', ()=>{ if (same.checked){ wa.value = phone.value; setErr(wa.closest('.field'),''); } });
+  phone.addEventListener('input', ()=>{ if (same.checked) wa.value = phone.value; });
+
+  form.querySelectorAll('input[name=budget]').forEach(r=> r.addEventListener('change', ()=>{
+    document.getElementById('qual-no').hidden = r.value !== 'No' || !r.checked;
+    setErr(document.getElementById('qual'), '');
+  }));
+
+  function data(){ return Object.fromEntries(new FormData(form).entries()); }
+  function buildSummary(){
+    const d = data();
+    const rows = [['Name', d.fullName],['Business', d.businessName],['WhatsApp', d.whatsapp],['Email', d.email],['City', d.city],['Business type', d.businessType]];
+    const ul = document.getElementById('summary'); ul.innerHTML = '';
+    rows.forEach(([k,v])=>{ const li=document.createElement('li'); const a=document.createElement('span'); const b=document.createElement('span'); a.textContent=k; b.textContent=v||'—'; li.append(a,b); ul.append(li); });
+  }
+
+  /* Optional: send lead data to your CRM before payment, so unpaid leads can be followed up */
+  function sendLead(){
+    if (!C.leadWebhookUrl) return;
+    try { fetch(C.leadWebhookUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data(), stage:'qualification-complete', source:'strategy-call-booking'})}).catch(()=>{}); } catch(e){}
+  }
+
+  /* ---------- ₹99 payment ---------- */
+  const payBtn = document.getElementById('pay-btn');
+  const link = payBtn.dataset.razorpayLink || C.razorpayPaymentLink;
+  const thankYou = payBtn.dataset.thankyouUrl || C.thankYouUrl;
+  payBtn.addEventListener('click', ()=>{
+    const d = data();
+    if (C.razorpayKeyId && window.Razorpay){
+      // Razorpay Checkout: create the order on your server, then pass order_id here.
+      console.log('Razorpay integration triggered');
+    } else if (link) {
+      window.location.href = link;
+    } else {
+      alert("Payment link is not configured yet. Please configure it in window.SITE_CONFIG.");
+    }
+  });
+})();
+</script>
+</body>
+</html>
