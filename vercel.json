@@ -1,17 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "growth.castflow.in"
-        }
-      ],
-      "destination": "/growth-landing.html",
-      "permanent": false
-    }
-  ],
   "rewrites": [
     {
       "source": "/(.*)",
